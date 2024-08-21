@@ -1,0 +1,99 @@
+INSERT INTO Tbl_Usuario (Usu_Cedula, Usu_Nombre, Usu_Apellido, Usu_Correo)
+VALUES
+(1234567890, 'Carlos', 'Pérez', 'carlos.perez@example.com'),
+(2345678901, 'María', 'González', 'maria.gonzalez@example.com'),
+(3456789012, 'Juan', 'Ramírez', 'juan.ramirez@example.com'),
+(4567890123, 'Ana', 'Torres', 'ana.torres@example.com'),
+(5678901234, 'Pedro', 'Martínez', 'pedro.martinez@example.com'),
+(6789012345, 'Luisa', 'López', 'luisa.lopez@example.com'),
+(7890123456, 'Sofía', 'Rodríguez', 'sofia.rodriguez@example.com');
+
+INSERT INTO Tbl_Admin (Admin_Correo)
+VALUES
+('admin1@example.com'),
+('admin2@example.com'),
+('admin3@example.com'),
+('admin4@example.com'),
+('admin5@example.com');
+
+                                                                                                                                                                                                                                                                                                             INSERT INTO Tbl_Caso_Donacion (Caso_Telefono,Caso_Correo, Caso_Estado, Caso_Nombre_Fundacion, Caso_Nombre_Caso, Caso_Fecha) 
+VALUES ('5551234', 'contacto@fundacionvida.org', 'Activo', 'Fundación Vida', 'Ayuda para Niños en Riesgo', '2024-08-15'),
+('5555678', 'info@saludglobal.org', 'Pendiente', 'Salud Global', 'Campaña de Vacunación', '202408-14'),
+('5558765', 'soporte@educacionparaTodos.org', 'Completado', 'Educación para Todos', 'Programa de Becas', '2024-08-13'),
+('5554321', 'donaciones@proteccionanimal.org', 'Activo', 'Protección Animal', 'Rescate de Mascotas Callejeras', '2024-08-12'),
+('5552468', 'apoyo@reforestation.org', 'Pendiente', 'Reforestación', 'Plantación de Árboles en la Selva', '2024-08-11'),
+('5551357', 'ayuda@ayudagloblal.org', 'Activo', 'Ayuda Global', 'Alimentos para Desplazados', '2024-08-10'),
+('5559876', 'contacto@refugiojuvenil.org', 'Completado', 'Refugio Juvenil', 'Rehabilitación de Jóvenes en Riesgo', '2024-08-09');
+
+INSERT INTO Tbl_Caso_Donacion (Don_Nombre_Persona,
+    Don_Correo,Don_Numero_Cuenta,) 
+VALUESI('Juan Pérez', 'juan.perez@example.com', '1234567890'),
+('Ana Gómez', 'ana.gomez@example.com', '0987654321'),
+('Carlos Martínez', 'carlos.martinez@example.com', '1122334455'),
+('Laura Fernández', 'laura.fernandez@example.com', '5566778899'),
+('Pedro López', 'pedro.lopez@example.com', '2233445566'),
+('María Ruiz', 'maria.ruiz@example.com', '6677889900'),
+('Luis Hernández', 'luis.hernandez@example.com', '3344556677');
+
+
+
+INSERT INTO Tbl_Informe (Inf_Nombre_Caso, Inf_Fundacion_nombre, Inf_Monto)
+VALUES
+('Caso 1', 'Fundación Esperanza', 5000),
+('Caso 2', 'Fundación Vida', 7500),
+('Caso 3', 'Fundación Corazón', 12000),
+('Caso 4', 'Fundación Ayuda', 2500),
+('Caso 5', 'Fundación Luz', 4300),
+('Caso 6', 'Fundación Manos', 8200),
+('Caso 7', 'Fundación Amor', 15000);
+
+INSERT INTO Tbl_Confirmación (Con_correo, Con_Monto, Con_Nombre_Caso)
+VALUES
+(1234567890, '5000', 1),
+(2345678901, '7500', 2),
+(3456789012, '12000', 3),
+(4567890123, '2500', 4),
+(5678901234, '4300', 5),
+(6789012345, '8200', 6),
+(7890123456, '15000', 7);
+
+INSERT INTO Tbl_Recuerdos_Recaudados (Recu_Fecha, Recu_Id_Donante, Recu_Destino, Recu_Cantidad, Recu_Descripcion, Recu_Tipo_Recurso)
+VALUES
+('2024-08-01', 101, 'Hospital Central', 50, 'Cajas de alimentos', 'Alimentos'),
+('2024-08-02', 102, 'Escuela Rural', 30, 'Libros educativos', 'Libros'),
+('2024-08-03', 103, 'Orfanato Luz', 20, 'Juguetes para niños', 'Juguetes'),
+('2024-08-04', 104, 'Centro de Salud', 40, 'Medicamentos básicos', 'Medicamentos'),
+('2024-08-05', 105, 'Comedor Social', 100, 'Raciones de comida', 'Comida'),
+('2024-08-06', 106, 'Escuela Comunitaria', 25, 'Útiles escolares', 'Útiles'),
+('2024-08-07', 107, 'Refugio de Animales', 15, 'Cobijas y alimentos', 'Artículos para animales’);
+
+INSERT INTO Tbl_Fundaciones (Fund_ID, Fund_Direccion, Fund_Nombre, Fund_Descripcion, Fund_Casos_Activos, Fund_Telefono, Fund_Correo)
+VALUES
+(1, 'Calle 1, Ciudad A', 'Esperanza', 'Fundación de ayuda a niños', 5, 1234567890, 'contacto@esperanza.org'),
+(2, 'Avenida 2, Ciudad B', 'Vida', 'Fundación de apoyo a personas mayores', 3, 2345678901, 'info@vida.org'),
+(3, 'Calle 3, Ciudad C', 'Corazón', 'Fundación de asistencia médica', 4, 3456789012, 'contacto@corazon.org'),
+(4, 'Avenida 4, Ciudad D', 'Ayuda', 'Fundación para desastres naturales', 2, 4567890123, 'info@ayuda.org'),
+(5, 'Calle 5, Ciudad E', 'Luz', 'Fundación de educación', 6, 5678901234, 'contacto@luz.org'),
+(6, 'Avenida 6, Ciudad F', 'Manos', 'Fundación de voluntariado', 7, 6789012345, 'info@manos.org'),
+(7, 'Calle 7, Ciudad G', 'Amor', 'Fundación de protección animal', 8, 7890123456, 'contacto@amor.org');
+
+INSERT INTO Tbl_Catalogo_recursos (Cat_Id, Cat_Nombre, Cat_Disponibilidad, Cat_Tipo, Cat_Descripcion)
+VALUES
+('R001', 'Cajas de Alimentos', 'Disponible', 'Alimentos', 'Cajas con alimentos básicos'),
+('R002', 'Medicamentos Básicos', 'No Disponible', 'Medicamentos', 'Medicamentos para primeros auxilios'),
+('R003', 'Cobijas', 'Disponible', 'Ropa', 'Cobijas para refugios'),
+('R004', 'Libros Educativos', 'Disponible', 'Libros', 'Libros para enseñanza primaria'),
+('R005', 'Ropa para Niños', 'Disponible', 'Ropa', 'Ropa nueva para niños'),
+('R006', 'Juguetes', 'No Disponible', 'Juguetes', 'Juguetes para niños de 3 a 10 años'),
+('R007', 'Artículos de Aseo', 'Disponible', 'Artículos de Aseo', 'Productos de higiene personal');
+
+
+INSERT INTO Tbl_Lista_participantes (List_correo, List_Nombre, List_Apellido, List_Telefono, List_Direccion)
+VALUES 
+('carlos.perez@example.com', 'Carlos', 'Pérez', 123456789,’ ‘ );
+('ana.torres@example.com','Ana', 'Torres', 111111111,’ ‘ );
+('maria.gonzalez@example.com', 'María', 'González', 22222222,’ ‘ );
+('pedro.martinez@example.com','Pedro', 'Martínez',  333333333,’ ‘ );
+( 'sofia.rodriguez@example.com' ,'Sofía', 'Rodríguez', 444444444,’ ‘ );
+('maricamilacar@example.com', 'Camila', 'Cardozo', 55555555,’ ‘ );
+('IsabelaTovar55@example.com', 'Isabela', 'Tovar', 666666666,’ ‘ );
