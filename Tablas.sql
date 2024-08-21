@@ -24,17 +24,18 @@ CREATE TABLE Tbl_Caso_Donacion (
     PRIMARY KEY (Caso_Id)
 );
 
-CREATE TABLE Tbl_Donacion (
-    Don_Id Int (10) AUTO_INCREMENT,
-    Don_Nombre_Persona Varchar (20) NOT NULL,
-    Don_Correo Varchar (20) NOT NULL,
-    Don_Numero_Cuenta Varchar (20) NOT NULL,
-    Don_Caso_Id Varchar (20) NOT NULL,
-    Don_Usu_Cedula Int (10) NOT NULL,
+CREATE TABLE `tbl_donacion` (
+    Don_Id Int AUTO_INCREMENT,
+    Don_Nombre_Persona Varchar(20) NOT NULL,
+    Don_Correo Varchar(20) NOT NULL,
+    Don_Numero_Cuenta Varchar(20) NOT NULL,
+    Don_Caso_Id Int(11) NOT NULL,  -- Debe ser Int(11) para coincidir con Caso_Id en tbl_caso_donacion
+    Don_Usu_Cedula Int(10) NOT NULL,  -- Debe ser Int(10) para coincidir con Usu_Cedula en tbl_usuario
     PRIMARY KEY (Don_Id),
-    FOREIGN KEY Don_Caso_Id REFERENCES tbl_Caso_Donacion (Caso_Id),
-    FOREIGN KEY Don_Use_Cedula REFERENCES Tbl_Usuario (Use_Cedula)
+    FOREIGN KEY (Don_Caso_Id) REFERENCES tbl_caso_donacion(Caso_Id),
+    FOREIGN KEY (Don_Usu_Cedula) REFERENCES tbl_usuario(Usu_Cedula)
 );
+
 
 CREATE TABLE Tbl_Informe (
     Inf_Nombre_Caso Varchar (20) NOT NULL,
@@ -43,13 +44,13 @@ CREATE TABLE Tbl_Informe (
     Inf_Don_Id Int (10) NOT NULL,
     Inf_Admin_Id Int (10) NOT NULL,
     PRIMARY KEY (Inf_Nombre_Caso),
-    FOREIGN KEY Inf_Don_Id REFERENCES Tbl_Donacion(Don_Id),
-    FOREIGN KEY Inf_Admin_Id REFERENCES Tbl_Admin (Admin_Id)
+    FOREIGN KEY (Inf_Don_Id) REFERENCES Tbl_Donacion(Don_Id),
+    FOREIGN KEY (Inf_Admin_Id) REFERENCES Tbl_Admin (Admin_Id)
 );
 
 CREATE TABLE Tbl_Recursos_Recaudados(
     Recu_Numero_Transaccion Int (10) NOT NULL,
-    Recu_Fecha Date (25) NOT NULL,
+    Recu_Fecha Date NOT NULL,
     Recu_Id_Donante Int (10) NOT NULL,
     Recu_Destino Varchar (30) NOT NULL,
     Recu_Cantidad Int (10) NOT NULL,
@@ -57,19 +58,18 @@ CREATE TABLE Tbl_Recursos_Recaudados(
     Recu_Tipo_Recurso Varchar (20) NOT NULL,
     Recu_Inf_Nombre_Caso Varchar (20) NOT NULL,
     PRIMARY KEY (Recu_Numero_Transaccion),
-    FOREIGN KEY Recu_Inf_Nombre_Caso REFERENCES Tbl_Informe (Inf_Nombre_Caso)
-    
+    FOREIGN KEY (Recu_Inf_Nombre_Caso) REFERENCES Tbl_Informe (Inf_Nombre_Caso)
     );
     
-    CREATE TABLE Tbl_Confirmacion(
+   CREATE TABLE Tbl_Confirmacion(
         Con_Correo Int (20) NOT NULL,
         Con_Monto Varchar (20) NOT NULL,
         Con_Nombre_Caso Varchar (20) NOT NULL,
         Con_Don_Id Int (10) NOT NULL,
         PRIMARY KEY (Con_Correo),
-        FOREIGN KEY Con_Don_Id REFERENCES Tbl_Donacion (Don_Id)
+        FOREIGN KEY (Con_Don_Id) REFERENCES Tbl_Donacion (Don_Id)
     );
-    
+
     CREATE TABLE Tbl_Fundaciones( 
         Fund_Id Int (10) NOT NULL,
         Fund_Direccion Varchar (20) NOT NULL,
@@ -80,10 +80,11 @@ CREATE TABLE Tbl_Recursos_Recaudados(
         Fund_Correo Varchar (20) NOT NULL,
         Fund_Don_Id Int (10) NOT NULL,
         PRIMARY KEY (Fund_Id),
-        FOREIGN KEY Fund_Don_id REFERENCES Tbl_Donacion (Don_Id)
+        FOREIGN KEY (Fund_Don_id) REFERENCES Tbl_Donacion (Don_Id)
     );
     
-    CREATE TABLE Tbl_Catalogo_Recursos (
+    
+     CREATE TABLE Tbl_Catalogo_Recursos (
         Cat_Id Varchar (10) NOT NULL,
         Cat_Nombre Varchar (15) NOT NULL,
         Cat_Disponibilidad Varchar (15) NOT NULL,
@@ -102,7 +103,7 @@ CREATE TABLE Tbl_Recursos_Recaudados(
         List_Direccion Varchar (20) NOT NULL,
         List_Fund_Id Int (10) NOT NULL,
         PRIMARY KEY (List_Correo),
-        FOREIGN KEY List_Fund_Id REFERENCES Tbl_Fundaciones (Fund_Id)
+        FOREIGN KEY (List_Fund_Id) REFERENCES Tbl_Fundaciones (Fund_Id)
     );
     
     CREATE TABLE Tbl_Horarios_Voluntarios (
@@ -112,7 +113,7 @@ CREATE TABLE Tbl_Recursos_Recaudados(
         Hora_Localizacion Varchar (20) NOT NULL,
         Hora_List_Correo Varchar (20) NOT NULL,
         PRIMARY KEY (Hora_Id),
-        FOREIGN KEY Hora_List_Correo REFERENCES Tbl_Lista_Participantes (List_Correo)
+        FOREIGN KEY (Hora_List_Correo) REFERENCES Tbl_Lista_Participantes (List_Correo)
     );
-    
+
     
