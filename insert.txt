@@ -1,99 +1,224 @@
-INSERT INTO Tbl_Usuario (Usu_Cedula, Usu_Nombre, Usu_Apellido, Usu_Correo)
-VALUES
-(1234567890, 'Carlos', 'Pérez', 'carlos.perez@example.com'),
-(2345678901, 'María', 'González', 'maria.gonzalez@example.com'),
-(3456789012, 'Juan', 'Ramírez', 'juan.ramirez@example.com'),
-(4567890123, 'Ana', 'Torres', 'ana.torres@example.com'),
-(5678901234, 'Pedro', 'Martínez', 'pedro.martinez@example.com'),
-(6789012345, 'Luisa', 'López', 'luisa.lopez@example.com'),
-(7890123456, 'Sofía', 'Rodríguez', 'sofia.rodriguez@example.com');
 
-INSERT INTO Tbl_Admin (Admin_Correo)
-VALUES
-('admin1@example.com'),
-('admin2@example.com'),
-('admin3@example.com'),
-('admin4@example.com'),
-('admin5@example.com');
+ CREATE DATABASE Pantry_Amigo
+ 
+CREATE TABLE Tbl_Usuario(
+    Usu_Id int (10) NOT NULL,
+    Usu_Username Varchar (20) NOT NULL,
+    Usu_Password Varchar (20) NOT NULL,
+    Usu_Tipo Varchar (20) NOT NULL,
+    Usu_Correo Varchar (20) NOT NULL,
+    PRIMARY KEY (Usu_Id)
+);
 
-                                                                                                                                                                                                                                                                                                             INSERT INTO Tbl_Caso_Donacion (Caso_Telefono,Caso_Correo, Caso_Estado, Caso_Nombre_Fundacion, Caso_Nombre_Caso, Caso_Fecha) 
-VALUES ('5551234', 'contacto@fundacionvida.org', 'Activo', 'Fundación Vida', 'Ayuda para Niños en Riesgo', '2024-08-15'),
-('5555678', 'info@saludglobal.org', 'Pendiente', 'Salud Global', 'Campaña de Vacunación', '202408-14'),
-('5558765', 'soporte@educacionparaTodos.org', 'Completado', 'Educación para Todos', 'Programa de Becas', '2024-08-13'),
-('5554321', 'donaciones@proteccionanimal.org', 'Activo', 'Protección Animal', 'Rescate de Mascotas Callejeras', '2024-08-12'),
-('5552468', 'apoyo@reforestation.org', 'Pendiente', 'Reforestación', 'Plantación de Árboles en la Selva', '2024-08-11'),
-('5551357', 'ayuda@ayudagloblal.org', 'Activo', 'Ayuda Global', 'Alimentos para Desplazados', '2024-08-10'),
-('5559876', 'contacto@refugiojuvenil.org', 'Completado', 'Refugio Juvenil', 'Rehabilitación de Jóvenes en Riesgo', '2024-08-09');
+CREATE TABLE Tbl_Administrador(
+    Admin_Id INT AUTO_INCREMENT,
+    Admin_Username VARCHAR(40) NOT NULL,
+    Admin_Password VARCHAR(20) NOT NULL,
+    Admin_Correo VARCHAR(20) NOT NULL,
+    Admin_Usu_Id INT(10) NOT NULL,
+    PRIMARY KEY (Admin_Id),
+    FOREIGN KEY (Admin_Usu_Id) REFERENCES Tbl_Usuario(Usu_Id)
+);
 
-INSERT INTO Tbl_Caso_Donacion (Don_Nombre_Persona,
-    Don_Correo,Don_Numero_Cuenta,) 
-VALUESI('Juan Pérez', 'juan.perez@example.com', '1234567890'),
-('Ana Gómez', 'ana.gomez@example.com', '0987654321'),
-('Carlos Martínez', 'carlos.martinez@example.com', '1122334455'),
-('Laura Fernández', 'laura.fernandez@example.com', '5566778899'),
-('Pedro López', 'pedro.lopez@example.com', '2233445566'),
-('María Ruiz', 'maria.ruiz@example.com', '6677889900'),
-('Luis Hernández', 'luis.hernandez@example.com', '3344556677');
+CREATE TABLE Tbl_Fundaciones(
+    Fund_Id Int (10) NOT NULL,
+    Fund_Username Varchar (40) NOT NULL,
+    Fund_Direccion Varchar (20) NOT NULL,
+    Fund_Casos_Activos Int (10) NOT NULL,
+    Fund_Telefono Int (10) NOT NULL,
+    Fund_Usu_Id Int (10) NOT NULL,
+    PRIMARY KEY (Fund_Id),
+    FOREIGN KEY (Fund_Usu_Id) REFERENCES tbl_usuario (Usu_Id)
+);
 
-
-
-INSERT INTO Tbl_Informe (Inf_Nombre_Caso, Inf_Fundacion_nombre, Inf_Monto)
-VALUES
-('Caso 1', 'Fundación Esperanza', 5000),
-('Caso 2', 'Fundación Vida', 7500),
-('Caso 3', 'Fundación Corazón', 12000),
-('Caso 4', 'Fundación Ayuda', 2500),
-('Caso 5', 'Fundación Luz', 4300),
-('Caso 6', 'Fundación Manos', 8200),
-('Caso 7', 'Fundación Amor', 15000);
-
-INSERT INTO Tbl_Confirmación (Con_correo, Con_Monto, Con_Nombre_Caso)
-VALUES
-(1234567890, '5000', 1),
-(2345678901, '7500', 2),
-(3456789012, '12000', 3),
-(4567890123, '2500', 4),
-(5678901234, '4300', 5),
-(6789012345, '8200', 6),
-(7890123456, '15000', 7);
-
-INSERT INTO Tbl_Recuerdos_Recaudados (Recu_Fecha, Recu_Id_Donante, Recu_Destino, Recu_Cantidad, Recu_Descripcion, Recu_Tipo_Recurso)
-VALUES
-('2024-08-01', 101, 'Hospital Central', 50, 'Cajas de alimentos', 'Alimentos'),
-('2024-08-02', 102, 'Escuela Rural', 30, 'Libros educativos', 'Libros'),
-('2024-08-03', 103, 'Orfanato Luz', 20, 'Juguetes para niños', 'Juguetes'),
-('2024-08-04', 104, 'Centro de Salud', 40, 'Medicamentos básicos', 'Medicamentos'),
-('2024-08-05', 105, 'Comedor Social', 100, 'Raciones de comida', 'Comida'),
-('2024-08-06', 106, 'Escuela Comunitaria', 25, 'Útiles escolares', 'Útiles'),
-('2024-08-07', 107, 'Refugio de Animales', 15, 'Cobijas y alimentos', 'Artículos para animales’);
-
-INSERT INTO Tbl_Fundaciones (Fund_ID, Fund_Direccion, Fund_Nombre, Fund_Descripcion, Fund_Casos_Activos, Fund_Telefono, Fund_Correo)
-VALUES
-(1, 'Calle 1, Ciudad A', 'Esperanza', 'Fundación de ayuda a niños', 5, 1234567890, 'contacto@esperanza.org'),
-(2, 'Avenida 2, Ciudad B', 'Vida', 'Fundación de apoyo a personas mayores', 3, 2345678901, 'info@vida.org'),
-(3, 'Calle 3, Ciudad C', 'Corazón', 'Fundación de asistencia médica', 4, 3456789012, 'contacto@corazon.org'),
-(4, 'Avenida 4, Ciudad D', 'Ayuda', 'Fundación para desastres naturales', 2, 4567890123, 'info@ayuda.org'),
-(5, 'Calle 5, Ciudad E', 'Luz', 'Fundación de educación', 6, 5678901234, 'contacto@luz.org'),
-(6, 'Avenida 6, Ciudad F', 'Manos', 'Fundación de voluntariado', 7, 6789012345, 'info@manos.org'),
-(7, 'Calle 7, Ciudad G', 'Amor', 'Fundación de protección animal', 8, 7890123456, 'contacto@amor.org');
-
-INSERT INTO Tbl_Catalogo_recursos (Cat_Id, Cat_Nombre, Cat_Disponibilidad, Cat_Tipo, Cat_Descripcion)
-VALUES
-('R001', 'Cajas de Alimentos', 'Disponible', 'Alimentos', 'Cajas con alimentos básicos'),
-('R002', 'Medicamentos Básicos', 'No Disponible', 'Medicamentos', 'Medicamentos para primeros auxilios'),
-('R003', 'Cobijas', 'Disponible', 'Ropa', 'Cobijas para refugios'),
-('R004', 'Libros Educativos', 'Disponible', 'Libros', 'Libros para enseñanza primaria'),
-('R005', 'Ropa para Niños', 'Disponible', 'Ropa', 'Ropa nueva para niños'),
-('R006', 'Juguetes', 'No Disponible', 'Juguetes', 'Juguetes para niños de 3 a 10 años'),
-('R007', 'Artículos de Aseo', 'Disponible', 'Artículos de Aseo', 'Productos de higiene personal');
+CREATE TABLE Tbl_Caso_Donacion(
+    Caso_Id Varchar (15) NOT NULL,
+    Caso_Nombre_Caso Varchar (40) NOT NULL,
+    Caso_Descripcion Varchar (255) NOT NULL,
+    Caso_Fecha_Inicio Date NOT NULL,
+    Caso_Fecha_Fin  Date NOT NULL,
+    Caso_Estado Date NOT NULL,
+    Caso_Fund_Id Int (10) NOT NULL,
+    PRIMARY KEY (Caso_Id),
+    FOREIGN KEY (Caso_Fund_Id) REFERENCES tbl_fundaciones (Fund_Id)
+);
 
 
-INSERT INTO Tbl_Lista_participantes (List_correo, List_Nombre, List_Apellido, List_Telefono, List_Direccion)
+
+
+
+
+
+CREATE TABLE Tbl_Donacion_Recursos(
+    Rec_Id Int (10) NOT NULL,
+    Rec_Nombre Varchar (15) NOT NULL,
+    Rec_Disponibilidad Varchar (15) NOT NULL,
+    Rec_Tipo Varchar (10) NOT NULL,
+    Rec_Descripcion Varchar (30) NOT NULL,
+    Rec_Caso_Id Varchar (15) NOT NULL,
+    Rec_Dona_Cedula Int (10) NOT NULL,
+    PRIMARY KEY (Rec_Id),
+    FOREIGN KEY (Rec_Caso_Id) REFERENCES tbl_caso_donacion (Caso_Id),
+    FOREIGN KEY (Rec_Dona_Cedula) REFERENCES Tbl_Donante (Dona_Cedula)
+);
+
+CREATE TABLE Tbl_Voluntarios(
+    Vol_Cedula Int (10) NOT NULL,
+    Vol_Nombre Varchar (40) NOT NULL,
+    Vol_Apelldio Varchar (40) NOT NULL,
+    Vol_Correo Varchar (40) NOT NULL,
+    Vol_Celular Int (10) NOT NULL,
+    Vol_Caso_Id Varchar (15) NOT NULL,
+    PRIMARY KEY (Vol_Cedula),
+    FOREIGN KEY (Vol_Caso_Id) REFERENCES tbl_caso_donacion (Caso_Id)
+);
+
+CREATE TABLE Tbl_Horarios_Voluntarios(
+    Hora_Id Int (10) NOT NULL,
+    Hora_Citacion Datetime NOT NULL,
+    Hora_Localizacion Varchar (40) NOT NULL,
+    Hora_Vol_Cedula Int (10) NOT NULL,
+    PRIMARY KEY (Hora_Id),
+    FOREIGN KEY (Hora_Vol_Cedula) REFERENCES tbl_voluntarios (Vol_Cedula)
+);
+
+CREATE TABLE Tbl_Donante(
+    Dona_Cedula Int (10) NOT NULL,
+    Dona_Nombre Varchar (20) NOT NULL,
+    Dona_Nombre_Recurso Varchar (15) NOT NULL,
+    Dona_Apellido Varchar (40) NOT NULL,
+    Dona_Correo Varchar (40) NOT NULL,
+    Dona_Tipo_Donacion Varchar (40) NOT NULL,
+    Dona_Rec_Id Int (10) NOT NULL,
+    PRIMARY KEY (Dona_Cedula)
+);
+
+
+CREATE TABLE Tbl_Donacion_Dinero(
+    Don_Id Int (10) NOT NULL,
+    Don_Monto Varchar (20) NOT NULL,
+    Don_Fecha Date NOT NULL,
+    Don_Correo varchar (40) NOT NULL,
+    Don_Metodo_Pago Varchar (40) NOT NULL,
+    Don_Dona_Cedula Int (10) NOT NULL,
+    Don_Caso_Id Varchar (15) NOT NULL,
+    PRIMARY KEY (Don_Id),
+    FOREIGN KEY (Don_Caso_Id) REFERENCES tbl_Caso_Donacion (Caso_Id),
+    FOREIGN KEY (Don_Dona_Cedula) REFERENCES tbl_donante (Dona_Cedula)
+
+)
+
+
+INSERT INTO Tbl_Usuario (Usu_Id, Usu_Username, Usu_Password, Usu_Tipo, Usu_Correo) VALUES
+(111, 'admin01', 'password123', 'Administrador', 'admin01@example.com'),
+(222, 'admin02', 'password321', 'Administrador', 'admin02@example.com'),
+(333, 'admin03', 'password987', 'Administrador', 'admin03@example.com'),
+(444, 'admin04', 'password888', 'Administrador', 'admin04@example.com'),
+(555, 'admin05', 'password999', 'Administrador', 'admin05@example.com'),
+(666, 'admin06', 'password000', 'Administrador', 'admin06@example.com'),
+(777, 'admin07', 'password111', 'Administrador', 'admin07@example.com'),
+(888, 'fundacion01', 'password456', 'Fundación', 'contacto@fundacion01.org'),
+(999, 'fundacion02', 'password789', 'Fundación', 'contacto@fundacion02.org'),
+(101010, 'fundacion03', 'password654', 'Fundación', 'contacto@fundacion03.org'),
+(111111, 'fundacion04', 'password147', 'Fundación', 'contacto@fundacion04.org'),
+(121212, 'fundacion05', 'password779', 'Fundación', 'contacto@fundacion05.org'),
+(131313, 'fundacion06', 'password197', 'Fundación', 'contacto@fundacion06.org'),
+(141414, 'fundacion07', 'password426', 'Fundación', 'contacto@fundacion07.org');
+
+INSERT INTO Tbl_Administrador (Admin_Id, Admin_Username, Admin_Password, Admin_Correo,Admin_Usu_Id) 
 VALUES 
-('carlos.perez@example.com', 'Carlos', 'Pérez', 123456789,’ ‘ );
-('ana.torres@example.com','Ana', 'Torres', 111111111,’ ‘ );
-('maria.gonzalez@example.com', 'María', 'González', 22222222,’ ‘ );
-('pedro.martinez@example.com','Pedro', 'Martínez',  333333333,’ ‘ );
-( 'sofia.rodriguez@example.com' ,'Sofía', 'Rodríguez', 444444444,’ ‘ );
-('maricamilacar@example.com', 'Camila', 'Cardozo', 55555555,’ ‘ );
-('IsabelaTovar55@example.com', 'Isabela', 'Tovar', 666666666,’ ‘ );
+(001, 'admin01', 'password123', 'admin01@example.com',111),
+(002, 'admin02', 'password321', 'admin02@example.com',222),
+(003, 'admin03', 'password987', 'admin03@example.com',333),
+(004, 'admin04', 'password888', 'admin04@example.com',444),
+(005, 'admin05', 'password999','admin05@example.com',555),
+(006, 'admin06', 'password000', 'admin06@example.com',666),
+(007, 'admin07', 'password111', 'admin07@example.com',777);
+
+INSERT INTO Tbl_Fundaciones (Fund_Id, Fund_Username, Fund_Direccion, Fund_Casos_Activos, Fund_Telefono, Fund_Usu_Id) 
+VALUES 
+(008, 'fundacion01', 'Calle 123', 1, 1234567890, 888),
+(009, 'fundacion02', 'Avenida 456', 2, 2345678901, 999),
+(010, 'fundacion03', 'Calle 789', 2, 3456789012, 101010),
+(011, 'fundacion04', 'Avenida 101', 1, 4567890123, 111111),
+(012, 'fundacion05', 'Calle 205', 0, 1234567890, 121212),
+(013, 'fundacion06', 'Avenida 88', 0, 2345678901, 131313),
+(014, 'fundacion07', 'Carrera 114', 1, 3456789012, 141414);
+
+
+INSERT INTO Tbl_Caso_Donacion (Caso_Id, Caso_Nombre_Caso, Caso_Descripcion, Caso_Fecha_Inicio, Caso_Fecha_Fin, Caso_Estado, Caso_Fund_Id) 
+VALUES 
+('C001', 'Educación Infantil', 'Proveer recursos educativos a niños en zonas rurales.', '2024-01-10', '2024-12-31','Activo', 8), 
+('C002', 'Dia del niño', 'Campaña de regalos para niños.', '2024-02-15', '2024-11-30','Inactivo', 9),
+ ('C003', 'Alimentación Escolar', 'Proveer alimentos a escuelas en zonas marginadas.', '2024-03-20', '2024-09-30','Activo', 11),
+('C004', 'Reforestación Urbana', 'Proyecto de plantación de árboles en áreas urbanas.', '2024-04-01', '2024-10-31','Activo',10),
+('C005', 'Vivienda Digna', 'Construcción de viviendas para familias en situación de pobreza.', '2024-05-05', '2024-12-31','Activo', 14),
+('C006', 'Atención Médica', 'Proveer atención médica gratuita en zonas rurales.', '2024-06-10', '2024-12-31','Inactivo', 9),
+('C007', 'Empoderamiento Juvenil', 'Programa de capacitación laboral para jóvenes.', '2024-07-15', '2024-12-31','Inactivo', 10);
+
+
+INSERT INTO Tbl_Donacion_Recursos (Rec_Id, Rec_Nombre,Rec_Cantidad, Rec_Disponibilidad, Rec_Tipo, Rec_Descripcion,Rec_Dona_Cedula, Rec_Caso_Id) 
+VALUES 
+(705, 'Libros', 12,  'Disponible', 'Educación', 'Libros de texto y material educativo.',2001, 'C002'),
+(818, 'Juguetes',23, 'Disponible', 'Juguetería', 'Regalos para niños.',2003 ,'C002'),
+(699, 'Comida',7, 'Disponible', 'Alimentación', 'Alimentos para niños en escuelas.',2005, 'C003'),
+(423, 'Árboles',3, 'Disponible', 'Medio Ambiente', 'Plantas para reforestación.',2004, 'C004'),
+(672, 'Material de construcción',8, 'Disponible', 'Vivienda', 'Materiales para construir viviendas', 2007, 'C005' ),
+(698, 'Medicinas',12, 'Disponible', 'Salud', 'Medicamentos para atención médica.', 2001,'C006'),
+(201, 'Equipos de cómputo',2, 'Disponible', 'Capacitación', 'Computadoras para capacitación.' ,2006,'C001');
+
+
+
+
+
+INSERT INTO Tbl_Voluntarios (Vol_Cedula, Vol_Nombre, Vol_Apelldio, Vol_Correo, Vol_Celular, Vol_Caso_Id) 
+VALUES 
+(1001, 'Juan', 'Pérez', 'juan.perez@example.com', 1234567890, 'C001'), 
+(1002, 'María', 'García', 'maria.garcia@example.com', 2345678901, 'C002'),
+(1003, 'Luis', 'Martínez', 'luis.martinez@example.com', 3456789012, 'C003'),
+(1004, 'Ana', 'Rodríguez', 'ana.rodriguez@example.com', 4567890123, 'C004'), 
+(1005, 'Carlos', 'Hernández', 'carlos.hernandez@example.com', 5678901234, 'C005'), 
+(1006, 'Laura', 'López', 'laura.lopez@example.com', 6789012345, 'C006'), 
+(1007, 'Jorge', 'Gómez', 'jorge.gomez@example.com', 7890123456, 'C007');
+
+
+
+
+
+INSERT INTO Tbl_Horarios_Voluntarios (Hora_Id, Hora_Citacion, Hora_Localizacion, Hora_Vol_Cedula) 
+VALUES
+(01, '2024-09-01 09:00:00', 'Escuela Rural', 1001),
+(02, '2024-09-02 10:00:00', 'Centro Comunitario', 1002),
+(03, '2024-09-03 08:00:00', 'Comedor Escolar', 1003),
+(04, '2024-09-04 07:00:00', 'Parque Central', 1004),
+(05, '2024-09-05 09:30:00', 'Construcción de Viviendas', 1005),
+(06, '2024-09-06 08:30:00', 'Clínica Rural', 1006),
+(07, '2024-09-07 11:00:00', 'Centro Juvenil', 1007);
+
+
+INSERT INTO Tbl_Donante (Dona_Cedula, Dona_Nombre, Dona_Nombre_Recurso, Dona_Apellido, Dona_Correo, Dona_Tipo_Donacion) 
+VALUES
+(2001, 'Pedro', 'Libros', 'Sánchez', 'pedro.sanchez@example.com', 'Educativa'),
+(2002, 'Elena', 'Vacunas', 'Fernández', 'elena.fernandez@example.com', 'Salud'),
+(2003, 'Roberto', 'Comida', 'Ramírez', 'roberto.ramirez@example.com', 'Alimentación'), (2004, 'Patricia', 'Árboles', 'González', 'patricia.gonzalez@example.com', 'Medio Ambiente'),
+(2005, 'Miguel', 'Material de construcción', 'Torres', 'miguel.torres@example.com', 'Vivienda'),
+(2006, 'Claudia', 'Medicinas', 'Vega', 'claudia.vega@example.com', 'Salud'),
+(2007, 'Sergio', 'Equipos de cómputo', 'Morales', 'sergio.morales@example.com', 'Capacitación');
+
+
+
+
+
+
+
+
+
+INSERT INTO tbl_donacion_dinero (Don_Id,Don_Monto,Don_Fecha,Don_Correo,Don_Metodo_Pago,Don_Dona_Cedula,Don_Caso_Id) 
+VALUES 
+(3001, '500 USD', '2024-09-01', 'pedro.sanchez@example.com', 'Transferencia Bancaria',2001, 'C002'),
+(3002, '1200 USD', '2024-09-02', 'elena.fernandez@example.com', 'PayPal', 2002 ,'C005'), 
+(3003, '800 USD', '2024-09-03', 'roberto.ramirez@example.com', 'Tarjeta de Crédito', 2003 ,'C007'),
+(3004, '1000 USD', '2024-09-04', 'patricia.gonzalez@example.com', 'Transferencia Bancaria', 2004 ,'C004'),
+(3005, '1500 USD', '2024-09-05', 'miguel.torres@example.com', 'PayPal', 2005 ,'C004'), 
+(3006, '700 USD', '2024-09-06', 'claudia.vega@example.com', 'Tarjeta de Crédito', 2006 ,'C002'), 
+(3007, '950 USD', '2024-09-07', 'sergio.morales@example.com', 'Transferencia Bancaria', 2007 ,'C003');
