@@ -1,0 +1,41 @@
+#azul{
+    float: left;
+    background-color: blue;
+    width: 20%;
+    height: 700px;
+    border: black 5px solid;
+}
+.morado{
+    position: fixed;
+    background-color: purple;
+    left: 40%;
+    width: 40%;
+    height: 100%;
+    border: black 5px solid;
+}
+.rojo{
+    position: fixed;
+    background-color: rgb(255, 0, 0);
+    left: 80.5%;
+    width: 20%;
+    height: 80%;
+    border: black 5px solid;
+}
+.amarillo{
+    position: fixed;
+    background-color: rgb(255, 136, 0);
+    top: 80%;
+    left: 0.5%;
+    width: 39%;
+    height: 20%;
+    border: black 5px solid;
+}
+.amarillo2 {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 19%;
+    height: 20%;
+    background-color: rgb(255, 136, 0);
+    border: black 5px solid;
+}
