@@ -1,0 +1,68 @@
+body {
+    margin: 0; /* Elimina el margen predeterminado del navegador */
+    height: 100vh; /* Establece la altura del cuerpo al 100% del viewport */
+    display: grid; /* Activa el uso de CSS Grid */
+    grid-template-rows: 1fr 2fr 1fr; /* Define tres filas con proporciones específicas */
+    grid-template-columns: 1fr 2fr 1fr; /* Define tres columnas con proporciones específicas */
+    gap: 5px; /* Espacio entre los elementos de la cuadrícula */
+    background-color: black; /* Fondo negro para hacer que las líneas entre bloques sean negras */
+}
+
+/* Estilo común para todos los bloques */
+.box {
+    border: 2px solid black; /* Establece un borde negro de 2px alrededor de cada bloque */
+}
+
+/* Especifica las posiciones y estilos de cada bloque */
+
+/* Bloque azul en la esquina superior izquierda */
+.box1 {
+    background-color: #2980b9; /* Color de fondo azul */
+    grid-row: 1 / 2; /* Ocupa la primera fila */
+    grid-column: 1 / 2; /* Ocupa la primera columna */
+}
+
+/* Bloque azul en la esquina superior derecha */
+.box2 {
+    background-color: #2980b9; /* Color de fondo azul */
+    grid-row: 1 / 2; /* Ocupa la primera fila */
+    grid-column: 2 / 4; /* Ocupa la segunda y tercera columna */
+}
+
+/* Bloque rojo en la parte derecha, sobre el bloque púrpura */
+.box3 {
+    background-color: #c0392b; /* Color de fondo rojo */
+    grid-row: 2 / 4; /* Ocupa desde la segunda hasta la tercera fila */
+    grid-column: 3 / 4; /* Ocupa la tercera columna */
+}
+
+/* Bloque púrpura grande en el centro */
+.box4 {
+    background-color: #8e44ad; /* Color de fondo púrpura */
+    grid-row: 2 / 3; /* Ocupa la segunda fila */
+    grid-column: 1 / 3; /* Ocupa la primera y segunda columna */
+}
+
+/* Bloques naranjas en la fila inferior */
+.box5, .box6, .box7, .box8 {
+    background-color: #e67e22; /* Color de fondo naranja */
+    grid-row: 3 / 4; /* Todos ocupan la tercera fila */
+    grid-column: span 1; /* Cada uno ocupa una columna diferente */
+}
+
+/* Cada bloque ocupa una de las cuatro columnas de la fila inferior */
+.box5 {
+    grid-column: 1 / 2; /* Ocupa la primera columna de la fila inferior */
+}
+
+.box6 {
+    grid-column: 2 / 3; /* Ocupa la segunda columna de la fila inferior */
+}
+
+.box7 {
+    grid-column: 3 / 4; /* Ocupa la tercera columna de la fila inferior */
+}
+
+.box8 {
+    grid-column: 4 / 5; /* Ocupa la cuarta columna de la fila inferior */
+}
