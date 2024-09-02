@@ -1,41 +1,60 @@
-#azul{
-    float: left;
-    background-color: blue;
-    width: 20%;
-    height: 700px;
-    border: black 5px solid;
+#azul1{
+    position: absolute;/* Posicion del elemento absoluta+ */
+    top: 0%;/* Coloca el borde superior 0% del contenedor*/
+    left: 0%;/*Coloca el borde izquierdo al 0% del contenedor*/
+    background-color: blue;/*color de fondo del elemento a azul.*/
+    width: 20%;/*El ancho del elemento será el 20% */
+    height: 80%;/*La altura del elemento será el 80%*/
+    box-sizing: border-box;
+    border: black 5px solid;/*Aplica un borde sólido negro de 5px*/
+}
+#azul2{
+    position: absolute;/* Posicion del elemento absoluta+ */
+    background-color: blue;/*color de fondo del elemento a azul.*/
+    top: 0%;/* Coloca el borde superior 0% del contenedor*/
+    left: 20%;/*Coloca el borde izquierdo al 20% del contenedor*/
+    width: 20%;/*El ancho del elemento será el 20% */
+    height: 80%;/*La altura del elemento será el 80%*/
+    box-sizing: border-box;
+    border: black 5px solid;/*Aplica un borde sólido negro de 5px*/
 }
 .morado{
-    position: fixed;
-    background-color: purple;
-    left: 40%;
-    width: 40%;
-    height: 100%;
-    border: black 5px solid;
+    position: fixed;/*posicion fija respecto a la pantalla*/
+    background-color: purple;/*color de fondo del elemento a morado.*/
+    top: 0%;/* Coloca el borde superior 0% del contenedor*/
+    left: 40%;/*Coloca el borde izquierdo al 40%*/
+    width: 40%;/*El ancho del elemento será el 40% */
+    height: 100%;/*La altura del elemento será el 100%*/
+    border: black 5px solid;/*Aplica un borde sólido negro de 5px*/
 }
 .rojo{
-    position: fixed;
-    background-color: rgb(255, 0, 0);
-    left: 80.5%;
-    width: 20%;
-    height: 80%;
-    border: black 5px solid;
+    position: fixed;/*posicion fija respecto a la pantalla*/
+    background-color: rgb(255, 0, 0);/*color de fondo del elemento a rojo.*/
+    top: 0%;/* Coloca el borde superior 0% del contenedor*/
+    right: 0%;/*Coloca el borde derecgo al 0%*/
+    width: 20%;/*El ancho del elemento será el 20% */
+    height: 80%;/*La altura del elemento será el 80%*/
+    box-sizing: border-box;
+    border: black 5px solid;/*Aplica un borde sólido negro de 5px*/
 }
-.amarillo{
-    position: fixed;
-    background-color: rgb(255, 136, 0);
-    top: 80%;
-    left: 0.5%;
-    width: 39%;
-    height: 20%;
-    border: black 5px solid;
+.amarillo1{
+    position: fixed;/*posicion fija respecto a la pantalla*/
+    bottom: 0%;/* Coloca el borde inferior 0% del contenedor*/
+    background-color: rgb(255, 136, 0);/*color de fondo del elemento a amarillo/naranjoso.*/
+    left: 0%;/*Coloca el borde izquierdo al 0% del contenedor*/
+    top: 80%;/* Coloca el borde superior 80% del contenedor*/
+    width: 40%;/*El ancho del elemento será el 40% */
+    height: 20%;/*La altura del elemento será el 20%*/
+    box-sizing: border-box;
+    border: black 5px solid;/*Aplica un borde sólido negro de 5px*/
 }
 .amarillo2 {
     position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 19%;
-    height: 20%;
+    bottom: 0;/* Coloca el borde inferior 0% del contenedor*/
+    right: 0;/*Coloca el borde derecho al 0% del contenedor*/
+    width: 20%;/*El ancho del elemento será el 40% */
+    height: 20%;/*La altura del elemento será el 20%*/
     background-color: rgb(255, 136, 0);
-    border: black 5px solid;
+    box-sizing: border-box;
+    border: black 5px solid;/*Aplica un borde sólido negro de 5px*/
 }
