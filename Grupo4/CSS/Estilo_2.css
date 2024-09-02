@@ -1,0 +1,44 @@
+html,
+body {
+    margin: 0;
+    /*Elimina el margen predeterminado que tienen los elementos html y body en muchos navegadores.*/
+    height: 100%;
+    /*Asegura que el html y el body ocupen el 100% del ancho y alto de la ventana del navegador.*/
+    width: 100%;
+}
+
+.container {
+    display: grid;
+    /*Define que .container utilizará un sistema de cuadrícula.*/
+    grid-template-rows: 1fr 3fr 1fr;
+    /*Define tres filas en la cuadrícula.*/
+    grid-template-columns: 1fr 2fr 1fr;
+    /*Define tres columnas en la cuadrícula. Las columnas exteriores (la primera y la tercera) ocupan una fracción del espacio disponible*/
+    height: 100%;
+    /*Asegura que el contenedor .container ocupe todo el ancho y alto disponible.*/
+    width: 100%;
+    gap: 2px; /*Establece un espacio (gap) de 2 píxeles entre las celdas de la cuadrícula.*/
+
+}
+
+.header {
+    grid-column: 1 / span 3; /*Indica que el elemento con la clase .header se extenderá a lo largo de las tres columnas de la cuadrícula, ocupando toda la fila superior.*/
+    background-color: #007bff; /*Establece un color de fondo azul */
+}
+
+.left,
+.right {
+    background-color: #6f42c1;
+}
+/*Establece un color de fondo púrpura (#6f42c1) para las celdas laterales (izquierda y derecha).*/
+
+.center {
+    background-color: #dc3545;
+}
+/* Establece un color de fondo rojo para el centro*/
+
+
+.footer {
+    grid-column: 1 / span 3; /*Indica que el elemento con la clase .footer se extenderá a lo largo de las tres columnas de la cuadrícula, ocupando toda la fila inferior.*/
+    background-color: #fd7e14; /*Establece un color de fondo naranja Al pie de pagina */
+}

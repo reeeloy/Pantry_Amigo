@@ -1,0 +1,88 @@
+html,
+body {
+    margin: 0; /*Elimina el margen predeterminado que tienen los elementos html y body.*/
+    height: 100%; /*Asegura que el html y el body ocupen el 100% del alto y ancho de la ventana del navegador*/
+    width: 100%;
+    display: flex; /*Define un contenedor flex para el body, lo que permite alinear*/
+    flex-direction: column; /*Establece que los elementos hijos del body se dispongan en una columna (uno debajo del otro).*/
+}
+
+.header {
+    background-color: #000; /* Establece un color de fondo negro para el encabezado*/
+    height: 10%; /*Define que el encabezado ocupará el 10% de la altura total de la página*/
+    width: 100%; /*Asegura que el encabezado ocupe todo el ancho de la página.*/
+}
+
+.content {
+    flex: 1; /*Hace que el contenedor .content ocupe todo el espacio disponible entre el header y el footer*/
+    display: flex; /*Define que el contenedor .content utilizará un modelo de diseño Flexbox */
+    width: 100%; /*Asegura que el contenedor .content ocupe todo el ancho de la página*/
+}
+
+.menu-container {
+    display: flex; /*Define un contenedor flex para el menú*/
+    width: 20%; /*Define un contenedor flex para el menú*/
+    flex-direction: column; /*Los elementos dentro de .menu-container se organizan en una columna.*/
+    background-color: #1a1dd1; /*stablece un color de fondo azul oscuro para el contenedor del menú*/
+    border: 1px solid black; /*Añade un borde negro alrededor del contenedor del menú*/
+}
+
+.menu-item {
+    background-color: #39b320; /*Establece un color de fondo verde para los elementos del menú*/
+    color: white; /*El texto de los elementos del menú es blanco*/
+    text-align: center; /*El texto de los elementos del menú está centrado*/
+    padding: 15px; /*Añade un relleno de 15 píxeles alrededor del contenido de los elementos del menú*/
+    border: 1px solid #000; /*Añade un borde negro alrededor de cada elemento del menú*/
+    font-family: Arial, Helvetica, sans-serif; /*Fuente de texto*/
+}
+
+.main-content {
+    flex: 1; /*Hace que .main-content ocupe todo el espacio restante dentro de .content.*/
+    display: flex; /*utilizará Flexbox*/
+    flex-direction: column; /*Organiza los elementos hijos en una columna vertical*/
+    border: 1px solid #000; /*Añade un borde negro alrededor del contenedor*/
+
+}
+
+.upper-content {
+    background-color: #6f42c1; /* Establece un color de fondo púrpura*/
+    height: 20%; /*Define la altura como el 20% del contenedor padre*/
+    width: 80%; /*Define que el ancho ocupe el 80% del contenedor padre.*/
+    position: absolute; /*Posiciona el contenedor en relación con el contenedor padre más cercano*/
+    top: 10%; 
+    /* Coloca el contenedor a un 10% desde la parte superior y un 20% desde la parte izquierda del contenedor padre.*/
+    left: 20%; 
+    border: 1px solid #000; /*Añade un borde negro alrededor*/
+    box-sizing: border-box; /*Asegura que el borde y el padding se incluyan dentro de las dimensiones del contenedor.*/
+   
+
+}
+
+.lower-content {
+    flex: 1; /*cupe el espacio restante dentro*/
+    display: flex; /*Organiza los elementos dentro de .lower-content en un contenedor Flexbox.*/
+}
+
+.lower-left {
+    width: 50%; 
+    background-color: #dc3545;
+    border: 1px solid #000;
+}
+/*Establece que cada sección (.lower-left y .lower-center) ocupará la mitad del ancho de .lower-content.*/
+/*signa un color de fondo rojo a ambas secciones.*/
+/*Agrega un borde negro alrededor de ambas secciones.*/
+
+.lower-center {
+    width: 50%;
+    background-color: #dc3545;
+    border: 1px solid #000;
+}
+
+.footer {
+    background-color: #f8d7da; /*Asigna un color de fondo rosa claro pie de pagina */
+    height: 15%; /*Define que el pie de página ocupe el 15% de la altura total de la página.*/
+    width: 100%; /*Asegura que el pie de página ocupe todo el ancho de la página.*/
+    border: 1px solid #000; /*Agrega un borde negro alrededor del pie de página.*/
+    box-sizing: border-box; /*Asegura que el ancho y la altura incluyan el borde y el relleno.*/
+
+}
