@@ -1,0 +1,141 @@
+*{
+    box-sizing: border-box;
+    /*controlar dimensiones sin que se vean afectadas
+    por el border o por el padding*/
+    margin:0;
+    padding: 0;
+    }
+    /*clases especiales*/
+    .borde{
+    border:1px solid gray;
+    }
+    .titulo{
+    width: 100%;
+    height: 50px;
+    }
+    
+    /*contenedor para pantallas grandes*/
+    .contenedor{
+    width: 99%;
+    max-width: 1280px;
+    margin:auto; /*quede centrado*/
+    }
+    /*navegador*/
+
+    /*cuerpo*/
+    body{
+    background-image: url('../img/blur-1889747_1280.jpg');
+    background-size: 100% 100%;
+    background-attachment: fixed;/*la imagen se quede fija*/
+    }
+
+    nav{
+    width: 100%;
+    height: 50px;
+    }
+    /*La suma da 100=65+15+20*/
+    .logo{
+    width: 20%;
+    height: 100%;
+    float: left;
+    padding: 5px;/*no se pegue la imagen logo tanto al borde*/
+/*aplica para la imagen y letras*/
+    text-align: center;
+    }
+    /*en su interior a otra caja cuando esten separados*/
+    .logo img{
+    /*width: auto;*/
+    /*height: 100%; de los 50px*/
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;/*la imagen sea curva*/
+    /*Si se quiere rendondez total se tiene que
+    calcular en el ancho y alto en medida
+    en pixeles. Teniendo en cuenta la
+    altura nav 50px y padding de 5px*/
+    }
+    .navegacion{
+    
+    width: 65%;
+    height: 100%;
+    float: left;
+    }
+    .ingreso{
+    width: 15%;
+    height: 100%;
+    float: left;
+    }
+    /*encabezado*/
+    header{
+    width: 100%;
+    height: 550px;
+    /*depende del monitor*/
+    background-image: url('../img/Fondo.jfif');
+    background-size:100% 100%;
+    }
+    /*portafolio*/
+    /*#titulo1{
+    width: 100%;
+    height: 50px;
+    }*/
+    main#portafolio{/*tiene que estar pegado para que sepa que es de esa etiqueta
+    si se separa pensara que es de alguna del interior*/
+    width: 100%;
+    height: 550px;
+    }
+    .div-porta{
+    width: 33.33%;
+    height:100%;
+    float: left;
+    }
+    /*quinenes-somos*/
+    /*#titulo2{
+    width: 100%;
+    height: 50px;
+    }*/
+    section#quienes-somos{
+    width: 100%;
+    height: 550px;
+    }
+    .fila{
+    width: 100%;
+    height: 33.33%;
+    }
+    .col-ext{
+    width: 40%;
+    height: 100%;
+    float: left;
+    }
+    .col-cen{
+    width: 20%;
+    
+    height: 100%;
+    float: left;
+    }
+    /*contactenos*/
+    /*#titulo3{
+    width: 100%;
+    height: 50px;
+    }*/
+    section#contactenos{
+    width: 100%;
+    height: 550px;
+    }
+    .div-contacto{
+    width: 50%;
+    height: 100%;
+    float: left;
+    }
+    .div-arr{
+    width: 100%;
+    height:70%;
+    }
+    .div-aba{
+    width: 100%;
+    height:30%;
+    }
+    /*footer*/
+    footer{
+    width: 100%;
+    height: 50px;
+    }
