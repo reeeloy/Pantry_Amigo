@@ -1,0 +1,197 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-image: url();
+}
+
+header {
+    background-color: #fff;
+    padding: 10px 20px;
+    box-shadow: 0 0 15px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-left, .nav-right {
+    display: flex;
+    align-items: center;
+}
+
+.nav-link1 {
+    padding-right: 40px;
+    padding-left: 40px;
+    text-decoration: none;
+    color: #4CAF50;
+    font-size: 17px;
+}
+.nav-link2 {
+    padding-right: 40px;
+    padding-left: 40px;
+    text-decoration: none;
+    color: #000;
+    font-size: 17px;
+}
+.nav-link3 {
+    padding-right: 40px;
+    padding-left: 40px;
+    text-decoration: none;
+    color: #000;
+    font-size: 17px;
+}
+.nav-link1:hover {
+    color: #4CAF50; /* Color verde como el de "INICIO" */
+}
+
+
+.logo {
+    width: 100px;
+    height: auto;
+}
+
+.icon {
+    width: 20px;
+    height: auto;
+}
+
+/*fondo banner*/
+.banner{
+    background-image: url(../IMG/PAbanner.png);
+    width: 100%;
+    height: 968px;
+        background-size: cover; /* Imagen cubre todo el contenedor */
+        background-position: center; /* Imagen centrada */
+        background-repeat: no-repeat; /* Evita la repetición de la imagen */
+        text-align: center;
+    }
+
+    .banner h1{
+        color: #fff;
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 0;
+        padding: 0;
+        text-shadow: 1px 2px 3px rgba(36, 35, 35, 0.5); /* Añade un ligero sombreado al texto */
+        font-size: 100px;
+    }
+    .banner h2{
+        margin: 0;
+        padding: 0;
+        color: #000;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 90px;
+    }
+    .banner p {
+        margin: 0;
+        padding: 0;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Añade un ligero sombreado al texto */
+    }
+    .banner button {
+        background-color: #fdfdfd;
+        color:#4CAF50;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        font-size: 1.2rem;
+        margin-top: 20px;
+    }
+    
+    .banner button:hover {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+.opciones{
+    display: flex;
+    justify-content: space-around;
+    padding: 50px;
+    background-color: #f4f4f4;
+}
+.opciones .donacion{
+    width: 400px;
+    color: #fff;
+    background-color: #414042;
+    padding: 20px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.donacion img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 20px;
+}
+
+.opciones .fundaciones{
+    width: 400px;
+    color: #fff;
+    background-color: #414042;
+    padding: 20px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.fundaciones img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 20px;
+}
+
+.opciones .voluntarios{
+    width: 400px;
+    color: #fff;
+    background-color: #414042;
+    padding: 20px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.voluntarios img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 20px;
+}
+
+h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.donacion:hover {
+    background-color: #4682b4;
+    transition: background-color 0.3s ease;
+}
+.fundaciones:hover {
+    background-color: #4682b4;
+    transition: background-color 0.3s ease;
+}
+.voluntarios:hover {
+    background-color: #4682b4;
+    transition: background-color 0.3s ease;
+}
+/*slides*/
+.slide-contenedor{
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+}
+.contenido .slide{
+    height: 150px;
+    width: 200px;
+}
+.slide img{
+    height: 100%;
+    width: 100%;
+    border-radius: 10%;
+}
