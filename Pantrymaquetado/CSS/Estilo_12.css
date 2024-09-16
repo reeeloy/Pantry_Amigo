@@ -1,0 +1,162 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #faf3e0;
+}
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.help-icon img {
+    width: 40px;
+    align-items: center;
+    cursor: pointer;
+    
+}
+
+
+
+header {
+    background-color: #4682b4;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #ddd;
+}
+
+
+.logito {
+
+    /*no se pegue la imagen logo tanto al borde*/
+    /*aplica para la imagen y letras*/
+    align-items: center;
+    font-size: 20px;
+    display: flex;
+    
+    
+}   
+/*en su interior a otra caja cuando esten separados*/
+.logito img {
+    /*width: auto;*/
+    /*height: 100%; de los 50px*/
+    width: 20%;
+    margin-right: 10px;
+    border-radius: 50%;
+    /*la imagen sea curva*/
+    /*Si se quiere rendondez total se tiene que
+    calcular en el ancho y alto en medida
+    en pixeles. Teniendo en cuenta la
+    altura nav 50px y padding de 5px*/
+}
+
+.home-button {
+    color: whitesmoke;
+    background-color: #ff6600;
+    padding: 8px 16px;
+    text-decoration: none;
+    margin-right: 20px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 80px);
+}
+
+.container {
+    display: flex;
+    justify-content: center; /* Esto centra el contenido horizontalmente */
+    align-items: flex-start; /* Alinea las cajas desde la parte superior */
+    width: 100%;
+    max-width: 900px;
+    margin: 20px;
+}
+
+.case-details {
+    background-color:#68bb62;
+    padding: 20px;
+    border-radius: 20px;
+    color: white;
+    width: 70%; /* Tamaño ajustable de la caja de detalles */
+    margin-right: 100px; /* Margen derecho para separar la caja de detalles de la de resumen */
+
+}
+.case-details h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.case-details p {
+    margin-bottom: 10px;
+}
+
+.case-image {
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 30px;
+}
+
+.foundation-info {
+    display: flex;
+    align-items: center;
+}
+
+.foundation-logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 20px;
+    margin-right: 10px;
+}
+
+.donation-summary {
+    background-color: #68bb62;
+    padding: 20px;
+    border-radius: 20px;
+    color: white;
+    width: 30%; /* Tamaño ajustable de la caja de resumen */
+    margin-left: 100px; /* Margen izquierdo para un poco más de espacio */
+}
+
+.donation-summary h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.donation-summary label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.donation-summary input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    border: none;
+}
+
+.continue-button {
+    background-color: #ff6600;
+    border: none;
+    color: white;
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.continue-button:hover {
+    background-color: #ddd;
+}
