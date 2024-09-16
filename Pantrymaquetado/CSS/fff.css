@@ -185,38 +185,43 @@ h3 {
 }
 /*historias*/
 .historias{
-    height: 600px;
-    width: 100%;
-    background-color: #68bb62c5;
-    padding: 20px;
+    text-align: center;
+    padding-bottom: 40xp;
 }
 
 .historias h1{
-    color: #414042;
+    padding: 20px;
+    color: #fff;
     text-align: left;
+    text-shadow: 2px 2px 4px #4CAF50;
 }
-.historias h6{
+.historias p{
     color: #000;
     text-align: left;
-    margin: 0;
-    padding: 5px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Añade un ligero sombreado al texto */
+    padding-left: 25px;
+    padding-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Añade un ligero sombreado al texto*/
+}
+section{
+    background-color: #4caf4f6e;
+}
+.contenedor{
+    display: flex;
+    justify-content: space-around;
 }
 
-.historias .cuadrado{
-    width: 300px;
-    height: 400px;
+.cuadrado{
+    width: 250px;
     color: #fff;
     background-color: #414042;
     padding: 20px;
     text-align: center;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
 }
 .cuadrado img{
-    width: 200px;
-    height: auto;
-    margin-bottom: 20px;
+    width: 100%;
+    padding: 15px;
 
 }
 .cuadrado button {
@@ -225,8 +230,6 @@ h3 {
     padding: 10px 20px;
     border: none;
     border-radius: 50px;
-    cursor: pointer;
-    font-size: 1.2rem;
     margin-top: 20px;
 }
 
@@ -235,10 +238,6 @@ h3 {
     color: white;
 }
 
-.flex{
-    display: flex;
-    justify-content: space-around;
-}
 
 /*footer*/
 footer{
