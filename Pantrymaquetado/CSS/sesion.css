@@ -1,77 +1,158 @@
+/* Reinicio de estilos básicos */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Estilos del cuerpo */
 body {
     display: flex;
     font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
 }
 
-/*menu*/
-.menu{
+/* Menú lateral */
+.menu {
     background-color: #4682b4;
-    color: #fff;
+    color: white;
     width: 20%;
     height: 100vh;
     padding: 20px;
 }
 
-.menu ul{
-    list-style: none;
-}
-.menu ul li{
-padding: 15px;
-color: #fff;
+.menu img {
+    width: 100%;
+    margin-bottom: 20px;
 }
 
-.perfil{
+.menu ul {
+    list-style: none;
+}
+
+.menu ul li {
+    padding: 15px;
+}
+
+.menu ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.menu ul li a:hover {
+    text-decoration: underline;
+}
+
+.help {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.help a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Sección principal */
+.principal {
     width: 80%;
     padding: 20px;
+}
+
+header {
+    text-align: right;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+.perfil {
+    display: inline-block;
     text-align: right;
 }
 
-.perfil img{
-    height: 100px;
-    width: 100px;
-    border-radius: 20%;
-    border-color: black;
-    border-width: 5px;
+.perfil img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
 }
-.principal{
-    width: 80%;
-    padding: 20px;
 
+.username {
+    font-weight: bold;
 }
-.casos,.nuevo.caso, .horario{
-    padding: 20px;
+
+.rol {
+    color: gray;
+    font-size: 14px;
 }
-.casos{
+
+/* Casos */
+.casos {
     display: flex;
     justify-content: space-between;
 }
-.caso{
-    width: 30%;
-    padding: 10px;
-    border-radius: 5px;
+
+.casos h2 {
+    margin-bottom: 20px;
 }
 
-.caso img{
-    width: 100%;
-    border-radius: 5px;
-}
-.caso-nuevo{
-    background-color: green;
+.caso {
+    background-color: white;
     padding: 20px;
-    color: #fff;
+    width: 30%;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.caso h3 {
+    margin-bottom: 10px;
+}
+
+.caso img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Nuevo caso */
+.nuevo-caso {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.nuevo-caso p {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.nuevo-caso button {
+    padding: 10px 20px;
+    background-color: #4682b4;
+    color: white;
     border: none;
     border-radius: 5px;
+    cursor: pointer;
 }
 
-.caso-nuevo button{
-    padding: 10px;
-    background-color: #fff;
-    color: green;
-    border-radius: 5px;
+.nuevo-caso button:hover {
+    background-color: #3572a5;
+}
+
+/* Horarios asignados */
+.horario {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.horario h2 {
+    margin-bottom: 10px;
+}
+
+.horario img {
+    width: 100px;
+    height: 100px;
 }

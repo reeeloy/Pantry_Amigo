@@ -1,0 +1,111 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-image: url();
+}
+
+header {
+    background-color: #fff;
+    padding: 10px 20px;
+    box-shadow: 0 0 15px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-left, .nav-right {
+    display: flex;
+    align-items: center;
+}
+
+.nav-link1 {
+    padding-right: 40px;
+    padding-left: 40px;
+    text-decoration: none;
+    color: #000000;
+    font-size: 17px;
+}
+.nav-link2 {
+    padding-right: 40px;
+    padding-left: 40px;
+    text-decoration: none;
+    color: #4CAF50;
+    font-size: 17px;
+}
+.nav-link3 {
+    padding-right: 40px;
+    padding-left: 40px;
+    text-decoration: none;
+    color: #000;
+    font-size: 17px;
+}
+.nav-link1:hover {
+    color: #4CAF50; /* Color verde como el de "INICIO" */
+}
+
+
+.logo {
+    width: 100px;
+    height: auto;
+}
+
+.icon {
+    width: 20px;
+    height: auto;
+}
+
+/* Logo izq */
+.form-section {
+    width: 400px;
+    background-color: #4682b4;
+    padding: 20px;
+    border-radius: 0 10px 10px 0;
+    display: flex;
+    justify-content: center;
+}
+
+form {
+    width: 400px;
+}
+
+.form-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+input {
+    width: 48%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+input[type="password"],
+.full-width input {
+    width: 100%;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #fff;
+    color: #4CAF50;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+button:hover {
+    background-color: #4CAF50;
+    color: #fff
+}
