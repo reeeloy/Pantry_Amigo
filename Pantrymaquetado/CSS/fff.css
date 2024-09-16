@@ -80,6 +80,7 @@ header {
         padding: 0;
         text-shadow: 1px 2px 3px rgba(36, 35, 35, 0.5); /* Añade un ligero sombreado al texto */
         font-size: 100px;
+        padding-top: 20px;
     }
     .banner h2{
         margin: 0;
@@ -87,11 +88,13 @@ header {
         color: #000;
         font-family: 'Times New Roman', Times, serif;
         font-size: 90px;
+        padding-top: 10px;
     }
     .banner p {
         margin: 0;
         padding: 0;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Añade un ligero sombreado al texto */
+        padding-top: 20px ;
     }
     .banner button {
         background-color: #fdfdfd;
@@ -180,18 +183,75 @@ h3 {
     background-color: #4682b4;
     transition: background-color 0.3s ease;
 }
-/*slides*/
-.slide-contenedor{
-    display: flex;
-    align-items: center;
-    background-color: #fff;
-}
-.contenido .slide{
-    height: 150px;
-    width: 200px;
-}
-.slide img{
-    height: 100%;
+/*historias*/
+.historias{
+    height: 600px;
     width: 100%;
-    border-radius: 10%;
+    background-color: #68bb62c5;
+    padding: 20px;
+}
+
+.historias h1{
+    color: #414042;
+    text-align: left;
+}
+.historias h6{
+    color: #000;
+    text-align: left;
+    margin: 0;
+    padding: 5px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Añade un ligero sombreado al texto */
+}
+
+.historias .cuadrado{
+    width: 300px;
+    height: 400px;
+    color: #fff;
+    background-color: #414042;
+    padding: 20px;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.cuadrado img{
+    width: 200px;
+    height: auto;
+    margin-bottom: 20px;
+
+}
+.cuadrado button {
+    background-color: #fdfdfd;
+    color:#4CAF50;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    margin-top: 20px;
+}
+
+.cuadrado button:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.flex{
+    display: flex;
+    justify-content: space-around;
+}
+
+/*footer*/
+footer{
+    width: 100%;
+    height: 60px;
+    }
+.borde-foot{
+    background-color: #4682b4;
+    text-align: justify;
+}
+
+.borde-foot img{
+    float:left;
+    height: 30px;
+    width: auto;
 }
