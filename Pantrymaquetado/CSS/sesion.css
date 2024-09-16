@@ -1,0 +1,77 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    font-family: Arial, sans-serif;
+}
+
+/*menu*/
+.menu{
+    background-color: #4682b4;
+    color: #fff;
+    width: 20%;
+    height: 100vh;
+    padding: 20px;
+}
+
+.menu ul{
+    list-style: none;
+}
+.menu ul li{
+padding: 15px;
+color: #fff;
+}
+
+.perfil{
+    width: 80%;
+    padding: 20px;
+    text-align: right;
+}
+
+.perfil img{
+    height: 100px;
+    width: 100px;
+    border-radius: 20%;
+    border-color: black;
+    border-width: 5px;
+}
+.principal{
+    width: 80%;
+    padding: 20px;
+
+}
+.casos,.nuevo.caso, .horario{
+    padding: 20px;
+}
+.casos{
+    display: flex;
+    justify-content: space-between;
+}
+.caso{
+    width: 30%;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.caso img{
+    width: 100%;
+    border-radius: 5px;
+}
+.caso-nuevo{
+    background-color: green;
+    padding: 20px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+}
+
+.caso-nuevo button{
+    padding: 10px;
+    background-color: #fff;
+    color: green;
+    border-radius: 5px;
+}
