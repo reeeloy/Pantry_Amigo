@@ -26,50 +26,50 @@ header {
 }
 
 .logo span {
-    font-size: 24px; /* Aumentado el tamaño de la fuente del texto del logo */
+    font-size: 24px; 
     font-weight: bold;
 }
 
 .search-bar {
     display: flex;
     align-items: center;
-    width: 40%; /* Asigna un ancho específico a la barra de búsqueda */
-    max-width: 500px; /* Limita el ancho máximo */
+    width: 40%; 
+    max-width: 500px; 
 }
 
 .search-bar input {
-    padding: 10px 15px; /* Aumentado el padding */
+    padding: 10px 15px; 
     border: 1px solid #ccc;
-    border-radius: 25px 0 0 25px; /* Aumentado para hacer más redondeado */
-    font-size: 16px; /* Aumentado el tamaño de la fuente */
-    width: calc(100% - 50px); /* Ajusta el ancho del input */
+    border-radius: 25px 0 0 25px; 
+    font-size: 16px; 
+    width: calc(100% - 50px); 
 }
 
 .search-bar button {
-    padding: 10px 15px; /* Aumentado el padding */
+    padding: 10px 15px; 
     border: 1px solid #ccc;
-    border-radius: 0 25px 25px 0; /* Aumentado para hacer más redondeado */
+    border-radius: 0 25px 25px 0; 
     background-color: white;
     cursor: pointer;
-    font-size: 16px; /* Aumentado el tamaño de la fuente */
+    font-size: 16px; 
 }
 
 nav a {
-    margin-left: 20px; /* Aumentado ligeramente */
+    margin-left: 20px; 
     text-decoration: none;
     color: #68bb62;
-    font-size: 18px; /* Aumentado el tamaño de la fuente */
+    font-size: 18px; 
 }
 
 nav .help {
     display: inline-block;
-    width: 30px; /* Aumentado de 20px a 30px */
-    height: 30px; /* Aumentado de 20px a 30px */
+    width: 30px; 
+    height: 30px; 
     background-color: #f0f0f0;
     border-radius: 50%;
     text-align: center;
-    line-height: 30px; /* Ajustado para centrar verticalmente */
-    font-size: 20px; /* Aumentado el tamaño de la fuente */
+    line-height: 30px;
+    font-size: 20px; 
 }
 main {
     padding: 20px;
