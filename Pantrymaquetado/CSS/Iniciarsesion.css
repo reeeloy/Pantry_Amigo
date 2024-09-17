@@ -1,0 +1,140 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-image: url();
+}
+
+header {
+    background-color: #fff;
+    padding: 10px 20px;
+    box-shadow: 0 0 15px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-left, .nav-right {
+    display: flex;
+    align-items: center;
+}
+
+.nav-link1 {
+    padding-right: 40px;
+    padding-left: 40px;
+    text-decoration: none;
+    color: #000000;
+    font-size: 17px;
+}
+.nav-link2 {
+    padding-right: 40px;
+    padding-left: 40px;
+    text-decoration: none;
+    color: #000000;
+    font-size: 17px;
+}
+.nav-link3 {
+    padding-right: 40px;
+    padding-left: 40px;
+    text-decoration: none;
+    color: #4CAF50;
+    font-size: 17px;
+}
+.nav-link3:hover {
+    color: #4CAF50; /* Color verde como el de "INICIO" */
+}
+
+
+.logo {
+    width: 100px;
+    height: auto;
+}
+
+.icon {
+    width: 20px;
+    height: auto;
+}
+/* Contenedor principal */
+.contenedor {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px;
+    background-color: #666;
+    height: 100%;
+}
+
+/* Sección de logo */
+.borde {
+    width: 45%;
+    color: white;
+    padding: 100px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo_ {
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.logo_ img {
+    height: 250px;
+}
+
+/* Sección del formulario */
+.form-section {
+    width: 60%;
+    background-color:#fff;
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-section p{
+    text-align: center;
+    padding: 10px;
+    padding-bottom: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.form-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+input[type="password"],
+.full-width input {
+    width: 100%;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    border-color: #fff;
+    border-radius: 10px;
+}
+
+button:hover {
+    background-color: #4682b4;
+    color: #fff;
+}
