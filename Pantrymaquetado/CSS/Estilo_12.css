@@ -6,7 +6,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #faf3e0;
+    background-color: #fff;
 }
 .navbar {
     display: flex;
@@ -24,7 +24,7 @@ body {
 
 
 header {
-    background-color: #4682b4;
+    background-color: #fff;
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
@@ -58,15 +58,12 @@ header {
 }
 
 .home-button {
-    color: whitesmoke;
-    background-color: #ff6600;
-    padding: 8px 16px;
+    color: #4CAF50;
+    font-size: 17px;
     text-decoration: none;
-    margin-right: 20px;
-    border-radius: 10px;
-    font-weight: bold;
+    padding-right: 40px;
+    padding-left: 40px;
 }
-
 main {
     display: flex;
     justify-content: center;
@@ -84,7 +81,7 @@ main {
 }
 
 .case-details {
-    background-color:#68bb62;
+    background-color:#4682b4;
     padding: 20px;
     border-radius: 20px;
     color: white;
@@ -120,7 +117,7 @@ main {
 }
 
 .donation-summary {
-    background-color: #68bb62;
+    background-color: #4682b4;
     padding: 20px;
     border-radius: 20px;
     color: white;
@@ -147,9 +144,9 @@ main {
 }
 
 .continue-button {
-    background-color: #ff6600;
+    background-color: #fdfdfd;
+    color: #4CAF50;
     border: none;
-    color: white;
     padding: 10px;
     width: 100%;
     cursor: pointer;
@@ -158,5 +155,6 @@ main {
 }
 
 .continue-button:hover {
-    background-color: #ddd;
+    background-color: #4CAF50;
+    color: white;
 }

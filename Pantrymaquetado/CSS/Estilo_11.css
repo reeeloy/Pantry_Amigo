@@ -86,6 +86,7 @@ main {
     width: 50%;
     height: 200px;
     margin-bottom: 15px;
+    border-radius: 50%;
 }
 
 .case h2 {

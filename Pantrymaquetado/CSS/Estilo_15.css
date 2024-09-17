@@ -58,16 +58,14 @@ nav ul li {
 
 nav ul li a {
     text-decoration: none;
-    color: white;
+    background-color: #fdfdfd;
+    color: #4CAF50;
+    font-size: 17px;
     font-weight: bold;
-    padding: 8px 15px;
-    background-color: #ff6600;
-    border-radius: 10px;
+    padding: 10px 20px;
 }
 
-nav ul li a:hover {
-    background-color: #ddd;
-}
+
 
 .faq-chat-container {
     display: flex;
@@ -75,7 +73,8 @@ nav ul li a:hover {
     padding: 20px;
 }
 
-.faq-section, .chat-section {
+.faq-section,
+.chat-section {
     background-color: #4682b4;
     color: #fff;
     padding: 20px;
