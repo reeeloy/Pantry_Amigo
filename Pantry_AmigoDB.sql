@@ -342,7 +342,154 @@ SHOW FULL TABLES WHERE table_type = 'VIEW';
 
 CREATE OR REPLACE VIEW Voluntarios_cedula_nombre_apellido AS
 SELECT
- Vol_Cedula,
+ Vol_Cedula,    
  Vol_Nombre,
  Vol_Apellido
 FROM Tbl_Voluntarios
+    
+/*TRIGGERS*/
+    
+CREATE TABLE Audi_Caso_Donacion (
+    id_Audi Int AUTO_INCREMENT,
+    Caso_Id_Audi Varchar (15) NOT NULL,
+    Caso_Nombre_Caso_Anterior Varchar (40) NOT NULL,
+    Caso_Descripcion_Anterior Varchar (255) NOT NULL,
+    Caso_Fecha_Inicio_Anterior date NOT NULL,
+    Caso_Fecha_Fin_Anterior Date NOT NULL,
+    Caso_Estado_Anterior Date NOT NULL,
+    Caso_Nombre_Caso_Nuevo Varchar (40) NOT NULL,
+    Caso_Descripcion_Nuevo Varchar (255) NOT NULL,
+    Caso_Fecha_Inicio_Nuevo date NOT NULL,
+    Caso_Fecha_Fin_Nuevo Date NOT NULL,
+    Caso_Estado_Nuevo Date NOT NULL,
+    Audi_Fecha_Modificacion Datetime,
+    Audi_Usuario Varchar (10) NOT NULL,
+    Audi_Accion Varchar (45) NOT NULL,
+    PRIMARY KEY (Id_Audi)
+);
+
+
+DROP TRIGGER IF EXISTS Donacion_recursos_Update;
+CREATE TRIGGER Donacion_recursos_Update
+BEFORE UPDATE ON tbl_caso_donacion
+FOR EACH ROW
+INSERT INTO audi_caso_donacion (
+    Caso_Id_Audi,
+    Caso_Nombre_Caso_Anterior,
+    Caso_Descripcion_Anterior,
+    Caso_Fecha_Inicio_Anterior,
+    Caso_Fecha_Fin_Anterior,
+    Caso_Estado_Anterior,
+    Caso_Nombre_Caso_Nuevo,
+    Caso_Descripcion_Nuevo,
+    Caso_Fecha_Inicio_Nuevo,
+    Caso_Fecha_Fin_Nuevo,
+    Caso_Estado_Nuevo,
+    Audi_Fecha_Modificacion,
+    Audi_Usuario,
+    Audi_Accion
+)
+VALUES (
+    NEW.Caso_Id,
+    OLD.Caso_Nombre_Caso,
+    OLD.Caso_Descripcion,
+    OLD.Caso_Fecha_Inicio,
+    OLD.Caso_Fecha_Fin,
+    OLD.Caso_Estado,
+    NEW.Caso_Nombre_Caso,
+    NEW.Caso_Descripcion,
+    NEW.Caso_Fecha_Inicio,
+    NEW.Caso_Fecha_Fin,
+    NEW.Caso_Estado,
+    NOW(),
+    CURRENT_USER(),
+    'Actualizacion'
+);
+
+UPDATE tbl_caso_donacion SET Caso_Nombre_Caso = '	
+Educación Infantil y niño', Caso_Descripcion = 'Proveer recursos educativos a niños en zonas rural'
+WHERE Caso_Id = 'C007'
+
+SELECT * FROM audi_caso_donacion;
+
+
+CREATE TABLE Audi_Donante (
+    Id_Audi Int AUTO_INCREMENT,
+    Dona_Cedula_Audi Int (10) NOT NULL,
+    Dona_Nombre_Anterior Varchar (20) NOT NULL,
+    Dona_Nombre_Recurso_Anterior Varchar (15) NOT NULL,
+    Dona_Apellido_Anterior Varchar (40) NOT NULL,
+    Dona_Correo_Anterior Varchar (40) NOT NULL,
+    Dona_Tipo_Donacion_Anterior Varchar (40) NOT NULL,
+    Dona_Nombre_Nuevo Varchar (20) NOT NULL,
+    Dona_Nombre_Recurso_Nuevo Varchar (15) NOT NULL,
+    Dona_Apellido_Nuevo Varchar (40) NOT NULL,
+    Dona_Correo_Nuevo Varchar (40) NOT NULL,
+    Dona_Tipo_Donacion_Nuevo Varchar (40) NOT NULL,
+    Audi_Fecha_Modificacion Datetime,
+    Audi_Usuario Varchar (10) NOT NULL,
+    Audi_Accion Varchar (45) NOT NULL,
+    PRIMARY KEY (Id_Audi)
+    );
+
+
+DELIMITER //
+
+CREATE TRIGGER after_donante_delete
+AFTER DELETE ON tbl_donante
+FOR EACH ROW
+BEGIN
+    INSERT INTO audi_donante (
+        Dona_Cedula_Audi,
+        Dona_Nombre_Anterior,
+        Dona_Nombre_Recurso_Anterior,
+        Dona_Apellido_Anterior,
+        Dona_Correo_Anterior,
+        Dona_Tipo_Donacion_Anterior,
+        Audi_Fecha_Modificacion,
+        Audi_Usuario,
+        Audi_Accion) 
+    VALUES (
+        old.Dona_Cedula,
+        old.Dona_Nombre,
+        old.Dona_Nombre_Recurso,
+        old.Dona_Apellido,
+        old.Dona_Correo,
+        old.Dona_Tipo_Donacion,
+        NOW(),
+        CURRENT_USER(),
+        'Eliminacion'
+    );
+END //
+
+DELIMITER ;
+
+DELETE FROM tbl_donante 
+WHERE Dona_Cedula = 1234567890
+
+SELECT *FROM audi_donante
+
+    
+/*INDEX*/
+
+INDICE PARA  buscar casos y su estado
+
+CREATE INDEX index_estado
+ON tbl_caso_donacion(Caso_Nombre_Caso , Caso_Estado);
+
+
+SHOW INDEXES IN tbl_caso_donacion
+
+INDICE para metodo de pago
+
+CREATE INDEX index_Metodo_Pago
+ON tbl_donacion_dinero(Don_Metodo_Pago,Don_Id, Don_Monto);
+
+
+SHOW INDEXES IN Tbl_Donacion_Dinero
+
+EXPLAIN SELECT *
+FROM Tbl_Donacion_Dinero
+WHERE Don_Metodo_Pago = 'Tarjeta de Crédito';
+
+
