@@ -9,14 +9,20 @@
 body {
     display: flex;
     font-family: Arial, sans-serif;
-    background-color: #4683b480;
+    background-color: #f4f4f4;
+}
+
+/* Contenedor principal */
+.container {
+    display: flex;
+    width: 100%;
 }
 
 /* Menú lateral */
 .menu {
     background-color: #4682b4;
     color: white;
-    width: 20%;
+    width: 250px;
     height: 100vh;
     padding: 20px;
 }
@@ -31,15 +37,21 @@ body {
 }
 
 .menu ul li {
-    padding: 15px;
+    padding: 15px 0;
 }
 
 .menu ul li a {
     color: white;
     text-decoration: none;
     font-size: 18px;
+    display: flex; 
+    align-items:center;
 }
 
+.menu ul li img{
+    height: auto;
+    width: 30px;
+}
 .menu ul li a:hover {
     text-decoration: underline;
 }
@@ -56,20 +68,21 @@ body {
 
 /* Sección principal */
 .principal {
-    width: 80%;
+    width: calc(100% - 250px);
     padding: 20px;
 }
 
+/* Perfil en el header */
 header {
-    text-align: right;
+    display: flex;
+    justify-content: flex-end;
     padding-bottom: 20px;
     border-bottom: 1px solid #ddd;
-    margin-bottom: 20px;
 }
 
 .perfil {
-    display: inline-block;
-    text-align: right;
+    display: flex;
+    align-items: center;
 }
 
 .perfil img {
@@ -90,25 +103,35 @@ header {
 
 /* Casos */
 .casos {
-    display: flex;
-    justify-content: space-between;
+    margin-top: 20px;
 }
 
 .casos h2 {
-    margin-bottom: 20px;
+    font-size: 24px;
+    padding-bottom: 10px;
+}
+
+.filtro-casos {
+    background-color: #58D68D;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.casos {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
 }
 
 .caso {
     background-color: white;
     padding: 20px;
     width: 30%;
-    text-align: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
-}
-
-.caso h3 {
-    margin-bottom: 10px;
+    text-align: center;
 }
 
 .caso img {
@@ -118,41 +141,77 @@ header {
     border-radius: 10px;
 }
 
-/* Nuevo caso */
-.nuevo-caso {
-    margin-top: 20px;
-    text-align: center;
+.caso h3 {
+    padding: 10px 0;
 }
 
-.nuevo-caso p {
-    font-size: 18px;
+.caso p {
+    font-size: 14px;
+    color: #666;
+}
+
+/* Horarios */
+.horarios {
+    margin-top: 20px;
+}
+
+.horarios h2 {
+    font-size: 24px;
     margin-bottom: 10px;
 }
 
+.horario {
+    background-color: white;
+    width: 60%;
+    text-align: left;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.horario img {
+    padding-left: 0;
+    width: 200px;
+    height: 200px;
+}
+
+.horario h3 {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.secundario{
+    display: flex;
+    justify-content: space-around;
+    padding-top: 100px;
+}
+.nuevo-caso {
+    width: 25%;
+    height: 300px;
+    background-image: url(../IMG/fondo1.png) ;
+    text-align: center;
+    padding: 40px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.nuevo-caso p {
+    font-weight: bolder;
+    font-size: 45px;
+    padding-bottom: 30px;
+    text-align: center;
+}
+
 .nuevo-caso button {
+    width: 40%;
     padding: 10px 20px;
-    background-color: #4682b4;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    border-color: #000;
+    border-radius: 30px;
 }
 
 .nuevo-caso button:hover {
     background-color: #3572a5;
-}
-
-/* Horarios asignados */
-.horario {
-    margin-top: 20px;
-    text-align: center;
-}
-
-.horario h2 {
-    margin-bottom: 10px;
-}
-
-.horario img {
-    width: 100px;
-    height: 100px;
+    color: #ffffff;
 }
