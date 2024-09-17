@@ -61,19 +61,50 @@ header {
     width: 20px;
     height: auto;
 }
-
-/* Logo izq */
-.form-section {
-    width: 400px;
-    background-color: #4682b4;
-    padding: 20px;
-    border-radius: 0 10px 10px 0;
+/* Contenedor principal */
+.contenedor {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px;
+    background-color: #666;
+    height: 100%;
 }
 
-form {
-    width: 400px;
+/* Sección de logo */
+.borde {
+    width: 45%;
+    color: white;
+    padding: 100px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo_ {
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.logo_ img {
+    height: 250px;
+}
+
+/* Sección del formulario */
+.form-section {
+    width: 60%;
+    background-color:#fff;
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-section p{
+    text-align: center;
+    padding: 10px;
+    padding-bottom: 30px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .form-group {
@@ -97,15 +128,13 @@ input[type="password"],
 button {
     width: 100%;
     padding: 10px;
-    background-color: #fff;
-    color: #4CAF50;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 1em;
+    background-color: #4CAF50;
+    color: #fff;
+    border-color: #fff;
+    border-radius: 10px;
 }
 
 button:hover {
-    background-color: #4CAF50;
-    color: #fff
+    background-color: #4682b4;
+    color: #fff;
 }
