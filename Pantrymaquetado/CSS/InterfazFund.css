@@ -64,8 +64,14 @@ body {
 .help a {
     color: white;
     text-decoration: none;
+    display: flex; 
+    align-items:center;
 }
 
+.help a img{
+    height: auto;
+    width: 30px;
+}
 /* Sección principal */
 .principal {
     width: calc(100% - 250px);
