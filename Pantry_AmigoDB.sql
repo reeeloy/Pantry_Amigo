@@ -5,7 +5,7 @@ USE Pantry_Amigo;
 CREATE TABLE Tbl_Usuario (
     Usu_Id INT(10) NOT NULL,
     Usu_Username VARCHAR(20) NOT NULL,
-    Usu_Correo VARCHAR(50) NOT NULL,
+    Usu_Correo VARCHAR(50) NOT NULL UNIQUE,
     PRIMARY KEY (Usu_Id)
 );
 
@@ -13,7 +13,7 @@ CREATE TABLE Tbl_Administrador (
     Admin_Id INT AUTO_INCREMENT,
     Admin_Username VARCHAR(40) NOT NULL,
     Admin_Password VARCHAR(20) NOT NULL,
-    Admin_Correo VARCHAR(20) NOT NULL,
+    Admin_Correo VARCHAR(50) NOT NULL UNIQUE,
     Admin_Usu_Id INT(10) NOT NULL,
     PRIMARY KEY (Admin_Id),
     FOREIGN KEY (Admin_Usu_Id) REFERENCES Tbl_Usuario(Usu_Id)
@@ -26,7 +26,7 @@ CREATE TABLE Tbl_Fundaciones (
     Fund_Direccion VARCHAR(20) NOT NULL,
     Fund_Casos_Activos INT(10) NOT NULL,
     Fund_Telefono INT(10) NOT NULL,
-    Fund_Usu_Id INT(10) NOT NULL,
+    Fund_Usu_Id INT(10) NOT NULL UNIQUE,
     PRIMARY KEY (Fund_Id),
     FOREIGN KEY (Fund_Usu_Id) REFERENCES Tbl_Usuario(Usu_Id)
 );
@@ -99,6 +99,7 @@ CREATE TABLE Tbl_Donacion_Dinero (
     FOREIGN KEY (Don_Caso_Id) REFERENCES Tbl_Caso_Donacion(Caso_Id),
     FOREIGN KEY (Don_Dona_Cedula) REFERENCES Tbl_Donante(Dona_Cedula)
 );
+
 
 /* Ejemplo de inserción de datos*/
 INSERT INTO Tbl_Usuario (Usu_Id, Usu_Username, Usu_Password, Usu_Tipo, Usu_Correo) VALUES
