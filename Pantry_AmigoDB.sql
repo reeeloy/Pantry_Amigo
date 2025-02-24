@@ -5,9 +5,7 @@ USE Pantry_Amigo;
 CREATE TABLE Tbl_Usuario (
     Usu_Id INT(10) NOT NULL,
     Usu_Username VARCHAR(20) NOT NULL,
-    Usu_Password VARCHAR(20) NOT NULL,
-    Usu_Tipo VARCHAR(20) NOT NULL,
-    Usu_Correo VARCHAR(20) NOT NULL,
+    Usu_Correo VARCHAR(50) NOT NULL,
     PRIMARY KEY (Usu_Id)
 );
 
@@ -23,6 +21,7 @@ CREATE TABLE Tbl_Administrador (
 
 CREATE TABLE Tbl_Fundaciones (
     Fund_Id INT(10) NOT NULL,
+    Fund_Correo VARCHAR(50) NOT NULL UNIQUE,
     Fund_Username VARCHAR(40) NOT NULL,
     Fund_Direccion VARCHAR(20) NOT NULL,
     Fund_Casos_Activos INT(10) NOT NULL,
