@@ -62,6 +62,7 @@ CREATE TABLE Tbl_Donacion_Recursos (
     Rec_Descripcion VARCHAR(30) NOT NULL,
     Rec_Caso_Id VARCHAR(15) NOT NULL,
     Rec_Dona_Cedula INT(10) NOT NULL,
+    Rec_Fecha_Caducidad DATE NOT NULL;
     PRIMARY KEY (Rec_Id),
     FOREIGN KEY (Rec_Caso_Id) REFERENCES Tbl_Caso_Donacion(Caso_Id),
     FOREIGN KEY (Rec_Dona_Cedula) REFERENCES Tbl_Donante(Dona_Cedula)
