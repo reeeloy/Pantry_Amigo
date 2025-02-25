@@ -56,7 +56,7 @@ CREATE TABLE Tbl_Donante (
 CREATE TABLE Tbl_Donacion_Recursos (
     Rec_Id INT(10) NOT NULL,
     Rec_Nombre VARCHAR(15) NOT NULL,
-    Rec_Cantidad INT NOT NULL,
+    Rec_Cantidad INT NOT NULL CHECK (Rec_Cantidad >= 0),
     Rec_Disponibilidad VARCHAR(15) NOT NULL,
     Rec_Tipo VARCHAR(10) NOT NULL,
     Rec_Descripcion VARCHAR(30) NOT NULL,
