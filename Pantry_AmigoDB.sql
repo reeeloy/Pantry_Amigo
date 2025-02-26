@@ -504,6 +504,19 @@ WHERE Don_Metodo_Pago = 'Tarjeta de Crédito';
 
 **************************************************
 CONSULTAS REGLAS DE NEGOCIO
+*************************************
+    Un producto debe pertenecer a una categoría válida
+    SELECT 
+    dr.Rec_Id AS ID_Recurso,
+    dr.Rec_Nombre AS Nombre_Recurso,
+    dr.Rec_Cantidad AS Cantidad,
+    dr.Rec_Disponibilidad AS Disponibilidad,
+    dr.Rec_Descripcion AS Descripcion,
+    c.Cat_Nombre AS Categoria
+FROM Tbl_Donacion_Recursos dr
+INNER JOIN Tbl_Categorias c ON dr.Rec_Cat_Nombre = c.Cat_Nombre;
+
+***********************
     
 SELECT 
     f.Fund_Username AS Fundacion,
