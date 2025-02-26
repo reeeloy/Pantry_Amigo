@@ -5,6 +5,8 @@ USE Pantry_Amigo;
 CREATE TABLE Tbl_Usuario (
     Usu_Id INT(10) NOT NULL,
     Usu_Username VARCHAR(20) NOT NULL,
+    Usu_Password VARCHAR(20) NOT NULL,
+    Usu_Tipo VARCHAR(30) NOT NULL,
     Usu_Correo VARCHAR(50) NOT NULL UNIQUE,
     PRIMARY KEY (Usu_Id)
 );
