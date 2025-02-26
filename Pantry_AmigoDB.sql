@@ -207,17 +207,20 @@ VALUES
 (3006, '700 USD', '2024-09-06', 'claudia.vega@example.com', 'Tarjeta de Crédito', 2006 ,'C002'), 
 (3007, '950 USD', '2024-09-07', 'sergio.morales@example.com', 'Transferencia Bancaria', 2007 ,'C003');
 
-INSERT INTO Tbl_Donacion_Recursos (Rec_Id, Rec_Nombre,Rec_Cantidad, Rec_Disponibilidad, Rec_Tipo, Rec_Descripcion,Rec_Dona_Cedula, Rec_Caso_Id) 
+INSERT INTO tbl_categorias (Cat_Nombre) 
+VALUES ('Alimentación'), ('Medio Ambiente'), ('Construcción'), ('Salud'), ('Tecnología');
+
+
+INSERT INTO Tbl_Donacion_Recursos (Rec_Id, Rec_Nombre,Rec_Cantidad, Rec_Disponibilidad, Rec_Descripcion, Rec_Caso_Id, Rec_Dona_Cedula, Rec_Fecha_Caducidad, Rec_Cat_Nombre) 
 VALUES 
-(705, 'Libros', 12,  'Disponible', 'Educación', 'Libros de texto y material educativo.',2001, 'C002'),
-(818, 'Juguetes',23, 'Disponible', 'Juguetería', 'Regalos para niños.',2003 ,'C002'),
-(699, 'Comida',7, 'Disponible', 'Alimentación', 'Alimentos para niños en escuelas.',2005, 'C003'),
-(423, 'Árboles',3, 'Disponible', 'Medio Ambiente', 'Plantas para reforestación.',2004, 'C004'),
-(672, 'Material de construcción',8, 'Disponible', 'Vivienda', 'Materiales para construir viviendas', 2007, 'C005' ),
-(698, 'Medicinas',12, 'Disponible', 'Salud', 'Medicamentos para atención médica.', 2001,'C006'),
-(201, 'Equipos de cómputo',2, 'Disponible', 'Capacitación', 'Computadoras para capacitación.' ,2006,'C001');
-
-
+(705, 'Libros', 12,  'Disponible', 'descripcion de los recursos' , 2001, 'C002', '2025-09-01','Educación'),
+(818, 'Juguetes',23, 'Disponible', 'descripcion de los recursos', 2003 ,'C002', '2025-09-01', 'Juguetería'),
+(699, 'Comida',7, 'Disponible', 'descripcion de los recursos',2005, 'C003', '2025-09-01', 'Alimentación'),
+(423, 'Árboles',3, 'Disponible', 'descripcion de los recursos' , 2004, 'C004', '2025-09-01', 'Medio Ambiente'),
+(672, 'Material de construcción',8, 'Disponible', 'descripcion de los recursos', 2007, 'C005', '2025-09-01', 'Construccion' ),
+(698, 'Medicinas',12, 'Disponible', 'descripcion de los recursos', 2001,'C006', '2025-09-01', 'Salud'),
+(201, 'Equipos de cómputo',2, 'Disponible', 'descripcion de los recursos' ,2006,'C001', '2025-09-01', 'Tecnologia');
+    
 /*Procedimiento para obtener donaciones monetarias*/
 DELIMITER $$
 CREATE PROCEDURE ObtenerDonacionesMonetarias()
