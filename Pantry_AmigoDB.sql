@@ -60,6 +60,7 @@ CREATE TABLE Tbl_Categorias (
     Cat_Nombre VARCHAR(50) NOT NULL UNIQUE,
     PRIMARY KEY (Cat_Id)
 );
+
 CREATE TABLE Tbl_Donacion_Recursos (
     Rec_Id INT(10) NOT NULL,
     Rec_Nombre VARCHAR(15) NOT NULL,
@@ -69,7 +70,7 @@ CREATE TABLE Tbl_Donacion_Recursos (
     Rec_Caso_Id VARCHAR(15) NOT NULL,
     Rec_Dona_Cedula INT(10) NOT NULL,
     Rec_Fecha_Caducidad DATE NOT NULL,
-    Rec_Cat_Nombre VARCHAR(50) NOT NULL UNIQUE,
+    Rec_Cat_Nombre VARCHAR(50) NOT NULL,
     PRIMARY KEY (Rec_Id),
     FOREIGN KEY (Rec_Caso_Id) REFERENCES Tbl_Caso_Donacion(Caso_Id),
     FOREIGN KEY (Rec_Dona_Cedula) REFERENCES Tbl_Donante(Dona_Cedula),
@@ -183,8 +184,6 @@ VALUES
 
 
 
-
-
 INSERT INTO Tbl_Horarios_Voluntarios (Hora_Id, Hora_Citacion, Hora_Localizacion, Hora_Vol_Cedula) 
 VALUES
 (01, '2024-09-01 09:00:00', 'Escuela Rural', 1001),
@@ -209,16 +208,16 @@ VALUES
 INSERT INTO tbl_categorias (Cat_Nombre) 
 VALUES ('Alimentación'), ('Medio Ambiente'), ('Construcción'), ('Salud'), ('Tecnología');
 
-
-INSERT INTO Tbl_Donacion_Recursos (Rec_Id, Rec_Nombre,Rec_Cantidad, Rec_Disponibilidad, Rec_Descripcion, Rec_Caso_Id, Rec_Dona_Cedula, Rec_Fecha_Caducidad, Rec_Cat_Nombre) 
+INSERT INTO `tbl_donacion_recursos` (`Rec_Id`, `Rec_Nombre`, `Rec_Cantidad`, `Rec_Disponibilidad`, `Rec_Descripcion`, `Rec_Caso_Id`, `Rec_Dona_Cedula`, `Rec_Fecha_Caducidad`, `Rec_Cat_Nombre`) 
 VALUES 
-(705, 'Libros', 12,  'Disponible', 'descripcion de los recursos' , 2001, 'C002', '2025-09-01','Educación'),
-(818, 'Juguetes',23, 'Disponible', 'descripcion de los recursos', 2003 ,'C002', '2025-09-01', 'Juguetería'),
-(699, 'Comida',7, 'Disponible', 'descripcion de los recursos',2005, 'C003', '2025-09-01', 'Alimentación'),
-(423, 'Árboles',3, 'Disponible', 'descripcion de los recursos' , 2004, 'C004', '2025-09-01', 'Medio Ambiente'),
-(672, 'Material de construcción',8, 'Disponible', 'descripcion de los recursos', 2007, 'C005', '2025-09-01', 'Construccion' ),
-(698, 'Medicinas',12, 'Disponible', 'descripcion de los recursos', 2001,'C006', '2025-09-01', 'Salud'),
-(201, 'Equipos de cómputo',2, 'Disponible', 'descripcion de los recursos' ,2006,'C001', '2025-09-01', 'Tecnologia');
+(818, 'jueguetes', '23', 'Disponible', 'descripcion de los recursos', 'C002', '2003', '2025-09-25', 'Salud');
+(705, 'Libros', 12,  'Disponible', 'descripcion de los recursos' ,'C002', 2001,  '2025-09-01','Educación'),
+(818, 'Juguetes',23, 'Disponible', 'descripcion de los recursos', 'C002',2003 , '2025-09-01', 'Juguetería'),
+(699, 'Comida',7, 'Disponible', 'descripcion de los recursos','C003', 2005,  '2025-09-01', 'Alimentación'),
+(423, 'Árboles',3, 'Disponible', 'descripcion de los recursos' , 'C004', 2004, '2025-09-01', 'Medio Ambiente'),
+(672, 'Material de construcción',8, 'Disponible', 'descripcion de los recursos', 'C005', 2007,  '2025-09-01', 'Construccion' ),
+(698, 'Medicinas',12, 'Disponible', 'descripcion de los recursos', 'C006', 2001, '2025-09-01', 'Salud'),
+(201, 'Equipos de cómputo',2, 'Disponible', 'descripcion de los recursos' ,'C001',2006, '2025-09-01', 'Tecnologia');
     
 /*Procedimiento para obtener donaciones monetarias*/
 DELIMITER $$
