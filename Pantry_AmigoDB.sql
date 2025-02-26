@@ -53,6 +53,11 @@ CREATE TABLE Tbl_Donante (
     PRIMARY KEY (Dona_Cedula)
 );
 
+CREATE TABLE Tbl_Categorias (
+    Cat_Id INT AUTO_INCREMENT,
+    Cat_Nombre VARCHAR(50) NOT NULL UNIQUE,
+    PRIMARY KEY (Cat_Id)
+);
 CREATE TABLE Tbl_Donacion_Recursos (
     Rec_Id INT(10) NOT NULL,
     Rec_Nombre VARCHAR(15) NOT NULL,
@@ -62,12 +67,13 @@ CREATE TABLE Tbl_Donacion_Recursos (
     Rec_Descripcion VARCHAR(30) NOT NULL,
     Rec_Caso_Id VARCHAR(15) NOT NULL,
     Rec_Dona_Cedula INT(10) NOT NULL,
-    Rec_Fecha_Caducidad DATE NOT NULL;
+    Rec_Fecha_Caducidad DATE NOT NULL,
+    Rec_Cat_Id VARCHAR(50) NOT NULL UNIQUE,
     PRIMARY KEY (Rec_Id),
     FOREIGN KEY (Rec_Caso_Id) REFERENCES Tbl_Caso_Donacion(Caso_Id),
-    FOREIGN KEY (Rec_Dona_Cedula) REFERENCES Tbl_Donante(Dona_Cedula)
-    FOREIGN KEY (Rec_Cat_Id) REFERENCES Tbl_Categorias(Cat_Id);
-);
+    FOREIGN KEY (Rec_Dona_Cedula) REFERENCES Tbl_Donante(Dona_Cedula),
+    FOREIGN KEY (Rec_Cat_Id) REFERENCES Tbl_Categorias(Cat_Id)
+    );
 
 CREATE TABLE Tbl_Voluntarios (
     Vol_Cedula INT(10) NOT NULL,
@@ -102,11 +108,6 @@ CREATE TABLE Tbl_Donacion_Dinero (
     FOREIGN KEY (Don_Dona_Cedula) REFERENCES Tbl_Donante(Dona_Cedula)
 );
 
-CREATE TABLE Tbl_Categorias (
-    Cat_Id INT AUTO_INCREMENT,
-    Cat_Nombre VARCHAR(50) NOT NULL UNIQUE,
-    PRIMARY KEY (Cat_Id)
-);
 
 
 
