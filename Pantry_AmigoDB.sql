@@ -504,22 +504,43 @@ WHERE Don_Metodo_Pago = 'Tarjeta de Crédito';
 
 **************************************************
 CONSULTAS REGLAS DE NEGOCIO
+    
+SELECT 
+    f.Fund_Username AS Fundacion,
+    f.Fund_Correo AS Correo,
+    c.Caso_Nombre_Caso AS Nombre_Caso,
+    c.Caso_Descripcion AS Descripcion
+FROM Tbl_Fundaciones f
+JOIN Tbl_Caso_Donacion c ON f.Fund_Id = c.Caso_Fund_Id
+WHERE c.Caso_Estado = 'Activo';
+*****************************************
 
 SELECT Fund_Id, Fund_Username, Fund_Correo, Fund_Direccion, Fund_Telefono FROM tbl_fundaciones;
+************************************************
+SELECT 
+    d.Dona_Nombre AS Nombre_Donante,
+    d.Dona_Apellido AS Apellido_Donante,
+    r.Rec_Nombre AS Recurso_Donado,
+    r.Rec_Cantidad AS Cantidad,
+    c.Cat_Nombre AS Categoria
+FROM Tbl_Donante d
+JOIN Tbl_Donacion_Recursos r ON d.Dona_Cedula = r.Rec_Dona_Cedula
+JOIN Tbl_Categorias c ON r.Rec_Cat_Nombre = c.Cat_Nombre;
+***************************************************************
 
 SELECT Don_Id, Don_Fecha, Don_Monto, Don_Metodo_Pago 
 FROM tbl_donacion_dinero
 WHERE Don_Dona_Cedula = '2001';
-
+****************************************
 SELECT Usu_Correo FROM tbl_usuario WHERE Usu_Correo = 'admin01@example.com';
-
+*********************************************************
 SELECT Admin_Id, Admin_Username, Admin_Correo 
 FROM tbl_administrador;
-
+********************************************************
 SELECT Don_Id, Don_Dona_Cedula, Don_Fecha , Don_Metodo_Pago
 FROM tbl_donacion_dinero
 WHERE Don_Monto = '700 USD';
-
+**********************************************************
 SELECT Vol_Cedula, Vol_Nombre, Vol_Celular, Vol_Caso_Id FROM tbl_voluntarios;
 
 
