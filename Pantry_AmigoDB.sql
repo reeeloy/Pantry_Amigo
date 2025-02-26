@@ -502,4 +502,22 @@ EXPLAIN SELECT *
 FROM Tbl_Donacion_Dinero
 WHERE Don_Metodo_Pago = 'Tarjeta de Crédito';
 
+**************************************************
+CONSULTAS REGLAS DE NEGOCIO
+
+SELECT Fund_Id, Fund_Username, Fund_Correo, Fund_Direccion, Fund_Telefono FROM tbl_fundaciones;
+
+SELECT Don_Id, Don_Fecha, Don_Monto, Don_Metodo_Pago 
+FROM tbl_donacion_dinero
+WHERE Don_Dona_Cedula = '2001';
+
+SELECT Usu_Correo FROM tbl_usuario WHERE Usu_Correo = 'admin01@example.com';
+
+SELECT Admin_Id, Admin_Username, Admin_Correo 
+FROM tbl_administrador;
+
+SELECT Don_Id, Don_Dona_Cedula, Don_Fecha , Don_Metodo_Pago
+FROM tbl_donacion_dinero
+WHERE Don_Monto = '700 USD';
+
 
