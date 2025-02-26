@@ -140,18 +140,15 @@ VALUES
 (006, 'admin06', 'password000', 'admin06@example.com',666),
 (007, 'admin07', 'password111', 'admin07@example.com',777);
 
-
-
-
-INSERT INTO Tbl_Fundaciones (Fund_Id, Fund_Username, Fund_Direccion, Fund_Casos_Activos, Fund_Telefono, Fund_Usu_Id) 
+INSERT INTO Tbl_Fundaciones (Fund_Id, Fund_Correo, Fund_Username, Fund_Direccion, Fund_Casos_Activos, Fund_Telefono, Fund_Usu_Id) 
 VALUES 
-(008, 'fundacion01', 'Calle 123', 1, 1234567890, 888),
-(009, 'fundacion02', 'Avenida 456', 2, 2345678901, 999),
-(010, 'fundacion03', 'Calle 789', 2, 3456789012, 101010),
-(011, 'fundacion04', 'Avenida 101', 1, 4567890123, 111111),
-(012, 'fundacion05', 'Calle 205', 0, 1234567890, 121212),
-(013, 'fundacion06', 'Avenida 88', 0, 2345678901, 131313),
-(014, 'fundacion07', 'Carrera 114', 1, 3456789012, 141414);
+(008, 'contacto@fundacion01.org' ,'fundacion01', 'Calle 123', 1, 1234567890, 888),
+(009, 'contacto@fundacion02.org','fundacion02', 'Avenida 456', 2, 2345678901, 999),
+(010, 'contacto@fundacion03.org','fundacion03', 'Calle 789', 2, 3456789012, 101010),
+(011, 'contacto@fundacion04.org','fundacion04', 'Avenida 101', 1, 4567890123, 111111),
+(012, 'contacto@fundacion05.org','fundacion05', 'Calle 205', 0, 1234567890, 121212),
+(013, 'contacto@fundacion06.org','fundacion06', 'Avenida 88', 0, 2345678901, 131313),
+(014, 'contacto@fundacion07.org','fundacion07', 'Carrera 114', 1, 3456789012, 141414);
 
 
 INSERT INTO Tbl_Caso_Donacion (Caso_Id, Caso_Nombre_Caso, Caso_Descripcion, Caso_Fecha_Inicio, Caso_Fecha_Fin, Caso_Estado, Caso_Fund_Id) 
