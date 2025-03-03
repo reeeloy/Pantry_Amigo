@@ -25,16 +25,15 @@ header {
     width: 20%;
     height: 100%;
     float: left;
-    padding: 5px;/no se pegue la imagen logo tanto al borde/
-    /aplica para la imagen y letras/
+    padding: 5px;
     text-align: center;
     }
 .logo img{
-     /width: auto;/
-    /height: 100%; de los 50px/
+     width: auto;
+    height: 100%; 
     width: 40px;
     height: 40px;
-    border-radius: 50%;/la imagen sea curva/
+    border-radius: 50%;
     /*Si se quiere rendondez total se tiene que
     calcular en el ancho y alto en medida
     en pixeles. Teniendo en cuenta la
