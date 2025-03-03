@@ -12,7 +12,7 @@ class registrarDonante{
             $Dona_Correo = $regDonante->getDona_Correo();
          
             $sql = "INSERT INTO tbl_donante (Dona_Cedula, Dona_Nombre, Dona_Apellido, Dona_Correo) 
-                    VALUES ('$Dona_Cedula', ' $Dona_Nombre', '$Dona_Apellido', '$Dona_Correo')";
+                    VALUES ('$Dona_Cedula', '$Dona_Nombre', '$Dona_Apellido', '$Dona_Correo')";
 
 $conexion->consulta($sql);
 $res = $conexion->obtenerFilasAfectadas();

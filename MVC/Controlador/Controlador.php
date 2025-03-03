@@ -5,10 +5,10 @@ require_once '../Modelo/registrarDonante.php';
 if (isset($_POST['regDonaCedula'])&& isset($_POST['regDonaNombre']) && isset($_POST['regDonaApellido']) && isset($_POST['regDonaCorreo'])) {
     try{
 
-    $nit = $_POST['regDonaCedula'];
-        $empresa = $_POST['regDonaNombre'];
-        $ciudad = $_POST['regDonaApellido'];
-        $telefono = $_POST['regDonaCorreo'];
+        $Dona_Cedula = $_POST['regDonaCedula'];
+        $Dona_Nombre = $_POST['regDonaNombre'];
+        $Dona_Apellido= $_POST['regDonaApellido'];
+        $Dona_Correo = $_POST['regDonaCorreo'];
         $personal = new Donante();
         $personal->Donante($Dona_Cedula, $Dona_Nombre, $Dona_Apellido, $Dona_Correo);
         $perCliente = new registrarDonante();

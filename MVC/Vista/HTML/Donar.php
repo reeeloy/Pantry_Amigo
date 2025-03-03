@@ -49,7 +49,7 @@
 
             <div class="donation-summary">
                 <h2>Resumen</h2>
-                <form id="frmDonar" action="../../Controlador/Control.php" method="POST">
+                <form id="frmDonar" action="../../Controlador/Controlador.php" method="POST">
                 
                 <label for="DonaCedula">Cédula:</label>
                     <input type="text" name="regDonaCedula" id="regDonaCedula" required>
