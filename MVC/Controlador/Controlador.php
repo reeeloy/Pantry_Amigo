@@ -33,7 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $caso = new Caso();
             if ($caso->registrarCaso($casoId, $casoNombre, $casoDescripcion, $casoFechaInicio, $casoFechaFin, $casoEstado, $casoFundacion)) {
                 echo "<script>alert('Caso registrado exitosamente');</script>";
-                echo "<script>window.location.href='../views/registrarCaso.php';</script>";
             } else {
                 echo "<script>alert('Error al registrar el caso');</script>";
             }
@@ -47,7 +46,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             session_start();
             $_SESSION['resultado'] = $resultado;
-            header("Location: ../views/resultado_consulta.php");
             exit();
         }
     } catch (Exception $ex) {
