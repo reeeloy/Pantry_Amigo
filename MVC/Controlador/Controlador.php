@@ -2,6 +2,7 @@
 require_once '../Modelo/Donante.php';
 require_once '../Modelo/registrarDonante.php';
 require_once '../Modelo/Caso.php';
+require_once '../Modelo/ConsultaRecursos.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
@@ -19,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $perCliente->regDonante($personal);
         }
 
-        // caso dinacion(reguistrar)
+        // caso donacion(registrar)
         if (isset($_POST['registrarCaso'])) {
             $casoId = $_POST['casoId'];
             $casoNombre = $_POST['casoNombre'];
@@ -37,9 +38,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo "<script>alert('Error al registrar el caso');</script>";
             }
         }
+        //Consultar Recursos Recaudados
+        if (isset($_POST['consultarRecursos']) && !empty($_POST['caso_id'])) {
+            $caso_id = $_POST['caso_id'];
+            $consulta = new ConsultaRecursos();
+            $resultado = $consulta->consultarRecursos($caso_id);
+
+
+            session_start();
+            $_SESSION['resultado'] = $resultado;
+            header("Location: ../views/resultado_consulta.php");
+            exit();
+        }
     } catch (Exception $ex) {
         echo 'Error: ' . $ex->getMessage();
     }
 }
 ?>
-
