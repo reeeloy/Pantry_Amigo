@@ -32,7 +32,7 @@
         </form>
     </div>
 
-    <!-- Tabla de resultados -->
+
     <div class="results-container">
         <div class="result-item">
             <span><b>Caso</b> 123456789</span>
