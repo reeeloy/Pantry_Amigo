@@ -37,19 +37,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo "<script>alert('Error al registrar el caso');</script>";
             }
         }
-        //Consultar Recursos Recaudados
-        if (isset($_POST['consultarRecursos']) && !empty($_POST['caso_id'])) {
-            $caso_id = $_POST['caso_id'];
-            $consulta = new ConsultaRecursos();
-            $resultado = $consulta->consultarRecursos($caso_id);
-
-
-            session_start();
-            $_SESSION['resultado'] = $resultado;
-            exit();
-        }
     } catch (Exception $ex) {
         echo 'Error: ' . $ex->getMessage();
     }
 }
-?>
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['caso_id'])) {
+    $caso_id = $_GET['caso_id'];
+
+    $modelo = new ConsultaRecursos();
+    $result = $modelo->consultarRecursos($caso_id);
+
+    // Incluir la vista para mostrar los recursos
+    require '../Vista/HTML/resultadoConsultaRe.php';
+}

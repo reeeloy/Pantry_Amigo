@@ -1,47 +1,39 @@
-<?php
-require_once 'modelo/ConsultaRecursos.php';
-
-if (isset($_POST['caso_id'])) {
-    $caso_id = $_POST['caso_id'];
-    $consulta = new ConsultaRecursos();
-    $resultado = $consulta->consultarRecursos($caso_id);
-}
-?>
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Resultado de la Consulta</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta id recursos</title>
 </head>
 <body>
+    <div>Consulta de recursos recaudados caso: <?php echo htmlspecialchars($caso_id); ?></div>
     <div>
-        <h1>Resultado de la Consulta</h1>
-        <div>
-            <?php if ($resultado->num_rows > 0): ?>
-                <table>
-                    <tr>
-                        <th colspan="2">Recursos del Caso</th>
-                    </tr>
-                    <?php while ($fila = $resultado->fetch_object()): ?>
-                        <tr>
-                            <td>Recurso</td>
-                            <td><?php echo $fila->recurso; ?></td>
-                        </tr>
-                        <tr>
-                            <td>Cantidad</td>
-                            <td><?php echo $fila->cantidad; ?></td>
-                        </tr>
-                        <tr>
-                            <td>Tipo de Donación</td>
-                            <td><?php echo $fila->tipo_donacion; ?></td>
-                        </tr>
-                    <?php endwhile; ?>
-                </table>
-            <?php else: ?>
-                <p>No se encontraron recursos para este caso.</p>
-            <?php endif; ?>
-        </div>
+        <table>
+            <tr><th colspan="6">Datos de recursos recaudados</th></tr>
+            <tr>
+                <th>Nombre del Recurso</th>
+                <th>Cantidad</th>
+                <th>Disponibilidad</th>
+                <th>Descripción</th>
+                <th>Fecha de Caducidad</th>
+                <th>Categoría</th>
+            </tr>
+            <?php while ($fila = $result->fetch_object()) { ?>
+            <tr>
+                <td><?php echo $fila->Rec_Nombre; ?></td>
+                <td><?php echo $fila->Rec_Cantidad; ?></td>
+                <td><?php echo $fila->Rec_Disponibilidad; ?></td>
+                <td><?php echo $fila->Rec_Descripcion; ?></td>
+                <td><?php echo $fila->Rec_Fecha_Caducidad; ?></td>
+                <td><?php echo $fila->Rec_Cat_Nombre; ?></td>
+            </tr>
+            <?php } ?>
+        </table>
     </div>
 </body>
 </html>
+
+
+
+
+

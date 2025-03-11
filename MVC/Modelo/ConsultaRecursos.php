@@ -10,7 +10,7 @@ class ConsultaRecursos {
 
     public function consultarRecursos($caso_id) {
         $this->conexion->abrir();
-        $sql = "SELECT recurso, cantidad, tipo_donacion FROM Tbl_Donacion_Recursos WHERE Caso_Id = '$caso_id'";
+        $sql = "SELECT Rec_Nombre, Rec_Cantidad, Rec_Descripcion, Rec_Fecha_Caducidad FROM Tbl_Donacion_Recursos WHERE Rec_Caso_Id = '$caso_id'";
         $resultado = $this->conexion->obtenerResult($sql);
         $this->conexion->cerrar();
         return $resultado;

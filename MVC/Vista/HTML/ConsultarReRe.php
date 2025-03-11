@@ -11,10 +11,10 @@
             <table>
                 <tr>
                     <td>ID del Caso</td>
-                    <td><input type="text" name="caso_id" id="caso_id"></td>
+                    <td><input type="text" name="consultarReRe" id="consultarReRe"></td>
                 </tr>
                 <tr>
-                    <td><input type="submit" name="consultar" value="Consultar"></td>
+                    <td><input type="submit" name="registroEnviar" value="Consultar" id="resEnviar"></td>
                     <td><input type="reset" value="Limpiar"></td>
                 </tr>
             </table>
