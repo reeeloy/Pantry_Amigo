@@ -69,7 +69,7 @@ header {
 
 /* banner*/
 .banner {
-    height: 500px;
+    height: 550px;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -77,14 +77,14 @@ header {
 }
 
 .banner-box {
-    background-color: #7ed9578a;
-    height: 450px;
-    width: 90%;
+    background-color: #7ed957b4;
+    height: 480px;
+    width: 85%;
     border-radius: 15px;
-    margin-top: 60px;
+    margin-top: 70px;
     display: flex;
     justify-content: space-between;
-    padding: 50px;
+    padding: 80px;
 }
 
 #banner-left {
@@ -97,12 +97,12 @@ header {
 }
 
 #banner-left h1 {
-    font-size: 2.5rem;
+    font-size: 2.7rem;
     font-weight: bold;
 }
 
 #banner-left p {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     margin-bottom: 20px;
 }
 
@@ -131,131 +131,76 @@ header {
     height: 300px;
     width: auto;
 }
+
 /*cifra php*/
-.band{
+.band {
     background-color: #545454;
-    height: 150px;
-    padding: 30px;
+    height: 120px;
+    padding: 15px;
     text-align: end;
     color: white;
-    z-index: 2;
 }
 
-.band h3{
+.band h3 {
     font-size: 3.5rem;
     font-weight: bold;
 }
-.band h4{
-    font-size: 1.5rem;
+
+.band h4 {
+    font-size: 1.0rem;
     font-weight: bold;
 }
 
-/*----------------------------*/
+/*----------opciones------------------*/
 .opciones {
-    width: 80%;
+    width: 100%;
+    height: 350px;
+    background-color: #d9d9d9;
     display: flex;
     justify-content: center;
-    gap: 40px;
+    gap: 150px;
     padding: 20px;
 }
 
-.opciones div {
-    width: 140px;
-    height: 140px;
-    background-color: #5d9b89;
-    color: #fff;
-    padding: 15px;
-    text-align: center;
+.circulo {
+    width: 250px;
+    height: 250px;
     border-radius: 50%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
+    color: white;
+    font-weight: bold;
+    background-color: #4CAF50;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.opciones img{
+    height: 120px;
+}
+
+.circle {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    font-weight: bold;
+    background-color: #2b577d;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/*slider*/
+main{
+    display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.opciones div:hover {
-    background-color: #4682b4;
-    transform: scale(1.1);
-}
-
-.opciones img {
-    width: 50px;
-    height: 50px;
-    margin-bottom: 10px;
-}
-
-.opciones h3 {
-    font-size: 14px;
-    margin: 0;
-}
-
-/*historias*/
-.historias {
-    text-align: center;
-    padding-bottom: 40xp;
-}
-
-.historias h1 {
-    padding: 20px;
-    color: #fff;
-    text-align: left;
-    text-shadow: 2px 2px 4px #4CAF50;
-}
-
-.historias p {
-    color: #f8f5f5;
-    text-align: left;
-    padding-left: 25px;
-    padding-bottom: 30px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    /* Añade un ligero sombreado al texto*/
-}
-
-section {
-    background-color: #4caf4f6e;
-    height: 700px;
-}
-
-.contenedor {
-    display: flex;
-    justify-content: space-around;
-}
-
-.cuadrado {
-    width: 250px;
-    color: #fff;
-    background-color: #414042;
-    padding: 20px;
-    text-align: center;
-    border-radius: 10px;
-    text-align: center;
-}
-
-.cuadrado img {
-    width: 100%;
-    padding: 15px;
-
-}
-
-.cuadrado button {
-    background-color: #fdfdfd;
-    color: #4CAF50;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 50px;
-    margin-top: 20px;
-}
-
-.cuadrado p {
-    color: #ffffff;
-}
-
-.cuadrado button:hover {
-    background-color: #4CAF50;
-    color: white;
+    min-height: 50vh;
+    background-color:  #545454;
 }
 
 
