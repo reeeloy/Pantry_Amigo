@@ -32,13 +32,7 @@
                 <p>ID: 1234567</p>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro ipsam dolorem delectus dolores, eum
                     facilis vitae esse ullam beatae minima qui deleniti. Ratione quis reiciendis eos quisquam incidunt
-                    libero corporis!
-                    Ducimus aperiam distinctio pariatur. Hic temporibus provident amet exercitationem velit voluptate
-                    aliquid quisquam doloribus natus labore dolorum autem fuga earum consequatur blanditiis quibusdam
-                    ad, molestias mollitia porro maiores sit itaque.
-                    Ipsa voluptas nisi commodi totam explicabo est at vitae dolorem a non reprehenderit sed fugit velit,
-                    veritatis esse repellendus autem expedita maxime dicta ut ipsum officiis alias. Asperiores, vero
-                    modi??</p>
+                    libero corporis!</p>
                 <img src="../IMG/Tapas.png" alt="Imagen del caso" class="case-image">
                 <div class="foundation-info">
                     <img src="../IMG/Fondo.png" alt="Logo de la fundación" class="foundation-logo">

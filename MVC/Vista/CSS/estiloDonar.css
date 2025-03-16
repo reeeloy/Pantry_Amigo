@@ -35,8 +35,6 @@ header {
 
 .logito {
 
-    /*no se pegue la imagen logo tanto al borde*/
-    /*aplica para la imagen y letras*/
     align-items: center;
     font-size: 20px;
     display: flex;

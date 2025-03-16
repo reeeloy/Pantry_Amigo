@@ -8,7 +8,7 @@ class ConexionBD{
     private $citaId;
 
     public function abrir() {
-        $this->mySQLI = new mysqli("localhost", "root", "", "pantry");
+        $this->mySQLI = new mysqli("localhost", "root", "", "pantry_amigo");
         if (mysqli_connect_errno()) {
         return 0;
         } else {
