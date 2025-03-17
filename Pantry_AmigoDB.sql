@@ -90,7 +90,7 @@ CREATE TABLE Tbl_Horarios_Voluntarios (
 CREATE TABLE Tbl_Donacion_Dinero (
     Don_Id INT(10) NOT NULL,
     Don_Monto VARCHAR(20) NOT NULL,
-    Don_Comision VARCHAR(20)
+    Don_Comision VARCHAR(20),
     Don_Cedula_Donante Varchar(15),
     Don_Nombre_Donante VARCHAR(20) NOT NULL,
     Don_Apellido_Donante VARCHAR(20) NOT NULL,
@@ -98,9 +98,10 @@ CREATE TABLE Tbl_Donacion_Dinero (
     Don_Metodo_Pago VARCHAR(40) NOT NULL,
     Don_Fecha DATE NOT NULL,
     Don_Caso_Id VARCHAR(15) NOT NULL,
+    Don_Cat_Nombre VARCHAR(50) NOT NULL,
     PRIMARY KEY (Don_Id),
     FOREIGN KEY (Don_Caso_Id) REFERENCES Tbl_Caso_Donacion(Caso_Id),
-    FOREIGN KEY (Rec_Cat_Nombre) REFERENCES Tbl_Categorias(Cat_Nombre)
+    FOREIGN KEY (Don_Cat_Nombre) REFERENCES Tbl_Categorias(Cat_Nombre)
 );
 
 
