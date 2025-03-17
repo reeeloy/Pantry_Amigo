@@ -45,35 +45,25 @@ CREATE TABLE Tbl_Caso_Donacion (
     FOREIGN KEY (Caso_Fund_Id) REFERENCES Tbl_Fundaciones(Fund_Id)
 );
 
-CREATE TABLE Tbl_Donante (
-    Dona_Cedula INT(10) NOT NULL,
-    Dona_Nombre VARCHAR(20) NOT NULL,
-    Dona_Nombre_Recurso VARCHAR(15) NOT NULL,
-    Dona_Apellido VARCHAR(40) NOT NULL,
-    Dona_Correo VARCHAR(40) NOT NULL,
-    Dona_Tipo_Donacion VARCHAR(40) NOT NULL,
-    PRIMARY KEY (Dona_Cedula)
-);
-
 CREATE TABLE Tbl_Categorias (
-    Cat_Id INT AUTO_INCREMENT,
     Cat_Nombre VARCHAR(50) NOT NULL UNIQUE,
     PRIMARY KEY (Cat_Id)
 );
 
 CREATE TABLE Tbl_Donacion_Recursos (
     Rec_Id INT(10) NOT NULL,
-    Rec_Nombre VARCHAR(15) NOT NULL,
+    Rec_Cedula_Donante Varchar(15),
+    Rec_Nombre_Donante VARCHAR(20) NOT NULL,
+    Rec_Apellido_Donante VARCHAR(20) NOT NULL,
+    Rec_Correo_Donante VARCHAR(50) NOT NULL,
     Rec_Cantidad INT NOT NULL CHECK (Rec_Cantidad >= 0),
-    Rec_Disponibilidad VARCHAR(15) NOT NULL,
     Rec_Descripcion VARCHAR(30) NOT NULL,
-    Rec_Caso_Id VARCHAR(15) NOT NULL,
-    Rec_Dona_Cedula INT(10) NOT NULL,
+    Rec_Disponibilidad VARCHAR(15) NOT NULL,
     Rec_Fecha_Caducidad DATE NOT NULL,
+    Rec_Caso_Id VARCHAR(15) NOT NULL,
     Rec_Cat_Nombre VARCHAR(50) NOT NULL,
     PRIMARY KEY (Rec_Id),
     FOREIGN KEY (Rec_Caso_Id) REFERENCES Tbl_Caso_Donacion(Caso_Id),
-    FOREIGN KEY (Rec_Dona_Cedula) REFERENCES Tbl_Donante(Dona_Cedula),
     FOREIGN KEY (Rec_Cat_Nombre) REFERENCES Tbl_Categorias(Cat_Nombre)
     );
 
@@ -100,14 +90,17 @@ CREATE TABLE Tbl_Horarios_Voluntarios (
 CREATE TABLE Tbl_Donacion_Dinero (
     Don_Id INT(10) NOT NULL,
     Don_Monto VARCHAR(20) NOT NULL,
-    Don_Fecha DATE NOT NULL,
+    Don_Comision VARCHAR(20)
+    Don_Cedula_Donante Varchar(15),
+    Don_Nombre_Donante VARCHAR(20) NOT NULL,
+    Don_Apellido_Donante VARCHAR(20) NOT NULL,
     Don_Correo VARCHAR(40) NOT NULL,
     Don_Metodo_Pago VARCHAR(40) NOT NULL,
-    Don_Dona_Cedula INT(10) NOT NULL,
+    Don_Fecha DATE NOT NULL,
     Don_Caso_Id VARCHAR(15) NOT NULL,
     PRIMARY KEY (Don_Id),
     FOREIGN KEY (Don_Caso_Id) REFERENCES Tbl_Caso_Donacion(Caso_Id),
-    FOREIGN KEY (Don_Dona_Cedula) REFERENCES Tbl_Donante(Dona_Cedula)
+    FOREIGN KEY (Rec_Cat_Nombre) REFERENCES Tbl_Categorias(Cat_Nombre)
 );
 
 
