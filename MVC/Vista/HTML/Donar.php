@@ -11,18 +11,21 @@
 
 <body>
     <header>
-        <div class="logito">
-            <img src="../IMG/Logo.png" alt="Pantry Amigo">
-            <span>Pantry Amigo</span>
-        </div>
-        <div class="navbar">
-            <nav>
-            <a href="../HTML/Home.html" class="home-button">INICIO</a>
+        <nav>
+            <div class="logo">
+                <img src="../IMG/Logo.png" alt="Logo">
+            </div>
+            <div class="menu">
+
+                <div class="menu-item">INFO
+                    <ul class="submenu">
+                        <li>SOBRE NOSOTROS</li>
+                        <li>FAQ</li>
+                        <li>AYUDA</li>
+                    </ul>
+                </div>
+            </div>
         </nav>
-            <a href="../HTML/Pagina_15.html" class="help-icon">
-                <img src="../IMG/Ayuda.png" alt="Ayuda">
-            </a>
-        </div>
     </header>
 
     <main>
@@ -44,20 +47,20 @@
             <div class="donation-summary">
                 <h2>Resumen</h2>
                 <form id="frmDonar" action="../../Controlador/Controlador.php" method="POST">
-                
-                <label for="DonaCedula">Cédula:</label>
+
+                    <label for="DonaCedula">Cédula:</label>
                     <input type="text" name="regDonaCedula" id="regDonaCedula" required>
 
-                <label for="DonaNombre">Nombre:</label>
-                <input type="text" name="regDonaNombre" id="regDonaNombre" required>
+                    <label for="DonaNombre">Nombre:</label>
+                    <input type="text" name="regDonaNombre" id="regDonaNombre" required>
 
-                <label for="DonaApellido">Apellido:</label>
-                <input type="text" name="regDonaApellido" id="regDonaApellido" required>
+                    <label for="DonaApellido">Apellido:</label>
+                    <input type="text" name="regDonaApellido" id="regDonaApellido" required>
 
-                <label for="DonaCorreo">Correo:</label>
+                    <label for="DonaCorreo">Correo:</label>
                     <input type="email" name="regDonaCorreo" id="regDonaCorreo" required>
-                
-                <button type="submit" name="donarEnviar" value="Enviar" id="DonaEnviar">Continuar</button>
+
+                    <button type="submit" name="donarEnviar" value="Enviar" id="DonaEnviar">Continuar</button>
                 </form>
             </div>
         </div>

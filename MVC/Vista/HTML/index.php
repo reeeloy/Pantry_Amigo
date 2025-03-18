@@ -140,6 +140,26 @@
         </div>
     </div>
 
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Asigna eventos a cada botón de ícono
+        document.querySelector(".option-button-donar").addEventListener("click", function () {
+            window.location.href = "ConsultarCasos.php"; // Redirige a la página de donaciones
+        });
+
+        document.querySelector(".option-button-fund").addEventListener("click", function () {
+            window.location.href = "fundaciones.html"; // Redirige a la página de fundaciones
+        });
+
+        document.querySelector(".option-button-vol").addEventListener("click", function () {
+            window.location.href = "voluntariados.html"; // Redirige a la página de voluntariados
+        });
+
+        document.querySelector(".option-button-con").addEventListener("click", function () {
+            window.location.href = "casos.html"; // Redirige a la página de casos de donación
+        });
+    });
+</script>
 
 
 </body>
