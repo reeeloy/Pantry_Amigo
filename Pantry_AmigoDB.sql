@@ -41,6 +41,7 @@ CREATE TABLE Tbl_Caso_Donacion (
     Caso_Fecha_Fin DATE NOT NULL,
     Caso_Estado VARCHAR(20) NOT NULL,
     Caso_Fund_Id INT(10) NOT NULL,
+    Caso_Acepta_Vol TINYINT(1) DEFAULT 0,
     PRIMARY KEY (Caso_Id),
     FOREIGN KEY (Caso_Fund_Id) REFERENCES Tbl_Fundaciones(Fund_Id)
 );
