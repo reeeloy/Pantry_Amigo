@@ -237,20 +237,40 @@ nav {
 }
 
 /*slider*/
+.card-Wrapper{
+    max-width: 1100px;
+    margin: 0 80px 45px;
+    padding: 40px 10px;
+    overflow: hidden;
+
+}
+
+section .swiper-title{
+    text-align: center; 
+    margin-bottom: 20px;
+}
+
+.swiper-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+/*
 .container-swiper{
     padding: 30px;
     display: flex;
     justify-content: center;
     min-height: 50vh;
     background-color:  #4caf4f71;
-}
+}*/
 
 .card-list .card-item{
     list-style: none;
 }
 
 .card-list .card-item .card-link{
-    width: 400px;
+    user-select: none;
     display: block;
     background-color: #fff;
     padding: 18px;
@@ -306,6 +326,17 @@ nav {
 .card-list .card-link:hover .card-button{
     color: #fff;
     background: #2b577d;
+}
+
+.card-Wrapper.swipper-pagination-bullet {
+    height: 13px;
+    width: 13px;
+    opacity: 0.5;
+    background: #2b577d;
+}
+
+.card-Wrapper.swipper-pagination-bullet-active{
+    opacity: 1;
 }
 
 

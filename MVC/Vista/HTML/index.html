@@ -7,6 +7,8 @@
     <!-- Importación correcta de íconos de Google Fonts -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&family=Material+Symbols+Rounded&display=swap">
+    <!-- link swiper-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 
     <title>Pantry Amigo</title>
     <link rel="stylesheet" href="../CSS/Home1.css">
@@ -81,12 +83,13 @@
             <button class="option-button-con material-symbols-outlined">document_search</button>
         </div>
     </div>
+    
     <!--historias increibles-->
-    <div class="container-swiper">
-
+    <section class="container swiper">
+        <h2 class="swiper-title">Historias increibles</h2>
         <div class="card-wrapper">
             <ul class="card-list swiper-wrapper">
-                <li class="card-item">
+                <li class="card-item swiper-slide">
                     <a href="#" class="card-link">
                         <img src="../IMG/donacionalimentos.webp" alt="card Img" class="card-img">
                         <p class="badge">Fundacion 1</p>
@@ -137,29 +140,36 @@
                 </li>
             </ul>
 
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
         </div>
-    </div>
+    </section>
+
+    <!-- link swiper js-->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="../JS/swiper.js"></script>
 
     <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // Asigna eventos a cada botón de ícono
-        document.querySelector(".option-button-donar").addEventListener("click", function () {
-            window.location.href = "ConsultarCasos.php"; // Redirige a la página de donaciones
-        });
+        document.addEventListener("DOMContentLoaded", function() {
+            // Asigna eventos a cada botón de ícono
+            document.querySelector(".option-button-donar").addEventListener("click", function() {
+                window.location.href = "ConsultarCasos.php"; // Redirige a la página de donaciones
+            });
 
-        document.querySelector(".option-button-fund").addEventListener("click", function () {
-            window.location.href = "fundaciones.html"; // Redirige a la página de fundaciones
-        });
+            document.querySelector(".option-button-fund").addEventListener("click", function() {
+                window.location.href = "fundaciones.html"; // Redirige a la página de fundaciones
+            });
 
-        document.querySelector(".option-button-vol").addEventListener("click", function () {
-            window.location.href = "voluntariados.html"; // Redirige a la página de voluntariados
-        });
+            document.querySelector(".option-button-vol").addEventListener("click", function() {
+                window.location.href = "voluntariados.html"; // Redirige a la página de voluntariados
+            });
 
-        document.querySelector(".option-button-con").addEventListener("click", function () {
-            window.location.href = "casos.html"; // Redirige a la página de casos de donación
+            document.querySelector(".option-button-con").addEventListener("click", function() {
+                window.location.href = "casos.html"; // Redirige a la página de casos de donación
+            });
         });
-    });
-</script>
+    </script>
 
 
 </body>
