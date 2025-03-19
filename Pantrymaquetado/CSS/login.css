@@ -6,7 +6,13 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-image: url();
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
 }
 
 header {
@@ -37,20 +43,19 @@ header {
     padding-right: 40px;
     padding-left: 40px;
     text-decoration: none;
-    color: #000000;
+    color: #4CAF50;
     font-size: 17px;
 }
 .nav-link3 {
     padding-right: 40px;
     padding-left: 40px;
     text-decoration: none;
-    color: #4CAF50;
+    color: #000;
     font-size: 17px;
 }
-.nav-link3:hover {
+.nav-link1:hover {
     color: #4CAF50; /* Color verde como el de "INICIO" */
 }
-
 
 .logo {
     width: 100px;
@@ -92,49 +97,41 @@ header {
 }
 
 /* Sección del formulario */
-.form-section {
-    width: 60%;
-    background-color:#fff;
-    padding: 50px;
+.login-container {
+    background: linear-gradient(to right, #6dd5ed, #2193b0);
+    padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.form-section p{
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
-    padding: 10px;
-    padding-bottom: 30px;
-    font-family: Arial, Helvetica, sans-serif;
+    width: 300px;
+    margin: 10px;
 }
 
-.form-group {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
+h2 {
+    color: white;
+    margin-bottom: 20px;
 }
 
 input {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
+    margin: 10px 0;
+    border: none;
     border-radius: 5px;
-}
-
-input[type="password"],
-.full-width input {
-    width: 100%;
+    font-size: 14px;
 }
 
 button {
     width: 100%;
     padding: 10px;
-    background-color: #4CAF50;
-    color: #fff;
-    border-color: #fff;
-    border-radius: 10px;
+    border: none;
+    border-radius: 5px;
+    background: linear-gradient(to right, #4caf50, #1b8d8d);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
 }
 
 button:hover {
-    background-color: #4682b4;
-    color: #fff;
+    background: linear-gradient(to right, #45a049, #137979);
 }
