@@ -36,6 +36,7 @@ CREATE TABLE Tbl_Fundaciones (
 CREATE TABLE Tbl_Caso_Donacion (
     Caso_Id VARCHAR(15) NOT NULL,
     Caso_Nombre_Caso VARCHAR(40) NOT NULL,
+    Caso_Monto_Meta  VARCHAR(10) NOT NULL,
     Caso_Descripcion VARCHAR(255) NOT NULL,
     Caso_Fecha_Inicio DATE NOT NULL,
     Caso_Fecha_Fin DATE NOT NULL,
