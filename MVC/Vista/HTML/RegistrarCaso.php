@@ -46,7 +46,12 @@
     <label>ID de Fundación:</label>
     <input type="number" name="casoFundacion" required><br>
 
-    <button type="submit" name="registrarCaso"> crear Caso</button>
+    <label> ¿Este caso necesita voluntarios?
+    <input type="checkbox" name="casoAceptaVoluntarios" value="1">
+    </label>
+
+
+    <button type="submit" name="registrarCaso"> Crear</button>
 </form>
 
 </body>

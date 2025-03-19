@@ -44,7 +44,7 @@
                 </div>
             </div>
 
-            <div class="donation-summary">
+            <div class="donation-summary">   
                 <h2>Resumen</h2>
                 <form id="frmDonar" action="../../Controlador/Controlador.php" method="POST">
 
