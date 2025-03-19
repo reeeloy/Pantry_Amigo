@@ -48,7 +48,7 @@ CREATE TABLE Tbl_Caso_Donacion (
 
 CREATE TABLE Tbl_Categorias (
     Cat_Nombre VARCHAR(50) NOT NULL UNIQUE,
-    PRIMARY KEY (Cat_Id)
+    PRIMARY KEY (Cat_Nombre)
 );
 
 CREATE TABLE Tbl_Donacion_Recursos (
