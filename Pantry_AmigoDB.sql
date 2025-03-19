@@ -191,29 +191,30 @@ VALUES
 (07, '2024-09-07 11:00:00', 'Centro Juvenil', 1007);
 
 
-INSERT INTO tbl_Donacion_Dinero (Don_Id,Don_Monto,Don_Fecha,Don_Correo,Don_Metodo_Pago,Don_Dona_Cedula,Don_Caso_Id) 
+INSERT INTO tbl_Donacion_Dinero (Don_Id,Don_Monto,Don_Comision,Don_Cedula_Donante,Don_Nombre_Donante,Don_Apellido_Donante,Don_Correo,Don_Metodo_Pago,Don_Fecha,Don_Caso_Id,Don_Cat_Nombre) 
 VALUES 
-(3001, '500 USD', '2024-09-01', 'pedro.sanchez@example.com', 'Transferencia Bancaria',2001, 'C002'),
-(3002, '1200 USD', '2024-09-02', 'elena.fernandez@example.com', 'PayPal', 2002 ,'C005'), 
-(3003, '800 USD', '2024-09-03', 'roberto.ramirez@example.com', 'Tarjeta de Crédito', 2003 ,'C007'),
-(3004, '1000 USD', '2024-09-04', 'patricia.gonzalez@example.com', 'Transferencia Bancaria', 2004 ,'C004'),
-(3005, '1500 USD', '2024-09-05', 'miguel.torres@example.com', 'PayPal', 2005 ,'C004'), 
-(3006, '700 USD', '2024-09-06', 'claudia.vega@example.com', 'Tarjeta de Crédito', 2006 ,'C002'), 
-(3007, '950 USD', '2024-09-07', 'sergio.morales@example.com', 'Transferencia Bancaria', 2007 ,'C003');
+(3001, '500 USD', '500 Pesos', '101010','Pedro','Sanchez', 'pedro.sanchez@example.com', 'Transferencia Bancaria', '2025-03-03','C002','Salud'),
+(3002, '1200 USD', '500 Pesos', '303030','Elena','Fernandez', 'elena.fernandez@example.com', 'PayPal', '2025-01-02' ,'C005','Alimentacion'), 
+(3003, '800 USD', '500 Pesos', '404040','Roberto','Ramirez','roberto.ramirez@example.com', 'Tarjeta de Crédito', '2025-02-01' ,'C007','Construccion'),
+(3004, '1000 USD', '500 Pesos', '505050','Patricia','Gonzales','patricia.gonzalez@example.com', 'Transferencia Bancaria', '2024-09-04' ,'C004','Medio Ambiente'),
+(3005, '1500 USD', '500 Pesos', '707070','Miguel','Torres','miguel.torres@example.com', 'PayPal', '2024-06-02' ,'C004','Tecnologia'), 
+(3006, '700 USD', '500 Pesos', '808080','Claudia','Vega','claudia.vega@example.com', 'Tarjeta de Crédito', '2025-05-05' ,'C002','Salud'), 
+(3007, '950 USD', '500 Pesos', '909090','Sergio','Morales','sergio.morales@example.com', 'Transferencia Bancaria', '2025-08-10' ,'C003','Alimentacion');
+
 
 INSERT INTO tbl_categorias (Cat_Nombre) 
 VALUES ('Alimentación'), ('Medio Ambiente'), ('Construcción'), ('Salud'), ('Tecnología');
 
-INSERT INTO `tbl_donacion_recursos` (`Rec_Id`, `Rec_Nombre`, `Rec_Cantidad`, `Rec_Disponibilidad`, `Rec_Descripcion`, `Rec_Caso_Id`, `Rec_Dona_Cedula`, `Rec_Fecha_Caducidad`, `Rec_Cat_Nombre`) 
+
+INSERT INTO tbl_donacion_recursos (Rec_Id,Rec_Cedula_Donante,Rec_Nombre_Donante,Rec_Apellido_Donante,Rec_Correo_Donante,Rec_Cantidad,Rec_Descripcion,Rec_Disponibilidad,Rec_Fecha_Caducidad,Rec_Caso_Id,Rec_Cat_Nombre) 
 VALUES 
-(818, 'jueguetes', '23', 'Disponible', 'descripcion de los recursos', 'C002', '2003', '2025-09-25', 'Salud');
-(705, 'Libros', 12,  'Disponible', 'descripcion de los recursos' ,'C002', 2001,  '2025-09-01','Educación'),
-(818, 'Juguetes',23, 'Disponible', 'descripcion de los recursos', 'C002',2003 , '2025-09-01', 'Juguetería'),
-(699, 'Comida',7, 'Disponible', 'descripcion de los recursos','C003', 2005,  '2025-09-01', 'Alimentación'),
-(423, 'Árboles',3, 'Disponible', 'descripcion de los recursos' , 'C004', 2004, '2025-09-01', 'Medio Ambiente'),
-(672, 'Material de construcción',8, 'Disponible', 'descripcion de los recursos', 'C005', 2007,  '2025-09-01', 'Construccion' ),
-(698, 'Medicinas',12, 'Disponible', 'descripcion de los recursos', 'C006', 2001, '2025-09-01', 'Salud'),
-(201, 'Equipos de cómputo',2, 'Disponible', 'descripcion de los recursos' ,'C001',2006, '2025-09-01', 'Tecnologia');
+(001,'101010','Pedro','Sanchez', 'pedro.sanchez@example.com', 10,'Donacion de sangre', 'Disponible','2025-09-25','C001', 'Salud'),
+(002, '303030','Elena','Fernandez','elena.fernandez@example.com', 20, 'Mercados con todo ' , 'Disponible', '2025-09-01','C003','Alimentacion'),
+(003, '404040','Roberto','Ramirez','roberto.ramirez@example.com',10, 'Computadores para estudio','Disponible', '2025-09-01','C002', 'Tecnologia'),
+(004, '505050','Patricia','Gonzales','patricia.gonzalez@example.com',20, 'Mercados con todo','Disponible', '2025-09-01', 'C005', 'Alimentación'),
+(005, '707070','Miguel','Torres','miguel.torres@example.com',10, 'Recusrosos para mejorar el ambiente' ,'Disponible', '2025-09-01', 'C004','Medio Ambiente'),
+(006, '808080','Claudia','Vega','claudia.vega@example.com',10, 'Material para contruccion','Disponible',  '2025-09-01','C006', 'Construccion' ),
+(007, '909090','Sergio','Morales','sergio.morales@example.com',20,'Donacion de sangre', 'Disponible',  '2025-09-01','C007', 'Salud');
     
 /*Procedimiento para obtener donaciones monetarias*/
 DELIMITER $$
