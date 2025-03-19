@@ -3,6 +3,7 @@ require_once '../Modelo/Donante.php';
 require_once '../Modelo/registrarDonante.php';
 require_once '../Modelo/Caso.php';
 require_once '../Modelo/ConsultaRecursos.php';
+require_once '../Modelo/Participacion.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
@@ -41,24 +42,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            try {
                 //registrar voluntarios
-                if (isset($_POST['regVolCedula']) && isset($_POST['regVolNombre']) && isset($_POST['regVolApellido']) && isset($_POST['regVolCorreo']) && isset($_POST['regVolCelular']) && isset($_POST['regVolCasoId'])) {
+                if (isset($_POST['registrarVoluntario']))
+                {
 
                     $Vol_Cedula = $_POST['regVolCedula'];
                     $Vol_Nombre = $_POST['regVolNombre'];
                     $Vol_Apellido = $_POST['regVolApellido'];
                     $Vol_Correo = $_POST['regVolCorreo'];
                     $Vol_Celular = $_POST['regVolCelular'];
-                    $Vol_CasoId = $_POST['regVolCasoId']
-        
-                   /* $personal = new Donante();
-                    $personal->Donante($Dona_Cedula, $Dona_Nombre, $Dona_Apellido, $Dona_Correo);
-        
-                    $perCliente = new registrarDonante();
-                    $perCliente->regDonante($personal);
-                }*/
+                    $Vol_CasoId = $_POST['regVolCasoId'];
+
+                    $voluntario = new Participacion();
+                    
+                    if ($voluntario->registrarVoluntario($Vol_Cedula, $Vol_Nombre, $Vol_Apellido, $Vol_Correo, $Vol_Celular, $Vol_CasoId)){
+                        echo "<script>alert('Voluntario registrado exitosamente');</script>";
+                    } else {
+                        echo "<script>alert('Error al registrar el Voluntario');</script>";
+                    }
+                }
     } catch (Exception $ex) {
         echo 'Error: ' . $ex->getMessage();
     }

@@ -29,7 +29,7 @@
         <input type="text" name="regVolCasoId" id="regVolCasoId" required><br>
 
 
-        <button type="submit" name="donarEnviar" value="Enviar" id="DonaEnviar">Registrar</button>
+        <button type="submit" name="registrarVoluntario" >Registrar</button>
     </form>
 
 </body>
