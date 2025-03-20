@@ -15,7 +15,7 @@
       </div>
       <nav class="menu">
         <ul>
-          <li><a href="#" id="perfil-link">Perfil</a></li>
+          <li><a href="../../../MVC/Vista/HTML/from_Fundacion.php" id="perfil-link">Perfil</a></li>
           <li><a href="#" id="casos-link" class="active">Casos</a></li>
           <li><a href="#" id="voluntarios-link">Voluntarios</a></li>
           <li><a href="#" id="consultar-link">Consultar</a></li>

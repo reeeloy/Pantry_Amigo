@@ -1,4 +1,4 @@
-<?php require_once "../Controlador/voluntarioControlador.php"; ?>
+<?php require_once "../../Controlador/voluntarioControlador.php"; ?>
 
 <!DOCTYPE html>
 <html lang="es">

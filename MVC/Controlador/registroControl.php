@@ -2,8 +2,8 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-include '../modelo/conexionBD.php'; // Conexión a la base de datos
-include '../modelo/registro.php';
+include '../../MVC/Modelo/conexionBDD.php'; // Conexión a la base de datos
+include '../../MVC/Modelo/registro.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = trim($_POST['username']);
@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $result = $user->registrarUsuario($username, $password, $tipo, $correo);
 
     if ($result === true) {
-        header("Location: ../vista/dashboard.php"); // Redirigir a la página principal
+        header("Location: ../Vista/HTML/index.php"); // Redirigir a la página principal
         exit();
     } else {
         echo "<p style='color:red;'>$result</p>";

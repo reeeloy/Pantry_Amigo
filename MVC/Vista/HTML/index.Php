@@ -24,8 +24,9 @@
                 <div class="menu-item-ubi">INICIO</div>
                 <div class="menu-item">CUENTA
                     <ul class="submenu">
-                        <li>SIGN UP</li>
-                        <li>LOGIN</li>
+                        <li><button><a href="../../../MVC/Vista/HTML/registrofrom.php">SIGN UP</a></button></li>
+                        <li><button><a href="../../../MVC/Vista/HTML/IniciarSesionFrom.php">LOGIN</a></button></li>
+                        
                     </ul>
                 </div>
                 <div class="menu-item">PARTICIPAR

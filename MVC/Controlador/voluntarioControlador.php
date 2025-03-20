@@ -1,5 +1,5 @@
 <?php
-require_once "../Modelo/voluntarioModelo.php";
+require_once "../../MVC/Modelo/voluntarioModelo.php";
 
 class VoluntarioControlador {
     private $modelo;
