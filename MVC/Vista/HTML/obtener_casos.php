@@ -1,7 +1,6 @@
 <?php
-    ini_set('display_errors', 1);
-    error_reporting(E_ALL);
-    
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
 require_once '/xampp/htdocs/Pantry-Amigo/MVC/Modelo/ConexionBD.php'; // Asegúrate de que la ruta sea correcta
 header('Content-Type: application/json'); // Devuelve JSON
@@ -14,7 +13,13 @@ switch ($metodo) {
     case 'GET':
         // Leer casos
         if ($conexion->abrir()) {
-            $sql = "SELECT * FROM tbl_caso_donacion";
+            // Modificación: Convertimos Caso_Estado en 'Activo' o 'Inactivo'
+            $sql = "SELECT *, 
+                           CASE 
+                               WHEN Caso_Estado = 1 THEN 'Activo' 
+                               ELSE 'Inactivo' 
+                           END AS Estado 
+                    FROM tbl_caso_donacion";
             $conexion->consulta($sql);
             $result = $conexion->obtenerResult();
             $casos = [];

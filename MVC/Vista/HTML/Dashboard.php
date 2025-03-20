@@ -11,7 +11,7 @@
     <!-- Sidebar -->
     <aside class="sidebar">
       <div class="logo">
-      <img src="/Pantry-amigo/MVC/Vista/IMG/Logo_Pantry-amigo.png" alt="Logo de la empresa" class="logo-img">
+        <img src="/Pantry-amigo/MVC/Vista/IMG/Logo_Pantry-amigo.png" alt="Logo de la empresa" class="logo-img">
       </div>
       <nav class="menu">
         <ul>
@@ -34,6 +34,12 @@
 
       <!-- Sección de Casos (Visible por defecto) -->
       <section id="casos" class="seccion-activa">
+        <!-- Barra de búsqueda para filtrar por ID -->
+        <div class="search-bar">
+          <input type="text" id="filtro-id" placeholder="Ingrese el ID del caso">
+          <button id="btn-filtrar">Filtrar</button>
+        </div>
+
         <div class="cases" id="lista-casos">
           <!-- Aquí se cargarán los casos dinámicamente -->
         </div>
@@ -86,7 +92,7 @@
     </main>
   </div>
 
-  <!-- Script para manejar la navegación y las listas -->
+  <!-- Script para manejar la navegación y la carga/filtrado de datos -->
   <script>
     // Seleccionar elementos del DOM
     const perfilLink = document.getElementById('perfil-link');
@@ -101,10 +107,14 @@
     const tituloSeccion = document.getElementById('titulo-seccion');
     const listaCasos = document.getElementById('lista-casos');
     const listaVoluntarios = document.getElementById('lista-voluntarios');
+    const filtroInput = document.getElementById('filtro-id');
+    const btnFiltrar = document.getElementById('btn-filtrar');
+
+    let casosData = []; // Variable para almacenar los casos cargados
 
     // Función para cargar casos desde PHP
     function cargarCasos() {
-      fetch('/Pantry-amigo/MVC/Vista/HTML/obtener_casos.php') // Solicitud al archivo PHP
+      fetch('/Pantry-amigo/MVC/Vista/HTML/obtener_casos.php')
         .then(response => {
           if (!response.ok) {
             throw new Error(`Error en la solicitud: ${response.statusText}`);
@@ -112,25 +122,12 @@
           return response.json();
         })
         .then(data => {
-          listaCasos.innerHTML = ''; // Limpiar el contenedor
-
           if (data.error) {
-            console.error('Error desde el servidor:', data.error);
             listaCasos.innerHTML = `<p>Error: ${data.error}</p>`;
             return;
           }
-
-          data.forEach(caso => {
-            const casoHTML = `
-              <div class="case">
-                <h3>${caso.Caso_Nombre_Caso}</h3>
-                <p><strong>${caso.Caso_Descripcion}</strong></p>
-                <p>Fecha de inicio: ${caso.Caso_Fecha_Inicio}</p>
-                <p>Fecha de fin: ${caso.Caso_Fecha_Fin}</p>
-              </div>
-            `;
-            listaCasos.insertAdjacentHTML('beforeend', casoHTML);
-          });
+          casosData = data; // Almacenar la data original
+          mostrarCasos(casosData);
         })
         .catch(error => {
           console.error('Error al cargar los casos:', error);
@@ -138,44 +135,39 @@
         });
     }
 
-    // Función para cargar voluntarios desde PHP
-    function cargarVoluntarios() {
-      fetch('/Pantry-amigo/MVC/Vista/HTML/obtener_voluntarios.php') // Solicitud al archivo PHP
-        .then(response => {
-          if (!response.ok) {
-            throw new Error(`Error en la solicitud: ${response.statusText}`);
-          }
-          return response.json();
-        })
-        .then(data => {
-          listaVoluntarios.innerHTML = ''; // Limpiar el contenedor
+    // Función para mostrar casos en la interfaz
+    function mostrarCasos(casos) {
+      listaCasos.innerHTML = ''; // Limpiar el contenedor
+      casos.forEach(caso => {
+        // Se utiliza "Caso_Id" (ajusta según tu API) y se muestra Estado basado en el valor de Caso_Estado
+        const estado = caso.Estado ? caso.Estado : (caso.Caso_Estado == 1 ? 'Activo' : 'Inactivo');
+        const casoHTML = `
+          <div class="case" data-id="${caso.Caso_Id}">
+            <h3>${caso.Caso_Nombre_Caso}</h3>
+            <p><strong>${caso.Caso_Descripcion}</strong></p>
+            <p>ID: ${caso.Caso_Id}</p>
+            <p>Estado: ${estado}</p>
+            <p>Fecha de inicio: ${caso.Caso_Fecha_Inicio}</p>
+            <p>Fecha de fin: ${caso.Caso_Fecha_Fin}</p>
+          </div>
+        `;
+        listaCasos.insertAdjacentHTML('beforeend', casoHTML);
+      });
+    }
 
-          if (data.error) {
-            console.error('Error desde el servidor:', data.error);
-            listaVoluntarios.innerHTML = `<p>Error: ${data.error}</p>`;
-            return;
-          }
-
-          data.forEach(voluntario => {
-            const voluntarioHTML = `
-              <div class="voluntario">
-                <p><strong>${voluntario.Vol_Nombre} ${voluntario.Vol_Apellido}</strong></p>
-                <p>Correo: ${voluntario.Vol_Correo}</p>
-                <p>Celular: ${voluntario.Vol_Celular}</p>
-                <p>Caso asignado: ${voluntario.Vol_Caso_Id}</p>
-              </div>
-            `;
-            listaVoluntarios.insertAdjacentHTML('beforeend', voluntarioHTML);
-          });
-        })
-        .catch(error => {
-          console.error('Error al cargar los voluntarios:', error);
-          listaVoluntarios.innerHTML = `<p>Error al cargar los voluntarios: ${error.message}</p>`;
-        });
+    // Función para filtrar los casos por ID
+    function filtrarCasosPorID() {
+      const filtro = filtroInput.value.trim();
+      if (filtro === '') {
+        mostrarCasos(casosData);
+        return;
+      }
+      const casosFiltrados = casosData.filter(caso => String(caso.Caso_Id) === filtro);
+      mostrarCasos(casosFiltrados);
     }
 
     // Función para mostrar la sección de casos
-    function mostrarCasos() {
+    function mostrarCasosSeccion() {
       casosSection.classList.remove('seccion-oculta');
       casosSection.classList.add('seccion-activa');
       voluntariosSection.classList.remove('seccion-activa');
@@ -183,7 +175,7 @@
       ayudaSection.classList.remove('seccion-activa');
       ayudaSection.classList.add('seccion-oculta');
       tituloSeccion.textContent = 'Casos';
-      cargarCasos(); // Cargar los casos dinámicamente
+      cargarCasos();
       resaltarOpcion(casosLink);
     }
 
@@ -196,7 +188,7 @@
       ayudaSection.classList.remove('seccion-activa');
       ayudaSection.classList.add('seccion-oculta');
       tituloSeccion.textContent = 'Voluntarios';
-      cargarVoluntarios(); // Cargar los voluntarios dinámicamente
+      cargarVoluntarios();
       resaltarOpcion(voluntariosLink);
     }
 
@@ -215,27 +207,60 @@
     // Función para resaltar la opción seleccionada
     function resaltarOpcion(link) {
       const menuLinks = [perfilLink, casosLink, voluntariosLink, ayudaLink, salirLink];
-      menuLinks.forEach((menuLink) => {
-        menuLink.classList.remove('active');
-      });
+      menuLinks.forEach(menuLink => menuLink.classList.remove('active'));
       link.classList.add('active');
     }
 
-    // Event listeners
+    // Función para cargar voluntarios desde PHP
+    function cargarVoluntarios() {
+      fetch('/Pantry-amigo/MVC/Vista/HTML/obtener_voluntarios.php')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Error en la solicitud: ${response.statusText}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          listaVoluntarios.innerHTML = '';
+          if (data.error) {
+            listaVoluntarios.innerHTML = `<p>Error: ${data.error}</p>`;
+            return;
+          }
+          data.forEach(voluntario => {
+            const voluntarioHTML = `
+              <div class="voluntario">
+                <p><strong>${voluntario.Vol_Nombre} ${voluntario.Vol_Apellido}</strong></p>
+                <p>Correo: ${voluntario.Vol_Correo}</p>
+                <p>Celular: ${voluntario.Vol_Celular}</p>
+                <p>Caso asignado: ${voluntario.Vol_Caso_Id}</p>
+              </div>
+            `;
+            listaVoluntarios.insertAdjacentHTML('beforeend', voluntarioHTML);
+          });
+        })
+        .catch(error => {
+          listaVoluntarios.innerHTML = `<p>Error al cargar los voluntarios: ${error.message}</p>`;
+        });
+    }
+
+    // Event listeners para navegación
     perfilLink.addEventListener('click', () => {
-      mostrarCasos(); // Cambia a la sección de casos (o la que corresponda)
+      mostrarCasosSeccion();
       resaltarOpcion(perfilLink);
     });
-    casosLink.addEventListener('click', mostrarCasos);
+    casosLink.addEventListener('click', mostrarCasosSeccion);
     voluntariosLink.addEventListener('click', mostrarVoluntarios);
     ayudaLink.addEventListener('click', mostrarAyuda);
     salirLink.addEventListener('click', () => {
       alert('Cerrando sesión...');
-      // Aquí puedes agregar la lógica para cerrar sesión
+      // Lógica para cerrar sesión
     });
 
+    // Event listener para el botón de filtrar
+    btnFiltrar.addEventListener('click', filtrarCasosPorID);
+
     // Mostrar la sección de casos por defecto
-    mostrarCasos();
+    mostrarCasosSeccion();
   </script>
 </body>
 </html>
