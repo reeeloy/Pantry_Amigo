@@ -32,10 +32,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $casoEstado = $_POST['casoEstado'];
             $casoFundacion = $_POST['casoFundacion'];
             $casoAceptaVoluntarios = isset($_POST['casoAceptaVoluntarios']) ? 1 : 0;
+            $casoMontoMeta = $_POST['casoMontoMeta'];
 
 
             $caso = new Caso();
-            if ($caso->registrarCaso($casoId, $casoNombre, $casoDescripcion, $casoFechaInicio, $casoFechaFin, $casoEstado, $casoFundacion, $casoAceptaVoluntarios)) {
+            if ($caso->registrarCaso($casoId, $casoNombre, $casoDescripcion, $casoFechaInicio, $casoFechaFin, $casoEstado, $casoFundacion, $casoAceptaVoluntarios, $casoMontoMeta)) {
                 echo "<script>alert('Caso registrado exitosamente');</script>";
             } else {
                 echo "<script>alert('Error al registrar el caso');</script>";

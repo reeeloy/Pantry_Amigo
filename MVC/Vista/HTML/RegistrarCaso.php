@@ -8,19 +8,7 @@
 </head>
 <body>
 
- <header>
-        <nav class="navbar">
-            <div class="nav-left">
-                <a href="../HTML/Home.html" class="nav-link1">INICIO</a>
-            </div>
-            <div class="nav-logo">
-                <img src="../IMG/logoPA.png" alt="Logo" class="logo">
-            </div>
-            <div class="nav-right">
-                <a href="../HTML/Pagina_15.html"><img src="../IMG/icon1.jfif" alt="Ayuda" class="icon"></a>
-            </div>
-        </nav>
-</header>
+
 
 <form action="../../Controlador/Controlador.php" method="POST">
 <h2>Registro de Caso de Donación</h2>
@@ -50,7 +38,9 @@
     <input type="checkbox" name="casoAceptaVoluntarios" value="1">
     </label>
 
-
+    <label>Monto Meta:</label>
+    <input type="text" name="casoMontoMeta" required><br>
+    
     <button type="submit" name="registrarCaso"> Crear</button>
 </form>
 
