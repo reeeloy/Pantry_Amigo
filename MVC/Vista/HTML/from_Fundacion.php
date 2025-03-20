@@ -42,6 +42,7 @@ $mensaje = $_GET['mensaje'] ?? '';
 
         <button type="submit" name="accion" value="registrar" class="btn btn-register">Registrar</button>
         <button type="submit" name="accion" value="actualizar" class="btn btn-update">Actualizar</button>
+        <button type="button" onclick="window.location.href='Dashboard.php'" class="btn btn-blue">Regresar</button>
     </form>
 </div>
 
@@ -66,6 +67,19 @@ $mensaje = $_GET['mensaje'] ?? '';
             alert("Fundación actualizada correctamente");
         }
     });
+    document.addEventListener("DOMContentLoaded", function() {
+    const buttons = document.querySelectorAll("button");
+
+    buttons.forEach(button => {
+        button.addEventListener("mouseenter", function() {
+            this.style.transform = "scale(1.05)";
+        });
+
+        button.addEventListener("mouseleave", function() {
+            this.style.transform = "scale(1)";
+        });
+    });
+});
 </script>
 
 </body>

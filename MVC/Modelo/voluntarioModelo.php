@@ -1,5 +1,5 @@
 <?php
-require_once "../Controlador/conexionBD.php";
+require_once "../../MVC/Modelo/ConexionBD.php";
 
 class Voluntario{
     private $conexion;
