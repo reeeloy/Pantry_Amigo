@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <link rel="stylesheet" href="../CSS/estiloRegVoluntario.css">
     <title>Registro de Voluntariado</title>
 </head>
 

@@ -60,3 +60,11 @@ h2 {
     background-color: #3d8b3d;
     transform: scale(1.05);
 }
+.btn-blue {
+    background-color: #3498db;
+    color: white;
+}
+
+.btn-blue:hover {
+    background-color: #2980b9;
+}

@@ -15,7 +15,7 @@
       </div>
       <nav class="menu">
         <ul>
-          <li><a href="#" id="perfil-link">Perfil</a></li>
+          <li><a href="../../../MVC/Vista/HTML/from_Fundacion.php" id="perfil-link">Perfil</a></li>
           <li><a href="#" id="casos-link" class="active">Casos</a></li>
           <li><a href="#" id="voluntarios-link">Voluntarios</a></li>
           <li><a href="#" id="consultar-link">Consultar</a></li>
@@ -28,8 +28,8 @@
     <!-- Contenido Principal -->
     <main class="content">
       <header class="header">
-        <h2 id="titulo-seccion">Casos</h2>
-        <button class="new-case-button" id="nuevo-caso-button">Nuevo caso de donación</button>
+        <h2 id="titulo-seccion">Casos</h2>       
+        <button class="new-case-button" id="nuevo-caso-button" onclick="window.location.href='RegistrarCaso.php'">Nuevo caso de donación</button>
       </header>
 
       <!-- Sección de Casos (Visible por defecto) -->
@@ -59,7 +59,7 @@
         <div id="lista-voluntarios">
           <!-- Aquí se cargarán los voluntarios dinámicamente -->
         </div>
-        <button id="agregar-voluntario-button">Agregar Voluntario</button>
+        <button id="agregar-voluntario-button" onclick="window.location.href='RegistrarVoluntario.php'">Agregar Voluntario </button>
       </section>
 
       <!-- Sección de Ayuda (Oculta por defecto) -->

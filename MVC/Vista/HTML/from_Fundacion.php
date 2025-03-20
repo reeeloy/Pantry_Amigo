@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../Controlador/fundacionControlador.php';
+require_once __DIR__ . '../../../../MVC/Controlador/fundacionControlador.php';
 $controller = new FundacionControlador();
 
 $fundacion = [];
@@ -16,7 +16,7 @@ $mensaje = $_GET['mensaje'] ?? '';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro y Actualización de Fundación</title>
-    <link rel="stylesheet" href="../Vista/css/style.css">
+    <link rel="stylesheet" href="../../../MVC/Vista/CSS/stylee.css">
 </head>
 <body>
 
@@ -25,7 +25,7 @@ $mensaje = $_GET['mensaje'] ?? '';
 
     <?php if ($mensaje) echo "<p style='color:green;'>$mensaje</p>"; ?>
 
-    <form id="fundacionForm" action="../Controlador/fundacionControlador.php" method="post">
+    <form id="fundacionForm" action="../../../MVC/Controlador/fundacionControlador.php" method="post">
         <div class="form-group">
             <input type="number" name="Fund_Id" id="Fund_Id" value="<?= $fundacion['Fund_Id'] ?? '' ?>" placeholder="ID Fundación" required>
             <input type="email" name="Fund_Correo" id="Fund_Correo" value="<?= $fundacion['Fund_Correo'] ?? '' ?>" placeholder="Correo" required>
@@ -42,6 +42,7 @@ $mensaje = $_GET['mensaje'] ?? '';
 
         <button type="submit" name="accion" value="registrar" class="btn btn-register">Registrar</button>
         <button type="submit" name="accion" value="actualizar" class="btn btn-update">Actualizar</button>
+        <button type="button" onclick="window.location.href='Dashboard.php'" class="btn btn-blue">Regresar</button>
     </form>
 </div>
 
@@ -66,6 +67,19 @@ $mensaje = $_GET['mensaje'] ?? '';
             alert("Fundación actualizada correctamente");
         }
     });
+    document.addEventListener("DOMContentLoaded", function() {
+    const buttons = document.querySelectorAll("button");
+
+    buttons.forEach(button => {
+        button.addEventListener("mouseenter", function() {
+            this.style.transform = "scale(1.05)";
+        });
+
+        button.addEventListener("mouseleave", function() {
+            this.style.transform = "scale(1)";
+        });
+    });
+});
 </script>
 
 </body>

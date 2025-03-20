@@ -24,8 +24,9 @@
                 <div class="menu-item-ubi">INICIO</div>
                 <div class="menu-item">CUENTA
                     <ul class="submenu">
-                        <li>SIGN UP</li>
-                        <li>LOGIN</li>
+                        <li><button><a href="../../../MVC/Vista/HTML/registrofrom.php">SIGN UP</a></button></li>
+                        <li><button><a href="../../../MVC/Vista/HTML/IniciarSesionFrom.php">LOGIN</a></button></li>
+                        
                     </ul>
                 </div>
                 <div class="menu-item">PARTICIPAR
@@ -182,9 +183,9 @@
                     <h3>Enlaces</h3>
                     <ul>
                         <li><a href="#">Inicio</a></li>
-                        <li><a href="#">Casos de Donación</a></li>
-                        <li><a href="#">Fundaciones</a></li>
-                        <li><a href="#">Voluntariados</a></li>
+                        <li><a href="ConsultarCasos.php">Casos de Donación</a></li>
+                        <li><a href="ConsultarFundacion.php">Fundaciones</a></li>
+                        <li><a href="ConsultarVoluntario.php">Voluntariados</a></li>
                         <li><a href="#">Contacto</a></li>
                     </ul>
                 </div>

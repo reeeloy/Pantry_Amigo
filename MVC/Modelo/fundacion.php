@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../Controlador/conexionBD.php';
+require_once __DIR__ . '../../../MVC/Modelo/ConexionBD.php';
 
 class Fundacion {
     private $conn;
