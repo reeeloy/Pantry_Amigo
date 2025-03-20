@@ -182,9 +182,9 @@
                     <h3>Enlaces</h3>
                     <ul>
                         <li><a href="#">Inicio</a></li>
-                        <li><a href="#">Casos de Donación</a></li>
-                        <li><a href="#">Fundaciones</a></li>
-                        <li><a href="#">Voluntariados</a></li>
+                        <li><a href="ConsultarCasos.php">Casos de Donación</a></li>
+                        <li><a href="ConsultarFundacion.php">Fundaciones</a></li>
+                        <li><a href="ConsultarVoluntario.php">Voluntariados</a></li>
                         <li><a href="#">Contacto</a></li>
                     </ul>
                 </div>
