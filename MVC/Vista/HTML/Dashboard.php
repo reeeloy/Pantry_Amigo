@@ -4,22 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard Fundación</title>
-  <link rel="stylesheet" href="../CSS/estiloDashboard.css">
+  <link rel="stylesheet" href="/Pantry-amigo/MVC/Vista/CSS/estiloDashboard.css">
 </head>
 <body>
   <div class="dashboard">
     <!-- Sidebar -->
     <aside class="sidebar">
       <div class="logo">
-        <!-- Logo de la empresa -->
-        <img src="../IMG/Logo_Pantry-amigo.png" alt="Logo de la empresa" class="logo-img">
+      <img src="/Pantry-amigo/MVC/Vista/IMG/Logo_Pantry-amigo.png" alt="Logo de la empresa" class="logo-img">
       </div>
       <nav class="menu">
         <ul>
           <li><a href="#" id="perfil-link">Perfil</a></li>
           <li><a href="#" id="casos-link" class="active">Casos</a></li>
           <li><a href="#" id="voluntarios-link">Voluntarios</a></li>
-          <li><a href="#" id="voluntarios-link">Consultar</a></li>
+          <li><a href="#" id="consultar-link">Consultar</a></li>
           <li><a href="#" id="ayuda-link">Ayuda</a></li>
           <li><a href="#" id="salir-link">Salir</a></li>
         </ul>
@@ -35,56 +34,16 @@
 
       <!-- Sección de Casos (Visible por defecto) -->
       <section id="casos" class="seccion-activa">
-        <div class="cases">
-          <div class="case">
-            <h3>Caso 1</h3>
-            <p><strong>Tasmin Kaspal</strong> - DOJAMAYYYY</p>
-          </div>
-          <div class="case">
-            <h3>Caso 2</h3>
-            <p><strong>Jonathan Patterson</strong> - DOJAMAYYYY</p>
-          </div>
-          <div class="case">
-            <h3>Caso 3</h3>
-            <p><strong>Olivia Wilson</strong> - DOJAMAYYYY</p>
-          </div>
+        <div class="cases" id="lista-casos">
+          <!-- Aquí se cargarán los casos dinámicamente -->
         </div>
 
         <!-- Horarios Asignados -->
         <section class="assigned-schedules">
           <h3>Horarios asignados</h3>
-          <div class="schedule">
-            <h4>Caso 2</h4>
-            <p><strong>Jonathan Patterson</strong> - DOJAMAYYYY</p>
+          <div id="horarios-asignados">
+            <!-- Aquí se cargarán los horarios dinámicamente -->
           </div>
-          <div class="schedule">
-            <h4>Caso 3</h4>
-            <p><strong>Olivia Wilson</strong> - DOJAMAYYYY</p>
-          </div>
-        </section>
-
-        <!-- Tabla de Análisis -->
-        <section class="analysis-table">
-          <h3>2024</h3>
-          <table>
-            <thead>
-              <tr>
-                <th>ANÁLISE</th>
-                <th>FEBRUARY</th>
-                <th>MAYER</th>
-                <th>APRIL</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>LATO</td>
-                <td>ATRE</td>
-                <td>AT&T</td>
-                <td>ADVENTE</td>
-              </tr>
-              <!-- Más filas aquí -->
-            </tbody>
-          </table>
         </section>
       </section>
 
@@ -140,14 +99,80 @@
     const voluntariosSection = document.getElementById('voluntarios');
     const ayudaSection = document.getElementById('ayuda');
     const tituloSeccion = document.getElementById('titulo-seccion');
+    const listaCasos = document.getElementById('lista-casos');
     const listaVoluntarios = document.getElementById('lista-voluntarios');
-    const agregarVoluntarioButton = document.getElementById('agregar-voluntario-button');
 
-    // Datos de ejemplo para voluntarios
-    let voluntarios = [
-      { nombre: 'Juan Pérez', fechaRegistro: '2023-10-01' },
-      { nombre: 'María Gómez', fechaRegistro: '2023-10-05' },
-    ];
+    // Función para cargar casos desde PHP
+    function cargarCasos() {
+      fetch('/Pantry-amigo/MVC/Vista/HTML/obtener_casos.php') // Solicitud al archivo PHP
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Error en la solicitud: ${response.statusText}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          listaCasos.innerHTML = ''; // Limpiar el contenedor
+
+          if (data.error) {
+            console.error('Error desde el servidor:', data.error);
+            listaCasos.innerHTML = `<p>Error: ${data.error}</p>`;
+            return;
+          }
+
+          data.forEach(caso => {
+            const casoHTML = `
+              <div class="case">
+                <h3>${caso.Caso_Nombre_Caso}</h3>
+                <p><strong>${caso.Caso_Descripcion}</strong></p>
+                <p>Fecha de inicio: ${caso.Caso_Fecha_Inicio}</p>
+                <p>Fecha de fin: ${caso.Caso_Fecha_Fin}</p>
+              </div>
+            `;
+            listaCasos.insertAdjacentHTML('beforeend', casoHTML);
+          });
+        })
+        .catch(error => {
+          console.error('Error al cargar los casos:', error);
+          listaCasos.innerHTML = `<p>Error al cargar los casos: ${error.message}</p>`;
+        });
+    }
+
+    // Función para cargar voluntarios desde PHP
+    function cargarVoluntarios() {
+      fetch('/Pantry-amigo/MVC/Vista/HTML/obtener_voluntarios.php') // Solicitud al archivo PHP
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Error en la solicitud: ${response.statusText}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          listaVoluntarios.innerHTML = ''; // Limpiar el contenedor
+
+          if (data.error) {
+            console.error('Error desde el servidor:', data.error);
+            listaVoluntarios.innerHTML = `<p>Error: ${data.error}</p>`;
+            return;
+          }
+
+          data.forEach(voluntario => {
+            const voluntarioHTML = `
+              <div class="voluntario">
+                <p><strong>${voluntario.Vol_Nombre} ${voluntario.Vol_Apellido}</strong></p>
+                <p>Correo: ${voluntario.Vol_Correo}</p>
+                <p>Celular: ${voluntario.Vol_Celular}</p>
+                <p>Caso asignado: ${voluntario.Vol_Caso_Id}</p>
+              </div>
+            `;
+            listaVoluntarios.insertAdjacentHTML('beforeend', voluntarioHTML);
+          });
+        })
+        .catch(error => {
+          console.error('Error al cargar los voluntarios:', error);
+          listaVoluntarios.innerHTML = `<p>Error al cargar los voluntarios: ${error.message}</p>`;
+        });
+    }
 
     // Función para mostrar la sección de casos
     function mostrarCasos() {
@@ -158,6 +183,7 @@
       ayudaSection.classList.remove('seccion-activa');
       ayudaSection.classList.add('seccion-oculta');
       tituloSeccion.textContent = 'Casos';
+      cargarCasos(); // Cargar los casos dinámicamente
       resaltarOpcion(casosLink);
     }
 
@@ -170,7 +196,7 @@
       ayudaSection.classList.remove('seccion-activa');
       ayudaSection.classList.add('seccion-oculta');
       tituloSeccion.textContent = 'Voluntarios';
-      actualizarListaVoluntarios();
+      cargarVoluntarios(); // Cargar los voluntarios dinámicamente
       resaltarOpcion(voluntariosLink);
     }
 
@@ -195,29 +221,6 @@
       link.classList.add('active');
     }
 
-    // Función para actualizar la lista de voluntarios
-    function actualizarListaVoluntarios() {
-      listaVoluntarios.innerHTML = voluntarios
-        .map(
-          (voluntario) => `
-            <div class="voluntario">
-              <p><strong>${voluntario.nombre}</strong> - Registrado el ${voluntario.fechaRegistro}</p>
-            </div>
-          `
-        )
-        .join('');
-    }
-
-    // Función para agregar un nuevo voluntario (corregida)
-    function agregarVoluntario() {
-      const nuevoVoluntario = {
-        nombre: `Voluntario ${voluntarios.length + 1}`,
-        fechaRegistro: new Date().toISOString().split('T')[0],
-      };
-      voluntarios.push(nuevoVoluntario);
-      actualizarListaVoluntarios();
-    }
-
     // Event listeners
     perfilLink.addEventListener('click', () => {
       mostrarCasos(); // Cambia a la sección de casos (o la que corresponda)
@@ -230,7 +233,6 @@
       alert('Cerrando sesión...');
       // Aquí puedes agregar la lógica para cerrar sesión
     });
-    agregarVoluntarioButton.addEventListener('click', agregarVoluntario);
 
     // Mostrar la sección de casos por defecto
     mostrarCasos();
