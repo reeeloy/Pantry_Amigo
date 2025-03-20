@@ -2,7 +2,7 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-include '../Amigo/Pantry-Amigo/MVC/Modelo/conexionBDD.php';
+include '../../MVC/Modelo/conexionBDD.php';
 include '../../MVC/Modelo/inicioSesion.php';
 
 $user = new Usuario($conn);
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $login = $user->iniciarSesion($username, $password);
         if ($login) {
             $_SESSION['username'] = $username;
-            header("Location: ../vista/dashboard.php");
+            header("Location: ../Vista/HTML/Dashboard.php");
             exit();
         } else {
             $error = "Usuario o contraseña incorrectos";

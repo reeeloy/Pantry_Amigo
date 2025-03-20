@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $result = $user->registrarUsuario($username, $password, $tipo, $correo);
 
     if ($result === true) {
-        header("Location: ../vista/dashboard.php"); // Redirigir a la página principal
+        header("Location: ../Vista/HTML/index.php"); // Redirigir a la página principal
         exit();
     } else {
         echo "<p style='color:red;'>$result</p>";
