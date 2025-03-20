@@ -1,4 +1,4 @@
-<?php
+ <?php
 require_once '../Modelo/ConexionBD.php';
 class registrarDonante{
     public function regDonante(Donante $regDonante){
