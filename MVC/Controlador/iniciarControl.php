@@ -2,8 +2,8 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-include '../modelo/conexionBD.php';
-include '../modelo/inicioSesion.php';
+include '../Amigo/Pantry-Amigo/MVC/Modelo/conexionBDD.php';
+include '../../MVC/Modelo/inicioSesion.php';
 
 $user = new Usuario($conn);
 

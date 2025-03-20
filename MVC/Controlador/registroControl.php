@@ -2,8 +2,8 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-include '../modelo/conexionBD.php'; // Conexión a la base de datos
-include '../modelo/registro.php';
+include '../../MVC/Modelo/conexionBDD.php'; // Conexión a la base de datos
+include '../../MVC/Modelo/registro.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = trim($_POST['username']);

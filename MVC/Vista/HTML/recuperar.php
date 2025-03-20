@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recuperar Contraseña</title>
-    <link rel="stylesheet" href="../vista/css/style.css">
+    <link rel="stylesheet" href="../../../MVC/Vista/CSS/style.css">
 </head>
 <body>
     <div class="login-container">
