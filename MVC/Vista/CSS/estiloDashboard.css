@@ -190,7 +190,7 @@
   }
   
   /* Botón para agregar voluntarios */
-  #agregar-voluntario-button {
+  #agregar-voluntario-button  {
     background-color: #4CAF50;
     color: #fff;
     border: none;
@@ -199,7 +199,20 @@
     cursor: pointer;
     margin-top: 20px;
   }
+  #asignar-Horario-button  {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+  } 
   
+  #asignar-Horario-button{
+    background-color: #45a049;
+  }
+
   #agregar-voluntario-button:hover {
     background-color: #45a049;
   }
@@ -305,4 +318,5 @@
     margin-bottom: 10px;
     margin-left: 20px; /* Mueve el logo a la derecha */
   }
+
   

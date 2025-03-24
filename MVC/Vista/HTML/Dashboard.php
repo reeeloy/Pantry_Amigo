@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard Fundación</title>
   <link rel="stylesheet" href="/Pantry-amigo/MVC/Vista/CSS/estiloDashboard.css">
 </head>
+
 <body>
   <div class="dashboard">
     <!-- Sidebar -->
@@ -28,7 +30,7 @@
     <!-- Contenido Principal -->
     <main class="content">
       <header class="header">
-        <h2 id="titulo-seccion">Casos</h2>       
+        <h2 id="titulo-seccion">Casos</h2>
         <button class="new-case-button" id="nuevo-caso-button" onclick="window.location.href='RegistrarCaso.php'">Nuevo caso de donación</button>
       </header>
 
@@ -56,11 +58,24 @@
       <!-- Sección de Voluntarios (Oculta por defecto) -->
       <section id="voluntarios" class="seccion-oculta">
         <h3>Lista de Voluntarios</h3>
+
+        <!-- Barra de búsqueda para filtrar voluntarios por Caso ID -->
+        <div class="search-bar">
+          <input type="text" id="filtro-voluntario-id" placeholder="Ingrese el ID del caso">
+          <button id="btn-filtrar-voluntario">Filtrar</button>
+        </div>
+
         <div id="lista-voluntarios">
+
+
           <!-- Aquí se cargarán los voluntarios dinámicamente -->
         </div>
         <button id="agregar-voluntario-button" onclick="window.location.href='RegistrarVoluntario.php'">Agregar Voluntario </button>
+        
       </section>
+
+
+
 
       <!-- Sección de Ayuda (Oculta por defecto) -->
       <section id="ayuda" class="seccion-oculta">
@@ -179,6 +194,8 @@
       resaltarOpcion(casosLink);
     }
 
+    
+
     // Función para mostrar la sección de voluntarios
     function mostrarVoluntarios() {
       voluntariosSection.classList.remove('seccion-oculta');
@@ -191,6 +208,8 @@
       cargarVoluntarios();
       resaltarOpcion(voluntariosLink);
     }
+
+    
 
     // Función para mostrar la sección de ayuda
     function mostrarAyuda() {
@@ -233,6 +252,7 @@
                 <p>Correo: ${voluntario.Vol_Correo}</p>
                 <p>Celular: ${voluntario.Vol_Celular}</p>
                 <p>Caso asignado: ${voluntario.Vol_Caso_Id}</p>
+                <button id="asignar-Horario-button" onclick="window.location.href='RegistrarHorario.php?cedula=${voluntario.Vol_Cedula}'">Asignar horario </button>
               </div>
             `;
             listaVoluntarios.insertAdjacentHTML('beforeend', voluntarioHTML);
@@ -262,5 +282,7 @@
     // Mostrar la sección de casos por defecto
     mostrarCasosSeccion();
   </script>
+  
 </body>
+
 </html>
