@@ -319,4 +319,21 @@
     margin-left: 20px; /* Mueve el logo a la derecha */
   }
 
+  /* Botón para eliminar caso */
+.eliminar-caso {
+  background-color: #e74c3c;  /* Rojo vibrante */
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.eliminar-caso:hover {
+  background-color: #c0392b;
+}
+
   
