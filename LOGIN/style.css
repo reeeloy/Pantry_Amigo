@@ -1,0 +1,118 @@
+*
+{
+	font-family:arial;
+	text-align:center;
+	 margin: 0;
+	padding: 0;
+	
+}
+body
+{
+	top:50%;
+	left:50%;
+	position: absolute;
+	transform: translate(-50%,-50%);
+		background-image: linear-gradient(to right top, #ac2063, #9f2472, #8c2b80, #75338c, #583b94, #3e4292, #23468c, #004883, #00486e, #004355, #1d3c40, #2e3433);
+}
+
+.ub1
+{
+text-align:left;
+font-weight: bold;
+color:white;
+margin-bottom:0.5em;
+margin-top:0.5em;
+}
+#frmlogin{
+    left: 50px;
+}
+#frmregistrar{
+    left: 450px;
+}
+
+.caja1
+{
+	
+	background-color: rgba(0, 0, 0, .5);
+	width:26em;
+    height: 28em;
+    position: relative;
+    margin:auto;
+    padding: 0.1em;
+	border-radius: 1em;
+	color:black;
+	overflow: hidden; 
+}
+
+.grupo-entradas{
+    position: absolute;
+    width:20em;
+	height: auto;
+    transition: .5s;
+	
+}
+
+input, select
+{
+	width: 100%;
+    padding: 0.5em;
+	font-size:1em;
+	border-radius:5px;
+	border:1px solid black;
+	color:black;
+	text-align:left;
+	cursor:pointer;
+	
+}
+
+input::placeholder 
+{
+  color: #1E265D;
+  font-weight: bold;
+   opacity: 0.5; 
+}
+
+input[type=submit],input[type=reset]
+{
+margin-top: 1.5em;
+width:48%;
+text-align:center;
+background-color: #1958AD;
+color:white;
+
+}
+input[type=checkbox]
+{
+margin-left:0;
+width:10%;
+
+}
+
+.botondeintercambiar{
+    width: 240px;
+    margin: 35px auto;
+    position: relative;
+    box-shadow: 0 0 6px 0.5px black;
+    border-radius: 30px;
+}
+.botoncambiarcaja{
+    padding: 10px 30px;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    outline: none;
+    position: relative;
+	font-weight: bold;
+	font-size:16px;
+	color:white;
+}
+#btnvai{
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 130px;
+    height: 100%;
+	background-color: #1C62C1;
+    border-radius: 30px;
+	transition: .5s;
+}
