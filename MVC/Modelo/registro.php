@@ -1,4 +1,5 @@
 <?php
+require_once '../Modelo/ConexionBD.php';
 class Usuario {
     private $conn;
 

@@ -1,4 +1,5 @@
 <?php
+require_once '../Modelo/ConexionBD.php';
 require_once '../Modelo/Donante.php';
 require_once '../Modelo/registrarDonante.php';
 require_once '../Modelo/Caso.php';

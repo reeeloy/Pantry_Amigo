@@ -12,7 +12,7 @@
     <header>
         <nav class="navbar">
             <div class="nav-left">
-                <a href="../HTML/Home.html" class="nav-link1">INICIO</a>
+                <a href="../HTML/index.Php" class="nav-link1">INICIO</a>
                 <a href="../HTML/registro.html" class="nav-link2">REGISTRARSE</a>
             </div>
             <div class="nav-logo">
