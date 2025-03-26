@@ -4,7 +4,7 @@ class ConexionBD {
     private $result;
 
     public function abrir() {
-        $this->mysqli = new mysqli("localhost", "root", "", "Pantry-Amigo");
+        $this->mysqli = new mysqli("localhost", "root", "", "Pantry_Amigo");
 
         // Manejo de errores de conexión
         if ($this->mysqli->connect_error) {
@@ -68,7 +68,7 @@ class ConexionBD {
 
     public static function getConnection() {
         if (!self::$conn) {
-            self::$conn = new mysqli("localhost", "root", "", "Pantry-Amigo");
+            self::$conn = new mysqli("localhost", "root", "", "Pantry_Amigo");
             if (self::$conn->connect_error) {
                 die("❌ Error de conexión: " . self::$conn->connect_error);
             }
