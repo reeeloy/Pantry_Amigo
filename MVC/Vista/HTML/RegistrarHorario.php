@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Asignar Horario a Voluntario</title>
+    <link rel="stylesheet" href="../CSS/estiloRegHorarios.css">
 </head>
 <body>
     <h2>Asignar Horario a Voluntario</h2>

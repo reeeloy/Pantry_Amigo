@@ -1,4 +1,5 @@
 <?php
+require_once '../Modelo/ConexionBD.php';
 class Donante{
     private $Dona_Cedula;
     private $Dona_Nombre;

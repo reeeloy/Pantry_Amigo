@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$database = "Pantry_Amigo";
+$database = "Pantry-Amigo";
 
 $conn = new mysqli($servername, $username, $password, $database);
 
