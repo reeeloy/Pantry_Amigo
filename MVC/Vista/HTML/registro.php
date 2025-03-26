@@ -1,23 +1,22 @@
-<?php
-include 'conexionbd.php';
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nit = $_POST["nit"];
-    $nombre = $_POST["nombre"];
-    $apellido = $_POST["apellido"];
-    $telefono = $_POST["telefono"];
-    $email = $_POST["email"];
-    $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
-    $rol = $_POST["rol"]; // usuario, fundacion, administrador
-
-    $sql = "INSERT INTO usuarios (nit, nombre, apellido, direccion, telefono, email, password, rol)
-            VALUES ('$nit', '$nombre', '$apellido', '$telefono', '$email', '$password', '$rol')";
-
-    if ($conn->query($sql) === TRUE) {
-        echo "Registro exitoso.";
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
-}
-$conn->close();
-?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registro</title>
+    <link rel="stylesheet" href="../CSS/styleee.css">
+</head>
+<body>
+<div class="container">
+    <h1>Registrate</h1>
+    <form action="../../Controlador/usuarioControlador.php" method="POST">
+        <input type="text" name="username" placeholder="Usuario" required>
+        <input type="password" name="password" placeholder="Contraseña" required>
+        <input type="email" name="correo" placeholder="Correo" required>
+        <select name="tipo">
+            <option value="Usuario">Usuario</option>
+            <option value="Administrador">Administrador</option>
+        </select>
+        <button type="submit" name="register">Registrarse</button>
+    </form>
+    </div>
+</body>
+</html>

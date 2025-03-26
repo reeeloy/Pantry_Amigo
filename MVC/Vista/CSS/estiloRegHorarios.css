@@ -5,13 +5,20 @@ body {
     padding: 0;
     display: flex;
     justify-content: center;
+<<<<<<< HEAD
     gap: 60px;
+=======
+>>>>>>> de688beafd0da9e1ff9ef07de068bb9e3944ba4b
     align-items: center;
     height: 100vh;
 }
 .container {
     background: #fff;
+<<<<<<< HEAD
     padding: 40px;
+=======
+    padding: 20px;
+>>>>>>> de688beafd0da9e1ff9ef07de068bb9e3944ba4b
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 300px;

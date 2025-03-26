@@ -68,7 +68,7 @@ class ConexionBD {
 
     public static function getConnection() {
         if (!self::$conn) {
-            self::$conn = new mysqli("localhost", "root", "", "Pantry_Amigo");
+            self::$conn = new mysqli("localhost", "root", "", "Pantry-Amigo");
             if (self::$conn->connect_error) {
                 die("❌ Error de conexión: " . self::$conn->connect_error);
             }
@@ -77,7 +77,7 @@ class ConexionBD {
     }
     
     private $host = "localhost";
-    private $dbname = "Pantry_Amigo";
+    private $dbname = "Pantry-Amigo";
     private $usuario = "root";
     private $password = "";
     public $conexion;
@@ -90,5 +90,7 @@ class ConexionBD {
             die("Error de conexión: " . $e->getMessage());
         }
     }
+
+
 }
 ?>
