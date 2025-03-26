@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Casos de Donación</title>
   <link rel="stylesheet" href="/Pantry-amigo/MVC/Vista/CSS/estiloDashboard.css">
+  <link rel="stylesheet" href="../CSS/estilosCasosActivos.css">
 </head>
 
 <body>
