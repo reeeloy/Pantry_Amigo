@@ -4,7 +4,7 @@ class ConexionBD {
     private $result;
 
     public function abrir() {
-        $this->mysqli = new mysqli("localhost", "root", "", "Pantry-Amigo");
+        $this->mysqli = new mysqli("localhost", "root", "", "Pantry_Amigo");
 
         // Manejo de errores de conexión
         if ($this->mysqli->connect_error) {

@@ -10,7 +10,7 @@
 
 
 
-<form action="../../Controlador/Controlador.php" method="POST">
+<form action="/MVC/Controlador/Controlador.php" method="POST">
 <h2>Registro de Caso de Donación</h2>
 
 <label>ID del Caso:</label>
