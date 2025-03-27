@@ -77,7 +77,7 @@ class ConexionBD {
     }
     
     private $host = "localhost";
-    private $dbname = "Pantry-Amigo";
+    private $dbname = "Pantry_Amigo";
     private $usuario = "root";
     private $password = "";
     public $conexion;
