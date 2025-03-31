@@ -23,31 +23,6 @@ $mensaje = $_GET['mensaje'] ?? '';
 <div class="container">
     <h2>Registro y Actualización de Fundación</h2>
 
-   <?php
-require_once __DIR__ . '../../../../MVC/Controlador/fundacionControlador.php';
-$controller = new FundacionControlador();
-
-$fundacion = [];
-if (isset($_GET['Fund_Id'])) {
-    $fundacion = $controller->obtenerFundacion($_GET['Fund_Id']);
-}
-
-$mensaje = $_GET['mensaje'] ?? '';
-?>
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro y Actualización de Fundación</title>
-    <link rel="stylesheet" href="../../../MVC/Vista/CSS/stylee.css">
-</head>
-<body>
-
-<div class="container">
-    <h2>Registro y Actualización de Fundación</h2>
-
     <?php if ($mensaje) echo "<p style='color:green;'>$mensaje</p>"; ?>
 
     <div class="profile-section">
@@ -86,60 +61,6 @@ $mensaje = $_GET['mensaje'] ?? '';
             const reader = new FileReader();
             reader.onload = function(e) {
                 document.getElementById("profilePreview").src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        }
-    });
-
-    document.getElementById("fundacionForm").addEventListener("submit", function(event) {
-        let id = document.getElementById("Fund_Id").value;
-        let correo = document.getElementById("Fund_Correo").value;
-        let username = document.getElementById("Fund_Username").value;
-        let direccion = document.getElementById("Fund_Direccion").value;
-        let telefono = document.getElementById("Fund_Telefono").value;
-
-        if (id === "" || correo === "" || username === "" || direccion === "" || telefono === "") {
-            alert("Todos los campos son obligatorios");
-            event.preventDefault();
-            return;
-        }
-
-        let accion = document.activeElement.value;
-        if (accion === "registrar") {
-            alert("Fundación registrada correctamente");
-        } else if (accion === "actualizar") {
-            alert("Fundación actualizada correctamente");
-        }
-    });
-    document.addEventListener("DOMContentLoaded", function() {
-    const buttons = document.querySelectorAll("button");
-
-    buttons.forEach(button => {
-        button.addEventListener("mouseenter", function() {
-            this.style.transform = "scale(1.05)";
-        });
-
-        button.addEventListener("mouseleave", function() {
-            this.style.transform = "scale(1)";
-        });
-    });
-});
-</script>
-
-</body>
-</html>
-
-
-    </div>
-</div>
-
-<script>
-    document.getElementById("imageInput").addEventListener("change", function(event) {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById("previewImage").src = e.target.result;
             };
             reader.readAsDataURL(file);
         }
