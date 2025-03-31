@@ -2,7 +2,7 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-require_once '/xampp/htdocs/Pantry-Amigo/MVC/Modelo/ConexionBD.php';
+require_once '/xampp/htdocs/Pantry_Amigo/MVC/Modelo/ConexionBD.php';
 header('Content-Type: application/json');
 
 $conexion = new ConexionBD();

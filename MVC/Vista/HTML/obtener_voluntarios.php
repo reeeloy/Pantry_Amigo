@@ -3,7 +3,7 @@
     ini_set('display_errors', 0);
     header('Content-Type: application/json');
 // ...
-require_once '/xampp/htdocs/Pantry-Amigo/MVC/Modelo/ConexionBD.php'; // Asegúrate de que la ruta sea correcta
+require_once '/xampp/htdocs/Pantry_Amigo/MVC/Modelo/ConexionBD.php'; // Asegúrate de que la ruta sea correcta
 header('Content-Type: application/json'); // Devuelve JSON
 
 $conexion = new ConexionBD();

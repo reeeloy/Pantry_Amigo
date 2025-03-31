@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard Fundación</title>
-  <link rel="stylesheet" href="/Pantry-amigo/MVC/Vista/CSS/estiloDashboard.css">
+  <link rel="stylesheet" href="/Pantry_Amigo/MVC/Vista/CSS/estiloDashboard.css">
 </head>
 
 <body>
@@ -13,7 +13,7 @@
     <!-- Sidebar -->
     <aside class="sidebar">
       <div class="logo">
-        <img src="/Pantry-amigo/MVC/Vista/IMG/Logo_Pantry-amigo.png" alt="Logo de la empresa" class="logo-img">
+        <img src="/Pantry_Amigo/MVC/Vista/IMG/Logo_Pantry-amigo.png" alt="Logo de la empresa" class="logo-img">
       </div>
       <nav class="menu">
         <ul>
@@ -121,7 +121,7 @@
 
     // Función para cargar casos desde PHP
     function cargarCasos() {
-      fetch('/Pantry-amigo/MVC/Vista/HTML/obtener_casos.php')
+      fetch('/Pantry_Amigo/MVC/Vista/HTML/obtener_casos.php')
         .then(response => {
           if (!response.ok) {
             throw new Error(`Error en la solicitud: ${response.statusText}`);
@@ -186,7 +186,7 @@
 
     // Función para eliminar un caso
     function eliminarCaso(casoId) {
-      fetch(`/Pantry-amigo/MVC/Vista/HTML/eliminar_caso.php?caso_id=${encodeURIComponent(casoId)}`)
+      fetch(`/Pantry_Amigo/MVC/Vista/HTML/eliminar_caso.php?caso_id=${encodeURIComponent(casoId)}`)
         .then(response => response.json())
         .then(data => {
           if (data.success) {
@@ -269,7 +269,7 @@
 
     // Función para cargar voluntarios desde PHP
     function cargarVoluntarios() {
-      fetch('/Pantry-amigo/MVC/Vista/HTML/obtener_voluntarios.php')
+      fetch('/Pantry_Amigo/MVC/Vista/HTML/obtener_voluntarios.php')
         .then(response => {
           if (!response.ok) {
             throw new Error(`Error en la solicitud: ${response.statusText}`);
