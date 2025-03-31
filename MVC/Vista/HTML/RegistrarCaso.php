@@ -34,9 +34,7 @@
     <label>ID de Fundación:</label>
     <input type="number" name="casoFundacion" required><br>
 
-    <label> ¿Este caso necesita voluntarios?
-    <input type="checkbox" name="casoAceptaVoluntarios" value="1">
-    </label>
+    
 
     <label>Monto Meta:</label>
     <input type="text" name="casoMontoMeta" required><br>

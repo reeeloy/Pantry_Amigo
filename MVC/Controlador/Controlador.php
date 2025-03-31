@@ -27,7 +27,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $perCliente->regDonante($personal);
         }
 
-        // REGISTRAR CASO DE DONACIÓN
+
+        // REGISTRAR CASO DE DONACIÓN DINERO
+        if (isset($_POST['registrarCasoDin'])) {
+            $casoNombre = $_POST['casoNombre'];
+            $casoDescripcion = $_POST['casoDescripcion'];
+            $montoMeta =$_POST['casoMontoMeta'];
+            $casoMontoRecaudado = 0; 
+            $casoFechaInicio = $_POST['casoFechaInicio'];
+            $casoFechaFin = $_POST['casoFechaFin'];
+            $casoEstado = $_POST['casoEstado'];
+            $casoImagen = $_FILES['casoImagen']['name'] ?? null;
+            $casoVoluntariado = isset($_POST['casoVoluntariado']) ? 1 : 0;
+            $fundacionId = $_POST['casoFundacion'];
+            $categoriaNombre =$_POST['casoCategoria'];
+
+            $caso = new Caso();
+            if ($caso->registrarCasoDinero($casoNombre, $casoDescripcion, $montoMeta, $casoMontoRecaudado, $casoFechaInicio, $casoFechaFin, $casoEstado, $casoImagen = null, $casoVoluntariado, $fundacionId, $categoriaNombre)) {
+                echo "<script>alert('Caso registrado exitosamente');</script>";
+            } else {
+                echo "<script>alert('Error al registrar el caso');</script>";
+            }
+        }
+
+        // REGISTRAR CASO DE DONACIÓN recursos ediat
         if (isset($_POST['registrarCaso'])) {
             $casoId = $_POST['casoId'];
             $casoNombre = $_POST['casoNombre'];

@@ -46,7 +46,7 @@ CREATE TABLE  Tbl_Casos_Dinero (
     Caso_Imagen VARCHAR(255) NULL,
     Caso_Voluntariado TINYINT(1) DEFAULT 0,
     Caso_Fund_Id INT NOT NULL,
-    Caso_Cat_Nombre VARCHAR(50) NOT NULL,
+    Caso_Cat_Nombre ENUM('Salud', 'Educación', 'Emergencias', 'Alimentación', 'Tecnología', 'Medio Ambiente') NOT NULL,
     PRIMARY KEY (Caso_Id),
     FOREIGN KEY (Caso_Fund_Id) REFERENCES Tbl_Fundaciones(Fund_Id),
     FOREIGN KEY (Caso_Cat_Nombre) REFERENCES Tbl_Categorias(Cat_Nombre)
@@ -64,14 +64,15 @@ CREATE TABLE  Tbl_Casos_Recursos (
     Caso_Imagen VARCHAR(255) NULL,
     Caso_Voluntariado TINYINT(1) DEFAULT 0,
     Caso_Fund_Id INT NOT NULL,
-    Caso_Cat_Nombre VARCHAR(50) NOT NULL,
+    Caso_Cat_Nombre ENUM('Salud', 'Educación', 'Emergencias', 'Alimentación', 'Tecnología', 'Medio Ambiente') NOT NULL,
     PRIMARY KEY (Caso_Id),
     FOREIGN KEY (Caso_Fund_Id) REFERENCES Tbl_Fundaciones(Fund_Id),
     FOREIGN KEY (Caso_Cat_Nombre) REFERENCES Tbl_Categorias(Cat_Nombre)
 );
 
+
 CREATE TABLE Tbl_Categorias (
-    Cat_Nombre VARCHAR(50) NOT NULL,
+    Cat_Nombre ENUM('Salud', 'Educación', 'Emergencias', 'Alimentación', 'Tecnología', 'Medio Ambiente') NOT NULL,
     PRIMARY KEY (Cat_Nombre)
 );
 
@@ -87,7 +88,7 @@ CREATE TABLE Tbl_Donacion_Recursos (
     Rec_Disponibilidad ENUM('Inmediata', 'A programar') NOT NULL,
     Rec_Fecha_Caducidad DATE NULL,
     Rec_Caso_Id INT NOT NULL,
-    Rec_Cat_Nombre VARCHAR(50) NOT NULL,
+    Rec_Cat_Nombre ENUM('Salud', 'Educación', 'Emergencias', 'Alimentación', 'Tecnología', 'Medio Ambiente') NOT NULL,
     PRIMARY KEY (Rec_Id),
     FOREIGN KEY (Rec_Caso_Id) REFERENCES Tbl_Casos_Recursos(Caso_Id),
     FOREIGN KEY (Rec_Cat_Nombre) REFERENCES Tbl_Categorias(Cat_Nombre)
@@ -99,9 +100,9 @@ CREATE TABLE Tbl_Voluntarios (
     Vol_Apellido VARCHAR(40) NOT NULL,
     Vol_Correo VARCHAR(40) NOT NULL,
     Vol_Celular INT(10) NOT NULL,
-    Vol_Caso_Id VARCHAR(15) NOT NULL,
+Vol_Caso_Id INT NOT NULL,
+Vol_Caso_Tipo ENUM('Dinero', 'Recursos') NOT NULL,
     PRIMARY KEY (Vol_Cedula),
-    FOREIGN KEY (Vol_Caso_Id) REFERENCES Tbl_Caso_Donacion(Caso_Id)
 );
 
 CREATE TABLE Tbl_Horarios_Voluntarios (
@@ -124,8 +125,10 @@ CREATE TABLE Tbl_Donacion_Dinero (
     Don_Metodo_Pago VARCHAR(40) NOT NULL,
     Don_Fecha DATE NOT NULL,
     Don_Caso_Id INT NOT NULL,
+ Don_Cat_Nombre ENUM('Salud', 'Educación', 'Emergencias', 'Alimentación', 'Tecnología', 'Medio Ambiente') NOT NULL,
     PRIMARY KEY (Don_Id),
     FOREIGN KEY (Don_Caso_Id) REFERENCES Tbl_Casos_Dinero(Caso_Id)
+FOREIGN KEY (Don_Cat_Nombre) REFERENCES Tbl_Categorias(Cat_Nombre)
 );
 
 
