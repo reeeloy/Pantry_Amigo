@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pantry Amigo</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="../CSS/fundacion.css">
+    <link rel="stylesheet" href="../CSS/Revisarfund.css">
 </head>
 <body>
 
+    <!-- Encabezado -->
     <header>
         <div class="logito">
             <img src="../IMG/Logo.png" alt="Pantry Amigo Logo">

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fundaciones aliadas</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="../MVC/Vista/CSS/fundacion.css">
+    <link rel="stylesheet" href="../CSS/fundacion.css">
 </head>
 
 <body>
@@ -50,19 +50,19 @@
                                                 <img width="300px" src="https://www.asesoriamadridgesys.com/wp-content/uploads/Las-donaciones.jpg" alt="">
                         <h3>Fundacion/XXXX</h3>
                         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quidem dignissimos dolores fugit! Repellat rem in expedita asperiores voluptate sunt quas?</p>
-                        <a class="btn btn_post_destacado" href="RevisarFundacion.html">Revisar</a>
+                        <a class="btn btn_post_destacado" href="../HTML/RevisarFundacion.php">Revisar</a>
                     </div>
                                     <div class="swiper-slide featured_posts__item">
                                                 <img width="300px" src="https://www.asesoriamadridgesys.com/wp-content/uploads/Las-donaciones.jpg" alt="">
                         <h3>Fundacion/XXXXX</h3>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam ab repellat molestiae illum rerum nihil praesentium voluptatibus mollitia placeat corrupti?</p>
-                        <a class="btn btn_post_destacado" href="RevisarFundacion.html">Revisar</a>
+                        <a class="btn btn_post_destacado" href="../HTML/RevisarFundacion.php">Revisar</a>
                     </div>
                                     <div class="swiper-slide featured_posts__item">
                                                 <img width="300px" src="https://www.asesoriamadridgesys.com/wp-content/uploads/Las-donaciones.jpg" alt="">
                         <h3>Fundacion/XXXXX</h3>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, inventore tempore ipsam earum quo consequuntur provident impedit! Odio, accusantium quaerat?</p>
-                        <a class="btn btn_post_destacado" href="RevisarFundacion.html">Revisar</a>
+                        <a class="btn btn_post_destacado" href="../HTML/RevisarFundacion.php">Revisar</a>
                     </div>
                                 </div>
                 <div class="swiper-pagination"></div>
@@ -78,7 +78,7 @@
                         <div class="date-close">Convocatoria Abierta</div>
                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad numquam reiciendis similique aut ea culpa veritatis ut expedita eveniet deserunt adipisci porro velit repellendus, maiores accusantium fuga ipsum iste cum?Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ducimus, corrupti.
                        </p>                       
-                       <a class="btn btn_post_destacado" href="CasoDonacion.html">Ingresar</a>                   </div>
+                       <a class="btn btn_post_destacado" href="../HTML/CasoDonacion.php">Ingresar</a>                   </div>
                 </div>
                 <div data-wow-duration="2.5s" class="img-rrt-pr order-2-991 wow bounceInRight">
                     <img src="https://recol.pe/images/2021/07/26/1200x630_utiles_escolares_donaciones.jpg" alt="">
@@ -99,7 +99,7 @@
                     <div class="date-close">Convocatoria Abierta</div>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum qui velit ut soluta praesentium esse similique nihil eveniet, reiciendis quidem.</p>
                     <div class="focus"></div>
-                    <a class="btn btn_post_destacado" href="CasoDonacion.html">Ingresar</a>
+                    <a class="btn btn_post_destacado" href="../HTML/CasoDonacion.php">Ingresar</a>
                 </div>
             </div>
             <div data-wow-duration="2.5s" class="img-rrt-pr order-2-991 wow bounceInRight">
@@ -119,7 +119,7 @@
                     <div class="date-close">Convocatoria Abierta</div>
                     <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolor saepe possimus officia perspiciatis recusandae similique vel id est quia consectetur?</p>                                   
                     <div class="focus"></div>
-                    <a class="btn btn_post_destacado" href="CasoDonacion.html">Ingresar</a>
+                    <a class="btn btn_post_destacado" href="../HTML/CasoDonacion.php">Ingresar</a>
                 </div>
             </div>
             <div data-wow-duration="2.5s" class="img-rrt-pr order-2-991 wow bounceInRight">
@@ -138,7 +138,7 @@
                     <div class="date-close">Convocatoria Abierta</div>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus soluta ipsa dignissimos laborum deleniti tenetur praesentium autem, corporis quo aut!</p>                                  
                     <div class="focus"></div>
-                    <a class="btn btn_post_destacado" href="CasoDonacion.html">Ingresar</a>
+                    <a class="btn btn_post_destacado" href="../HTML/CasoDonacion.php">Ingresar</a>
                 </div>
             </div>
             <div data-wow-duration="2.5s" class="img-rrt-pr order-2-991 wow bounceInRight">
@@ -157,7 +157,7 @@
                     <div class="date-close">Convocatoria Abierta</div>
                     <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Explicabo soluta illo labore aliquid perspiciatis est id odit enim ratione accusamus.</p>                                    
                     <div class="focus"></div>
-                    <a class="btn btn_post_destacado" href="CasoDonacion.html">Ingresar</a>
+                    <a class="btn btn_post_destacado" href="../HTML/CasoDonacion.php">Ingresar</a>
                 </div>
             </div>
             <div data-wow-duration="2.5s" class="img-rrt-pr order-2-991 wow bounceInRight">
@@ -176,7 +176,7 @@
                     <div class="date-close">Convocatoria Abierta</div>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus dolor corrupti et porro aperiam aut voluptates rerum voluptatibus, natus fugit?</p>                                   
                     <div class="focus"></div>
-                    <a class="btn btn_post_destacado" href="CasoDonacion.html">Ingresar</a>
+                    <a class="btn btn_post_destacado" href="../HTML/CasoDonacion.php">Ingresar</a>
                 </div>
             </div>
             <div data-wow-duration="2.5s" class="img-rrt-pr order-2-991 wow bounceInRight">
