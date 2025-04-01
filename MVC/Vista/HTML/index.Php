@@ -50,9 +50,9 @@
         </div>
         <div class="menu-item">PARTICIPAR
           <ul class="submenu">
-            <li>Casos</li>
+            <li><button><a href="../HTML/ConsultarFundacion.php"></a>Casos</a></button></li>
             <li>Donar</li>
-            <li>Fundaciones</li>
+            <li><button><a href="../HTML/ConsultarFundacion.php"></a>Fundaciones</button></li>
             <li>Voluntariados</li>
           </ul>
         </div>
@@ -88,7 +88,7 @@
   <!-- Opciones -->
   <div class="opciones">
     <div class="circulo">
-      <button class="option-button-donar material-symbols-outlined">loyalty </button>
+      <button class="option-button-donar material-symbols-outlined" href=RevisarFundacion.php>loyalty </button>
     </div>
     <div class="circle">
       <button class="option-button-fund material-symbols-rounded">crowdsource</button>
