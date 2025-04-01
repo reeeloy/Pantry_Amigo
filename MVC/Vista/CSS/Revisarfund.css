@@ -1,0 +1,258 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: white;
+    border-bottom: 2px solid #ddd;
+}
+
+.logito {
+    display: flex;
+    align-items: center;
+}
+
+.logito img {
+    width: 50px;
+    margin-right: 10px;
+}
+
+.navbar nav {
+    display: flex;
+    align-items: center;
+}
+
+.navbar {
+text-decoration: none;
+color: black;
+margin-right: 15px;
+font-weight: bold;
+}
+
+.search-bar {
+padding: 5px;
+border-radius: 20px;
+border: 1px solid #ccc;
+width: 200px;
+}
+
+.help-icon img {
+width: 30px;
+}
+
+
+/* Barra de navegación */
+header {
+    background-color: #f8f8f8;
+    padding: 10px;
+    text-align: center;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+nav input {
+    padding: 5px;
+    width: 200px;
+}
+
+nav button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* Sección de perfil */
+.profile {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.profile img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+.profile h1 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Información */
+.info {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.text {
+    width: 50%;
+}
+
+.text h2 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.text p {
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.details {
+    text-align: right;
+    width: 30%;
+}
+
+.details p {
+    margin-bottom: 10px;
+}
+
+.follow-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.follow-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Casos activos */
+.cases {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.cases h2 {
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.cases-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.case img {
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    background-color: #ddd;
+}
+
+/*CASOS*/
+
+.featured_posts {
+    max-width: 1200px;
+    margin: auto;
+    text-align: center;
+}
+
+.featured_posts h2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #a8e60b;
+    margin-bottom: 20px;
+}
+
+/* Estilos del contenedor Swiper */
+.swiper {
+    width: 100%;
+    padding: 20px 0;
+}
+
+.swiper-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+/* Estilos de cada publicación */
+.featured_posts__item {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: left;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.featured_posts__item:hover {
+    transform: scale(1.05);
+}
+
+/* Imágenes */
+.featured_posts__item img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+/* Títulos */
+.featured_posts__item h3 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Párrafos */
+.featured_posts__item p {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.5;
+}
+
+/* Botón */
+.btn_post_destacado {
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #a8e60b;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.btn_post_destacado:hover {
+    background: #a8e60b;
+}
+
+/* Estilos de los controles de Swiper */
+.swiper-pagination {
+    position: relative;
+    margin-top: 15px;
+}
+
+.swiper-pagination-bullet {
+    background: #a8e60b;
+    opacity: 0.7;
+}
+
+.swiper-pagination-bullet-active {
+    background: #a8e60b;
+    opacity: 1;
+}
