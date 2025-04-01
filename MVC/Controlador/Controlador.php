@@ -51,19 +51,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // REGISTRAR CASO DE DONACIÓN recursos ediat
-        if (isset($_POST['registrarCaso'])) {
-            $casoId = $_POST['casoId'];
+        if (isset($_POST['registrarCasoRec'])) {
             $casoNombre = $_POST['casoNombre'];
             $casoDescripcion = $_POST['casoDescripcion'];
             $casoFechaInicio = $_POST['casoFechaInicio'];
             $casoFechaFin = $_POST['casoFechaFin'];
             $casoEstado = $_POST['casoEstado'];
-            $casoFundacion = $_POST['casoFundacion'];
-            $casoAceptaVoluntarios = isset($_POST['casoAceptaVoluntarios']) ? 1 : 0;
-            $casoMontoMeta = $_POST['casoMontoMeta'];
+            $casoPuntoRec = $_POST['casoPuntoRec'];
+            $casoImagen = $_FILES['casoImagen']['name'] ?? null;
+            $casoVoluntariado = isset($_POST['casoVoluntariado']) ? 1 : 0;
+            $fundacionId = $_POST['casoFundacion'];
+            $categoriaNombre =$_POST['casoCategoria'];
 
             $caso = new Caso();
-            if ($caso->registrarCaso($casoId, $casoNombre, $casoDescripcion, $casoFechaInicio, $casoFechaFin, $casoEstado, $casoFundacion, $casoAceptaVoluntarios, $casoMontoMeta)) {
+            if ($caso->registrarCasoRecursos($casoNombre, $casoDescripcion, $casoFechaInicio, $casoFechaFin, $casoEstado, $casoPuntoRec, $casoImagen = null, $casoVoluntariado, $fundacionId, $categoriaNombre)) {
                 echo "<script>alert('Caso registrado exitosamente');</script>";
             } else {
                 echo "<script>alert('Error al registrar el caso');</script>";

@@ -34,12 +34,21 @@ class Caso {
     }
     
 
-    //reg casos rec
-    public function registrarCaso($id, $nombre, $descripcion, $fechaInicio, $fechaFin, $estado, $fundacionId, $aceptaVoluntarios, $montoMeta) {
+    //Registrar Caso Recurso
+    public function registrarCasoRecursos($nombre, $descripcion, $fechaInicio, $fechaFin, $estado, $puntoRec, $imagen, $voluntariado, $fundacionId, $categoriaNombre) {
         if ($this->conexion->abrir()) {
-            $sql = "INSERT INTO tbl_caso_donacion (Caso_Id, Caso_Nombre_Caso, Caso_Descripcion, Caso_Fecha_Inicio, Caso_Fecha_Fin, Caso_Estado, Caso_Fund_Id, Caso_Acep_Vol, Caso_Monto_Meta) 
-                    VALUES ('$id', '$nombre', '$descripcion', '$fechaInicio', '$fechaFin', '$estado', $fundacionId, $aceptaVoluntarios, '$montoMeta')";
-                    
+            // Si no se proporciona una imagen, se guarda como NULL en la base de datos
+            $imagenSQL = $imagen ? "'$imagen'" : "NULL";
+    
+            $sql = "INSERT INTO tbl_casos_recursos (
+                        Caso_Nombre, Caso_Descripcion, Caso_Fecha_Inicio, Caso_Fecha_Fin, Caso_Estado, Caso_Punto_Recoleccion, Caso_Imagen, 
+                        Caso_Voluntariado, Caso_Fund_Id, Caso_Cat_Nombre
+                    ) 
+                    VALUES (
+                        '$nombre', '$descripcion','$fechaInicio', '$fechaFin', '$estado', '$puntoRec', $imagenSQL, 
+                        '$voluntariado', '$fundacionId', '$categoriaNombre'
+                    )";
+    
             $this->conexion->consulta($sql);
             $filasAfectadas = $this->conexion->obtenerFilasAfectadas();
             $this->conexion->cerrar();
@@ -47,6 +56,8 @@ class Caso {
         }
         return false;
     }
+
+   
 
     // 🔍 Obtener todos los casos activos
     public function obtenerCasosActivos() {
