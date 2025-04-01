@@ -58,9 +58,9 @@
       <!-- Sección de Voluntarios (Oculta por defecto) -->
       <section id="voluntarios" class="seccion-oculta">
         <h3>Lista de Voluntarios</h3>
-        <!-- Barra de búsqueda para filtrar voluntarios por Caso ID -->
+        <!-- Barra de búsqueda para filtrar voluntarios por Cédula -->
         <div class="search-bar">
-          <input type="text" id="filtro-voluntario-id" placeholder="Ingrese el ID del caso">
+          <input type="text" id="filtro-voluntario-cedula" placeholder="Ingrese la Cédula del voluntario">
           <button id="btn-filtrar-voluntario">Filtrar</button>
         </div>
         <div id="lista-voluntarios">
@@ -116,8 +116,11 @@
     const listaVoluntarios = document.getElementById('lista-voluntarios');
     const filtroInput = document.getElementById('filtro-id');
     const btnFiltrar = document.getElementById('btn-filtrar');
+    const filtroVoluntarioInput = document.getElementById('filtro-voluntario-cedula');
+    const btnFiltrarVoluntario = document.getElementById('btn-filtrar-voluntario');
 
     let casosData = []; // Variable para almacenar los casos cargados
+    let voluntariosData = []; // Variable para almacenar los voluntarios cargados
 
     // Función para cargar casos desde PHP
     function cargarCasos() {
@@ -277,28 +280,53 @@
           return response.json();
         })
         .then(data => {
-          listaVoluntarios.innerHTML = ''; // Limpiar el contenedor
           if (data.error) {
             listaVoluntarios.innerHTML = `<p>Error: ${data.error}</p>`;
             return;
           }
-          data.forEach(voluntario => {
-            const voluntarioHTML = `
-              <div class="voluntario">
-                <p><strong>${voluntario.Vol_Nombre} ${voluntario.Vol_Apellido}</strong></p>
-                <p>Correo: ${voluntario.Vol_Correo}</p>
-                <p>Celular: ${voluntario.Vol_Celular}</p>
-                <p>Caso asignado: ${voluntario.Vol_Caso_Id}</p>
-                <button id="asignar-Horario-button" onclick="window.location.href='RegistrarHorario.php?cedula=${voluntario.Vol_Cedula}'">Asignar horario</button>
-              </div>
-            `;
-            listaVoluntarios.insertAdjacentHTML('beforeend', voluntarioHTML);
-          });
+          voluntariosData = data; // Almacenar la data original
+          mostrarVoluntariosLista(voluntariosData);
         })
         .catch(error => {
           listaVoluntarios.innerHTML = `<p>Error al cargar los voluntarios: ${error.message}</p>`;
         });
     }
+
+    // Función para mostrar la lista de voluntarios
+    function mostrarVoluntariosLista(voluntarios) {
+      listaVoluntarios.innerHTML = ''; // Limpiar el contenedor
+      voluntarios.forEach(voluntario => {
+        const voluntarioHTML = `
+          <div class="voluntario">
+            <p><strong>${voluntario.Vol_Nombre} ${voluntario.Vol_Apellido}</strong></p>
+            <p>Cédula: ${voluntario.Vol_Cedula}</p>
+            <p>Correo: ${voluntario.Vol_Correo}</p>
+            <p>Celular: ${voluntario.Vol_Celular}</p>
+            <p>Caso asignado: ${voluntario.Vol_Caso_Id}</p>
+            <button id="asignar-Horario-button" onclick="window.location.href='RegistrarHorario.php?cedula=${voluntario.Vol_Cedula}'">Asignar horario</button>
+          </div>
+        `;
+        listaVoluntarios.insertAdjacentHTML('beforeend', voluntarioHTML);
+      });
+    }
+
+    // Función para filtrar voluntarios por cédula
+    function filtrarVoluntariosPorCedula() {
+      const filtro = filtroVoluntarioInput.value.trim();
+      if (filtro === '') {
+        mostrarVoluntariosLista(voluntariosData);
+        return;
+      }
+      
+      const voluntariosFiltrados = voluntariosData.filter(voluntario => 
+        String(voluntario.Vol_Cedula).includes(filtro)
+      );
+      
+      mostrarVoluntariosLista(voluntariosFiltrados);
+    }
+
+    // Event listener para el botón de filtrar voluntarios
+    btnFiltrarVoluntario.addEventListener('click', filtrarVoluntariosPorCedula);
 
     // Mostrar la sección de casos por defecto
     mostrarCasosSeccion();
