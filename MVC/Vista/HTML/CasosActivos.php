@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Casos de Donación</title>
-  <link rel="stylesheet" href="/Pantry-amigo/MVC/Vista/CSS/estiloDashboard.css">
+  <link rel="stylesheet" href="/Pantry_Amigo/MVC/Vista/CSS/estiloDashboard.css">
   <link rel="stylesheet" href="../CSS/estilosCasosActivos.css">
 </head>
-
 <body>
   <div class="dashboard">
     <main class="content">
       <header class="header">
         <h2>Casos de Donación</h2>
       </header>
+
+      <!-- Botones para seleccionar el tipo de caso -->
+      <div class="botones">
+        <button onclick="cargarCasos('dinero')">Casos de Dinero</button>
+        <button onclick="cargarCasos('recursos')">Casos de Recursos</button>
+      </div>
 
       <!-- Sección de Casos -->
       <section id="casos" class="seccion-activa">
@@ -26,14 +30,22 @@
   </div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      cargarCasos();
-    });
+    function cargarCasos(tipo) {
+      let url = tipo === 'dinero' 
+        ? '/Pantry_Amigo/MVC/Vista/HTML/ObtenerCasosDinero.php' 
+        : '/Pantry_Amigo/MVC/Vista/HTML/ObtenerCasosRecursos.php';
 
-    function cargarCasos() {
-      fetch('/Pantry_Amigo/MVC/Vista/HTML/ObtenerCasosDinero.php')
-        .then(response => response.json())
+      fetch(url)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Error HTTP: ${response.status}`);
+          }
+          return response.json();
+        })
         .then(data => {
+          if (!Array.isArray(data)) {
+            throw new Error('Respuesta no válida del servidor');
+          }
           const listaCasos = document.getElementById('lista-casos');
           listaCasos.innerHTML = '';
           data.forEach(caso => {
@@ -42,8 +54,7 @@
                 <h3>${caso.Caso_Nombre}</h3>
                 <p><strong>${caso.Caso_Descripcion}</strong></p>
                 <p>ID: ${caso.Caso_Id}</p>
-                <p>Estado: ${caso.Caso_Estado}</p>
-                <button id="DetallesCaso" onclick="window.location.href='Detalles.php?ID=${caso.Caso_Id}'">Ver detalles </button>
+                <button onclick="window.location.href='Detalles.php?ID=${caso.Caso_Id}'">Ver detalles</button>
               </div>
             `;
             listaCasos.insertAdjacentHTML('beforeend', casoHTML);
@@ -54,7 +65,10 @@
           document.getElementById('lista-casos').innerHTML = '<p>Error al cargar los casos.</p>';
         });
     }
+
+    // Cargar casos de dinero por defecto al abrir la página
+    document.addEventListener("DOMContentLoaded", () => cargarCasos('dinero'));
   </script>
 </body>
-
 </html>
+

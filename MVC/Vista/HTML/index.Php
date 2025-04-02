@@ -214,7 +214,7 @@
     document.addEventListener("DOMContentLoaded", function() {
       // Asigna eventos a cada botón de ícono
       document.querySelector(".option-button-donar").addEventListener("click", function() {
-        window.location.href = "ConsultarCasos.php"; // Redirige a la página de donaciones
+        window.location.href = "CasosActivos.php"; // Redirige a la página de donaciones
       });
 
       document.querySelector(".option-button-fund").addEventListener("click", function() {
