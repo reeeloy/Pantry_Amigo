@@ -1,5 +1,5 @@
 <?php
-require_once '../Modelo/ConexionBD.php';
+require_once 'ConexionBD.php';
 
 class Caso {
     private $conexion;
@@ -59,10 +59,11 @@ class Caso {
 
    
 
-    // 🔍 Obtener todos los casos activos
-    public function obtenerCasosActivos() {
+    // 🔍 Obtener todos los casos activos dinero
+    public function obtenerCasosActivosDinero() {
         if ($this->conexion->abrir()) {
-            $sql = "SELECT Caso_Id, Caso_Nombre_Caso, Caso_Descripcion FROM tbl_caso_donacion WHERE Caso_Estado = 'activo'";
+            
+            $sql = "SELECT Caso_Id, Caso_Nombre, Caso_Descripcion FROM tbl_casos_dinero WHERE Caso_Estado = 'Activo'";
             $resultado = $this->conexion->consulta($sql);
             $this->conexion->cerrar();
             return $resultado;
@@ -70,21 +71,14 @@ class Caso {
         return null;
     }
 
-
-    public function obtenerCasoPorId($id) {
+    // 🔍 Obtener todos los casos activos dinero
+    public function obtenerCasosActivosRecursos() {
         if ($this->conexion->abrir()) {
-            $sql = "SELECT * FROM tbl_caso_donacion WHERE Caso_Id = '$id'";
+            
+            $sql = "SELECT Caso_Id, Caso_Nombre, Caso_Descripcion FROM tbl_casos_recursos WHERE Caso_Estado = 'Activo'";
             $resultado = $this->conexion->consulta($sql);
-            
-            // Verifica si la consulta devolvió un resultado válido
-            if ($resultado && $resultado instanceof mysqli_result) {
-                $caso = $resultado->fetch_assoc();
-            } else {
-                $caso = null;
-            }
-            
             $this->conexion->cerrar();
-            return $caso;
+            return $resultado;
         }
         return null;
     }

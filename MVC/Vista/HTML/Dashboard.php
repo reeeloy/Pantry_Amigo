@@ -31,11 +31,15 @@
     <main class="content">
       <header class="header">
         <h2 id="titulo-seccion">Casos</h2>
-        <button class="new-case-button" id="nuevo-caso-button" onclick="window.location.href='RegistrarCaso.php'">Nuevo caso de donación</button>
+        
       </header>
-
+      <div class="crear-casos">
+          <button class="new-case-button" id="nuevo-caso-button" onclick="window.location.href='RegistrarCasoDinero.php'">Nuevo caso de donación Dinero</button>
+          <button class="new-case-button" id="nuevo-caso-button" onclick="window.location.href='RegistrarCasoRecursos.php'">Nuevo caso de donación Recursos</button>
+        </div>
       <!-- Sección de Casos (Visible por defecto) -->
       <section id="casos" class="seccion-activa">
+        
         <!-- Barra de búsqueda para filtrar por ID -->
         <div class="search-bar">
           <input type="text" id="filtro-id" placeholder="Ingrese el ID del caso">
@@ -317,11 +321,11 @@
         mostrarVoluntariosLista(voluntariosData);
         return;
       }
-      
-      const voluntariosFiltrados = voluntariosData.filter(voluntario => 
+
+      const voluntariosFiltrados = voluntariosData.filter(voluntario =>
         String(voluntario.Vol_Cedula).includes(filtro)
       );
-      
+
       mostrarVoluntariosLista(voluntariosFiltrados);
     }
 
@@ -331,6 +335,7 @@
     // Mostrar la sección de casos por defecto
     mostrarCasosSeccion();
   </script>
-  
+
 </body>
+
 </html>

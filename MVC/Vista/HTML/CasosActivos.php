@@ -31,7 +31,7 @@
     });
 
     function cargarCasos() {
-      fetch('/Pantry-amigo/MVC/Vista/HTML/obtener_casos.php')
+      fetch('/Pantry_Amigo/MVC/Vista/HTML/ObtenerCasosDinero.php')
         .then(response => response.json())
         .then(data => {
           const listaCasos = document.getElementById('lista-casos');
@@ -39,12 +39,10 @@
           data.forEach(caso => {
             const casoHTML = `
               <div class="case">
-                <h3>${caso.Caso_Nombre_Caso}</h3>
+                <h3>${caso.Caso_Nombre}</h3>
                 <p><strong>${caso.Caso_Descripcion}</strong></p>
                 <p>ID: ${caso.Caso_Id}</p>
-                <p>Estado: ${caso.Caso_Estado == 1 ? 'Activo' : 'Inactivo'}</p>
-                <p>Fecha de inicio: ${caso.Caso_Fecha_Inicio}</p>
-                <p>Fecha de fin: ${caso.Caso_Fecha_Fin}</p>
+                <p>Estado: ${caso.Caso_Estado}</p>
                 <button id="DetallesCaso" onclick="window.location.href='Detalles.php?ID=${caso.Caso_Id}'">Ver detalles </button>
               </div>
             `;
