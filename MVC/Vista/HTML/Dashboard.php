@@ -6,6 +6,72 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard Fundación</title>
   <link rel="stylesheet" href="/Pantry_Amigo/MVC/Vista/CSS/estiloDashboard.css">
+  <style>
+    /* Estilos para el modal de actualización */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+      background-color: #fff;
+      margin: 10% auto;
+      padding: 20px;
+      border-radius: 5px;
+      width: 60%;
+      max-width: 600px;
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: #000;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    .form-buttons {
+      text-align: right;
+      margin-top: 20px;
+    }
+
+    .actualizar-caso {
+      background-color: #4CAF50;
+      color: white;
+      margin-right: 10px;
+    }
+
+    .eliminar-caso, .actualizar-caso-btn {
+      margin-right: 10px;
+    }
+  </style>
 </head>
 
 <body>
@@ -99,7 +165,45 @@
     </main>
   </div>
 
-  <!-- Script para manejar la navegación, carga/filtrado de datos y eliminación de casos -->
+  <!-- Modal para actualizar caso -->
+  <div id="modal-actualizar-caso" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3>Actualizar Caso</h3>
+      <form id="form-actualizar-caso">
+        <input type="hidden" id="caso-id" name="caso_id">
+        <div class="form-group">
+          <label for="caso-nombre">Nombre del Caso:</label>
+          <input type="text" id="caso-nombre" name="caso_nombre" required>
+        </div>
+        <div class="form-group">
+          <label for="caso-descripcion">Descripción:</label>
+          <textarea id="caso-descripcion" name="caso_descripcion" rows="3" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="caso-estado">Estado:</label>
+          <select id="caso-estado" name="caso_estado" required>
+            <option value="Pendiente">Activo</option>
+            <option value="Cancelado">Inactivo</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="caso-fecha-inicio">Fecha de inicio:</label>
+          <input type="date" id="caso-fecha-inicio" name="caso_fecha_inicio" required>
+        </div>
+        <div class="form-group">
+          <label for="caso-fecha-fin">Fecha de fin:</label>
+          <input type="date" id="caso-fecha-fin" name="caso_fecha_fin" required>
+        </div>
+        <div class="form-buttons">
+          <button type="button" id="cancelar-actualizacion">Cancelar</button>
+          <button type="submit" class="actualizar-caso">Guardar Cambios</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Script para manejar la navegación, carga/filtrado de datos y eliminación/actualización de casos -->
   <script>
     // Seleccionar elementos del DOM
     const perfilLink = document.getElementById('perfil-link');
@@ -118,6 +222,12 @@
     const btnFiltrar = document.getElementById('btn-filtrar');
     const filtroVoluntarioInput = document.getElementById('filtro-voluntario-cedula');
     const btnFiltrarVoluntario = document.getElementById('btn-filtrar-voluntario');
+
+    // Modal y formulario de actualización
+    const modalActualizarCaso = document.getElementById('modal-actualizar-caso');
+    const formActualizarCaso = document.getElementById('form-actualizar-caso');
+    const closeModal = document.querySelector('.close');
+    const btnCancelarActualizacion = document.getElementById('cancelar-actualizacion');
 
     let casosData = []; // Variable para almacenar los casos cargados
     let voluntariosData = []; // Variable para almacenar los voluntarios cargados
@@ -159,7 +269,10 @@
             <p>Estado: ${estado}</p>
             <p>Fecha de inicio: ${caso.Caso_Fecha_Inicio}</p>
             <p>Fecha de fin: ${caso.Caso_Fecha_Fin}</p>
-            <button class="eliminar-caso" data-caso-id="${caso.Caso_Id}">Eliminar caso</button>
+            <div>
+              <button class="actualizar-caso-btn" data-caso-id="${caso.Caso_Id}">Actualizar caso</button>
+              <button class="eliminar-caso" data-caso-id="${caso.Caso_Id}">Eliminar caso</button>
+            </div>
           </div>
         `;
         listaCasos.insertAdjacentHTML('beforeend', casoHTML);
@@ -174,6 +287,59 @@
           }
         });
       });
+
+      // Añadir event listeners para los botones de actualizar
+      document.querySelectorAll('.actualizar-caso-btn').forEach(button => {
+        button.addEventListener('click', function() {
+          const casoId = this.getAttribute('data-caso-id');
+          abrirModalActualizarCaso(casoId);
+        });
+      });
+    }
+
+    // Función para abrir el modal de actualización y cargar los datos del caso
+    function abrirModalActualizarCaso(casoId) {
+      // Buscar el caso por ID
+      const caso = casosData.find(caso => caso.Caso_Id == casoId);
+      if (caso) {
+        // Completar el formulario con los datos del caso
+        document.getElementById('caso-id').value = caso.Caso_Id;
+        document.getElementById('caso-nombre').value = caso.Caso_Nombre_Caso;
+        document.getElementById('caso-descripcion').value = caso.Caso_Descripcion;
+        document.getElementById('caso-estado').value = caso.Caso_Estado;
+        document.getElementById('caso-fecha-inicio').value = formatearFechaParaInput(caso.Caso_Fecha_Inicio);
+        document.getElementById('caso-fecha-fin').value = formatearFechaParaInput(caso.Caso_Fecha_Fin);
+        
+        // Mostrar el modal
+        modalActualizarCaso.style.display = 'block';
+      } else {
+        alert("No se encontró el caso especificado.");
+      }
+    }
+
+    // Función para formatear la fecha al formato requerido por input[type="date"]
+    function formatearFechaParaInput(fechaStr) {
+      if (!fechaStr) return '';
+      
+      // Si la fecha ya está en formato YYYY-MM-DD, no necesita conversión
+      if (/^\d{4}-\d{2}-\d{2}$/.test(fechaStr)) {
+        return fechaStr;
+      }
+      
+      // Convertir de formato DD/MM/YYYY a YYYY-MM-DD
+      const partes = fechaStr.split('/');
+      if (partes.length === 3) {
+        return `${partes[2]}-${partes[1].padStart(2, '0')}-${partes[0].padStart(2, '0')}`;
+      }
+      
+      // Si el formato es diferente, intentar con Date
+      try {
+        const fecha = new Date(fechaStr);
+        return fecha.toISOString().split('T')[0];
+      } catch (e) {
+        console.error("Error al formatear fecha:", e);
+        return '';
+      }
     }
 
     // Función para filtrar los casos por ID
@@ -198,6 +364,8 @@
             if (casoElemento) {
               casoElemento.remove();
             }
+            // También eliminar de la matriz de datos
+            casosData = casosData.filter(caso => caso.Caso_Id != casoId);
             alert(data.message);
           } else {
             alert("Error: " + data.message);
@@ -208,6 +376,51 @@
           alert("Ocurrió un error al eliminar el caso.");
         });
     }
+
+    // Función para actualizar un caso
+    function actualizarCaso(formData) {
+      fetch('/Pantry_Amigo/MVC/Vista/HTML/actualizar_caso.php', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          alert(data.message);
+          // Actualizar la vista
+          cerrarModalActualizarCaso();
+          cargarCasos(); // Recargar todos los casos para reflejar los cambios
+        } else {
+          alert("Error: " + data.message);
+        }
+      })
+      .catch(error => {
+        console.error("Error al actualizar el caso:", error);
+        alert("Ocurrió un error al actualizar el caso.");
+      });
+    }
+
+    // Event listener para el formulario de actualización
+    formActualizarCaso.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const formData = new FormData(formActualizarCaso);
+      actualizarCaso(formData);
+    });
+
+    // Función para cerrar el modal
+    function cerrarModalActualizarCaso() {
+      modalActualizarCaso.style.display = 'none';
+      formActualizarCaso.reset();
+    }
+
+    // Event listeners para cerrar el modal
+    closeModal.addEventListener('click', cerrarModalActualizarCaso);
+    btnCancelarActualizacion.addEventListener('click', cerrarModalActualizarCaso);
+    window.addEventListener('click', function(event) {
+      if (event.target === modalActualizarCaso) {
+        cerrarModalActualizarCaso();
+      }
+    });
 
     // Función para mostrar la sección de casos
     function mostrarCasosSeccion() {
