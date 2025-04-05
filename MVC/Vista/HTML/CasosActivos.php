@@ -52,8 +52,11 @@
             const casoHTML = `
               <div class="case">
                 <h3>${caso.Caso_Nombre}</h3>
+                <p> IMG: ${caso.Caso_Imagen}</p>
                 <p><strong>${caso.Caso_Descripcion}</strong></p>
                 <p>ID: ${caso.Caso_Id}</p>
+                <p>Descripcion: ${caso.Caso_Descripcion}</p>
+                <p>Categoria: ${caso.Caso_Cat_Nombre}</p>
                 <button onclick="window.location.href='Detalles.php?ID=${caso.Caso_Id}'">Ver detalles</button>
               </div>
             `;

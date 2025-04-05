@@ -6,72 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard Fundación</title>
   <link rel="stylesheet" href="/Pantry_Amigo/MVC/Vista/CSS/estiloDashboard.css">
-  <style>
-    /* Estilos para el modal de actualización */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-    }
 
-    .modal-content {
-      background-color: #fff;
-      margin: 10% auto;
-      padding: 20px;
-      border-radius: 5px;
-      width: 60%;
-      max-width: 600px;
-    }
-
-    .close {
-      color: #aaa;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .close:hover {
-      color: #000;
-    }
-
-    .form-group {
-      margin-bottom: 15px;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: bold;
-    }
-
-    .form-group input, .form-group textarea, .form-group select {
-      width: 100%;
-      padding: 8px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-    }
-
-    .form-buttons {
-      text-align: right;
-      margin-top: 20px;
-    }
-
-    .actualizar-caso {
-      background-color: #4CAF50;
-      color: white;
-      margin-right: 10px;
-    }
-
-    .eliminar-caso, .actualizar-caso-btn {
-      margin-right: 10px;
-    }
-  </style>
 </head>
 
 <body>
@@ -86,6 +21,7 @@
           <li><a href="../../../MVC/Vista/HTML/from_Fundacion.php" id="perfil-link">Perfil</a></li>
           <li><a href="#" id="casos-link" class="active">Casos</a></li>
           <li><a href="#" id="voluntarios-link">Voluntarios</a></li>
+          <li><a href="#" id="donaciones-link">Donaciones</a></li>
           <li><a href="#" id="consultar-link">Consultar</a></li>
           <li><a href="#" id="ayuda-link">Ayuda</a></li>
           <li><a href="#" id="salir-link">Salir</a></li>
