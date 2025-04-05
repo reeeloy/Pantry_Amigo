@@ -1,0 +1,44 @@
+/* Estilos generales */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f1f5f9;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .header {
+    background-color: #2563eb;
+    padding: 1.5rem 2rem;
+    color: white;
+    text-align: center;
+    border-bottom: 4px solid #1e40af;
+  }
+  
+  #detalle-caso {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+  
+  #detalle-info {
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 2rem 2.5rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    width: 90%;
+    max-width: 750px;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  #detalle-info h3 {
+    font-size: 2rem;
+    color: #1e293b;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #e2e8f0
+  }  
+  

@@ -19,7 +19,16 @@
       <nav class="menu">
         <ul>
           <li><a href="../../../MVC/Vista/HTML/from_Fundacion.php" id="perfil-link">Perfil</a></li>
-          <li><a href="#" id="casos-link" class="active">Casos</a></li>
+
+          <li class="has-submenu">
+            <a href="#" id="casos-link" class="active">Casos</a>
+            <ul class="submenu">
+              <li><a href="#" id="casos-activos-link">Activos</a></li>
+              <li><a href="#" id="casos-inactivos-link">Inactivos</a></li>
+              <li><a href="#" id="crear-caso-link">Crear casos</a></li>
+            </ul>
+          </li>
+
           <li><a href="#" id="voluntarios-link">Voluntarios</a></li>
           <li><a href="#" id="donaciones-link">Donaciones</a></li>
           <li><a href="#" id="consultar-link">Consultar</a></li>
@@ -33,15 +42,11 @@
     <main class="content">
       <header class="header">
         <h2 id="titulo-seccion">Casos</h2>
-        
       </header>
-      <div class="crear-casos">
-          <button class="new-case-button" id="nuevo-caso-button" onclick="window.location.href='RegistrarCasoDinero.php'">Nuevo caso de donación Dinero</button>
-          <button class="new-case-button" id="nuevo-caso-button" onclick="window.location.href='RegistrarCasoRecursos.php'">Nuevo caso de donación Recursos</button>
-        </div>
+
       <!-- Sección de Casos (Visible por defecto) -->
       <section id="casos" class="seccion-activa">
-        
+
         <!-- Barra de búsqueda para filtrar por ID -->
         <div class="search-bar">
           <input type="text" id="filtro-id" placeholder="Ingrese el ID del caso">
@@ -52,15 +57,15 @@
           <!-- Aquí se cargarán los casos dinámicamente -->
         </div>
 
+        <div class="activos">
+
+        </div>
+
         <!-- Horarios Asignados -->
         <section class="assigned-schedules">
-          <h3>Horarios asignados</h3>
-          <div id="horarios-asignados">
-            <!-- Aquí se cargarán los horarios dinámicamente -->
-          </div>
+          <!-- Aquí puedes cargar horarios de voluntarios -->
         </section>
       </section>
-
       <!-- Sección de Voluntarios (Oculta por defecto) -->
       <section id="voluntarios" class="seccion-oculta">
         <h3>Lista de Voluntarios</h3>
@@ -249,7 +254,7 @@
         document.getElementById('caso-estado').value = caso.Caso_Estado;
         document.getElementById('caso-fecha-inicio').value = formatearFechaParaInput(caso.Caso_Fecha_Inicio);
         document.getElementById('caso-fecha-fin').value = formatearFechaParaInput(caso.Caso_Fecha_Fin);
-        
+
         // Mostrar el modal
         modalActualizarCaso.style.display = 'block';
       } else {
@@ -260,18 +265,18 @@
     // Función para formatear la fecha al formato requerido por input[type="date"]
     function formatearFechaParaInput(fechaStr) {
       if (!fechaStr) return '';
-      
+
       // Si la fecha ya está en formato YYYY-MM-DD, no necesita conversión
       if (/^\d{4}-\d{2}-\d{2}$/.test(fechaStr)) {
         return fechaStr;
       }
-      
+
       // Convertir de formato DD/MM/YYYY a YYYY-MM-DD
       const partes = fechaStr.split('/');
       if (partes.length === 3) {
         return `${partes[2]}-${partes[1].padStart(2, '0')}-${partes[0].padStart(2, '0')}`;
       }
-      
+
       // Si el formato es diferente, intentar con Date
       try {
         const fecha = new Date(fechaStr);
@@ -320,24 +325,24 @@
     // Función para actualizar un caso
     function actualizarCaso(formData) {
       fetch('/Pantry_Amigo/MVC/Vista/HTML/actualizar_caso.php', {
-        method: 'POST',
-        body: formData
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          alert(data.message);
-          // Actualizar la vista
-          cerrarModalActualizarCaso();
-          cargarCasos(); // Recargar todos los casos para reflejar los cambios
-        } else {
-          alert("Error: " + data.message);
-        }
-      })
-      .catch(error => {
-        console.error("Error al actualizar el caso:", error);
-        alert("Ocurrió un error al actualizar el caso.");
-      });
+          method: 'POST',
+          body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            alert(data.message);
+            // Actualizar la vista
+            cerrarModalActualizarCaso();
+            cargarCasos(); // Recargar todos los casos para reflejar los cambios
+          } else {
+            alert("Error: " + data.message);
+          }
+        })
+        .catch(error => {
+          console.error("Error al actualizar el caso:", error);
+          alert("Ocurrió un error al actualizar el caso.");
+        });
     }
 
     // Event listener para el formulario de actualización
@@ -374,6 +379,30 @@
       cargarCasos();
       resaltarOpcion(casosLink);
     }
+
+     // Función para mostrar la sección Casos activos
+     function mostrarCasos(casos) {
+      listaCasos.innerHTML = ''; // Limpiar el contenedor
+      casos.forEach(caso => {
+        // Se utiliza "Caso_Estado" para mostrar información
+        const estado = caso.Caso_Estado = 'Activo';
+        const casoHTML = `
+          <div class="case" id="caso-${caso.Caso_Id}" data-id="${caso.Caso_Id}">
+            <h3>${caso.Caso_Nombre_Caso}</h3>
+            <p><strong>${caso.Caso_Descripcion}</strong></p>
+            <p>ID: ${caso.Caso_Id}</p>
+            <p>Estado: ${estado}</p>
+            <p>Fecha de inicio: ${caso.Caso_Fecha_Inicio}</p>
+            <p>Fecha de fin: ${caso.Caso_Fecha_Fin}</p>
+            <div>
+              <button class="actualizar-caso-btn" data-caso-id="${caso.Caso_Id}">Actualizar caso</button>
+              <button class="eliminar-caso" data-caso-id="${caso.Caso_Id}">Eliminar caso</button>
+            </div>
+          </div>
+        `;
+        listaCasos.insertAdjacentHTML('beforeend', casoHTML);
+      });
+     }
 
     // Función para mostrar la sección de voluntarios
     function mostrarVoluntarios() {
@@ -483,7 +512,8 @@
 
     // Mostrar la sección de casos por defecto
     mostrarCasosSeccion();
-  </script>
+    
+  </script> 
 
 </body>
 

@@ -57,7 +57,7 @@
                 <p>ID: ${caso.Caso_Id}</p>
                 <p>Descripcion: ${caso.Caso_Descripcion}</p>
                 <p>Categoria: ${caso.Caso_Cat_Nombre}</p>
-                <button onclick="window.location.href='Detalles.php?ID=${caso.Caso_Id}'">Ver detalles</button>
+                <button onclick="window.location.href='Detalles.php?ID=${caso.Caso_Id}&tipo=${tipo}'">Ver detalles</button>
               </div>
             `;
             listaCasos.insertAdjacentHTML('beforeend', casoHTML);
@@ -71,6 +71,7 @@
 
     // Cargar casos de dinero por defecto al abrir la página
     document.addEventListener("DOMContentLoaded", () => cargarCasos('dinero'));
+    
   </script>
 </body>
 </html>

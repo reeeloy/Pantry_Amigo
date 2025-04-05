@@ -37,13 +37,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $casoFechaInicio = $_POST['casoFechaInicio'];
             $casoFechaFin = $_POST['casoFechaFin'];
             $casoEstado = $_POST['casoEstado'];
-            $casoImagen = $_FILES['casoImagen']['name'] ?? null;
             $casoVoluntariado = isset($_POST['casoVoluntariado']) ? 1 : 0;
             $fundacionId = $_POST['casoFundacion'];
             $categoriaNombre =$_POST['casoCategoria'];
-
+            
+            $casoImagen = $_FILES['casoImagen']['name'] ?? null;$imagenRuta = null;
+            if (isset($_FILES['casoImagen']) && $_FILES['casoImagen']['error'] === 0) {
+                $nombreArchivo = basename($_FILES['casoImagen']['name']);
+                $rutaTemporal = $_FILES['casoImagen']['tmp_name'];
+                $carpetaDestino = "../Vista/imagenes_casos/";
+        
+                if (!file_exists($carpetaDestino)) {
+                    mkdir($carpetaDestino, 0777, true); // Crear carpeta si no existe
+                }
+        
+                $rutaFinal = $carpetaDestino . $nombreArchivo;
+        
+                if (move_uploaded_file($rutaTemporal, $rutaFinal)) {
+                    $imagenRuta = "imagenes_casos/" . $nombreArchivo; // Ruta relativa
+                } else {
+                    echo "<script>alert('Error al guardar la imagen');</script>";
+                }
+            }
             $caso = new Caso();
-            if ($caso->registrarCasoDinero($casoNombre, $casoDescripcion, $montoMeta, $casoMontoRecaudado, $casoFechaInicio, $casoFechaFin, $casoEstado, $casoImagen = null, $casoVoluntariado, $fundacionId, $categoriaNombre)) {
+            if ($caso->registrarCasoDinero($casoNombre, $casoDescripcion, $montoMeta, $casoMontoRecaudado, $casoFechaInicio, $casoFechaFin, $casoEstado, $imagenRuta, $casoVoluntariado, $fundacionId, $categoriaNombre)) {
                 echo "<script>alert('Caso registrado exitosamente');</script>";
             } else {
                 echo "<script>alert('Error al registrar el caso');</script>";
