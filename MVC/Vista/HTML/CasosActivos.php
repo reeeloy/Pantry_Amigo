@@ -52,8 +52,7 @@
             const casoHTML = `
               <div class="case">
                 <h3>${caso.Caso_Nombre}</h3>
-                <p> IMG: ${caso.Caso_Imagen}</p>
-                <p><strong>${caso.Caso_Descripcion}</strong></p>
+                <img src="/Pantry_Amigo/${caso.Caso_Imagen}" alt="Imagen del caso" style="width: 300px; max-height: 200px;">
                 <p>ID: ${caso.Caso_Id}</p>
                 <p>Descripcion: ${caso.Caso_Descripcion}</p>
                 <p>Categoria: ${caso.Caso_Cat_Nombre}</p>
