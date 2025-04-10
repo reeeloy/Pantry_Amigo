@@ -47,7 +47,7 @@
             if (tipo === 'dinero') {
               const botones = `
     <div class="botones-detalle">
-      <button onclick="window.location.href='Donar.php?ID=${data.Caso_Id}'">Donar</button>
+      <button onclick="window.location.href='Donar.php?ID=${data.Caso_Id}&categoria=${encodeURIComponent(data.Caso_Cat_Nombre)}'">Donar</button>
       ${data.Caso_Voluntariado == 1 ? `<button onclick="window.location.href='RegistrarVoluntario.php?ID=${data.Caso_Id}'">Voluntariado</button>` : ''}
     </div>
   `;
