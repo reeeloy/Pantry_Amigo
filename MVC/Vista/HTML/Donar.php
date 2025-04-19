@@ -16,6 +16,10 @@ $caso = $result->fetch_assoc();
 
 $conn->cerrar();
 ?>
+<head>
+  <title>Donación</title>
+  <link rel="stylesheet" href="../CSS/estilosDonacion.css">
+</head>
 
 <h2>Donar al caso:</h2>
 
