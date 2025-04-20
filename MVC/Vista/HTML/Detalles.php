@@ -60,7 +60,6 @@
                 <p><strong>Fecha de Fin:</strong> ${data.Caso_Fecha_Fin}</p>
                 <p><strong>Estado:</strong> ${data.Caso_Estado}</p>
                 <p><strong>Categoria:</strong> ${data.Caso_Cat_Nombre}</p>
-                ${data.Caso_Voluntariado}
                 ${botones}
               `;
             } else {

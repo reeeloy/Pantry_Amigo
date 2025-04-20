@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <link rel="stylesheet" href="../CSS/estilosIndex.css">
-  <title>Document</title>
+  <title>Pantry Amigo</title>
 </head>
 
 <body>
@@ -29,7 +29,7 @@
           <a href="#sobre-nosotros" class="nav-link">ABOUT US</a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link">ACOUNT</a>
+          <a href="" class="nav-link">ACOUNT</a>
           <ul class="submenu">
             <li><a href="../HTML/registro.php">SIGN UP</a></li>
             <li><a href="../HTML/login.php">LOGIN</a></li>
@@ -38,7 +38,7 @@
         <li class="nav-item">
           <a href="#" class="nav-link">PARTICIPATE</a>
           <ul class="submenu">
-            <li><a href="#">DONATE</a></li>
+            <li><a href="#casos">DONATE</a></li>
             <li><a href="#">VOLUNTEERING</a></li>
           </ul>
         </li>
@@ -145,32 +145,32 @@
     <div class="card-wrapper">
       <ul class="card-list swiper-wrapper">
         <li class="card-item swiper-slide">
-          <a href="#" class="card-link">
-            <img src="../IMG/donacionalimentos.webp" alt="card Img" class="card-img">
-            <p class="badge">Fundacion 1</p>
-            <h2 class="card-title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum,
-              consectetur.</h2>
-            <button class="card-button material-symbols-rounded" onclick="window.location.href='Detalles.php?ID=9&tipo=dinero'">arrow_forward</button>
+          <a href="#" class="card-link" onclick="window.location.href='Detalles.php?ID=9&tipo=recursos'">
+            <img src="../imagenes_casos/donacionalimentos.webp" alt="card Img" class="card-img">
+            <p class="badge">Fundacion 13</p>
+            <h2 class="card-title">Donacion de alimentos</h2>
+            <p class="description">Estamos haciendo recolecta de alimentos para la cena de caridad mensual.</p>
+            <button class="card-button material-symbols-rounded" onclick="window.location.href='Detalles.php?ID=9&tipo=recursos'">arrow_forward</button>
 
           </a>
         </li>
         <!-- Otra carta -->
         <li class="card-item swiper-slide">
-          <a href="#" class="card-link">
-            <img src="../IMG/donacion-foto.jpg" alt="card Img" class="card-img">
+          <a href="#" class="card-link" onclick="window.location.href='Detalles.php?ID=10&tipo=dinero'">
+            <img src="../imagenes_casos/Daniela.jpg" alt="card Img" class="card-img">
             <p class="badge">Fundacion 2</p>
-            <h2 class="card-title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum,
-              consectetur.</h2>
+            <h2 class="card-title">Cambio de genero de Daniela</h2>
+            <p class="description">Daniela dejará su identidad anterior y será mujer</p>
             <button class="card-button material-symbols-rounded" onclick="window.location.href='Detalles.php?ID=10&tipo=dinero'">arrow_forward</button>
           </a>
         </li>
         <!-- Otra carta -->
-        <li class="card-item swiper-slide">
+        <li class="card-item swiper-slide" onclick="window.location.href='Detalles.php?ID=8&tipo=recursos'">
           <a href="#" class="card-link">
-            <img src="../IMG/donacionniños.jpg" alt="card Img" class="card-img">
+            <img src="../imagenes_casos/Croquetas.jpg" alt="card Img" class="card-img">
             <p class="badge">Fundacion 3</p>
-            <h2 class="card-title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum,
-              consectetur.</h2>
+            <h2 class="card-title">Croquetas para todos</h2>
+            <p class="description">Necesitamos reunir croquetas dogchow adulto para una fundación de perritos</p>
             <button class="card-button material-symbols-rounded" onclick="window.location.href='Detalles.php?ID=8&tipo=recursos'">arrow_forward</button>
           </a>
         </li>
