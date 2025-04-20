@@ -23,19 +23,19 @@
   </div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
       const urlParams = new URLSearchParams(window.location.search);
       const casoId = urlParams.get('ID');
-      const tipo = urlParams.get('tipo'); // 'dinero' o 'recursos'
+      const tipo = urlParams.get('tipo');
 
       if (!casoId || !tipo) {
         document.getElementById('detalle-info').innerHTML = "<p>Error: faltan parámetros en la URL.</p>";
         return;
       }
 
-      const endpoint = tipo === 'dinero' ?
-        '/Pantry_Amigo/MVC/Vista/HTML/ObtenerDetallesDinero.php' :
-        '/Pantry_Amigo/MVC/Vista/HTML/ObtenerDetallesRecursos.php';
+      const endpoint = tipo === 'dinero'
+        ? '/Pantry_Amigo/MVC/Vista/HTML/ObtenerDetallesDinero.php'
+        : '/Pantry_Amigo/MVC/Vista/HTML/ObtenerDetallesRecursos.php';
 
       fetch(`${endpoint}?ID=${casoId}`)
         .then(response => response.json())
@@ -44,41 +44,34 @@
           if (data.error) {
             detalleInfo.innerHTML = `<p>${data.error}</p>`;
           } else {
-            if (tipo === 'dinero') {
-              const botones = `
-    <div class="botones-detalle">
-      <button onclick="window.location.href='Donar.php?ID=${data.Caso_Id}&categoria=${encodeURIComponent(data.Caso_Cat_Nombre)}'">Donar</button>
-      ${data.Caso_Voluntariado == 1 ? `<button onclick="window.location.href='RegistrarVoluntario.php?ID=${data.Caso_Id}'">Voluntariado</button>` : ''}
-    </div>
-  `;
-              detalleInfo.innerHTML = `
-                <h3>${data.Caso_Nombre}</h3>
-                <img src="/Pantry_Amigo/${data.Caso_Imagen}" alt="Imagen del caso" style="max-width: 300px;">
-                <p><strong>Descripción:</strong> ${data.Caso_Descripcion}</p>
-                <p><strong>Monto Meta:</strong> $${data.Caso_Monto_Meta}</p>
-                <p><strong>Recaudado:</strong> $${data.Caso_Monto_Recaudado}</p>
-                <p><strong>Fecha de Fin:</strong> ${data.Caso_Fecha_Fin}</p>
-                <p><strong>Estado:</strong> ${data.Caso_Estado}</p>
-                <p><strong>Categoria:</strong> ${data.Caso_Cat_Nombre}</p>
-                ${botones}
-              `;
-            } else {
-              const botones = `
-    <div class="botones-detalle">
-      ${data.Caso_Voluntariado == 1 ? `<button onclick="window.location.href='RegistrarVoluntario.php?ID=${data.Caso_Id}'">Voluntariado</button>` : ''}
-    </div>
-  `;
-              detalleInfo.innerHTML = `
-                <h3>${data.Caso_Nombre}</h3>
-                <img src="/Pantry_Amigo/${data.Caso_Imagen}" alt="Imagen del caso" style="max-width: 300px; border-radius: 10px; margin-bottom: 10px;" />
-                <p><strong>Descripción:</strong> ${data.Caso_Descripcion}</p>
-                <p><strong>Punto de Recolección:</strong> ${data.Caso_Punto_Recoleccion}</p>
-                <p><strong>Fecha de Inicio:</strong> ${data.Caso_Fecha_Inicio}</p>
-                <p><strong>Estado:</strong> ${data.Caso_Estado}</p>
-                <p><strong>Categoria:</strong> ${data.Caso_Cat_Nombre}</p>
-                 ${botones}
-              `;
-            }
+            const botones = `
+              <div class="botones-detalle">
+                ${tipo === 'dinero' ? `<button onclick="window.location.href='Donar.php?ID=${data.Caso_Id}&categoria=${encodeURIComponent(data.Caso_Cat_Nombre)}'">Donar</button>` : ''}
+                ${data.Caso_Voluntariado == 1 ? `<button onclick="window.location.href='RegistrarVoluntario.php?ID=${data.Caso_Id}'">Voluntariado</button>` : ''}
+              </div>`;
+
+            const contenido = `
+              <h3>${data.Caso_Nombre}</h3>
+              <div class="imagen-container">
+                <img src="/Pantry_Amigo/${data.Caso_Imagen}" alt="Imagen del caso" />
+              </div>
+              <p><strong>Descripción:</strong> ${data.Caso_Descripcion}</p>
+              ${tipo === 'dinero'
+                ? `
+                  <p><strong>Monto Meta:</strong> $${data.Caso_Monto_Meta}</p>
+                  <p><strong>Recaudado:</strong> $${data.Caso_Monto_Recaudado}</p>
+                  <p><strong>Fecha de Fin:</strong> ${data.Caso_Fecha_Fin}</p>
+                `
+                : `
+                  <p><strong>Punto de Recolección:</strong> ${data.Caso_Punto_Recoleccion}</p>
+                  <p><strong>Fecha de Inicio:</strong> ${data.Caso_Fecha_Inicio}</p>
+                `
+              }
+              <p><strong>Estado:</strong> ${data.Caso_Estado}</p>
+              <p><strong>Categoría:</strong> ${data.Caso_Cat_Nombre}</p>
+              ${botones}`;
+
+            detalleInfo.innerHTML = contenido;
           }
         })
         .catch(error => {
