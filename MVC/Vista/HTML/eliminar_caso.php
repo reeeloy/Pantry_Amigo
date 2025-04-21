@@ -15,7 +15,7 @@ if (isset($_GET['caso_id'])) {
     $conexion->abrir();
 
     // Preparar y ejecutar la consulta de eliminación
-    $sql = "DELETE FROM tbl_caso_donacion WHERE Caso_Id = '$caso_id'";
+    $sql = "DELETE FROM tbl_casos_recursos WHERE Caso_Id = '$caso_id'";
     $conexion->consulta($sql);
 
     // Verificar si se afectó alguna fila (es decir, se eliminó el registro)

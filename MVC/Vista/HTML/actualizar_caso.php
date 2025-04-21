@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $caso_fecha_fin = mysqli_real_escape_string($conexion, $_POST['caso_fecha_fin']);
 
     // Preparar la consulta SQL para actualizar el caso
-    $query = "UPDATE tbl_caso_donacion SET 
+    $query = "UPDATE tbl_casos_recursos SET 
                 Caso_Nombre_Caso = '$caso_nombre', 
                 Caso_Descripcion = '$caso_descripcion', 
                 Caso_Estado = '$caso_estado', 

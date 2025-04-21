@@ -172,6 +172,7 @@
       calidad de vida. Trabajamos con fundaciones, voluntarios y aliados estratégicos para generar un impacto
       positivo y sostenible en la sociedad.
     </p>
+    <br/>
     <p>
       Nuestra misión es impulsar un cambio real, promoviendo la solidaridad y la cooperación a través de la
       innovación y la eficiencia en la gestión de donaciones. En Pantry Amigo, cada aporte cuenta y cada

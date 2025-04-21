@@ -23,74 +23,6 @@
         .download-report-button:hover {
             background-color: #0056b3;
         }
-
-        /* Estilos para el modal de actualización (si no los tenías) */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-        }
-
-        .modal-content {
-            background-color: #fff;
-            margin: 10% auto;
-            padding: 20px;
-            border-radius: 5px;
-            width: 60%;
-            max-width: 600px;
-        }
-
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .close:hover {
-            color: #000;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-
-        .form-buttons {
-            text-align: right;
-            margin-top: 20px;
-        }
-
-        .actualizar-caso {
-            background-color: #4CAF50;
-            color: white;
-            margin-right: 10px;
-        }
-
-        .eliminar-caso,
-        .actualizar-caso-btn {
-            margin-right: 10px;
-        }
     </style>
 </head>
 
@@ -655,7 +587,5 @@
         // Mostrar la sección de casos por defecto
         mostrarCasosSeccion();
     </script>
-
 </body>
-
 </html>
