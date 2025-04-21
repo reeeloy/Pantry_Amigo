@@ -32,7 +32,7 @@ nav {
 
 }
 .menu-item-ubi{
-    color: #4CAF50;
+    color: #7ec8a1;
     position: relative;
     cursor: pointer;
     padding: 10px;
@@ -56,7 +56,7 @@ nav {
     padding: 10px;
 }
 .submenu li:hover {
-    background: #7ed95783;
+    background: #7ec8a1;
 }
 .menu-item:hover .submenu {
     display: block;
