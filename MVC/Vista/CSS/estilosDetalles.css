@@ -1,64 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap');
 /* Estilos generales */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f1f5f9;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .header {
-    background-color: #2563eb;
-    padding: 1.5rem 2rem;
-    color: white;
-    text-align: center;
-    border-bottom: 4px solid #1e40af;
-  }
-  
-  #detalle-caso {
-    display: flex;
-    justify-content: center;
-    margin-top: 2rem;
-  }
-  
-  #detalle-info {
-    background-color: #ffffff;
-    border-radius: 20px;
-    padding: 2rem 2.5rem;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-    width: 90%;
-    max-width: 750px;
-    animation: fadeIn 0.5s ease-in-out;
-  }
-  
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  
-  #detalle-info h3 {
-    font-size: 2rem;
-    color: #1e293b;
-    margin-bottom: 1rem;
-    border-bottom: 2px solid #e2e8f0
-  }
-  
-  .botones-detalle {
-    margin-top: 20px;
-  }
-  
-  .botones-detalle button {
-    background-color: #3498db;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    margin-right: 10px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .botones-detalle button:hover {
-    background-color: #2980b9;
-  }
-  
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f1f5f9;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  background-color: #2563eb;
+  padding: 1.5rem 2rem;
+  color: white;
+  text-align: center;
+  border-bottom: 4px solid #1e40af;
+}
+
+#detalle-caso {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  padding: 0 1rem;
+}
+
+#detalle-info {
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 2rem 2.5rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 750px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#detalle-info h3 {
+  font-family: 'Poppins';
+  font-size: 2rem;
+  color: #2b577d;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 0.5rem;
+}
+
+#detalle-info p {
+  color: #555;
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+}
+
+.imagen-container {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.imagen-container img {
+  max-width: 100%;
+  max-height: 350px;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.botones-detalle {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.botones-detalle button {
+  background-color: #2b577d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.botones-detalle button:hover {
+  background-color: #7ec8a1;
+  transform: translateY(-2px);
+}
+
   
