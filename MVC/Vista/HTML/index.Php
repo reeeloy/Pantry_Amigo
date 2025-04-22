@@ -211,21 +211,37 @@
     </div>
   </section>
   
-  <!-- Sección Sobre Nosotros -->
-  <section class="sobre-nosotros">
-    <h2>Sobre Nosotros</h2>
-    <p>
-      Pantry Amigo es una plataforma comprometida con la transformación social. Conectamos a donantes con
-      organizaciones y comunidades vulnerables, facilitando la entrega de recursos esenciales para mejorar la
-      calidad de vida. Trabajamos con fundaciones, voluntarios y aliados estratégicos para generar un impacto
-      positivo y sostenible en la sociedad.
-    </p>
-    <p>
-      Nuestra misión es impulsar un cambio real, promoviendo la solidaridad y la cooperación a través de la
-      innovación y la eficiencia en la gestión de donaciones. En Pantry Amigo, cada aporte cuenta y cada
-      acción transforma vidas.
-    </p>
-  </section>
+  <!-- Team members-->
+  <section class="members-section">
+        <h2 class="section-title">Team Members</h2>
+        <div class="section-content">
+            <ul class="members-list">
+                <li class="member">
+                    <img src="../IMG/aboutus.jpg" alt="user" class="user-image">
+                    <h3 class="name">Laura Bolívar</h3>
+                    <i class="feedback">"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, qui?"</i>
+                </li>
+
+                <li class="member">
+                    <img src="../IMG/aboutus.jpg" alt="user" class="user-image">
+                    <h3 class="name">Daniel Martinez</h3>
+                    <i class="feedback">"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, qui?"</i>
+                </li>
+
+                <li class="member">
+                    <img src="../IMG/aboutus.jpg" alt="user" class="user-image">
+                    <h3 class="name">Alejandro Gómez</h3>
+                    <i class="feedback">"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, qui?"</i>
+                </li>
+
+                <li class="member">
+                    <img src="../IMG/aboutus.jpg" alt="user" class="user-image">
+                    <h3 class="name">Isabela Jimenez</h3>
+                    <i class="feedback">"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, qui?"</i>
+                </li>
+            </ul>
+        </div>
+    </section>
 
 
   <!-- Footer -->
