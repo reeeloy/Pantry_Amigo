@@ -26,11 +26,18 @@
     padding: 20px 0;
   }
   
-  .logo-img {
+  .logo img {
+    max-width: 100px;  /* o el tamaño que prefieras */
+    height: auto;
     display: block;
-    margin: 0 auto 20px;
-    max-width: 120px;
+    margin: 0 auto;
   }
+  
+  .logo {
+    text-align: center;
+    padding: 10px 0;
+  }
+  
   
   .menu ul {
     list-style: none;

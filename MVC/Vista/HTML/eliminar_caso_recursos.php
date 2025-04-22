@@ -5,14 +5,12 @@ $conn = (new ConexionBD())->conexion;
 
 if (isset($_GET['id'])) {
     try {
-        // Fíjate en usar el nombre real de la columna:
-        $stmt = $conn->prepare("DELETE FROM tbl_fundaciones WHERE Fund_Id = ?");
+        $stmt = $conn->prepare("DELETE FROM tbl_casos_recursos WHERE Caso_Id = ?");
         $stmt->execute([$_GET['id']]);
-        echo json_encode(['success' => true, 'message' => 'Fundación eliminada correctamente']);
+        echo json_encode(['success' => true, 'message' => 'Caso de recurso eliminado correctamente']);
     } catch (PDOException $e) {
         echo json_encode(['success' => false, 'message' => $e->getMessage()]);
     }
 } else {
     echo json_encode(['success' => false, 'message' => 'ID no proporcionado']);
 }
-?>
