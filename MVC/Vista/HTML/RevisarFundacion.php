@@ -80,19 +80,19 @@
                                                     <img width="300px" src="https://www.asesoriamadridgesys.com/wp-content/uploads/Las-donaciones.jpg" alt="">
                             <h3>CASOS/XXXX</h3>
                             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quidem dignissimos dolores fugit! Repellat rem in expedita asperiores voluptate sunt quas?</p>
-                            <a class="btn btn_post_destacado" href="">Revisar</a>
+                            <a class="btn btn_post_destacado" href=".../HTML/registroCaso.php">Revisar</a>
                         </div>
                                         <div class="swiper-slide featured_posts__item">
                                                     <img width="300px" src="https://www.asesoriamadridgesys.com/wp-content/uploads/Las-donaciones.jpg" alt="">
                             <h3>CASOS/XXXXX</h3>
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam ab repellat molestiae illum rerum nihil praesentium voluptatibus mollitia placeat corrupti?</p>
-                            <a class="btn btn_post_destacado" href="">Revisar</a>
+                            <a class="btn btn_post_destacado" href=".../HTML/registroCaso.php">REVISAR</a>
                         </div>
                                         <div class="swiper-slide featured_posts__item">
                                                     <img width="300px" src="https://www.asesoriamadridgesys.com/wp-content/uploads/Las-donaciones.jpg" alt="">
                             <h3>CASOS/XXXXX</h3>
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, inventore tempore ipsam earum quo consequuntur provident impedit! Odio, accusantium quaerat?</p>
-                            <a class="btn btn_post_destacado" href="/">Revisar</a>
+                            <a class="btn btn_post_destacado" href=".../HTML/registroCaso.php">Revisar</a>
                         </div>
                                     </div>
                     <div class="swiper-pagination"></div>

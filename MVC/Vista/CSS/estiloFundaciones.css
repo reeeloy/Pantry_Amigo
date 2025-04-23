@@ -1,0 +1,155 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #2b577d;
+    font-family: 'Arial', sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fffaf3;
+    padding: 10px 30px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logito {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logito img {
+    width: 40px;
+}
+
+.navbar nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.search-bar {
+    padding: 5px 10px;
+    border-radius: 20px;
+    border: 1px solid #fffaf3;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.fundacion-card {
+    background-color: #fffaf3;
+    display: flex;
+    align-items: center;
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.fundacion-card img {
+    width: 200px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-right: 20px;
+}
+
+.fundacion-info h4 {
+    font-size: 14px;
+    margin: 0;
+}
+
+.fundacion-info p {
+    font-size: 13px;
+    margin: 10px 0;
+}
+
+.ver-mas-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #A6E3AC;
+    color: #333;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.ver-mas-btn:hover {
+    background-color: #8bd38c;
+}
+
+@keyframes slideInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.fundacion-card {
+    animation: slideInLeft 0.6s ease-out;
+}
+
+/* FOOTER */
+.footer {
+    background-color: #fffaf3;
+    padding: 40px 20px 20px;
+    margin-top: 40px;
+    border-top: 3px solid #fffaf3;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.footer-container div {
+    flex: 1;
+    margin: 10px;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links ul li {
+    margin-bottom: 8px;
+}
+
+.footer-links a,
+.footer-social a {
+    text-decoration: none;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+.footer-social a {
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.footer-social a:hover,
+.footer-links a:hover {
+    color: #2b577d;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    color: #666;
+    font-size: 14px;
+}

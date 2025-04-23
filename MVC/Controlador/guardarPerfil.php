@@ -1,8 +1,7 @@
 <?php
 session_start();
-include("../Modelo/ConexionBD.php");
-include("../Modelo/fundacionModelo.php");
-
+include("Pantry_Amigo\MVC\Modelo\ConexionBD.php");
+include("Pantry_Amigo\MVC\Modelo\fundacionModelo.php");
 $usuarioId = $_SESSION['Usu_Id'];
 
 
