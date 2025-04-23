@@ -146,7 +146,7 @@
       <ul class="card-list swiper-wrapper">
         <li class="card-item swiper-slide">
           <a href="#" class="card-link" onclick="window.location.href='Detalles.php?ID=9&tipo=recursos'">
-            <img src="../imagenes_casos/donacionalimentos.webp" alt="card Img" class="card-img">
+            <img src="../../../imagenes_casos/donacionalimentos.webp" alt="card Img" class="card-img">
             <p class="badge">Fundacion 13</p>
             <h2 class="card-title">Donacion de alimentos</h2>
             <p class="description">Estamos haciendo recolecta de alimentos para la cena de caridad mensual.</p>

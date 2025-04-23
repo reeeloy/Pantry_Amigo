@@ -1,15 +1,38 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap');
-/* Estilos generales */
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f1f5f9;
+
+/* Reset básico */
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
-.header {
-  background-color: #2563eb;
+
+/******/
+
+.barra-recaudacion {
+  width: 100%;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 25px;
+  margin-top: 10px;
+}
+
+.progreso {
+  height: 100%;
+  background-color: #7ec8a1;
+  color: white;
+  text-align: center;
+  line-height: 25px;
+  white-space: nowrap;
+}
+
+
+.titulo {
+  background-color: #2b577d;
   padding: 1.5rem 2rem;
   color: white;
   text-align: center;
