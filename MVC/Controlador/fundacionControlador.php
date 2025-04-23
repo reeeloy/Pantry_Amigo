@@ -1,7 +1,7 @@
 <?php
 session_start();
-include("Pantry_Amigo\MVC\Modelo\ConexionBD.php");
-include("Pantry_Amigo\MVC\Modelo\fundacionModelo.php");
+include_once '../../Modelo/ConexionBD.php';
+include_once '../../Modelo/fundacionModelo.php';
 
 $usuarioId = $_SESSION['Usu_Id'];
 
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $modelo->actualizar($entrada);
     }
 
-    header("Location: ../vista/perfilFundacion.php");
+    header("Location: ../../Vista/HTML/Fundacion_Dashboard.php");
     exit;
 }
 ?>
