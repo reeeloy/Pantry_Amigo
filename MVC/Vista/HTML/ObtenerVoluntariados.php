@@ -22,12 +22,12 @@ while ($fila = $resultadoDinero->fetch_assoc()) {
     $voluntariadosDinero[] = $fila;
 }
 
-// Consulta para obtener casos de recursos con voluntariado
+/*// Consulta para obtener casos de recursos con voluntariado
 $sqlRecursos = "SELECT * FROM Tbl_Casos_Recursos WHERE Caso_Voluntariado = 1";
 if (!$conexion->consulta($sqlRecursos)) {
     echo json_encode(["error" => "Error al consultar los casos de recursos"]);
     exit;
-}
+}*/
 $resultadoRecursos = $conexion->obtenerResult();
 $voluntariadosRecursos = [];
 while ($fila = $resultadoRecursos->fetch_assoc()) {

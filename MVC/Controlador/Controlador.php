@@ -8,7 +8,7 @@ require_once '../Modelo/Participacion.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
-        // REGISTRAR DONANTE (dinero)
+        // REGISTRAR DONAcion dinero (dinero)
         if (
             isset($_POST['regDonaCedula']) &&
             isset($_POST['regDonaNombre']) &&

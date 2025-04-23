@@ -1,48 +1,37 @@
 <?php
-require_once __DIR__ . '../../../MVC/Modelo/fundacion.php';
+session_start();
+include("Pantry_Amigo\MVC\Modelo\ConexionBD.php");
+include("Pantry_Amigo\MVC\Modelo\fundacionModelo.php");
 
-class FundacionControlador {
-    private $model;
+$usuarioId = $_SESSION['Usu_Id'];
 
-    public function __construct() {
-        $this->model = new Fundacion();
+$modelo = new FundacionModelo($conn);
+$datos = $modelo->obtenerPorUsuario($usuarioId);
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $imagen = $datos['Fund_Imagen'] ?? null;
+    if (isset($_FILES['foto']) && $_FILES['foto']['name'] !== "") {
+        $imagen = uniqid() . "_" . $_FILES['foto']['name'];
+        move_uploaded_file($_FILES['foto']['tmp_name'], "../imagenes/$imagen");
     }
 
-    public function procesarFormulario() {
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $id = $_POST['Fund_Id'];
-            $correo = $_POST['Fund_Correo'];
-            $username = $_POST['Fund_Username'];
-            $direccion = $_POST['Fund_Direccion'];
-            $casos_activos = $_POST['Fund_Casos_Activos'];
-            $telefono = $_POST['Fund_Telefono'];
-            $usu_id = $_POST['Fund_Usu_Id'];
-            $accion = $_POST['accion'];
+    $entrada = [
+        'username' => $_POST['Fund_Username'],
+        'correo' => $_POST['Fund_Correo'],
+        'direccion' => $_POST['Fund_Direccion'],
+        'casos' => $_POST['Fund_Casos_Activos'],
+        'telefono' => $_POST['Fund_Telefono'],
+        'usuarioId' => $usuarioId,
+        'imagen' => $imagen
+    ];
 
-            if ($accion == "registrar") {
-                $registrado = $this->model->registrarFundacion($id, $correo, $username, $direccion, $casos_activos, $telefono, $usu_id);
-                if ($registrado) {
-                    header("Location: ../Vista/HTML/from_Fundacion.php?mensaje=" . urlencode("✅ Fundación registrada con ID: $id"));
-                    exit();
-                }
-            } elseif ($accion == "actualizar") {
-                $actualizado = $this->model->actualizarFundacion($id, $correo, $username, $direccion, $casos_activos, $telefono, $usu_id);
-                if ($actualizado) {
-                    header("Location: ../Vista/HTML/from_Fundacion.php?mensaje=" . urlencode("✅ Datos de la fundación actualizados."));
-                    exit();
-                }
-            }
-
-            header("Location: ../Vista/HTML/from_Fundacion.php?mensaje=" . urlencode("❌ Error al procesar la solicitud."));
-            exit();
-        }
+    if (isset($_POST['registrar'])) {
+        $modelo->registrar($entrada);
+    } elseif (isset($_POST['actualizar'])) {
+        $modelo->actualizar($entrada);
     }
 
-    public function obtenerFundacion($id) {
-        return $this->model->obtenerFundacion($id);
-    }
+    header("Location: ../vista/perfilFundacion.php");
+    exit;
 }
-
-$controlador = new FundacionControlador();
-$controlador->procesarFormulario();
 ?>
