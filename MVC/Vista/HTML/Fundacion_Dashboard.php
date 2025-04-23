@@ -88,14 +88,13 @@
 
     /* ==== Horarios: fondo claro y texto oscuro ==== */
     .voluntario .horarios {
-      background-color: var(--gris-claro);
-      color: var(--gris-oscuro);
+      background-color: #f0f0f0;
+      color: #333;
       margin-top: .5em; padding: .5em; border-left: 2px solid #2b577d;
       border-radius: 4px;
     }
     .voluntario .horarios li {
       margin-bottom: .3em;
-      color: var(--gris-oscuro);
     }
 
     /* ==== Formulario Inline Asignar Horario ==== */
@@ -113,6 +112,16 @@
     #form-asignar-horario .acciones-form button {
       padding:.6em 1em; margin-left:.5em; cursor:pointer;
     }
+
+    /* ==== Ayuda ==== */
+    #ayuda h3 { color: #2b577d; }
+    #ayuda h4 { margin-top: 1em; }
+    #ayuda ul { margin-left: 1.2em; }
+    #ayuda ul li { margin-bottom: .5em; }
+    #ayuda p { margin: .6em 0; }
+
+    /* Secciones ocultas */
+    .seccion-oculta { display: none; }
   </style>
 </head>
 <body>
@@ -127,6 +136,8 @@
         <a href="#" id="casos-link"><i class="fas fa-folder-open"></i> Casos</a>
         <a href="#" id="crear-caso-link"><i class="fas fa-plus-circle"></i> Crear Caso</a>
         <a href="#" id="voluntarios-link"><i class="fas fa-users"></i> Voluntarios</a>
+        <a href="#" id="ayuda-link"><i class="fas fa-question-circle"></i> Ayuda</a>
+        <a href="/Pantry_Amigo/logout.php" id="cerrar-sesion-link"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
       </nav>
     </aside>
 
@@ -153,8 +164,7 @@
       <!-- CREAR CASO -->
       <section id="crearCaso" class="seccion-oculta">
         <h3>Crear Caso</h3>
-        <a href="/Pantry_Amigo/MVC/Vista/HTML/RegistrarCasoDinero.php"
-           class="boton-crear-caso">
+        <a href="/Pantry_Amigo/MVC/Vista/HTML/RegistrarCasoDinero.php" class="boton-crear-caso">
           <i class="fas fa-plus"></i> Registrar Caso de Dinero
         </a>
       </section>
@@ -188,36 +198,59 @@
 
         <div id="lista-voluntarios"></div>
       </section>
+
+      <!-- AYUDA -->
+        <section id="ayuda" class="seccion-oculta">
+        <h3>Ayuda / Soporte</h3>
+        <h4>Preguntas Frecuentes</h4>
+        <ul>
+          <li><strong>¿Cómo creo un nuevo caso?</strong> Ve a "Crear Caso" y completa el formulario.</li>
+          <li><strong>¿Cómo actualizo un caso?</strong> En "Casos", pulsa "Actualizar" sobre el caso deseado.</li>
+          <li><strong>¿Cómo asigno voluntarios?</strong> En "Voluntarios", pulsa "Asignar horario".</li>
+        </ul>
+        <br><br>
+        <h4>Contacto</h4>
+        <p><i class="fas fa-envelope"></i> soporte@pantryamigo.org</p>
+        <p><i class="fas fa-phone"></i> +57 123 456 7890</p>
+      </section>
     </main>
   </div>
 
   <script>
-    let casosDineroData = [],
-        voluntariosData = [],
-        horariosData    = [];
+    let casosDineroData = [], voluntariosData = [], horariosData = [];
 
     const secciones = {
       'perfil-link':    'perfil',
       'casos-link':     'casos',
       'crear-caso-link':'crearCaso',
-      'voluntarios-link':'voluntarios'
+      'voluntarios-link':'voluntarios',
+      'ayuda-link':     'ayuda'
     };
 
     document.querySelectorAll('.menu a').forEach(a => {
       a.addEventListener('click', e => {
-        e.preventDefault();
         const id = e.currentTarget.id;
+        // Cerrar sesión deja comportamiento por defecto
+        if (id === 'cerrar-sesion-link') return;
+        e.preventDefault();
+        // Crear Caso → formulario externo
         if (id === 'crear-caso-link') {
-          return window.location.href = '/Pantry_Amigo/MVC/Vista/HTML/RegistrarCasoDinero.php';
+          window.location.href = '/Pantry_Amigo/MVC/Vista/HTML/RegistrarCasoDinero.php';
+          return;
         }
-        Object.values(secciones).forEach(sec=>
+        // Ocultar todas
+        Object.values(secciones).forEach(sec =>
           document.getElementById(sec).classList.replace('seccion-activa','seccion-oculta')
         );
+        // Mostrar la seleccionada
         const sel = secciones[id];
         document.getElementById(sel).classList.replace('seccion-oculta','seccion-activa');
+        // Título y menú activo
         document.getElementById('titulo-seccion').innerText = e.currentTarget.textContent.trim();
         document.querySelectorAll('.menu a').forEach(x=>x.classList.remove('active'));
         e.currentTarget.classList.add('active');
+
+        // Carga de datos
         if (sel === 'casos')       cargarCasos();
         if (sel === 'voluntarios') cargarVoluntarios();
       });
@@ -251,14 +284,13 @@
         cont.appendChild(d);
       });
     }
-    document.getElementById('btn-filtrar-casos')
-      .addEventListener('click', ()=>{
-        const t = document.getElementById('filtro-casos').value.trim().toLowerCase();
-        renderCasos(casosDineroData.filter(ci=>
-          ci.Caso_Id.toString().includes(t) ||
-          ci.Caso_Nombre.toLowerCase().includes(t)
-        ));
-      });
+    document.getElementById('btn-filtrar-casos').addEventListener('click', ()=>{
+      const t = document.getElementById('filtro-casos').value.trim().toLowerCase();
+      renderCasos(casosDineroData.filter(ci=>
+        ci.Caso_Id.toString().toLowerCase().includes(t) ||
+        ci.Caso_Nombre.toLowerCase().includes(t)
+      ));
+    });
     function openEditar(id){
       window.location.href = `/Pantry_Amigo/MVC/Vista/HTML/RegistrarCasoDinero.php?id=${id}`;
     }
@@ -293,9 +325,8 @@
             <button class="delete-vol" onclick="eliminarVol('${v.Vol_Cedula}')"><i class="fas fa-trash-alt"></i> Eliminar</button>
             <button class="assign-hor" onclick="openAsignar('${v.Vol_Cedula}')"><i class="fas fa-clock"></i> Asignar horario</button>
           </div>`;
-        // mostrar horarios asignados
-        const hs = horariosData.filter(h=> h.Hora_Vol_Cedula === v.Vol_Cedula);
-        if (hs.length) {
+        const hs = horariosData.filter(h=>h.Hora_Vol_Cedula===v.Vol_Cedula);
+        if(hs.length){
           html += `<div class="horarios"><strong>Horarios:</strong><ul>`;
           hs.forEach(h=> html += `<li>${h.Hora_Citacion} en ${h.Hora_Localizacion}</li>`);
           html += `</ul></div>`;
@@ -310,11 +341,10 @@
         .then(r=>r.json()).then(_=> cargarVoluntarios());
     }
 
-    // Formularios inline
+    // Formularios inline de horarios
     const formHor = document.getElementById('form-asignar-horario'),
           horForm = document.getElementById('horario-form');
-    document.getElementById('btn-cancelar-hor')
-      .addEventListener('click', ()=> formHor.style.display='none');
+    document.getElementById('btn-cancelar-hor').addEventListener('click', ()=>formHor.style.display='none');
     function openAsignar(ced){
       document.getElementById('hor-vol-cedula').value = ced;
       formHor.style.display = 'block';
@@ -332,17 +362,19 @@
       });
     });
 
-    // Filtrar voluntarios
+    // Filtrar voluntarios (ajustado para funcionar de nuevo)
     document.getElementById('btn-filtrar-voluntarios')
       .addEventListener('click', ()=>{
         const t = document.getElementById('filtro-voluntarios').value.trim().toLowerCase();
-        renderVoluntarios(voluntariosData.filter(v=>
-          v.Vol_Cedula.includes(t) ||
-          `${v.Vol_Nombre} ${v.Vol_Apellido}`.toLowerCase().includes(t)
-        ));
+        renderVoluntarios(
+          voluntariosData.filter(v =>
+            v.Vol_Cedula.toString().toLowerCase().includes(t) ||
+            (`${v.Vol_Nombre} ${v.Vol_Apellido}`).toLowerCase().includes(t)
+          )
+        );
       });
 
-    // Al cargar: muestra perfil
+    // Arranque: dejamos Perfil
     window.onload = () => {};
   </script>
 </body>
