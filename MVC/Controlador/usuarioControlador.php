@@ -12,6 +12,7 @@ if (isset($_POST['login'])) {
 
     if ($result->num_rows == 1) {
         $row = $result->fetch_assoc();
+        $_SESSION['Usu_Id'] = $row['Usu_Id']; //esta linea importante
         $_SESSION['username'] = $row['Usu_Username'];
         $_SESSION['tipo'] = $row['Usu_Tipo'];
 
