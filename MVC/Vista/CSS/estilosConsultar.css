@@ -2,73 +2,172 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
-
 body {
-    font-family: Arial, sans-serif;
-    background-image: url();
+  background-color: #f4f4f4;
+  padding-top: 100px; /* Para compensar el header fijo */
 }
 
-/*headerrr*/
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-size: 16px;
+}
+
+/* Utilidades */
+.section-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section-title {
+  text-align: center;
+  padding: 60px 0 40px;
+  text-transform: uppercase;
+  font-size: 2rem;
+  position: relative;
+}
+
+.section-title::after {
+  content: "";
+  width: 80px;
+  height: 5px;
+  display: block;
+  margin: 10px auto 0;
+  border-radius: 8px;
+  background: #7ec8a1;
+}
+
+/* Header / Navbar */
 header {
-    background-color: #fff;
-    padding: 10px 20px;
-    box-shadow: 0 0 15px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 5;
+  background: #2b577d;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
 }
 
-.nav-left, .nav-right {
-    display: flex;
-    align-items: center;
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.nav-link1 {
-    padding-right: 40px;
-    padding-left: 40px;
-    text-decoration: none;
-    color: #4CAF50;
-    font-size: 17px;
-}
-.nav-link2 {
-    padding-right: 40px;
-    padding-left: 40px;
-    text-decoration: none;
-    color: #000;
-    font-size: 17px;
-}
-.nav-link3 {
-    padding-right: 40px;
-    padding-left: 40px;
-    text-decoration: none;
-    color: #000;
-    font-size: 17px;
-}
-.nav-link1:hover {
-    color: #4CAF50; /* Color verde como el de "INICIO" */
+.nav-logo img {
+  width: 60px;
+  height: auto;
 }
 
-
-.logo {
-    width: 100px;
-    height: auto;
+.nav-logo .logo-text {
+  font-size: 2rem;
+  color: #fffaf3;
 }
 
-.icon {
-    width: 20px;
-    height: auto;
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
 }
 
-/* barra de busqueda*/
+.nav-link {
+  color: #fffaf3;
+  padding: 10px 18px;
+  font-size: 1.1rem;
+  border-radius: 30px;
+  transition: 0.3s ease;
+}
+
+.nav-link:hover {
+  background-color: #7ec8a1;
+  color: #2b577d;
+  font-weight: 600;
+}
+
+.nav-item {
+  position: relative;
+}
+
+/* Submenús */
+.submenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fffaf3;
+  border-radius: 30px;
+  border: 1px solid #d9d9d9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  min-width: 150px;
+  z-index: 999;
+}
+
+.submenu li a {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #2b577d;
+  font-weight: normal;
+  transition: 0.3s ease;
+}
+
+.submenu li a:hover {
+  background-color: #7ec8a1;
+  color: #fffaf3;
+  border-radius: 30px;
+}
+
+.nav-item:hover .submenu {
+  display: block;
+}
+
+/* Botones de filtro */
+.botones {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.botones button {
+  background-color: #7ec8a1;
+  padding: 10px 25px;
+  border-radius: 15px;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.botones button:hover {
+  background-color: #2b577d;
+  color: #fffaf3;
+}
 /* Barra de búsqueda */
 .search-container {
     display: flex;
     align-items: center;
-    background-color: #444;
+    background-color: #d9d9d9;
     padding: 8px;
     border-radius: 5px;
     margin: 20px;
@@ -95,7 +194,6 @@ header {
     border-radius: 5px;
     border-color: #77c04b;
     font-size: medium;
-    font-family: Georgia, Times, 'Times New Roman', serif;
     width: 80px;
 }
 
@@ -110,7 +208,7 @@ header {
     align-items: center;
     background-color: white;
     padding: 10px;
-    border-bottom: 2px solid #444;
+    border-bottom: 2px solid #000000;
 }
 
 .result-item span {
@@ -125,3 +223,4 @@ header {
 .icons i:hover {
     color: #77c04b;
 }
+
