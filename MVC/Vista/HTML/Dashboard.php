@@ -209,7 +209,7 @@
                     console.error('Error al cargar los casos:', error);
                     listaCasos.innerHTML = `<p>Error al cargar los casos: ${error.message}</p>`;
                 });
-        }
+        } 
 
         // Función para mostrar casos en la interfaz
         function mostrarCasos(casos) {
