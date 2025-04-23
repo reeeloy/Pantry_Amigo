@@ -23,7 +23,7 @@
     </header>
 
     <div class="search-container">
-        <form id="frmConsultar" action="../../Controlador/donacionDineroControlador.php" method="POST">
+    <form id="frmConsultar" action="../../Controlador/donacionDineroControlador.php" method="POST">
             <input type="text" name="cedula" placeholder="Ingrese CC del donante" class="search-input">
             <input type="submit" value="Consultar" id="resEnviar">
         </form>
