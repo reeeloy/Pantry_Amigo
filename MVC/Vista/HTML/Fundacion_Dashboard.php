@@ -5,7 +5,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dashboard Fundación</title>
-  <link rel="stylesheet" href="../CSS/fundacion_dashboard.css"/>
+  <link rel="stylesheet" href="/Pantry_Amigo/MVC/Vista/CSS/fundacion_dashboard.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <style>
     /* ==== Tarjeta de Caso ==== */
@@ -138,7 +138,7 @@
 
       <!-- PERFIL -->
       <section id="perfil" class="seccion-activa">
-      <?php include '../../Vista/HTML/perfilFundacion.php'; ?>
+        <p>Bienvenido a tu dashboard, aquí verás la información de tu fundación.</p>
       </section>
 
       <!-- CASOS -->
@@ -293,6 +293,7 @@
             <button class="delete-vol" onclick="eliminarVol('${v.Vol_Cedula}')"><i class="fas fa-trash-alt"></i> Eliminar</button>
             <button class="assign-hor" onclick="openAsignar('${v.Vol_Cedula}')"><i class="fas fa-clock"></i> Asignar horario</button>
           </div>`;
+        // mostrar horarios asignados
         const hs = horariosData.filter(h=> h.Hora_Vol_Cedula === v.Vol_Cedula);
         if (hs.length) {
           html += `<div class="horarios"><strong>Horarios:</strong><ul>`;
@@ -331,20 +332,17 @@
       });
     });
 
-    // Filtrar voluntarios (con cédula y nombre)
+    // Filtrar voluntarios
     document.getElementById('btn-filtrar-voluntarios')
       .addEventListener('click', ()=>{
-        const term = document.getElementById('filtro-voluntarios')
-                         .value.trim().toLowerCase();
-        const filtrados = voluntariosData.filter(v => {
-          const ced = String(v.Vol_Cedula).toLowerCase();
-          const full = `${v.Vol_Nombre} ${v.Vol_Apellido}`.toLowerCase();
-          return ced.includes(term) || full.includes(term);
-        });
-        renderVoluntarios(filtrados);
+        const t = document.getElementById('filtro-voluntarios').value.trim().toLowerCase();
+        renderVoluntarios(voluntariosData.filter(v=>
+          v.Vol_Cedula.includes(t) ||
+          `${v.Vol_Nombre} ${v.Vol_Apellido}`.toLowerCase().includes(t)
+        ));
       });
 
-    // Al cargar la página
+    // Al cargar: muestra perfil
     window.onload = () => {};
   </script>
 </body>
