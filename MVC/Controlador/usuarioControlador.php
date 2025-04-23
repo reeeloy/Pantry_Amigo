@@ -16,7 +16,7 @@ if (isset($_POST['login'])) {
         $_SESSION['username'] = $row['Usu_Username'];
         $_SESSION['tipo'] = $row['Usu_Tipo'];
 
-        header("Location: " . ($row['Usu_Tipo'] == 'Administrador' ? "../Vista/HTML/pruebaAdmin.php" : "../Vista/HTML/Dashboard.php"));
+        header("Location: " . ($row['Usu_Tipo'] == 'Administrador' ? "../Vista/HTML/Administrador_Dashboard.php" : "../Vista/HTML/Fundacion_Dashboard.php"));
         exit();
     } else {
         // Mostrar alerta y redirigir al login con un mensaje de error

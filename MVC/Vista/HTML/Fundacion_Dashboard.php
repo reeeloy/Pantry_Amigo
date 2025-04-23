@@ -1,3 +1,4 @@
+<!-- Fundacion_Dashboard.php -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,63 +8,111 @@
   <link rel="stylesheet" href="/Pantry_Amigo/MVC/Vista/CSS/fundacion_dashboard.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <style>
-    /* ===== Formularios ===== */
-    .form-caso {
-      display: none; background: #fff; border: 1px solid #ccc;
-      padding: 1em; border-radius: 6px; margin-bottom: 1em;
-    }
-    .form-caso h4 { margin-top:0; color:#2b577d; }
-    .form-caso div { margin-bottom:.8em; }
-    .form-caso label { font-weight:bold; margin-bottom:.3em; display:block; }
-    .form-caso input, .form-caso select, .form-caso textarea {
-      width:100%; padding:.6em; border:1px solid #ccc; border-radius:4px;
-    }
-    .form-caso .acciones-form { text-align:right; }
-    .form-caso .acciones-form button { padding:.6em 1em; margin-left:.5em; }
-    /* ===== Botones ===== */
-    #btn-agregar-caso {
-      background:#7ec8a1; color:#fff; border:none;
-      padding:.6em 1em; border-radius:4px; cursor:pointer;
-      margin-bottom:1em;
-    }
-    #btn-agregar-caso:hover { background:#65b28a; }
-    /* ===== Tarjeta de Caso ===== */
+    /* ==== Tarjeta de Caso ==== */
     .caso {
-      background:#f8f9fa; padding:1em; margin-bottom:.8em;
-      border-radius:6px; box-shadow:0 2px 4px rgba(0,0,0,0.1);
+      background: #f8f9fa;
+      padding: 1em;
+      margin-bottom: .8em;
+      border-radius: 6px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
-    .caso h4 { margin:0 0 .5em; color:#2b577d; }
-    .caso p { margin:.4em 0; color:#333; }
-    /* Sólo en sección “Casos” */
+    .caso h4 { margin: 0 0 .5em; color: #2b577d; }
+    .caso p { margin: .4em 0; color: #333; }
+
+    /* ==== Acciones en “Casos” ==== */
     section#casos .caso .acciones {
-      margin-top:.6em; display:flex; gap:.5em;
+      margin-top: .6em; display: flex; gap: .5em;
     }
     section#casos .caso .acciones button {
-      padding:4px 8px; font-size:.8em; border:none; border-radius:4px; cursor:pointer;
-      transition:background .2s;
+      padding: 4px 8px; font-size: .8em; border: none;
+      border-radius: 4px; cursor: pointer; transition: background .2s;
+      color: white;
     }
-    section#casos .caso .acciones button:first-child {
-      background:#2b577d; color:#fff;
+    section#casos .caso .acciones button.update { background: #2b577d; }
+    section#casos .caso .acciones button.delete { background: #e74c3c; }
+    section#casos .caso .acciones button.update:hover { background: #1f3f5c; }
+    section#casos .caso .acciones button.delete:hover { background: #c0392b; }
+
+    /* ==== Barra de búsqueda ==== */
+    .search-bar {
+      margin: 15px 0; display: flex; gap: 10px;
     }
-    section#casos .caso .acciones button:last-child {
-      background:#e74c3c; color:#fff;
-    }
-    section#casos .caso .acciones button:first-child:hover {
-      background:#1e3f5c;
-    }
-    section#casos .caso .acciones button:last-child:hover {
-      background:#c0392b;
-    }
-    /* ===== Barra de búsqueda ===== */
-    .search-bar { margin:15px 0; display:flex; gap:10px; }
     .search-bar input {
-      flex:1; padding:8px; border:1px solid #ccc; border-radius:5px;
+      flex: 1; padding: 8px; border: 1px solid #ccc; border-radius: 5px;
     }
     .search-bar button {
-      padding:8px 12px; background:#2b577d; color:#fff; border:none;
-      border-radius:5px; cursor:pointer; transition:background .2s;
+      padding: 8px 12px; background-color: #2b577d;
+      color: white; border: none; border-radius: 5px;
+      cursor: pointer; transition: background .2s;
     }
-    .search-bar button:hover { background:#1f3e5b; }
+    .search-bar button:hover { background-color: #1f3e5b; }
+
+    /* ==== Botón externo Crear Caso ==== */
+    .boton-crear-caso {
+      display: inline-block; padding: 10px 15px;
+      background-color: var(--verde-claro); color: var(--azul-oscuro);
+      border-radius: 5px; text-decoration: none; font-weight: bold;
+      margin-top: 1em; transition: background .2s;
+    }
+    .boton-crear-caso:hover { background-color: #65b28a; }
+
+    /* ==== Tarjeta de Voluntario ==== */
+    .voluntario {
+      background: #f8f9fa; padding: 1em; margin-bottom: .8em;
+      border-radius: 6px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .voluntario h4 { margin: 0 0 .5em; color: #2b577d; }
+    .voluntario p { margin: .4em 0; color: #333; }
+
+    /* ==== Acciones en Voluntarios ==== */
+    section#voluntarios .voluntario .acciones {
+      margin-top: .6em; display: flex; gap: .5em;
+    }
+    section#voluntarios .voluntario .acciones button {
+      padding: 4px 8px; font-size: .8em; border: none;
+      border-radius: 4px; cursor: pointer; transition: background .2s;
+      color: white;
+    }
+    section#voluntarios .voluntario .acciones button.delete-vol {
+      background: #e74c3c;
+    }
+    section#voluntarios .voluntario .acciones button.delete-vol:hover {
+      background: #c0392b;
+    }
+    section#voluntarios .voluntario .acciones button.assign-hor {
+      background: #2b577d;
+    }
+    section#voluntarios .voluntario .acciones button.assign-hor:hover {
+      background: #1f3f5c;
+    }
+
+    /* ==== Horarios: fondo claro y texto oscuro ==== */
+    .voluntario .horarios {
+      background-color: var(--gris-claro);
+      color: var(--gris-oscuro);
+      margin-top: .5em; padding: .5em; border-left: 2px solid #2b577d;
+      border-radius: 4px;
+    }
+    .voluntario .horarios li {
+      margin-bottom: .3em;
+      color: var(--gris-oscuro);
+    }
+
+    /* ==== Formulario Inline Asignar Horario ==== */
+    #form-asignar-horario {
+      display: none; background: #fff; border: 1px solid #ccc;
+      padding: 1em; border-radius: 6px; margin: 1em 0;
+    }
+    #form-asignar-horario h4 { margin-top:0; color:#2b577d; }
+    #form-asignar-horario div { margin-bottom:.8em; }
+    #form-asignar-horario label { font-weight:bold; display:block; margin-bottom:.3em; }
+    #form-asignar-horario input {
+      width:100%; padding:.6em; border:1px solid #ccc; border-radius:4px;
+    }
+    #form-asignar-horario .acciones-form { text-align:right; }
+    #form-asignar-horario .acciones-form button {
+      padding:.6em 1em; margin-left:.5em; cursor:pointer;
+    }
   </style>
 </head>
 <body>
@@ -77,6 +126,7 @@
         <a href="#" id="perfil-link" class="active"><i class="fas fa-user"></i> Perfil</a>
         <a href="#" id="casos-link"><i class="fas fa-folder-open"></i> Casos</a>
         <a href="#" id="crear-caso-link"><i class="fas fa-plus-circle"></i> Crear Caso</a>
+        <a href="#" id="voluntarios-link"><i class="fas fa-users"></i> Voluntarios</a>
       </nav>
     </aside>
 
@@ -93,220 +143,209 @@
 
       <!-- CASOS -->
       <section id="casos" class="seccion-oculta">
-        <h3>Casos de Donación</h3>
-
-        <!-- Formulario INLINE de actualización -->
-        <div id="form-editar-caso" class="form-caso">
-          <h4>Actualizar Caso</h4>
-          <form id="editar-caso-form">
-            <input type="hidden" name="Caso_Id" id="edit-caso-id">
-            <input type="hidden" name="Caso_Fund_Id" value="<?php echo $_SESSION['id_fundacion']; ?>">
-            <div><label><strong>ID:</strong></label><input type="text" id="edit-caso-id-display" readonly></div>
-            <div><label for="edit-caso-nombre"><strong>Nombre:</strong></label><input type="text" id="edit-caso-nombre" name="Caso_Nombre" required></div>
-            <div><label for="edit-caso-desc"><strong>Descripción:</strong></label><textarea id="edit-caso-desc" name="Caso_Descripcion" required></textarea></div>
-            <div><label for="edit-caso-meta"><strong>Meta:</strong></label><input type="number" id="edit-caso-meta" name="Caso_Monto_Meta" required></div>
-            <div><label for="edit-caso-recaudado"><strong>Recaudado:</strong></label><input type="number" id="edit-caso-recaudado" name="Caso_Monto_Recaudado" required></div>
-            <div><label for="edit-caso-fecha-inicio"><strong>Inicio:</strong></label><input type="date" id="edit-caso-fecha-inicio" name="Caso_Fecha_Inicio" required></div>
-            <div><label for="edit-caso-fecha-fin"><strong>Fin:</strong></label><input type="date" id="edit-caso-fecha-fin" name="Caso_Fecha_Fin" required></div>
-            <div><label for="edit-caso-estado"><strong>Estado:</strong></label><select id="edit-caso-estado" name="Caso_Estado" required>
-              <option value="Activo">Activo</option><option value="Inactivo">Inactivo</option>
-            </select></div>
-            <div><label for="edit-caso-vol"><strong>Voluntariado:</strong></label><input type="number" id="edit-caso-vol" name="Caso_Voluntariado" min="0" required></div>
-            <div><label for="edit-caso-cat"><strong>Categoría:</strong></label><input type="text" id="edit-caso-cat" name="Caso_Cat_Nombre" required></div>
-            <div class="acciones-form">
-              <button type="button" id="btn-cancelar-editar"><i class="fas fa-times"></i> Cancelar</button>
-              <button type="submit"><i class="fas fa-save"></i> Guardar</button>
-            </div>
-          </form>
-        </div>
-
-        <!-- Búsqueda -->
         <div class="search-bar">
           <input type="text" id="filtro-casos" placeholder="Buscar caso por ID o nombre">
           <button id="btn-filtrar-casos"><i class="fas fa-filter"></i> Filtrar</button>
         </div>
-        <!-- Listado -->
         <div id="lista-casos-dinero"></div>
       </section>
 
       <!-- CREAR CASO -->
       <section id="crearCaso" class="seccion-oculta">
         <h3>Crear Caso</h3>
-        <button id="btn-agregar-caso"><i class="fas fa-plus"></i> Añadir Caso</button>
-        <div id="form-crear-caso" class="form-caso">
-          <h4>Agregar Caso</h4>
-          <form id="crear-caso-form">
-            <input type="hidden" name="Caso_Fund_Id" value="<?php echo $_SESSION['id_fundacion']; ?>">
-            <div><label for="new-caso-nombre"><strong>Nombre:</strong></label><input type="text" id="new-caso-nombre" name="Caso_Nombre" required></div>
-            <div><label for="new-caso-desc"><strong>Descripción:</strong></label><textarea id="new-caso-desc" name="Caso_Descripcion" required></textarea></div>
-            <div><label for="new-caso-meta"><strong>Meta:</strong></label><input type="number" id="new-caso-meta" name="Caso_Monto_Meta" required></div>
-            <div><label for="new-caso-recaudado"><strong>Recaudado:</strong></label><input type="number" id="new-caso-recaudado" name="Caso_Monto_Recaudado" required></div>
-            <div><label for="new-caso-fecha-inicio"><strong>Inicio:</strong></label><input type="date" id="new-caso-fecha-inicio" name="Caso_Fecha_Inicio" required></div>
-            <div><label for="new-caso-fecha-fin"><strong>Fin:</strong></label><input type="date" id="new-caso-fecha-fin" name="Caso_Fecha_Fin" required></div>
-            <div><label for="new-caso-estado"><strong>Estado:</strong></label><select id="new-caso-estado" name="Caso_Estado" required>
-              <option value="Activo">Activo</option><option value="Inactivo">Inactivo</option>
-            </select></div>
-            <div><label for="new-caso-vol"><strong>Voluntariado:</strong></label><input type="number" id="new-caso-vol" name="Caso_Voluntariado" min="0" required></div>
-            <div><label for="new-caso-cat"><strong>Categoría:</strong></label><input type="text" id="new-caso-cat" name="Caso_Cat_Nombre" required></div>
+        <a href="/Pantry_Amigo/MVC/Vista/HTML/RegistrarCasoDinero.php"
+           class="boton-crear-caso">
+          <i class="fas fa-plus"></i> Registrar Caso de Dinero
+        </a>
+      </section>
+
+      <!-- VOLUNTARIOS -->
+      <section id="voluntarios" class="seccion-oculta">
+        <div class="search-bar">
+          <input type="text" id="filtro-voluntarios" placeholder="Buscar por cédula o nombre">
+          <button id="btn-filtrar-voluntarios"><i class="fas fa-filter"></i> Filtrar</button>
+        </div>
+
+        <!-- Formulario inline Asignar Horario -->
+        <div id="form-asignar-horario">
+          <h4>Asignar Horario</h4>
+          <form id="horario-form">
+            <input type="hidden" name="Hora_Vol_Cedula" id="hor-vol-cedula">
+            <div>
+              <label for="hor-citacion">Hora Citación</label>
+              <input type="datetime-local" id="hor-citacion" name="Hora_Citacion" required>
+            </div>
+            <div>
+              <label for="hor-localizacion">Localización</label>
+              <input type="text" id="hor-localizacion" name="Hora_Localizacion" required>
+            </div>
             <div class="acciones-form">
-              <button type="button" id="btn-cancelar-crear"><i class="fas fa-times"></i> Cancelar</button>
+              <button type="button" id="btn-cancelar-hor"><i class="fas fa-times"></i> Cancelar</button>
               <button type="submit"><i class="fas fa-save"></i> Guardar</button>
             </div>
           </form>
         </div>
-        <div class="search-bar">
-          <input type="text" id="filtro-casos-crear" placeholder="Buscar caso por ID o nombre">
-          <button id="btn-filtrar-casos-crear"><i class="fas fa-filter"></i> Filtrar</button>
-        </div>
-        <div id="lista-casos-dinero-crear"></div>
+
+        <div id="lista-voluntarios"></div>
       </section>
     </main>
   </div>
 
   <script>
-    let casosDineroData = [];
+    let casosDineroData = [],
+        voluntariosData = [],
+        horariosData    = [];
 
-    // Pestañas
     const secciones = {
-      'perfil-link':'perfil',
-      'casos-link':'casos',
-      'crear-caso-link':'crearCaso'
+      'perfil-link':    'perfil',
+      'casos-link':     'casos',
+      'crear-caso-link':'crearCaso',
+      'voluntarios-link':'voluntarios'
     };
-    document.querySelectorAll('.menu a').forEach(a=>{
-      a.addEventListener('click', e=>{
+
+    document.querySelectorAll('.menu a').forEach(a => {
+      a.addEventListener('click', e => {
         e.preventDefault();
-        Object.values(secciones).forEach(sec=>{
-          document.getElementById(sec).classList.add('seccion-oculta');
-          document.getElementById(sec).classList.remove('seccion-activa');
-        });
-        const sel = secciones[e.currentTarget.id];
+        const id = e.currentTarget.id;
+        if (id === 'crear-caso-link') {
+          return window.location.href = '/Pantry_Amigo/MVC/Vista/HTML/RegistrarCasoDinero.php';
+        }
+        Object.values(secciones).forEach(sec=>
+          document.getElementById(sec).classList.replace('seccion-activa','seccion-oculta')
+        );
+        const sel = secciones[id];
         document.getElementById(sel).classList.replace('seccion-oculta','seccion-activa');
         document.getElementById('titulo-seccion').innerText = e.currentTarget.textContent.trim();
         document.querySelectorAll('.menu a').forEach(x=>x.classList.remove('active'));
         e.currentTarget.classList.add('active');
-        if (sel==='casos' || sel==='crearCaso') cargarCasosDinero();
+        if (sel === 'casos')       cargarCasos();
+        if (sel === 'voluntarios') cargarVoluntarios();
       });
     });
 
-    // EDICIÓN INLINE
-    const formEditar = document.getElementById('form-editar-caso');
-    const editarForm = document.getElementById('editar-caso-form');
-    document.getElementById('btn-cancelar-editar').addEventListener('click', ()=>formEditar.style.display='none');
-    editarForm.addEventListener('submit', e=>{
-      e.preventDefault();
-      const fd = new FormData(editarForm);
-      console.log(Object.fromEntries(fd.entries())); // mira qué envías
-      fetch('/Pantry_Amigo/MVC/Vista/HTML/update_caso_dinero.php', {
-        method:'POST', body: fd
-      })
-      .then(r=>r.json())
-      .then(d=>{
-        alert(d.message);
-        formEditar.style.display='none';
-        cargarCasosDinero();
-      })
-      .catch(err=>alert('Error de red: '+err.message));
-    });
-
-    // CREACIÓN
-    const formCrear = document.getElementById('form-crear-caso');
-    const crearForm = document.getElementById('crear-caso-form');
-    document.getElementById('btn-agregar-caso').addEventListener('click', ()=>formCrear.style.display='block');
-    document.getElementById('btn-cancelar-crear').addEventListener('click', ()=>formCrear.style.display='none');
-    crearForm.addEventListener('submit', e=>{
-      e.preventDefault();
-      const fd = new FormData(crearForm);
-      console.log('crear→', Object.fromEntries(fd.entries())); // mira qué envías
-      fetch('/Pantry_Amigo/MVC/Vista/HTML/add_caso_dinero.php', {
-        method:'POST', body: fd
-      })
-      .then(r=>r.json())
-      .then(d=>{
-        alert(d.message);
-        formCrear.style.display='none';
-        cargarCasosDinero();
-      })
-      .catch(err=>alert('Error de red: '+err.message));
-    });
-
-    // Carga + render
-    function cargarCasosDinero(){
+    // — CASOS —
+    function cargarCasos(){
       fetch('/Pantry_Amigo/MVC/Vista/HTML/obtener_casos_dinero.php')
         .then(r=>r.json())
         .then(data=>{
           casosDineroData = data.error?[]:data;
-          renderCasos(casosDineroData,'lista-casos-dinero',true);
-          renderCasos(casosDineroData,'lista-casos-dinero-crear',false);
-        })
-        .catch(err=> document.getElementById('lista-casos-dinero').innerHTML = `<p>Error: ${err.message}</p>`);
+          renderCasos(casosDineroData);
+        });
     }
-    function renderCasos(list, containerId, withActions){
-      const cont = document.getElementById(containerId);
-      cont.innerHTML = '<h4>Casos de Dinero</h4>';
+    function renderCasos(list){
+      const cont = document.getElementById('lista-casos-dinero');
+      cont.innerHTML = '<h4>Casos de Dinero</h4><br>';
       list.forEach(ci=>{
-        const card = document.createElement('div');
-        card.className='caso';
-        let html = `
+        const d = document.createElement('div');
+        d.className = 'caso';
+        d.innerHTML = `
           <h4>${ci.Caso_Nombre} (${ci.Caso_Id})</h4>
           <p>${ci.Caso_Descripcion}</p>
           <p><strong>Meta:</strong> ${ci.Caso_Monto_Meta} • <strong>Recaudado:</strong> ${ci.Caso_Monto_Recaudado}</p>
           <p><strong>Inicio:</strong> ${ci.Caso_Fecha_Inicio} • <strong>Fin:</strong> ${ci.Caso_Fecha_Fin}</p>
-          <p><strong>Estado:</strong> ${ci.Caso_Estado} • <strong>Categoría:</strong> ${ci.Caso_Cat_Nombre}</p>`;
-        if(withActions){
-          html += `
-            <div class="acciones">
-              <button onclick="openEditar(${ci.Caso_Id})"><i class="fas fa-edit"></i> Actualizar</button>
-              <button onclick="eliminarCaso(${ci.Caso_Id})"><i class="fas fa-trash-alt"></i> Eliminar</button>
-            </div>`;
-        }
-        card.innerHTML = html;
-        cont.appendChild(card);
+          <p><strong>Estado:</strong> ${ci.Caso_Estado} • <strong>Categoría:</strong> ${ci.Caso_Cat_Nombre}</p>
+          <div class="acciones">
+            <button class="update" onclick="openEditar(${ci.Caso_Id})"><i class="fas fa-edit"></i> Actualizar</button>
+            <button class="delete" onclick="eliminarCaso(${ci.Caso_Id})"><i class="fas fa-trash-alt"></i> Eliminar</button>
+          </div>`;
+        cont.appendChild(d);
       });
     }
-
-    // Abre inline-edit
+    document.getElementById('btn-filtrar-casos')
+      .addEventListener('click', ()=>{
+        const t = document.getElementById('filtro-casos').value.trim().toLowerCase();
+        renderCasos(casosDineroData.filter(ci=>
+          ci.Caso_Id.toString().includes(t) ||
+          ci.Caso_Nombre.toLowerCase().includes(t)
+        ));
+      });
     function openEditar(id){
-      const d = casosDineroData.find(x=> x.Caso_Id===id);
-      if(!d) return alert('Caso no encontrado');
-      document.getElementById('edit-caso-id').value         = d.Caso_Id;
-      document.getElementById('edit-caso-id-display').value = d.Caso_Id;
-      document.getElementById('edit-caso-nombre').value     = d.Caso_Nombre;
-      document.getElementById('edit-caso-desc').value       = d.Caso_Descripcion;
-      document.getElementById('edit-caso-meta').value       = d.Caso_Monto_Meta;
-      document.getElementById('edit-caso-recaudado').value  = d.Caso_Monto_Recaudado;
-      document.getElementById('edit-caso-fecha-inicio').value = d.Caso_Fecha_Inicio;
-      document.getElementById('edit-caso-fecha-fin').value    = d.Caso_Fecha_Fin;
-      document.getElementById('edit-caso-estado').value     = d.Caso_Estado;
-      document.getElementById('edit-caso-vol').value        = d.Caso_Voluntariado;
-      document.getElementById('edit-caso-cat').value        = d.Caso_Cat_Nombre;
-      formEditar.style.display = 'block';
+      window.location.href = `/Pantry_Amigo/MVC/Vista/HTML/RegistrarCasoDinero.php?id=${id}`;
     }
-
-    // Eliminar
     function eliminarCaso(id){
       if(!confirm('¿Eliminar este caso?')) return;
       fetch(`/Pantry_Amigo/MVC/Vista/HTML/eliminar_caso_dinero.php?id=${id}`)
-        .then(r=>r.json()).then(_=> cargarCasosDinero());
+        .then(r=>r.json()).then(_=> cargarCasos());
     }
 
-    // Filtrar en ambas
-    document.getElementById('btn-filtrar-casos').addEventListener('click', ()=>{
-      const t = document.getElementById('filtro-casos').value.trim().toLowerCase();
-      renderCasos(casosDineroData.filter(ci=>
-        ci.Caso_Id.toString().includes(t) ||
-        ci.Caso_Nombre.toLowerCase().includes(t)
-      ), 'lista-casos-dinero', true);
-    });
-    document.getElementById('btn-filtrar-casos-crear').addEventListener('click', ()=>{
-      const t = document.getElementById('filtro-casos-crear').value.trim().toLowerCase();
-      renderCasos(casosDineroData.filter(ci=>
-        ci.Caso_Id.toString().includes(t) ||
-        ci.Caso_Nombre.toLowerCase().includes(t)
-      ), 'lista-casos-dinero-crear', false);
+    // — VOLUNTARIOS & HORARIOS —
+    function cargarVoluntarios(){
+      Promise.all([
+        fetch('/Pantry_Amigo/MVC/Vista/HTML/obtener_voluntarios.php').then(r=>r.json()),
+        fetch('/Pantry_Amigo/MVC/Vista/HTML/obtener_horarios_voluntarios.php').then(r=>r.json())
+      ]).then(([vols, horas])=>{
+        voluntariosData = vols.error?[]:vols;
+        horariosData    = horas.error?[]:horas;
+        renderVoluntarios(voluntariosData);
+      });
+    }
+    function renderVoluntarios(list){
+      const cont = document.getElementById('lista-voluntarios');
+      cont.innerHTML = '<h4>Voluntarios</h4><br>';
+      list.forEach(v=>{
+        const d = document.createElement('div');
+        d.className = 'voluntario';
+        let html = `
+          <h4>${v.Vol_Nombre} ${v.Vol_Apellido} (${v.Vol_Cedula})</h4>
+          <p><strong>Correo:</strong> ${v.Vol_Correo} • <strong>Cel:</strong> ${v.Vol_Celular}</p>
+          <p><strong>Caso ID:</strong> ${v.Vol_Caso_Id} • <strong>Tipo:</strong> ${v.Vol_Caso_Tipo}</p>
+          <div class="acciones">
+            <button class="delete-vol" onclick="eliminarVol('${v.Vol_Cedula}')"><i class="fas fa-trash-alt"></i> Eliminar</button>
+            <button class="assign-hor" onclick="openAsignar('${v.Vol_Cedula}')"><i class="fas fa-clock"></i> Asignar horario</button>
+          </div>`;
+        const hs = horariosData.filter(h=> h.Hora_Vol_Cedula === v.Vol_Cedula);
+        if (hs.length) {
+          html += `<div class="horarios"><strong>Horarios:</strong><ul>`;
+          hs.forEach(h=> html += `<li>${h.Hora_Citacion} en ${h.Hora_Localizacion}</li>`);
+          html += `</ul></div>`;
+        }
+        d.innerHTML = html;
+        cont.appendChild(d);
+      });
+    }
+    function eliminarVol(ced){
+      if(!confirm('¿Eliminar voluntario?')) return;
+      fetch(`/Pantry_Amigo/MVC/Vista/HTML/eliminar_voluntario.php?cedula=${ced}`)
+        .then(r=>r.json()).then(_=> cargarVoluntarios());
+    }
+
+    // Formularios inline
+    const formHor = document.getElementById('form-asignar-horario'),
+          horForm = document.getElementById('horario-form');
+    document.getElementById('btn-cancelar-hor')
+      .addEventListener('click', ()=> formHor.style.display='none');
+    function openAsignar(ced){
+      document.getElementById('hor-vol-cedula').value = ced;
+      formHor.style.display = 'block';
+    }
+    horForm.addEventListener('submit', e=>{
+      e.preventDefault();
+      const fd = new FormData(horForm);
+      fetch('/Pantry_Amigo/MVC/Vista/HTML/add_horario_voluntario.php',{
+        method:'POST', body: fd
+      })
+      .then(r=>r.json()).then(d=>{
+        alert(d.message);
+        formHor.style.display='none';
+        cargarVoluntarios();
+      });
     });
 
-    // Inicio
-    window.onload = cargarCasosDinero;
+    // Filtrar voluntarios (con cédula y nombre)
+    document.getElementById('btn-filtrar-voluntarios')
+      .addEventListener('click', ()=>{
+        const term = document.getElementById('filtro-voluntarios')
+                         .value.trim().toLowerCase();
+        const filtrados = voluntariosData.filter(v => {
+          const ced = String(v.Vol_Cedula).toLowerCase();
+          const full = `${v.Vol_Nombre} ${v.Vol_Apellido}`.toLowerCase();
+          return ced.includes(term) || full.includes(term);
+        });
+        renderVoluntarios(filtrados);
+      });
+
+    // Al cargar la página
+    window.onload = () => {};
   </script>
 </body>
 </html>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Caso de Donación</title>
-    <link rel="stylesheet" href="../CSS/estiloRegCaso.css">
+    <link rel="stylesheet" href="../../Vista/CSS/estiloRegCaso.css">
 </head>
 <body>
     <div class="container">
