@@ -65,7 +65,7 @@ $donaciones = $modelo->obtenerDonaciones($cedula);
                     <span><b>Donante:</b> <?= $don['Don_Nombre_Donante'] . ' ' . $don['Don_Apellido_Donante'] ?></span><br>
                     <span><b>Cédula:</b> <?= $don['Don_Cedula_Donante'] ?></span><br>
                     <span><b>Monto:</b> $<?= number_format($don['Don_Monto'], 0, ',', '.') ?></span><br>
-                    <span><b>Comisión:</b> $<?= number_format($don['Don_Comision'], 0, ',', '.') ?></span><br>
+                    <span><b>Categoria:</b> <?= $don['Don_Cat_Nombre']?></span><br>
                     <span><b>Correo:</b> <?= $don['Don_Correo'] ?></span>
                 </div>
             <?php endforeach; ?>
