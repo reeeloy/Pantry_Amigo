@@ -496,8 +496,8 @@ span {
 .members-section .members-list{
   display: flex;
   flex-wrap: wrap;
-  gap: 32px;
-
+  gap: 52px;
+  justify-content: center;  
 }
 
 .members-section .members-list .member{

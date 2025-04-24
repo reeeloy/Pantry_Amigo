@@ -233,12 +233,6 @@
                     <h3 class="name">Alejandro Gómez</h3>
                     <i class="feedback">"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, qui?"</i>
                 </li>
-
-                <li class="member">
-                    <img src="../IMG/aboutus.jpg" alt="user" class="user-image">
-                    <h3 class="name">Isabela Jimenez</h3>
-                    <i class="feedback">"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, qui?"</i>
-                </li>
             </ul>
         </div>
     </section>
