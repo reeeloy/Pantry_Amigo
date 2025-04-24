@@ -1,5 +1,6 @@
 <?php
-include 'Pantry_Amigo\MVC\Controlador\fundacionControlador.php';
+include_once '../../Controlador/fundacionControlador.php';;
+
 ?>
 
 <!DOCTYPE html>
