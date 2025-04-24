@@ -37,8 +37,8 @@ $preference_data = [
         "email" => $correo
     ],
     "back_urls" => [
-        "success" => "http://localhost/Pantry_Amigo/MVC/Vista/HTML/Index.php?caso_id=$caso_id&monto=$monto&nombre=" . urlencode($nombre) . "&correo=" . urlencode($correo),
-        "failure" => "http://localhost/Pantry_Amigo/ErrorPago.php"
+        "success" => "Pantry_Amigo/Vista/HTML/index.php?caso_id=$caso_id&monto=$monto&nombre=" . urlencode($nombre) . "&correo=" . urlencode($correo),
+        "failure" => "Pantry_Amigo/ErrorPago.php"
     ],
     "auto_return" => "approved"
 ];
@@ -58,8 +58,9 @@ curl_close($ch);
 // Decodificar la respuesta
 $response = json_decode($response, true);
 
-// Redirigir al sandbox
+// Redirigir al sandbox de Mercado Pago
 if (isset($response['sandbox_init_point'])) {
+    // Redirigir al usuario al sandbox de Mercado Pago para completar la donación
     header("Location: " . $response['sandbox_init_point']);
     exit;
 } else {
