@@ -1,4 +1,5 @@
 <?php
+// Siempre al principio…
 session_start();
 
 // Mostrar errores en desarrollo
@@ -6,18 +7,29 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+// Si por algún motivo tienes Usu_Id pero no id_fundacion,
+// lo usamos como respaldo:
+if (!isset($_SESSION['id_fundacion']) && isset($_SESSION['Usu_Id'])) {
+    $_SESSION['id_fundacion'] = $_SESSION['Usu_Id'];
+}
+
+header('Content-Type: application/json; charset=utf-8');
+
 include '../../Modelo/ConexionBD.php';
 
 // Validar método y sesión
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_SESSION['id_fundacion'])) {
-    echo json_encode(['success' => false, 'message' => 'Inválido: método no permitido o sesión no iniciada']);
+    echo json_encode([
+        'success' => false,
+        'message' => 'Inválido: método no permitido o sesión no iniciada'
+    ]);
     exit;
 }
 
 $conn = (new ConexionBD())->conexion;
 $d = $_POST;
 
-// Validar que todos los campos requeridos estén presentes
+// Campos que requerimos
 $campos_requeridos = [
     'Caso_Id',
     'Caso_Nombre',
@@ -32,28 +44,30 @@ $campos_requeridos = [
 
 foreach ($campos_requeridos as $campo) {
     if (!isset($d[$campo])) {
-        echo json_encode(['success' => false, 'message' => "Falta el campo requerido: $campo"]);
+        echo json_encode([
+            'success' => false,
+            'message' => "Falta el campo requerido: $campo"
+        ]);
         exit;
     }
 }
 
-// Preparar y ejecutar la consulta UPDATE
 try {
     $stmt = $conn->prepare("
         UPDATE tbl_casos_dinero SET
-            Caso_Nombre = ?, 
-            Caso_Descripcion = ?, 
-            Caso_Monto_Meta = ?, 
+            Caso_Nombre        = ?, 
+            Caso_Descripcion   = ?, 
+            Caso_Monto_Meta    = ?, 
             Caso_Monto_Recaudado = ?,
-            Caso_Fecha_Inicio = ?, 
-            Caso_Fecha_Fin = ?, 
-            Caso_Estado = ?, 
-            Caso_Imagen = ?,
-            Caso_Voluntariado = ?, 
-            Caso_Cat_Nombre = ?
+            Caso_Fecha_Inicio  = ?, 
+            Caso_Fecha_Fin     = ?, 
+            Caso_Estado        = ?, 
+            Caso_Imagen        = ?,
+            Caso_Voluntariado  = ?, 
+            Caso_Cat_Nombre    = ?
         WHERE 
-            Caso_Id = ? 
-            AND Caso_Fund_Id = ?
+            Caso_Id      = ? 
+          AND Caso_Fund_Id = ?
     ");
 
     $stmt->execute([
@@ -71,7 +85,13 @@ try {
         $_SESSION['id_fundacion']
     ]);
 
-    echo json_encode(['success' => true, 'message' => 'Caso de dinero actualizado correctamente']);
+    echo json_encode([
+        'success' => true,
+        'message' => 'Caso de dinero actualizado correctamente'
+    ]);
 } catch (PDOException $e) {
-    echo json_encode(['success' => false, 'message' => 'Error al actualizar: ' . $e->getMessage()]);
+    echo json_encode([
+        'success' => false,
+        'message' => 'Error al actualizar: ' . $e->getMessage()
+    ]);
 }
