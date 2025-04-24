@@ -45,9 +45,9 @@
             const div = document.createElement("div");
             div.className = "fundacion";
             div.innerHTML = `
-              <p><strong>ID:</strong> ${fundacion.Usu_Id}</p>
               <p><strong>Nombre:</strong> ${fundacion.Usu_Username}</p>
               <p><strong>Correo:</strong> ${fundacion.Usu_Correo}</p>
+              <p><strong>ID:</strong> ${fundacion.Usu_Id}</p>
             `;
             container.appendChild(div);
           });

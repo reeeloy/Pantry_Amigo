@@ -51,7 +51,7 @@
     <!-- Botones para seleccionar el tipo de caso -->
     <div class="botones">
       <button onclick="cargarCasos('dinero')">Casos de Dinero</button>
-      <button onclick="cargarCasos('recursos')">Casos de Recursos</button>
+      <!--<button onclick="cargarCasos('recursos')">Casos de Recursos</button>-->
     </div>
 
     <!-- Sección de Casos -->

@@ -110,7 +110,7 @@
         <p>Elige un caso y dona.</p>
       </div>
 
-      <div class="options-section-card" onclick="window.location.href='ConsultarFundacion.php'">
+      <div class="options-section-card" onclick="window.location.href='Fundaciones.php'">
         <div class="options-section-card-icon">
           <i class='bx bx-home-heart'></i>
         </div>
