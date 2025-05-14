@@ -48,10 +48,20 @@
       <h2>Casos De Donacion</h2>
     </div>
 
-    <!-- Botones para seleccionar el tipo de caso -->
+    <!-- Filtro por Categoría -->
     <div class="botones">
-      <button onclick="cargarCasos('dinero')">Casos de Dinero</button>
-      <!--<button onclick="cargarCasos('recursos')">Casos de Recursos</button>-->
+      <!-- Select oculto al principio -->
+       <label for="filtro-categoria">Filtrar por categoría:</label>
+       <select id="filtro-categoria" onchange="filtrarPorCategoria(this.value)">
+        <option value="">Seleccione una categoría</option>
+        <option value="Salud">Salud</option>
+        <option value="Educación">Educación</option>
+        <option value="Alimentación">Alimentación</option>
+        <option value="Emergencias">Emergencias</option>
+        <option value="Tecnología">Tecnología</option>
+        <option value="Medio Ambiente">Medio Ambiente</option>
+
+      </select>
     </div>
 
     <!-- Sección de Casos -->
@@ -63,47 +73,62 @@
   </main>
 
   <script>
-    function cargarCasos(tipo) {
-      let url = tipo === 'dinero' ?
-        '/Pantry_Amigo/MVC/Vista/HTML/ObtenerCasosDinero.php' :
-        '/Pantry_Amigo/MVC/Vista/HTML/ObtenerCasosRecursos.php';
+  let todosLosCasos = []; // Variable global para guardar todos los casos
 
-      fetch(url)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error(`Error HTTP: ${response.status}`);
-          }
-          return response.json();
-        })
-        .then(data => {
-          if (!Array.isArray(data)) {
-            throw new Error('Respuesta no válida del servidor');
-          }
-          const listaCasos = document.getElementById('lista-casos');
-          listaCasos.innerHTML = '';
-          data.forEach(caso => {
-            const casoHTML = `
-              <div class="case">
-                <h3>${caso.Caso_Nombre}</h3>
-                <img src="/Pantry_Amigo/${caso.Caso_Imagen}" alt="Imagen del caso"">
-                <p>ID: ${caso.Caso_Id}</p>
-                <p>Descripcion: ${caso.Caso_Descripcion}</p>
-                <p>Categoria: ${caso.Caso_Cat_Nombre}</p>
-                <button onclick="window.location.href='Detalles.php?ID=${caso.Caso_Id}&tipo=${tipo}'">Ver detalles</button>
-              </div>
-            `;
-            listaCasos.insertAdjacentHTML('beforeend', casoHTML);
-          });
-        })
-        .catch(error => {
-          console.error('Error al cargar los casos:', error);
-          document.getElementById('lista-casos').innerHTML = '<p>Error al cargar los casos.</p>';
-        });
+  function cargarCasos() {
+    fetch('/Pantry_Amigo/MVC/Vista/HTML/ObtenerCasosDinero.php')
+      .then(response => {
+        if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
+        return response.json();
+      })
+      .then(data => {
+        if (!Array.isArray(data)) throw new Error('La respuesta no es un array');
+
+        todosLosCasos = data; // Guardamos todos los casos para filtrar localmente
+        mostrarCasos(data);
+      })
+      .catch(error => {
+        console.error('Error al cargar los casos:', error);
+        document.getElementById('lista-casos').innerHTML = '<p>Error al cargar los casos.</p>';
+      });
+  }
+
+  function mostrarCasos(casos) {
+    const listaCasos = document.getElementById('lista-casos');
+    listaCasos.innerHTML = '';
+
+    if (casos.length === 0) {
+      listaCasos.innerHTML = '<p>No hay casos en esta categoría.</p>';
+      return;
     }
 
-    // Cargar casos de dinero por defecto al abrir la página
-    document.addEventListener("DOMContentLoaded", () => cargarCasos('dinero'));
-  </script>
+    casos.forEach(caso => {
+      const casoHTML = `
+        <div class="case">
+          <h3>${caso.Caso_Nombre}</h3>
+          <img src="/Pantry_Amigo/${caso.Caso_Imagen}" alt="Imagen del caso">
+          <p>ID: ${caso.Caso_Id}</p>
+          <p>Descripción: ${caso.Caso_Descripcion}</p>
+          <p>Categoría: ${caso.Caso_Cat_Nombre}</p>
+          <button onclick="window.location.href='Detalles.php?ID=${caso.Caso_Id}&tipo=dinero'">Ver detalles</button>
+        </div>
+      `;
+      listaCasos.insertAdjacentHTML('beforeend', casoHTML);
+    });
+  }
+
+  function filtrarPorCategoria(categoria) {
+    if (!categoria) {
+      mostrarCasos(todosLosCasos); // Mostrar todos si no hay categoría seleccionada
+    } else {
+      const filtrados = todosLosCasos.filter(caso => caso.Caso_Cat_Nombre === categoria);
+      mostrarCasos(filtrados);
+    }
+  }
+  // Carga inicial
+  document.addEventListener("DOMContentLoaded", cargarCasos);
+</script>
+
 
 </body>
 
