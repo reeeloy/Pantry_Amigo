@@ -64,7 +64,7 @@
           <li><a href="#" id="casos-link"><i class="fas fa-bullseye"></i> Casos de Donación</a></li>
           <li><a href="#" id="donaciones-dinero-link"><i class="fas fa-hand-holding-usd"></i> Donaciones en Dinero</a></li>
           <li><a href="#" id="donaciones-recursos-link"><i class="fas fa-box-open"></i> Donaciones en Recursos</a></li>
-          <li><a href="#" id="cerrar-sesion-link"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
+          <li><a href="/Pantry_Amigo/MVC/Vista/HTML/logout.php" id="cerrar-sesion-link"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
         </ul>
       </nav>
     </aside>

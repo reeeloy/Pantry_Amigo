@@ -143,7 +143,7 @@ session_start();
         <a href="#" id="crear-caso-link"><i class="fas fa-plus-circle"></i> Crear Caso</a>
         <a href="#" id="voluntarios-link"><i class="fas fa-users"></i> Voluntarios</a>
         <a href="#" id="ayuda-link"><i class="fas fa-question-circle"></i> Ayuda</a>
-        <a href="/Pantry_Amigo/logout.php" id="cerrar-sesion-link"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+        <a href="/Pantry_Amigo/MVC/Vista/HTML/logout.php" id="cerrar-sesion-link"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
       </nav>
     </aside>
 
