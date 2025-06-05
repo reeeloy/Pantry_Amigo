@@ -16,6 +16,8 @@ $voluntariado = 1;
 $fundacionId = 13;
 $categoriaNombre = "Salud";
 
+
+
 $insertado = $caso->registrarCasoDinero(
     $nombre,
     $descripcion,

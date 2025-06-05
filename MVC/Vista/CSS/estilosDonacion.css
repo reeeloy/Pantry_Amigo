@@ -246,6 +246,34 @@ header .navbar {
 }
 
 
+.mi-popup {
+  background-color: #ccc;
+  border: 5px solid #2b577d;
+  border-radius: 10px;
+}
+
+.mi-titulo {
+  font-family: "Poppins", sans-serif;
+  color: #2b577d;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.mi-icono {
+  color: #e67e22 !important;
+}
+
+.mi-boton {
+  background-color: #7ec8a1 !important;
+  color: #ffffff !important;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+
+
 @media (max-width: 768px) {
   
   .section-content {
@@ -265,5 +293,6 @@ header .navbar {
     font-size: 1.3rem;
   }
 }
+
 
 
