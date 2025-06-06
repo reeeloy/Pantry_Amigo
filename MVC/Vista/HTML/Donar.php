@@ -71,7 +71,7 @@ $conn->cerrar();
         <!-- Formulario de donación -->
         <section class="form-section">
           <h3 class="form-title">Completa tus datos</h3>
-          <form action="../../Controlador/CrearPreferencia.php" method="POST" class="donation-form" novalidate>
+          <form action="../HTML/CrearPreferencia.php" method="POST" class="donation-form" novalidate>
             <!-- Campos ocultos para enviar ID del caso y categoría -->
             <input type="hidden" name="casoId" value="<?= (int)$caso['Caso_Id'] ?>">
             <input type="hidden" name="categoria" value="<?= htmlspecialchars($categoria) ?>">

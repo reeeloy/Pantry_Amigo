@@ -1,68 +1,29 @@
 <?php
-require_once '../../Modelo/ConexionBD.php';
+require_once '../../../Modelo/ConexionBD.php';
 
-// Obtener parámetros desde la URL
-$caso_id = $_GET['caso_id'] ?? null;
-$monto = $_GET['monto'] ?? null;
-$nombre = $_GET['nombre'] ?? '';
-$correo = $_GET['correo'] ?? '';
+// Recibir parámetros que Mercado Pago envía en la URL (por ejemplo: status, payment_id, etc)
+$status = $_GET['status'] ?? '';
+$payment_id = $_GET['payment_id'] ?? '';
+$external_reference = $_GET['external_reference'] ?? ''; // si usas referencia externa
 
-// Validar parámetros
-if (!$caso_id || !$monto || !$nombre || !$correo) {
-    die("❌ Datos incompletos para registrar la donación.");
+if ($status !== 'approved') {
+    die("El pago no fue aprobado.");
 }
 
-// Validar que el monto sea un número válido
-if (!is_numeric($monto) || $monto <= 0) {
-    die("❌ El monto de la donación no es válido.");
-}
-
-// Crear una nueva conexión a la base de datos
+// Conectar a la base de datos
 $conn = new ConexionBD();
 if (!$conn->abrir()) {
-    die("❌ Error al conectar con la base de datos.");
+    die("Error al conectar a la base de datos.");
 }
 
-// Obtener la categoría del caso
-$sqlCategoria = "SELECT Caso_Categoria FROM Tbl_Casos_Dinero WHERE Caso_Id = ?";
-$conn->consulta($sqlCategoria, [$caso_id]);
-$resCategoria = $conn->obtenerResult();
-if ($resCategoria->num_rows === 0) {
-    die("❌ No se encontró el caso con ID $caso_id.");
-}
-$fila = $resCategoria->fetch_assoc();
-$categoria = $fila['Caso_Categoria'] ?? 'Sin categoría';
+// Actualizar el estado de la donación a 'approved'
+// Para esto debes tener algún identificador para relacionar, podría ser el payment_id, cédula, o el id insertado antes.
+// Aquí un ejemplo suponiendo que uses cédula y monto para actualizar el pago:
 
-// Dividir el nombre en partes (nombre y apellido)
-$partes = explode(" ", $nombre, 2);
-$nombre_donante = $partes[0];
-$apellido_donante = $partes[1] ?? '';
+$sql = "UPDATE Tbl_Donacion_Dinero SET Don_Estado = 'approved' WHERE Don_Cedula_Donante = ? AND Don_Monto = ? AND Don_Estado = 'pendiente'";
 
-// Calcular la comisión
-$comision = round($monto * 0.039, 2); // Asegurarse de que la comisión esté redondeada
-
-// Obtener la fecha y hora actual
-$fecha = date("Y-m-d H:i:s");
-
-// Insertar los datos de la donación
-$sqlInsert = "INSERT INTO Tbl_Donacion_Dinero (
-    Don_Monto, Don_Comision, Don_Nombre_Donante, Don_Apellido_Donante,
-    Don_Correo, Don_Metodo_Pago, Don_Fecha, Don_Caso_Id, Don_Cat_Nombre
-) VALUES (?, ?, ?, ?, ?, 'MercadoPago', ?, ?, ?)";
-
-$exito = $conn->consulta($sqlInsert, [
-    $monto, $comision, $nombre_donante, $apellido_donante, $correo, $fecha, $caso_id, $categoria
-]);
-
-// Cerrar la conexión
+$conn->consulta($sql, [$_GET['cedula'] ?? '', $_GET['monto'] ?? 0]);
 $conn->cerrar();
 
-// Verificar si la inserción fue exitosa
-if ($exito) {
-    echo "<h3>✅ ¡Gracias por tu donación!</h3>";
-} else {
-    echo "<h3>❌ Error al registrar la donación.</h3>";
-}
+echo "¡Gracias! El pago fue aprobado y registrado.";
 ?>
-
-
