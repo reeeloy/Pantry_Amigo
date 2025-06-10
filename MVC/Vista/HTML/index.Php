@@ -236,6 +236,116 @@
                 </li>
             </ul>
         </div>
+
+
+ // ...existing code...
+<div id="chatbot" style="position:fixed;bottom:20px;right:20px;width:300px;background:#fff;border-radius:10px;box-shadow:0 0 10px #aaa;z-index:9999;">
+  <div style="background:#4CAF50;color:#fff;padding:10px;border-radius:10px 10px 0 0;">
+    Chatbot Pantry Amigo
+    <span id="close-chatbot" style="float:right;cursor:pointer;">&times;</span>
+  </div>
+  <div id="chatbot-messages" style="height:200px;overflow-y:auto;padding:10px;font-size:14px;"></div>
+  <div style="display:flex;">
+    <input id="chatbot-input" type="text" placeholder="Escribe tu pregunta..." style="flex:1;padding:8px;border:none;border-top:1px solid #eee;">
+    <button onclick="sendChatbotMessage()" style="background:#4CAF50;color:#fff;border:none;padding:8px 12px;">Enviar</button>
+  </div>
+</div>
+
+<button id="open-chatbot" style="position:fixed;bottom:20px;right:20px;z-index:9998;display:none;background:#4CAF50;color:#fff;border:none;border-radius:50%;width:50px;height:50px;font-size:24px;box-shadow:0 0 10px #aaa;cursor:pointer;">
+  💬
+</button>
+
+<script>
+// Respuestas predeterminadas usando if anidados
+function getChatbotResponse(msg) {
+  // ...existing code...
+  const saludos = [
+    "¡Hola! ¿En qué puedo ayudarte?",
+    "¡Buenas! ¿Cómo puedo asistirte?",
+    "¡Hola! ¿Necesitas información sobre Pantry Amigo?"
+  ];
+  const donar = [
+    "Puedes donar haciendo clic en el botón 'Donar' o visitando la sección de casos activos.",
+    "Para donar, dirígete a la sección de casos activos y elige un caso.",
+    "Haz clic en 'Donar' para comenzar tu aporte."
+  ];
+  const ayudaDonar = [
+    "¿Te gustaría saber cómo donar o necesitas ayuda con el proceso?",
+    "¿Quieres que te explique el proceso de donación?",
+    "¿Tienes dudas sobre cómo donar? Estoy aquí para ayudarte."
+  ];
+  const voluntario = [
+    "¿Quieres información sobre cómo ser voluntario?",
+    "¿Te gustaría unirte como voluntario? Puedo indicarte cómo.",
+    "¿Buscas ser voluntario? Te explico cómo hacerlo."
+  ];
+  const inscribirVoluntario = [
+    "Para inscribirte como voluntario, ve a la sección 'Voluntariado' en el menú.",
+    "Puedes inscribirte como voluntario desde la sección correspondiente en el menú principal.",
+    "Haz clic en 'Voluntariado' para inscribirte y ayudar."
+  ];
+  const fundacion = [
+    "Puedes conocer nuestras fundaciones aliadas en la sección correspondiente del menú.",
+    "Visita la sección de fundaciones aliadas para más información.",
+    "En el menú encontrarás la sección de fundaciones aliadas."
+  ];
+  const noEntiendo = [
+    "Lo siento, no entendí tu pregunta. ¿Puedes reformularla?",
+    "No comprendí tu mensaje, ¿puedes escribirlo de otra forma?",
+    "Disculpa, ¿puedes aclarar tu pregunta?"
+  ];
+
+  function random(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+  }
+
+  if (msg.includes("hola") || msg.includes("buenas")) {
+    return random(saludos);
+  } else if (msg.includes("donar")) {
+    if (msg.includes("cómo") || msg.includes("dónde")) {
+      return random(donar);
+    } else {
+      return random(ayudaDonar);
+    }
+  } else if (msg.includes("voluntario")) {
+    if (msg.includes("inscrib")) {
+      return random(inscribirVoluntario);
+    } else {
+      return random(voluntario);
+    }
+  } else if (msg.includes("fundacion")) {
+    return random(fundacion);
+  } else {
+    return random(noEntiendo);
+  }
+}
+
+function sendChatbotMessage() {
+  var input = document.getElementById('chatbot-input');
+  var messages = document.getElementById('chatbot-messages');
+  var userMsg = input.value.trim();
+  if (!userMsg) return;
+  messages.innerHTML += "<div><b>Tú:</b> " + userMsg + "</div>";
+  var botResponse = getChatbotResponse(userMsg);
+  setTimeout(function() {
+    messages.innerHTML += "<div style='color:#4CAF50'><b>Amigo:</b> " + botResponse + "</div>";
+    messages.scrollTop = messages.scrollHeight;
+  }, 500);
+  input.value = "";
+}
+
+// Mostrar y ocultar el chatbot
+document.getElementById('close-chatbot').onclick = function() {
+  document.getElementById('chatbot').style.display = 'none';
+  document.getElementById('open-chatbot').style.display = 'block';
+};
+document.getElementById('open-chatbot').onclick = function() {
+  document.getElementById('chatbot').style.display = 'block';
+  document.getElementById('open-chatbot').style.display = 'none';
+};
+</script>
+// ...existing code...
+</body>
     </section>
 
 

@@ -65,16 +65,13 @@
     document.addEventListener("DOMContentLoaded", function() {
       const urlParams = new URLSearchParams(window.location.search);
       const casoId = urlParams.get('ID');
-      const tipo = urlParams.get('tipo');
 
-      if (!casoId || !tipo) {
-        document.getElementById('detalle-info').innerHTML = "<p>Error: faltan parámetros en la URL.</p>";
+      if (!casoId) {
+        document.getElementById('detalle-info').innerHTML = "<p>Error: falta el parámetro del ID en la URL.</p>";
         return;
       }
 
-      const endpoint = tipo === 'dinero' ?
-        '/Pantry_Amigo/MVC/Vista/HTML/ObtenerDetallesDinero.php' :
-        '/Pantry_Amigo/MVC/Vista/HTML/ObtenerDetallesRecursos.php';
+      const endpoint = '/Pantry_Amigo/MVC/Vista/HTML/ObtenerDetallesDinero.php';
 
       fetch(`${endpoint}?ID=${casoId}`)
         .then(response => response.json())
@@ -84,44 +81,65 @@
             detalleInfo.innerHTML = `<p>${data.error}</p>`;
           } else {
             const botones = `
-              <div class="botones-detalle">
-                ${tipo === 'dinero' ? `<button onclick="window.location.href='Donar.php?ID=${data.Caso_Id}&categoria=${encodeURIComponent(data.Caso_Cat_Nombre)}'">Donar</button>` : ''}
-                ${data.Caso_Voluntariado == 1 ? `<button onclick="window.location.href='RegistrarVoluntario.php?ID=${data.Caso_Id}'">Voluntariado</button>` : ''}
-              </div>`;
-
-            // Cálculo de porcentaje de recaudación
-            const recaudado = data.Caso_Monto_Recaudado;
-            const meta = data.Caso_Monto_Meta;
-            const porcentaje = (recaudado / meta) * 100;  // Calcula el porcentaje de recaudación
-
-            // Barra de recaudación
-            const barraRecaudacion = `
-              <div class="barra-recaudacion">
-                <div class="progreso" style="width: ${porcentaje}%;">${recaudado} / ${meta}</div>
-              </div>
-            `;
+            <div class="botones-detalle">
+              <button onclick="window.location.href='Donar.php?ID=${data.Caso_Id}&categoria=${encodeURIComponent(data.Caso_Cat_Nombre)}'">Donar</button>
+              ${data.Caso_Voluntariado == 1 ? `<button onclick="window.location.href='RegistrarVoluntario.php?ID=${data.Caso_Id}'">Voluntariado</button>` : ''}
+            </div>`;
 
             const contenido = `
-              <h3>${data.Caso_Nombre}</h3>
-              <div class="imagen-container">
-                <img src="/Pantry_Amigo/${data.Caso_Imagen}" alt="Imagen del caso" />
-              </div>
-              <p><strong>Descripción:</strong> ${data.Caso_Descripcion}</p>
-              ${tipo === 'dinero'
-                ? `
-                  <p><strong>Monto Meta:</strong> $${data.Caso_Monto_Meta}</p>
-                  <p><strong>Recaudado:</strong> $${recaudado}</p>
-                  <p><strong>Fecha de Fin:</strong> ${data.Caso_Fecha_Fin}</p>
-                  ${barraRecaudacion}
-                `
-                : `
-                  <p><strong>Punto de Recolección:</strong> ${data.Caso_Punto_Recoleccion}</p>
-                  <p><strong>Fecha de Inicio:</strong> ${data.Caso_Fecha_Inicio}</p>
-                `
-              }
-              <p><strong>Estado:</strong> ${data.Caso_Estado}</p>
-              <p><strong>Categoría:</strong> ${data.Caso_Cat_Nombre}</p>
-              ${botones}`;
+          
+          <div class="caso">
+            <div class="info-caso">
+             <h3>${data.Caso_Nombre}</h3>
+             <p><strong>Descripción:</strong> ${data.Caso_Descripcion}</p>
+             <div class="monto-caso">
+              <p><strong>Monto Meta:</strong> ${data.Caso_Monto_Meta}</p>
+             </div>    
+             ${botones}          
+           </div>
+
+            <div class="imagen-container">
+              <img src="/Pantry_Amigo/${data.Caso_Imagen}" alt="Imagen del caso" />
+            </div>
+
+            <div class="porcentaje">       
+            <p><strong>Recaudado:</strong> $${data.Caso_Monto_Recaudado}</p>
+            </div>        
+          </div>
+
+          <div class="detalles-caso-wrapper">
+            <div class="detalles-header">
+              <h4 class="margin"> Detalles del Caso</h4>
+              <div class="num-id"> <p><strong>id:</strong> ${data.Caso_Id}</p> </div>
+               line-----------------
+            </div>
+
+            <div class="detalles"> 
+
+            <div class="detalles-caso-fundacion"> 
+              <p> Este causa/caso es administrado por la <strong>Fundación: ${data.Fundacion_Nombre}</strong></p>
+              <p> Quieres comunicarte con la fundacion? <br> <strong>Correo</strong> ${data.Fundacion_Correo}</p>
+              <p><strong>Teléfono:</strong> ${data.Fundacion_Telefono}</p>
+              <p><strong>Dirección:</strong> ${data.Fundacion_Direccion}</p>
+            </div>
+            
+           <div class="detalles-caso-table">
+            <div class="celda"> <p>Fecha de Inicio:</p> </div>
+            <div class="celda-info"> <strong> ${data.Caso_Fecha_Inicio}</strong></div>
+
+            <div class="celda"> <p>Fecha de Fin:</p> </div>
+            <div class="celda-info"> <strong> ${data.Caso_Fecha_Fin}</strong></div>
+             
+            <div class="celda"> <p>Categoría:</p> </div>
+            <div class="celda-info"> <strong> ${data.Caso_Cat_Nombre}</strong></div>
+
+            <div class="celda"> <p>Voluntariado:</p> </div>
+            <div class="celda-info"> <strong> ${data.Caso_Voluntariado == 1 ? 'Sí' : 'No'}</strong></div>
+
+            </div>
+          </div>             
+        </div>
+           `;
 
             detalleInfo.innerHTML = contenido;
           }
@@ -134,26 +152,58 @@
   </script>
 
   <style>
-    .barra-recaudacion {
-      width: 100%;
-      background-color: #d9d9d9;
-      border-radius: 10px;
-      overflow: hidden;
-      height: 25px;
-      margin-top: 10px;
+    .detalles-caso-wrapper { /*arreglar ancho*/
+      background:rgb(139, 78, 78);
+      padding: 50px 20px;
+      width: 750px;
+      margin: 20px auto 0 auto;
     }
+    .detalles{
+      background: #f9f9f9;
+      border-radius: 16px;
+      box-shadow: 0 2px 8px rgba(60,60,60,0.08);
+      padding: 30px 20px;
+      width: 700px;
+      margin: 20px auto 0 auto;
+      display: flex;
+       gap: 40px;
+    }
+   .detalles-caso-table {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(60,60,60,0.08);
+  padding: 24px 20px;
+  width: 320px;
+  margin: 30px auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid #eee;
+}
 
-    .progreso {
-      font-family: 'Yusei Magic';
-      height: 100%;
-      background-color: #7ec8a1;
-      color: #2b577d;
-      text-align: center;
-      padding: 0 10px 10px;
-      line-height: 25px;
-      white-space: nowrap;
-    }
+.celda, .celda-info {
+  display: flex;
+  align-items: center;
+  padding: 12px 0;
+  border: none;
+  font-size: 1rem;
+}
+
+.celda {
+  color: #444;
+  flex: 2;
+  font-weight: 500;
+  justify-content: flex-start;
+}
+
+.celda-info {
+  color: #222;
+  flex: 3;
+  font-weight: bold;
+  justify-content: flex-end;
+}
   </style>
+
 </body>
 
 </html>

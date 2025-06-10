@@ -13,16 +13,6 @@ $monto = $_POST['monto'] ?? 0;
 $caso_id = $_POST['casoId'] ?? null;
 $categoria = $_POST['categoria'] ?? '';
 
-// 👉 PRIMERO: Guardar la donación en la base de datos
-$conn = new ConexionBD();
-if ($conn->abrir()) {
-    $sql = "INSERT INTO Tbl_Donacion_Dinero (Don_Caso_Id, Don_Nombre_Donante, Don_Apellido_Donante, Don_Cedula_Donante, Don_Correo, Don_Monto) 
-            VALUES (?, ?, ?, ?, ?, ?)";
-    $conn->consulta($sql, [$caso_id, $nombre, $apellido, $cedula, $correo, $monto]);
-    $conn->cerrar();
-} else {
-    die("❌ Error al conectar a la base de datos.");
-}
 
 // SEGUNDO: Crear la preferencia en Mercado Pago
 $preference_data = [
