@@ -1,5 +1,4 @@
 <?php
-
 require_once '../Pantry-Amigo/MVC/Modelo/ConexionBD.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -31,3 +30,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </script>";
     }
 }
+
+?>

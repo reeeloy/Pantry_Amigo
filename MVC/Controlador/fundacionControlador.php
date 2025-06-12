@@ -12,6 +12,8 @@ if (!isset($_SESSION['id_usuario'])) {
     header('Location: /Pantry_Amigo/MVC/Vista/HTML/login.php');
     exit;
 }
+
+//guarda el id de la persona
 $usuarioId = $_SESSION['id_usuario'];
 
 // 3) Creamos la conexión y el modelo
