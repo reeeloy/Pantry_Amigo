@@ -12,7 +12,7 @@ include_once '../../Controlador/fundacionControlador.php';;
     <style>
         body {
             font-family: 'Segoe UI', sans-serif;
-            background: #f4f4f4;
+            background:rgb(0, 0, 0);
         }
 
         .container {
@@ -48,7 +48,7 @@ include_once '../../Controlador/fundacionControlador.php';;
         .custom-file-upload {
             display: inline-block;
             background-color: #007bff;
-            color: #fff;
+            color: black;
             padding: 12px 25px;
             border-radius: 8px;
             cursor: pointer;
