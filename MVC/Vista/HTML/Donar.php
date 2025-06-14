@@ -30,6 +30,8 @@ $conn->cerrar();
   <link rel="stylesheet" href="../CSS/estilosDonacion.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <script src="https://sdk.mercadopago.com/js/v2"></script>
+
   <!-- Librería SweetAlert2 para mostrar alertas -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -71,7 +73,8 @@ $conn->cerrar();
         <!-- Formulario de donación -->
         <section class="form-section">
           <h3 class="form-title">Completa tus datos</h3>
-          <form action="../HTML/CrearPreferencia.php" method="POST" class="donation-form" novalidate>
+          <form id="form-donacion" class="donation-form" novalidate>
+
             <!-- Campos ocultos para enviar ID del caso y categoría -->
             <input type="hidden" name="casoId" value="<?= (int)$caso['Caso_Id'] ?>">
             <input type="hidden" name="categoria" value="<?= htmlspecialchars($categoria) ?>">
@@ -93,6 +96,8 @@ $conn->cerrar();
             <input type="number" id="monto" name="monto" min="3000" required>
 
             <button type="submit" class="submit-button">Ir a pagar</button>
+            <!-- Container para o botão de pagamento -->
+            <div id="walletBrick_container"></div>
           </form>
         </section>
       <?php else: ?>
@@ -104,59 +109,49 @@ $conn->cerrar();
 
   <!-- Script para validar el formulario antes de enviarlo -->
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const form = document.querySelector('.donation-form');
-      if (!form) return;
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('form-donacion');
+  if (!form) return;
 
-      form.addEventListener('submit', function(e) {
-        e.preventDefault(); // Detiene el envío por defecto
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const nombre   = form.nombre.value.trim();
+    const apellido = form.apellido.value.trim();
+    const cedula   = form.cedula.value.trim();
+    const correo   = form.correo.value.trim();
+    const monto    = parseFloat(form.monto.value);
+    const casoId   = form.casoId.value;
+    const categoria= form.categoria.value;
 
-        // Obtiene los valores de los campos
-        const nombre = document.getElementById('nombre').value.trim();
-        const apellido = document.getElementById('apellido').value.trim();
-        const cedula = document.getElementById('cedula').value.trim();
-        const correo = document.getElementById('correo').value.trim();
-        const monto = parseInt(document.getElementById('monto').value, 10);
+    if (!nombre||!apellido||!cedula||!correo||isNaN(monto) || monto<3000) {
+      return Swal.fire('Revisa los datos','Todos los campos y monto mínimo de 3000','warning');
+    }
 
-        // Valida que todos los campos estén completos
-        if (!nombre || !apellido || !cedula || !correo || isNaN(monto)) {
-          Swal.fire({
-            icon: 'warning',
-            title: 'Campos incompletos',
-            text: 'Por favor, completa todos los campos.',
-             customClass: {
-    popup: 'mi-popup',
-    title: 'mi-titulo',
-    icon: 'mi-icono',
-    confirmButton: 'mi-boton'
-  }
-            
-          });
-          return;
-        }
-
-        // Valida que el monto mínimo sea 1000
-        if (monto < 1000) {
-          Swal.fire({
-            icon: 'error',
-            title: 'Monto muy bajo',
-            text: 'El monto mínimo de donación es 3000 COP.',
-            
-            customClass: {
-    popup: 'mi-popup',
-    title: 'mi-titulo',
-    icon: 'mi-icono',
-    confirmButton: 'mi-boton'
-  }
-          });
-          return;
-        }
-
-        // Si todo es válido, envía el formulario
-        form.submit();
+    try {
+      const res = await fetch('http://localhost:3000/create_preference', {
+        method: 'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({
+          title:`Donación de ${nombre} ${apellido}`,
+          quantity:1, price:monto,
+          nombre, apellido, cedula, correo,
+          casoId, categoria
+        })
       });
-    });
-  </script>
+      const data = await res.json();
+      if (data.id) {
+        window.location.href = `https://www.mercadopago.com.co/checkout/v1/redirect?pref_id=${data.id}`;
+      } else {
+        Swal.fire('Error','No se pudo generar la preferencia','error');
+      }
+    } catch {
+      Swal.fire('Error de conexión','No se pudo contactar al servidor','error');
+    }
+  });
+});
+</script>
+
+
 
 </body>
 

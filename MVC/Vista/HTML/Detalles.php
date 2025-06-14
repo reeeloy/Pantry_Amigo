@@ -117,7 +117,7 @@
             <div class="detalles"> 
 
             <div class="detalles-caso-fundacion"> 
-              <p> Este causa/caso es administrado por la <strong>Fundación: ${data.Fundacion_Nombre}</strong></p>
+              <p> Esta causa es administrado por la <strong>Fundación: ${data.Fundacion_Nombre}</strong></p>
               <p> Quieres comunicarte con la fundacion? <br> <strong>Correo</strong> ${data.Fundacion_Correo}</p>
               <p><strong>Teléfono:</strong> ${data.Fundacion_Telefono}</p>
               <p><strong>Dirección:</strong> ${data.Fundacion_Direccion}</p>
@@ -153,8 +153,8 @@
 
   <style>
     .detalles-caso-wrapper { /*arreglar ancho*/
-      background:rgb(139, 78, 78);
-      padding: 50px 20px;
+      background:rgb(255, 255, 255);
+      padding: 30px 20px;
       width: 750px;
       margin: 20px auto 0 auto;
     }
@@ -168,6 +168,7 @@
       display: flex;
        gap: 40px;
     }
+
    .detalles-caso-table {
   background: #fff;
   border-radius: 16px;
@@ -184,7 +185,7 @@
 .celda, .celda-info {
   display: flex;
   align-items: center;
-  padding: 12px 0;
+  padding: 10px 0;
   border: none;
   font-size: 1rem;
 }
