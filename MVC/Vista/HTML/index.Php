@@ -139,78 +139,64 @@
   </section>
 
 
-  <!--carrusel-->
+  <!-- Carrusel dinámico de casos activos -->
   <section class="container-slider swiper" id="casos">
-    <h1 class="swiper-title">Historias increibles</h1>
+    <h1 class="swiper-title">Historias increíbles</h1>
     <p class="swiper-description">Descubre cómo cada donación cambia vidas y genera un impacto real en las comunidades.</p>
+
     <div class="card-wrapper">
       <ul class="card-list swiper-wrapper">
-        <li class="card-item swiper-slide">
-          <a href="#" class="card-link" onclick="window.location.href='Detalles.php?ID=9&tipo=recursos'">
-            <img src="../../../imagenes_casos/donacionalimentos.webp" alt="card Img" class="card-img">
-            <p class="badge">Fundacion 13</p>
-            <h2 class="card-title">Donacion de alimentos</h2>
-            <p class="description">Estamos haciendo recolecta de alimentos para la cena de caridad mensual.</p>
-            <button class="card-button material-symbols-rounded" onclick="window.location.href='Detalles.php?ID=9&tipo=recursos'">arrow_forward</button>
+        <?php
+        include_once '../../Modelo/ConexionBD.php';
+        $conexion = new ConexionBD();
 
-          </a>
-        </li>
-        <!-- Otra carta -->
-        <li class="card-item swiper-slide">
-          <a href="#" class="card-link" onclick="window.location.href='Detalles.php?ID=10&tipo=dinero'">
-            <img src="../imagenes_casos/Daniela.jpg" alt="card Img" class="card-img">
-            <p class="badge">Fundacion 2</p>
-            <h2 class="card-title">Cambio de genero de Daniela</h2>
-            <p class="description">Daniela dejará su identidad anterior y será mujer</p>
-            <button class="card-button material-symbols-rounded" onclick="window.location.href='Detalles.php?ID=10&tipo=dinero'">arrow_forward</button>
-          </a>
-        </li>
-        <!-- Otra carta -->
-        <li class="card-item swiper-slide" onclick="window.location.href='Detalles.php?ID=8&tipo=recursos'">
-          <a href="#" class="card-link">
-            <img src="../imagenes_casos/Croquetas.jpg" alt="card Img" class="card-img">
-            <p class="badge">Fundacion 3</p>
-            <h2 class="card-title">Croquetas para todos</h2>
-            <p class="description">Necesitamos reunir croquetas dogchow adulto para una fundación de perritos</p>
-            <button class="card-button material-symbols-rounded" onclick="window.location.href='Detalles.php?ID=8&tipo=recursos'">arrow_forward</button>
-          </a>
-        </li>
-        <!-- Otra carta -->
-        <li class="card-item swiper-slide">
-          <a href="#" class="card-link">
-            <img src="../IMG/donacionjuguetes.jpg" alt="card Img" class="card-img">
-            <p class="badge">Fundacion 4</p>
-            <h2 class="card-title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum,
-              consectetur.</h2>
-            <button class="card-button material-symbols-rounded" onclick="window.location.href='detalleHistoria.php?id=1'">arrow_forward</button>
-          </a>
-        </li>
-        <!-- Otra carta -->
-        <li class="card-item swiper-slide">
-          <a href="#" class="card-link">
-            <img src="../IMG/donacionutiles.png" alt="card Img" class="card-img">
-            <p class="badge">Fundacion 5</p>
-            <h2 class="card-title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum,
-              consectetur.</h2>
-            <button class="card-button material-symbols-rounded" onclick="window.location.href='detalleHistoria.php?id=1'">arrow_forward</button>
-          </a>
-        </li>
+        if ($conexion->abrir()) {
+          $sql = "SELECT Caso_Id, Caso_Nombre, Caso_Descripcion, Caso_Imagen, Caso_Fund_Id 
+          FROM tbl_casos_Dinero 
+          WHERE Caso_Estado = 'Activo' 
+          LIMIT 6";
 
-        <li class="card-item swiper-slide">
-          <a href="#" class="card-link">
-            <img src="../IMG/donacionutiles.png" alt="card Img" class="card-img">
-            <p class="badge">Fundacion 5</p>
-            <h2 class="card-title">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum,
-              consectetur.</h2>
-            <button class="card-button material-symbols-rounded" onclick="window.location.href='detalleHistoria.php?id=1'">arrow_forward</button>
-          </a>
-        </li>
+          if ($conexion->consulta($sql)) {
+            $result = $conexion->obtenerResult();
+
+            if ($result && $result->num_rows > 0) {
+              while ($row = $result->fetch_assoc()) {
+                // Ruta relativa completa igual a Detalles.php
+                $imgRuta = !empty($row['Caso_Imagen']) ? '/Pantry_Amigo/' . $row['Caso_Imagen'] : '/Pantry_Amigo/IMG/default.jpg';
+
+                echo '<li class="card-item swiper-slide">';
+                echo '<a href="Detalles.php?ID=' . urlencode($row['Caso_Id']) . '&tipo=dinero">';
+                echo '<img src="' . htmlspecialchars($imgRuta) . '" alt="Imagen del caso" class="card-img">';
+                echo '<p class="badge">Fundación ID: ' . htmlspecialchars($row['Caso_Fund_Id']) . '</p>';
+                echo '<h2 class="card-title">' . htmlspecialchars($row['Caso_Nombre']) . '</h2>';
+                echo '<p class="description">' . htmlspecialchars($row['Caso_Descripcion']) . '</p>';
+                echo '<span class="card-button material-symbols-rounded">arrow_forward</span>';
+                echo '</a>';
+                echo '</li>';
+              }
+            } else {
+              echo '<li class="card-item swiper-slide"><p>No hay casos activos.</p></li>';
+            }
+          } else {
+            echo '<li class="card-item swiper-slide"><p>Error al ejecutar la consulta.</p></li>';
+          }
+
+          $conexion->cerrar();
+        } else {
+          echo '<li class="card-item swiper-slide"><p>Error al conectar con la base de datos.</p></li>';
+        }
+        ?>
+
+
+
       </ul>
+
       <div class="swiper-pagination"></div>
       <div class="swiper-button-prev"></div>
       <div class="swiper-button-next"></div>
     </div>
   </section>
+
 
   <!-- Team members-->
   <section class="members-section">

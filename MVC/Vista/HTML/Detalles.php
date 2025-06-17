@@ -54,11 +54,11 @@
       <h2>Detalles del Caso</h2>
     </div>
 
-    <section id="detalle-caso">
+
       <div id="detalle-info">
         <!-- Aquí se mostrará la información del caso -->
       </div>
-    </section>
+
   </main>
 
   <script>
@@ -86,60 +86,52 @@
               ${data.Caso_Voluntariado == 1 ? `<button onclick="window.location.href='RegistrarVoluntario.php?ID=${data.Caso_Id}'">Voluntariado</button>` : ''}
             </div>`;
 
+            // Estructura tipo card-producto con imagen y recaudado en columna
             const contenido = `
-          
-          <div class="caso">
-            <div class="info-caso">
-             <h3>${data.Caso_Nombre}</h3>
-             <p><strong>Descripción:</strong> ${data.Caso_Descripcion}</p>
-             <div class="monto-caso">
-              <p><strong>Monto Meta:</strong> ${data.Caso_Monto_Meta}</p>
-             </div>    
-             ${botones}          
-           </div>
+              <div class="caso">
+                <div class="info-caso">
+                  <h3>${data.Caso_Nombre}</h3>
+                  <p>${data.Caso_Descripcion}</p>
+                  <div class="monto-caso">
+                    <p><strong>Monto Meta:</strong> $${data.Caso_Monto_Meta}</p>
+                  </div>
+                  ${botones}
+                </div>
+                <div class="imagen-porcentaje-row">
+                  <div class="imagen-container">
+                    <img src="/Pantry_Amigo/${data.Caso_Imagen}" alt="Imagen del caso" />
+                  </div>
+                  <div class="porcentaje">
+                    <p><strong>Recaudado:</strong> $${data.Caso_Monto_Recaudado}</p>
+                  </div>
+                </div>
+              </div>
 
-            <div class="imagen-container">
-              <img src="/Pantry_Amigo/${data.Caso_Imagen}" alt="Imagen del caso" />
-            </div>
-
-            <div class="porcentaje">       
-            <p><strong>Recaudado:</strong> $${data.Caso_Monto_Recaudado}</p>
-            </div>        
-          </div>
-
-          <div class="detalles-caso-wrapper">
-            <div class="detalles-header">
-              <h4 class="margin"> Detalles del Caso</h4>
-              <div class="num-id"> <p><strong>id:</strong> ${data.Caso_Id}</p> </div>
-               line-----------------
-            </div>
-
-            <div class="detalles"> 
-
-            <div class="detalles-caso-fundacion"> 
-              <p> Esta causa es administrado por la <strong>Fundación: ${data.Fundacion_Nombre}</strong></p>
-              <p> Quieres comunicarte con la fundacion? <br> <strong>Correo</strong> ${data.Fundacion_Correo}</p>
-              <p><strong>Teléfono:</strong> ${data.Fundacion_Telefono}</p>
-              <p><strong>Dirección:</strong> ${data.Fundacion_Direccion}</p>
-            </div>
-            
-           <div class="detalles-caso-table">
-            <div class="celda"> <p>Fecha de Inicio:</p> </div>
-            <div class="celda-info"> <strong> ${data.Caso_Fecha_Inicio}</strong></div>
-
-            <div class="celda"> <p>Fecha de Fin:</p> </div>
-            <div class="celda-info"> <strong> ${data.Caso_Fecha_Fin}</strong></div>
-             
-            <div class="celda"> <p>Categoría:</p> </div>
-            <div class="celda-info"> <strong> ${data.Caso_Cat_Nombre}</strong></div>
-
-            <div class="celda"> <p>Voluntariado:</p> </div>
-            <div class="celda-info"> <strong> ${data.Caso_Voluntariado == 1 ? 'Sí' : 'No'}</strong></div>
-
-            </div>
-          </div>             
-        </div>
-           `;
+              <div class="detalles-caso-wrapper">
+                <div class="detalles-header">
+                  <h4 class="margin">Detalles del Caso</h4>
+                  <div class="num-id"><p><strong>id:</strong> ${data.Caso_Id}</p></div>
+                </div>
+                <div class="detalles">
+                  <div class="detalles-caso-fundacion">
+                    <p>Esta causa es administrada por la <strong>Fundación: ${data.Fundacion_Nombre}</strong></p>
+                    <p>¿Quieres comunicarte con la fundación? <br> <strong>Correo:</strong> ${data.Fundacion_Correo}</p>
+                    <p><strong>Teléfono:</strong> ${data.Fundacion_Telefono}</p>
+                    <p><strong>Dirección:</strong> ${data.Fundacion_Direccion}</p>
+                  </div>
+                  <div class="detalles-caso-table">
+                    <div class="celda"><p>Fecha de Inicio:</p></div>
+                    <div class="celda-info"><strong>${data.Caso_Fecha_Inicio}</strong></div>
+                    <div class="celda"><p>Fecha de Fin:</p></div>
+                    <div class="celda-info"><strong>${data.Caso_Fecha_Fin}</strong></div>
+                    <div class="celda"><p>Categoría:</p></div>
+                    <div class="celda-info"><strong>${data.Caso_Cat_Nombre}</strong></div>
+                    <div class="celda"><p>Voluntariado:</p></div>
+                    <div class="celda-info"><strong>${data.Caso_Voluntariado == 1 ? 'Sí' : 'No'}</strong></div>
+                  </div>
+                </div>
+              </div>
+            `;
 
             detalleInfo.innerHTML = contenido;
           }
@@ -150,61 +142,5 @@
         });
     });
   </script>
-
-  <style>
-    .detalles-caso-wrapper { /*arreglar ancho*/
-      background:rgb(255, 255, 255);
-      padding: 30px 20px;
-      width: 750px;
-      margin: 20px auto 0 auto;
-    }
-    .detalles{
-      background: #f9f9f9;
-      border-radius: 16px;
-      box-shadow: 0 2px 8px rgba(60,60,60,0.08);
-      padding: 30px 20px;
-      width: 700px;
-      margin: 20px auto 0 auto;
-      display: flex;
-       gap: 40px;
-    }
-
-   .detalles-caso-table {
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 2px 8px rgba(60,60,60,0.08);
-  padding: 24px 20px;
-  width: 320px;
-  margin: 30px auto 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  border: 1px solid #eee;
-}
-
-.celda, .celda-info {
-  display: flex;
-  align-items: center;
-  padding: 10px 0;
-  border: none;
-  font-size: 1rem;
-}
-
-.celda {
-  color: #444;
-  flex: 2;
-  font-weight: 500;
-  justify-content: flex-start;
-}
-
-.celda-info {
-  color: #222;
-  flex: 3;
-  font-weight: bold;
-  justify-content: flex-end;
-}
-  </style>
-
 </body>
-
 </html>
