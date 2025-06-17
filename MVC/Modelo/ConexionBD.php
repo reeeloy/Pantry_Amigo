@@ -1,5 +1,6 @@
 <?php
 class ConexionBD {
+    
     // Variables para la conexión mysqli
     private $mysqli;
     private $result;
@@ -21,6 +22,10 @@ class ConexionBD {
         // Asegurar que se use UTF-8
         $this->mysqli->set_charset("utf8mb4");
         return true;
+    }
+    // Metodo para que pueda guardar datos
+       public function prepare($sql) {
+        return $this->mysqli->prepare($sql);
     }
 
     // Método para cerrar la conexión mysqli
@@ -106,6 +111,7 @@ $conn = new mysqli($host, $user, $pass, $db);
 if ($conn->connect_error) {
     die("Conexión fallida: " . $conn->connect_error);
 }
+
 
 
 ?>

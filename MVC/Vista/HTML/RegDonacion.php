@@ -1,29 +1,37 @@
 <?php
-require_once '../../../Modelo/ConexionBD.php';
+require_once '../../Modelo/ConexionBD.php';
 
-// Recibir parámetros que Mercado Pago envía en la URL (por ejemplo: status, payment_id, etc)
-$status = $_GET['status'] ?? '';
-$payment_id = $_GET['payment_id'] ?? '';
-$external_reference = $_GET['external_reference'] ?? ''; // si usas referencia externa
+$status    = $_GET['status'] ?? '';
+$nombre    = $_GET['nombre'] ?? '';
+$apellido  = $_GET['apellido'] ?? '';
+$cedula    = $_GET['cedula'] ?? '';
+$correo    = $_GET['correo'] ?? '';
+$monto     = $_GET['monto'] ?? 0;
+$casoId    = $_GET['caso'] ?? 0;
+$categoria = $_GET['cat'] ?? '';
 
 if ($status !== 'approved') {
-    die("El pago no fue aprobado.");
+    die("❌ Pago no aprobado.");
 }
 
-// Conectar a la base de datos
 $conn = new ConexionBD();
 if (!$conn->abrir()) {
-    die("Error al conectar a la base de datos.");
+    die("❌ Error al conectar a la BD.");
 }
 
-// Actualizar el estado de la donación a 'approved'
-// Para esto debes tener algún identificador para relacionar, podría ser el payment_id, cédula, o el id insertado antes.
-// Aquí un ejemplo suponiendo que uses cédula y monto para actualizar el pago:
+// Calcula comisión
+$comision = $monto * 0.054;
 
-$sql = "UPDATE Tbl_Donacion_Dinero SET Don_Estado = 'approved' WHERE Don_Cedula_Donante = ? AND Don_Monto = ? AND Don_Estado = 'pendiente'";
+$sql = "INSERT INTO Tbl_Donacion_Dinero 
+  (Don_Monto, Don_Comision, Don_Cedula_Donante, Don_Nombre_Donante, 
+   Don_Apellido_Donante, Don_Correo, Don_Fecha, Don_Caso_Id, Don_Cat_Nombre)
+  VALUES (?, ?, ?, ?, ?, ?, CURDATE(), ?, ?)";
+$params = [$monto, $comision, $cedula, $nombre, $apellido, $correo, $casoId, $categoria];
 
-$conn->consulta($sql, [$_GET['cedula'] ?? '', $_GET['monto'] ?? 0]);
+$conn->consulta($sql, $params);
 $conn->cerrar();
 
-echo "¡Gracias! El pago fue aprobado y registrado.";
+echo "<h2>✅ ¡Gracias, $nombre! Tu donación de $$monto COP se registró correctamente.</h2>";
 ?>
+
+
