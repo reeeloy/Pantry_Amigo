@@ -1,58 +1,74 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Caso de Donación</title>
-    <link rel="stylesheet" href="../../Vista/CSS/estiloRegCaso.css">
-</head>
-<body>
-    <div class="container">
-        <h2>Registrar Caso de Donación de Dinero</h2>
+<?php
+// Habilitar reporte de errores para depuración
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
-        <form action="../../Controlador/Controlador.php" method="POST" enctype="multipart/form-data">
-            <label>Nombre del Caso:</label>
-            <input type="text" name="casoNombre" required><br>
+// Indicar que la respuesta será en formato JSON
+header('Content-Type: application/json');
 
-            <label>Descripción:</label>
-            <textarea name="casoDescripcion" required></textarea><br>
+// Incluir la conexión a la base de datos
+include_once '../../Modelo/ConexionBD.php';
 
-            <label>Meta de Recaudación:</label>
-            <input type="number" name="casoMontoMeta" required>
+$response = ['success' => false, 'message' => 'Error desconocido.'];
 
-            <label>Fecha de Inicio:</label>
-            <input type="date" name="casoFechaInicio" required><br>
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Validar que los datos necesarios existen
+    $required_fields = ['Caso_Nombre', 'Caso_Descripcion', 'Caso_Monto_Meta', 'Caso_Cat_Id', 'Caso_Fecha_Inicio', 'Caso_Fecha_Fin'];
+    $missing_fields = [];
+    foreach ($required_fields as $field) {
+        if (empty($_POST[$field])) {
+            $missing_fields[] = $field;
+        }
+    }
 
-            <label>Fecha de Fin:</label>
-            <input type="date" name="casoFechaFin"><br>
+    if (!empty($missing_fields)) {
+        $response['message'] = 'Faltan campos requeridos: ' . implode(', ', $missing_fields);
+    } else {
+        $conn = new ConexionBD();
+        $conexion = $conn->abrir();
 
-            <label>Estado:</label>
-            <select name="casoEstado" required>
-                <option value="Activo">Activo</option>
-                <option value="Inactivo">Inactivo</option>
-            </select>
+        // Asignar variables desde POST
+        $nombre = $_POST['Caso_Nombre'];
+        $descripcion = $_POST['Caso_Descripcion'];
+        $meta = $_POST['Caso_Monto_Meta'];
+        $categoria_id = $_POST['Caso_Cat_Id'];
+        $fecha_inicio = $_POST['Caso_Fecha_Inicio'];
+        $fecha_fin = $_POST['Caso_Fecha_Fin'];
+        
+        // Asumimos un estado inicial 'Activo' y recaudado en 0
+        $estado = 'Activo'; 
+        $recaudado = 0;
+        
+        // Aquí debes obtener el Fund_Id de la sesión
+        session_start();
+        $fundacion_id = $_SESSION['Fund_Id'] ?? null; // Asegúrate de que 'Fund_Id' esté en la sesión
 
-            <label>Imagen del Caso:</label>
-            <input type="file" name="casoImagen" accept="image/*">
+        if ($fundacion_id) {
+            $sql = "INSERT INTO caso_de_dinero (Caso_Nombre, Caso_Descripcion, Caso_Monto_Meta, Caso_Monto_Recaudado, Caso_Fecha_Inicio, Caso_Fecha_Fin, Caso_Estado, Caso_Cat_Id, Caso_Fund_Id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            
+            $stmt = $conexion->prepare($sql);
+            if ($stmt) {
+                $stmt->bind_param("ssdissiii", $nombre, $descripcion, $meta, $recaudado, $fecha_inicio, $fecha_fin, $estado, $categoria_id, $fundacion_id);
+                
+                if ($stmt->execute()) {
+                    $response['success'] = true;
+                    $response['message'] = '¡Caso creado con éxito!';
+                } else {
+                    $response['message'] = 'Error al ejecutar la consulta: ' . $stmt->error;
+                }
+                $stmt->close();
+            } else {
+                $response['message'] = 'Error al preparar la consulta: ' . $conexion->error;
+            }
+        } else {
+            $response['message'] = 'Error: No se pudo identificar la fundación. Inicie sesión de nuevo.';
+        }
+        $conn->cerrar();
+    }
+} else {
+    $response['message'] = 'Método de solicitud no válido.';
+}
 
-            <label>Permitir Voluntariado:</label>
-            <input type="checkbox" name="casoVoluntariado" value="1">
-
-            <label>ID de Fundación:</label>
-            <input type="number" name="casoFundacion" required><br>
-
-            <label>Categoría:</label>
-            <select name="casoCategoria" required>
-                <option value="Salud">Salud</option>
-                <option value="Educacion">Educacion</option>
-                <option value="Emergencias">Emergencias</option>
-                <option value="Alimentación">Alimentación</option>
-                <option value="Tecnología">Tecnología</option>
-                <option value="Medio Ambiente">Medio Ambiente</option>
-            </select>
-
-            <button type="submit" name="registrarCasoDin">Crear Caso Dinero</button>
-        </form>
-    </div>
-</body>
-</html>
+echo json_encode($response);
+exit();
+?>
