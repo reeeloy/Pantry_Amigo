@@ -15,27 +15,8 @@ $result = $conn->obtenerResult();
 $caso = $result->fetch_assoc();
 
 $conn->cerrar();
-
-// --- MercadoPago Preference ---
-require_once '../../../vendor/autoload.php';
-use MercadoPago\Client\Preference\PreferenceClient;
-use MercadoPago\MercadoPagoConfig;
-
-MercadoPagoConfig::setAccessToken('APP_USR-4306942363216817-061310-05528330eb0be839b7b575acd647667e-2496822952');
-$client = new PreferenceClient();
-$preference = $client->create([
-    "items" => [
-        [
-            "id" => "donacion_" . $id,
-            "title" => "Donación para caso #" . $id,
-            "quantity" => 1,
-            "unit_price" => 3000.00, // Monto mínimo por defecto
-        ],
-    ],
-    "statement_descriptor" => "Donación Pantry",
-    "external_reference" => "donacion_" . $id,
-]);
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -45,19 +26,16 @@ $preference = $client->create([
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://sdk.mercadopago.com/js/v2"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
+
 <body>
   <header>
     <div class="navbar">
-      <a href="#" class="nav-logo" aria-label="Inicio">
+      <a href="#" class="nav-logo">
         <img src="../IMG/logosinfondo.png" alt="Logo de Pantry">
         <h2 class="logo-text">PANTRY</h2>
       </a>
-      <ul class="nav-menu">
-        <li class="nav-item"><a href="#" class="nav-link">INFO</a></li>
-      </ul>
-      <button id="menu-open-button" class="fas fa-bars" aria-label="Abrir menú"></button>
-      <button id="menu-close-button" class="fas fa-times" aria-label="Cerrar menú"></button>
     </div>
   </header>
 
@@ -65,7 +43,6 @@ $preference = $client->create([
     <section class="section-donation">
       <?php if ($caso): ?>
         <h2 class="section-title">Estás apoyando a:</h2>
-
         <section class="detail-section">
           <img src="/Pantry_Amigo/<?= htmlspecialchars($caso['Caso_Imagen']) ?>" alt="Imagen del caso" class="caso-imagen">
           <div class="detail-description">
@@ -81,10 +58,10 @@ $preference = $client->create([
             <input type="hidden" name="categoria" value="<?= htmlspecialchars($categoria) ?>">
 
             <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" required pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+" title="Solo letras y espacios">
+            <input type="text" id="nombre" name="nombre" required pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+">
 
             <label for="apellido">Apellido:</label>
-            <input type="text" id="apellido" name="apellido" required pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+" title="Solo letras y espacios">
+            <input type="text" id="apellido" name="apellido" required pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+">
 
             <label for="cedula">Cédula:</label>
             <input type="text" id="cedula" name="cedula" required>
@@ -93,14 +70,14 @@ $preference = $client->create([
             <input type="email" id="correo" name="correo" required>
 
             <label for="monto">Monto a donar:</label>
-            <input type="number" id="monto" name="monto" min="3000" required value="3000">
+            <input type="number" id="monto" name="monto" min="3000" required>
 
-           <button type="submit" id="btn-donar">Donar ahora</button>
+            <div class="g-recaptcha" data-sitekey="6LeAo2QrAAAAACgfC5XzTV94Idx5UHI1Cjx-WphI"></div>
 
-
+            <button type="submit" id="btn-donar">Donar ahora</button>
           </form>
-          <div id="wallet_container" style="margin-top:24px; display: none;"></div>
 
+          <div id="wallet_container" style="margin-top:24px; display: none;"></div>
         </section>
       <?php else: ?>
         <p class="error-msg">No se encontró el caso con ID <?= htmlspecialchars($id) ?></p>
@@ -108,7 +85,7 @@ $preference = $client->create([
     </section>
   </main>
 
-  <script>
+<script>
 const mp = new MercadoPago('APP_USR-8cf87360-1878-4484-be17-19415e2931e7', {
   locale: 'es-CO'
 });
@@ -125,13 +102,10 @@ function renderWallet(preferenceId) {
     }
   }).then(brick => {
     currentBrick = brick;
-    document.getElementById('wallet_container').style.display = 'block'; // Mostrar contenedor
+    document.getElementById('wallet_container').style.display = 'block';
   });
 }
 
-// Ya no renderizamos nada al inicio
-
-// Formulario
 document.getElementById("form-donacion").addEventListener("submit", function(e) {
   e.preventDefault();
 
@@ -141,6 +115,7 @@ document.getElementById("form-donacion").addEventListener("submit", function(e) 
   const correo = document.getElementById('correo').value.trim();
   const monto = parseFloat(document.getElementById('monto').value.trim());
   const casoId = document.querySelector('input[name="casoId"]').value;
+  const categoria = document.querySelector('input[name="categoria"]').value;
 
   if (!nombre || !apellido || !cedula || !correo || isNaN(monto) || monto < 3000) {
     Swal.fire({
@@ -151,12 +126,27 @@ document.getElementById("form-donacion").addEventListener("submit", function(e) 
     return;
   }
 
+  const recaptcha = grecaptcha.getResponse();
+  if (!recaptcha) {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Verifica que no eres un robot',
+      text: 'Por favor marca la casilla "No soy un robot".'
+    });
+    return;
+  }
+
+  enviarPreferencia({
+    nombre, apellido, cedula, correo, monto, casoId, categoria,
+    'g-recaptcha-response': recaptcha
+  });
+});
+
+function enviarPreferencia(datos) {
   fetch('generar_preferencia.php', {
     method: 'POST',
     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    body: new URLSearchParams({
-      nombre, apellido, cedula, correo, monto, casoId
-    })
+    body: new URLSearchParams(datos)
   })
   .then(res => res.json())
   .then(data => {
@@ -177,9 +167,7 @@ document.getElementById("form-donacion").addEventListener("submit", function(e) 
       });
     }
   });
-});
+}
 </script>
-
-
 </body>
 </html>
