@@ -16,6 +16,7 @@ $caso = $result->fetch_assoc();
 
 $conn->cerrar();
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -25,20 +26,16 @@ $conn->cerrar();
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://sdk.mercadopago.com/js/v2"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body>
   <header>
     <div class="navbar">
-      <a href="#" class="nav-logo" aria-label="Inicio">
+      <a href="#" class="nav-logo">
         <img src="../IMG/logosinfondo.png" alt="Logo de Pantry">
         <h2 class="logo-text">PANTRY</h2>
       </a>
-      <ul class="nav-menu">
-        <li class="nav-item"><a href="#" class="nav-link">INFO</a></li>
-      </ul>
-      <button id="menu-open-button" class="fas fa-bars" aria-label="Abrir menú"></button>
-      <button id="menu-close-button" class="fas fa-times" aria-label="Cerrar menú"></button>
     </div>
   </header>
 
@@ -46,7 +43,6 @@ $conn->cerrar();
     <section class="section-donation">
       <?php if ($caso): ?>
         <h2 class="section-title">Estás apoyando a:</h2>
-
         <section class="detail-section">
           <img src="/Pantry_Amigo/<?= htmlspecialchars($caso['Caso_Imagen']) ?>" alt="Imagen del caso" class="caso-imagen">
           <div class="detail-description">
@@ -62,10 +58,10 @@ $conn->cerrar();
             <input type="hidden" name="categoria" value="<?= htmlspecialchars($categoria) ?>">
 
             <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" required pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+" title="Solo letras y espacios">
+            <input type="text" id="nombre" name="nombre" required pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+">
 
             <label for="apellido">Apellido:</label>
-            <input type="text" id="apellido" name="apellido" required pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+" title="Solo letras y espacios">
+            <input type="text" id="apellido" name="apellido" required pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+">
 
             <label for="cedula">Cédula:</label>
             <input type="text" id="cedula" name="cedula" required>
@@ -76,10 +72,12 @@ $conn->cerrar();
             <label for="monto">Monto a donar:</label>
             <input type="number" id="monto" name="monto" min="3000" required>
 
-            <p><small>Luego de completar tus datos, aparecerá el formulario de pago seguro de Mercado Pago.</small></p>
+            <div class="g-recaptcha" data-sitekey="6LeAo2QrAAAAACgfC5XzTV94Idx5UHI1Cjx-WphI"></div>
 
-            <div id="walletBrick_container"></div>
+            <button type="submit" id="btn-donar">Donar ahora</button>
           </form>
+
+          <div id="wallet_container" style="margin-top:24px; display: none;"></div>
         </section>
       <?php else: ?>
         <p class="error-msg">No se encontró el caso con ID <?= htmlspecialchars($id) ?></p>
@@ -87,104 +85,89 @@ $conn->cerrar();
     </section>
   </main>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', async () => {
-      const mp = new MercadoPago("TEST-34b09027-4aa4-4155-9769-b43bc0b9f265", {
-        locale: "es-CO"
-      });
+<script>
+const mp = new MercadoPago('APP_USR-8cf87360-1878-4484-be17-19415e2931e7', {
+  locale: 'es-CO'
+});
 
-      const montoInput = document.getElementById('monto');
-      const form = document.getElementById('form-donacion');
-      let cardPaymentBrickController = null;
+let currentBrick = null;
 
-      const idempotencyKey = 'donacion_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+function renderWallet(preferenceId) {
+  if (currentBrick) currentBrick.unmount();
+  mp.bricks().create("wallet", "wallet_container", {
+    initialization: { preferenceId, redirectMode: 'modal' },
+    customization: {
+      texts: { action: 'pay', valueProp: 'security_details' },
+      visual: { buttonBackground: 'black' }
+    }
+  }).then(brick => {
+    currentBrick = brick;
+    document.getElementById('wallet_container').style.display = 'block';
+  });
+}
 
-      const crearBrick = (monto) => {
-        mp.bricks().create("cardPayment", "walletBrick_container", {
-          initialization: { amount: monto },
-          callbacks: {
-            onReady: () => console.log("✅ Brick cargado correctamente"),
-            onError: (error) => {
-              console.error("❌ Error cargando Brick:", error);
-              Swal.fire('Error', 'No se pudo cargar el formulario de pago.', 'error');
-            },
-            onSubmit: async (cardFormData) => {
-              if (!form.checkValidity()) {
-                Swal.fire('⚠️ Faltan datos', 'Por favor completa todos los campos requeridos antes de pagar.', 'warning');
-                return;
-              }
+document.getElementById("form-donacion").addEventListener("submit", function(e) {
+  e.preventDefault();
 
-              const data = {
-                nombre: form.nombre.value.trim(),
-                apellido: form.apellido.value.trim(),
-                cedula: form.cedula.value.trim(),
-                correo: form.correo.value.trim(),
-                monto: monto,
-                casoId: form.casoId.value,
-                categoria: form.categoria.value,
-                token: cardFormData.token,
-                payment_method_id: cardFormData.payment_method_id,
-                issuer_id: cardFormData.issuer_id,
-                installments: cardFormData.installments
-              };
+  const nombre = document.getElementById('nombre').value.trim();
+  const apellido = document.getElementById('apellido').value.trim();
+  const cedula = document.getElementById('cedula').value.trim();
+  const correo = document.getElementById('correo').value.trim();
+  const monto = parseFloat(document.getElementById('monto').value.trim());
+  const casoId = document.querySelector('input[name="casoId"]').value;
+  const categoria = document.querySelector('input[name="categoria"]').value;
 
-              console.log("🟡 Enviando datos al servidor:", data);
-
-              try {
-                const response = await fetch("/Pantry_Amigo/MVC/Vista/HTML/ProcesarPago.php", {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                    "X-Idempotency-Key": idempotencyKey
-                  },
-                  body: JSON.stringify(data)
-                });
-
-                if (!response.ok) throw new Error("❌ Error HTTP: " + response.status);
-
-                const result = await response.json();
-                console.log("📦 Resultado del pago:", result);
-
-                if (result.status === 'approved') {
-                  Swal.fire('✅ ¡Gracias!', 'Tu donación fue aprobada con éxito', 'success');
-                  // window.location.href = '/gracias.php';
-                } else {
-                  Swal.fire('⚠️ Pago no aprobado', result.status_detail || 'Intenta con otro medio de pago', 'warning');
-                }
-              } catch (error) {
-                console.error("❌ Error al procesar el pago:", error);
-                Swal.fire('❌ Error', 'Ocurrió un problema al procesar el pago', 'error');
-              }
-            }
-          }
-        }).then(controller => {
-          cardPaymentBrickController = controller;
-        });
-      };
-
-      let debounceTimer;
-      montoInput.addEventListener('input', () => {
-        clearTimeout(debounceTimer);
-        debounceTimer = setTimeout(() => {
-          const nuevoMonto = parseFloat(montoInput.value);
-          if (!isNaN(nuevoMonto)) {
-            if (nuevoMonto < 3000) {
-              Swal.fire('⚠️ Monto muy bajo', 'El monto mínimo es de $3.000 COP.', 'warning');
-              return;
-            }
-
-            if (cardPaymentBrickController) {
-              cardPaymentBrickController.unmount();
-            }
-            crearBrick(nuevoMonto);
-          }
-        }, 400);
-      });
-
-      if (montoInput.value && parseFloat(montoInput.value) >= 3000) {
-        crearBrick(parseFloat(montoInput.value));
-      }
+  if (!nombre || !apellido || !cedula || !correo || isNaN(monto) || monto < 3000) {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Campos incompletos',
+      text: 'Completa todos los campos y asegúrate de que el monto sea mínimo $3.000 COP.'
     });
-  </script>
+    return;
+  }
+
+  const recaptcha = grecaptcha.getResponse();
+  if (!recaptcha) {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Verifica que no eres un robot',
+      text: 'Por favor marca la casilla "No soy un robot".'
+    });
+    return;
+  }
+
+  enviarPreferencia({
+    nombre, apellido, cedula, correo, monto, casoId, categoria,
+    'g-recaptcha-response': recaptcha
+  });
+});
+
+function enviarPreferencia(datos) {
+  fetch('generar_preferencia.php', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    body: new URLSearchParams(datos)
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.preference_id) {
+      renderWallet(data.preference_id);
+      Swal.fire({
+        icon: 'success',
+        title: '¡Datos listos!',
+        text: 'Tu botón de pago fue cargado.',
+        timer: 2000,
+        showConfirmButton: false
+      });
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: data.error || 'No se pudo generar la preferencia de pago.'
+      });
+    }
+  });
+}
+</script>
 </body>
 </html>

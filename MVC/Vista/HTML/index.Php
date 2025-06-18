@@ -119,13 +119,7 @@
         <p>Conoce nuestras fundaciones.</p>
       </div>
 
-      <div class="options-section-card" onclick="window.location.href='Voluntariados.php'">
-        <div class="options-section-card-icon">
-          <i class='bx bx-user-pin'></i>
-        </div>
-        <h1 class="options-section-card-title">Voluntariado</h1>
-        <p>Súmate como voluntario.</p>
-      </div>
+    
 
       <div class="options-section-card" onclick="window.location.href='ConsultarParticipacion.php'">
         <div class="options-section-card-icon">
