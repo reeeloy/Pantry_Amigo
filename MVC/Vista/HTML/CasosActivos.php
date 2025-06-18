@@ -38,31 +38,59 @@
         </li>
       </ul>
       <button id="menu-open-button" class="fas fa-bars"></button>
-
     </div>
   </header>
 
-
-  <main class="content">
-    <div class="section-title">
-      <h2>Casos De Donacion</h2>
-    </div>
-
-    <!-- Filtro por Categoría -->
-    <div class="botones">
-      <!-- Select oculto al principio -->
-       <label for="filtro-categoria">Filtrar por categoría:</label>
-       <select id="filtro-categoria" onchange="filtrarPorCategoria(this.value)">
-        <option value="">Seleccione una categoría</option>
-        <option value="Salud">Salud</option>
-        <option value="Educación">Educación</option>
-        <option value="Alimentación">Alimentación</option>
-        <option value="Emergencias">Emergencias</option>
-        <option value="Tecnología">Tecnología</option>
-        <option value="Medio Ambiente">Medio Ambiente</option>
-
-      </select>
-    </div>
+  <main class="content-flex">
+    <!-- Menú lateral de filtros -->
+    <aside class="filtros-lateral">
+      <h3>Filtrar casos</h3>
+      <div class="filtro-group">
+        <label for="filtro-categoria">Categoría:</label>
+        <select id="filtro-categoria" onchange="filtrarCasos()">
+          <option value="">Todas</option>
+          <option value="Salud">Salud</option>
+          <option value="Educación">Educación</option>
+          <option value="Alimentación">Alimentación</option>
+          <option value="Emergencias">Emergencias</option>
+          <option value="Tecnología">Tecnología</option>
+          <option value="Medio Ambiente">Medio Ambiente</option>
+        </select>
+      </div>
+      <div class="filtro-group">
+        <label for="filtro-voluntariado">Voluntariado:</label>
+        <select id="filtro-voluntariado" onchange="filtrarCasos()">
+          <option value="">Todos</option>
+          <option value="1">Sí</option>
+          <option value="0">No</option>
+        </select>
+      </div>
+      <div class="filtro-group">
+        <label for="filtro-estado">Estado:</label>
+        <select id="filtro-estado" onchange="filtrarCasos()">
+          <option value="">Todos</option>
+          <option value="Activo">Activo</option>
+          <option value="Inactivo">Inactivo</option>
+        </select>
+      </div>
+      <div class="filtro-group">
+        <label for="filtro-monto">Monto meta:</label>
+        <select id="filtro-monto" onchange="filtrarCasos()">
+          <option value="">Todos</option>
+          <option value="1">Menos de $1.000.000</option>
+          <option value="2">Entre $1.000.000 y $5.000.000</option>
+          <option value="3">Más de $5.000.000</option>
+        </select>
+      </div>
+      <div class="filtro-group">
+        <label for="filtro-fecha">Ordenar por:</label>
+        <select id="filtro-fecha" onchange="filtrarCasos()">
+          <option value="">Ninguno</option>
+          <option value="recientes">Casos recientes</option>
+          <option value="finalizar">Próximos a finalizar</option>
+        </select>
+      </div>
+    </aside>
 
     <!-- Sección de Casos -->
     <section id="casos" class="seccion-activa">
@@ -110,6 +138,11 @@
           <p>ID: ${caso.Caso_Id}</p>
           <p>Descripción: ${caso.Caso_Descripcion}</p>
           <p>Categoría: ${caso.Caso_Cat_Nombre}</p>
+          <p>Voluntariado: ${caso.Caso_Voluntariado == 1 ? 'Sí' : 'No'}</p>
+          <p>Estado: ${caso.Caso_Estado ? caso.Caso_Estado : 'Activo'}</p>
+          <p>Monto meta: $${Number(caso.Caso_Monto_Meta).toLocaleString()}</p>
+          <p>Fecha de inicio: ${caso.Caso_Fecha_Inicio ? caso.Caso_Fecha_Inicio : ''}</p>
+          <p>Fecha de fin: ${caso.Caso_Fecha_Fin ? caso.Caso_Fecha_Fin : ''}</p>
           <button onclick="window.location.href='Detalles.php?ID=${caso.Caso_Id}&tipo=dinero'">Ver detalles</button>
         </div>
       `;
@@ -117,19 +150,45 @@
     });
   }
 
-  function filtrarPorCategoria(categoria) {
-    if (!categoria) {
-      mostrarCasos(todosLosCasos); // Mostrar todos si no hay categoría seleccionada
-    } else {
-      const filtrados = todosLosCasos.filter(caso => caso.Caso_Cat_Nombre === categoria);
-      mostrarCasos(filtrados);
+  function filtrarCasos() {
+    const categoria = document.getElementById('filtro-categoria').value;
+    const voluntariado = document.getElementById('filtro-voluntariado').value;
+    const estado = document.getElementById('filtro-estado').value;
+    const monto = document.getElementById('filtro-monto').value;
+    const fecha = document.getElementById('filtro-fecha').value;
+
+    let filtrados = todosLosCasos;
+
+    if (categoria) {
+      filtrados = filtrados.filter(caso => caso.Caso_Cat_Nombre === categoria);
     }
+    if (voluntariado !== "") {
+      filtrados = filtrados.filter(caso => String(caso.Caso_Voluntariado) === voluntariado);
+    }
+    if (estado) {
+      filtrados = filtrados.filter(caso => (caso.Caso_Estado || 'Activo') === estado);
+    }
+    if (monto) {
+      filtrados = filtrados.filter(caso => {
+        const meta = parseFloat(caso.Caso_Monto_Meta);
+        if (monto === "1") return meta < 1000000;
+        if (monto === "2") return meta >= 1000000 && meta <= 5000000;
+        if (monto === "3") return meta > 5000000;
+        return true;
+      });
+    }
+    // Ordenar por fecha
+    if (fecha === "recientes") {
+      filtrados = filtrados.slice().sort((a, b) => new Date(b.Caso_Fecha_Inicio) - new Date(a.Caso_Fecha_Inicio));
+    } else if (fecha === "finalizar") {
+      filtrados = filtrados.slice().sort((a, b) => new Date(a.Caso_Fecha_Fin) - new Date(b.Caso_Fecha_Fin));
+    }
+
+    mostrarCasos(filtrados);
   }
+
   // Carga inicial
   document.addEventListener("DOMContentLoaded", cargarCasos);
-</script>
-
-
+  </script>
 </body>
-
-</html> 
+</html>
