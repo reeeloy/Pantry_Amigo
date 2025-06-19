@@ -1,6 +1,6 @@
 <?php
-require_once '../../Modelo/conexionBDD.php';
-require_once '../../Modelo/donacionModelo.php';
+require_once '../../../MVC/Modelo/conexionBDD.php';
+require_once '../../../MVC/Modelo/donacionModelo.php';
 
 $conexion = new ConexionBD();
 $conn = $conexion->getConexion();
