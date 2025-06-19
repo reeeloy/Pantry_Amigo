@@ -27,7 +27,7 @@ body {
   width: 250px;
   background: linear-gradient(180deg, var(--primary-color) 0%, #1a3a5c 100%);
   color: white;
-  padding: 20px 0;
+  padding: 0px 0;
   box-shadow: 2px 0 10px rgba(0,0,0,0.1);
   transition: width 0.3s ease-in-out;
   display: flex;
@@ -60,7 +60,7 @@ body {
 .nav a.nav-link {
   display: flex !important; /* Se fuerza el display flex para anular cualquier otra regla */
   align-items: center !important; /* Se fuerza la alineación vertical */
-  padding: 15px 25px;
+  padding: 10px 25px;
   color: rgba(255,255,255,0.8);
   text-decoration: none;
   transition: all 0.3s ease;
