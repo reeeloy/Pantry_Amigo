@@ -21,19 +21,27 @@ $modelo = new FundacionModelo($conn); $datos = $modelo->obtenerPorUsuario($usuar
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   
   <link rel="stylesheet" href="/Pantry_Amigo/MVC/Vista/CSS/dashboard_styles.css"/>
-
 </head>
 <body>
   <div class="dashboard-container">
     <aside class="sidebar">
       <div class="logo"><img src="/Pantry_Amigo/MVC/Vista/IMG/Logo_Pantry-amigo.png" alt="Logo" class="logo-img"></div>
+      
       <nav class="nav menu flex-column">
-        <a href="#" id="perfil-link" class="nav-link active"><i class="fas fa-user"></i> Perfil</a>
-        <a href="#" id="casos-link" class="nav-link"><i class="fas fa-folder-open"></i> Casos</a>
-        <a href="#" id="crear-caso-link" class="nav-link"><i class="fas fa-plus-circle"></i> Crear Caso</a>
-        <a href="#" id="voluntarios-link" class="nav-link"><i class="fas fa-users"></i> Voluntarios</a>
-        <a href="#" id="ayuda-link" class="nav-link"><i class="fas fa-question-circle"></i> Ayuda</a>
-        <a href="/Pantry_Amigo/MVC/Vista/HTML/logout.php" id="cerrar-sesion-link" class="nav-link"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+        <div class="menu-links">
+            <a href="#" id="perfil-link" class="nav-link active"><i class="fas fa-user"></i> <span>Perfil</span></a>
+            <a href="#" id="casos-link" class="nav-link"><i class="fas fa-folder-open"></i> <span>Casos</span></a>
+            <a href="#" id="crear-caso-link" class="nav-link"><i class="fas fa-plus-circle"></i> <span>Crear Caso</span></a>
+            <a href="#" id="voluntarios-link" class="nav-link"><i class="fas fa-users"></i> <span>Voluntarios</span></a>
+            <a href="#" id="ayuda-link" class="nav-link"><i class="fas fa-question-circle"></i> <span>Ayuda</span></a>
+        </div>
+        
+        <div class="w-100">
+            <a href="#" id="sidebar-toggle" class="nav-link sidebar-toggle-link">
+                <i class="fas fa-chevron-left"></i> <span>Ocultar</span>
+            </a>
+            <a href="/Pantry_Amigo/MVC/Vista/HTML/logout.php" id="cerrar-sesion-link" class="nav-link"><i class="fas fa-sign-out-alt"></i> <span>Cerrar Sesión</span></a>
+        </div>
       </nav>
     </aside>
 
@@ -154,7 +162,6 @@ $modelo = new FundacionModelo($conn); $datos = $modelo->obtenerPorUsuario($usuar
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // --- INICIALIZACIÓN ---
     const modalCaso = new bootstrap.Modal(document.getElementById('modal-caso'));
     const casoForm = document.getElementById('caso-form');
     const secciones = { 'perfil-link': 'perfil', 'casos-link': 'casos', 'crear-caso-link': 'crear-caso-link', 'voluntarios-link': 'voluntarios', 'ayuda-link': 'ayuda' };
@@ -162,16 +169,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- NAVEGACIÓN ---
     document.querySelectorAll('.nav-link').forEach(link => {
+        if (link.id === 'sidebar-toggle') return;
+
         link.addEventListener('click', e => {
-            // CAMBIO PARA CERRAR SESIÓN
             if (e.currentTarget.id === 'cerrar-sesion-link') {
                 e.preventDefault();
-                if (confirm('¿Estás seguro de que deseas cerrar la sesión?')) {
-                    window.location.href = e.currentTarget.href;
-                }
+                if (confirm('¿Estás seguro de que deseas cerrar la sesión?')) window.location.href = e.currentTarget.href;
                 return;
             }
-            
             e.preventDefault();
             const id = e.currentTarget.id;
 
@@ -180,7 +185,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            document.getElementById('titulo-seccion').innerText = e.currentTarget.textContent.trim();
+            document.getElementById('titulo-seccion').innerText = e.currentTarget.querySelector('span').textContent.trim();
             document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
             e.currentTarget.classList.add('active');
 
@@ -214,14 +219,13 @@ document.addEventListener('DOMContentLoaded', function() {
         casosData = data && !data.error ? data : [];
         renderCasos(casosData);
     }
-
     function renderCasos(lista) {
         const container = document.getElementById('lista-casos-container');
         container.innerHTML = '';
         if (lista.length === 0) { container.innerHTML = '<div class="col-12"><div class="alert alert-info">No se encontraron casos. ¡Crea uno nuevo!</div></div>'; return; }
         
         lista.forEach(caso => {
-            const progreso = caso.Caso_Monto_Meta > 0 ? (caso.Caso_Monto_Recaudado / caso.Caso_Monto_Recaudado * 100).toFixed(1) : 0;
+            const progreso = caso.Caso_Monto_Meta > 0 ? (caso.Caso_Monto_Recaudado / caso.Caso_Monto_Meta * 100).toFixed(1) : 0;
             const casoElement = document.createElement('div');
             casoElement.className = 'col-lg-6 col-md-12 mb-4';
             casoElement.innerHTML = `
@@ -248,7 +252,6 @@ document.addEventListener('DOMContentLoaded', function() {
             container.appendChild(casoElement);
         });
     }
-
     window.abrirModalCaso = function(action, id = null) {
         casoForm.reset();
         const titulo = document.getElementById('modal-caso-titulo');
@@ -284,7 +287,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         modalCaso.show();
     };
-
     casoForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         const data = await apiCall('/Pantry_Amigo/MVC/Vista/HTML/manejador_casos.php', new FormData(this));
@@ -296,7 +298,6 @@ document.addEventListener('DOMContentLoaded', function() {
             mostrarNotificacion(data ? data.message : 'Error desconocido', 'danger');
         }
     });
-
     window.eliminarCaso = async function(id) {
         if (!confirm('¿Seguro que deseas eliminar este caso?')) return;
         const data = await apiCall(`/Pantry_Amigo/MVC/Vista/HTML/manejador_casos.php?action=eliminar&id=${id}`, { method: 'GET' });
@@ -353,6 +354,27 @@ document.addEventListener('DOMContentLoaded', function() {
         const data = await apiCall('/Pantry_Amigo/MVC/Vista/HTML/add_horario_voluntario.php', { method: 'POST', body: new FormData(this) });
         if (data && data.success) { mostrarNotificacion('Horario asignado.', 'success'); formHorarioContainer.style.display = 'none'; this.reset(); cargarVoluntarios(); }
         else { mostrarNotificacion(data.message, 'error'); }
+    });
+
+    // --- LÓGICA PARA EL SIDEBAR COLAPSABLE ---
+    const sidebar = document.querySelector('.sidebar');
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    sidebarToggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        sidebar.classList.toggle('collapsed');
+        
+        const icon = sidebarToggle.querySelector('i');
+        const text = sidebarToggle.querySelector('span');
+
+        if (sidebar.classList.contains('collapsed')) {
+            icon.classList.remove('fa-chevron-left');
+            icon.classList.add('fa-chevron-right');
+            text.textContent = '';
+        } else {
+            icon.classList.remove('fa-chevron-right');
+            icon.classList.add('fa-chevron-left');
+            text.textContent = 'Ocultar';
+        }
     });
 
     // --- UTILIDADES ---
