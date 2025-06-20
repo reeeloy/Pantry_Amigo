@@ -22,26 +22,27 @@ class DonacionModelo {
 
     // 🔁 Nuevo método para registrar donación
     public function registrarDonacion($datos) {
-        $sql = "INSERT INTO tbl_donacion_dinero 
-        (Don_Monto, Don_Comision, Don_Cedula_Donante, Don_Nombre_Donante, Don_Apellido_Donante, Don_Correo, Don_Fecha, Don_Caso_Id, Don_Cat_Nombre) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO tbl_donacion_dinero 
+    (Don_Monto, Don_Comision, Don_Cedula_Donante, Don_Nombre_Donante, Don_Apellido_Donante, Don_Correo, Don_Fecha, Don_Caso_Id, Don_Cat_Nombre) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param(
-            "dssssssis",
-            $datos['monto'],
-            $datos['comision'],
-            $datos['cedula'],
-            $datos['nombre'],
-            $datos['apellido'],
-            $datos['correo'],
-            $datos['fecha'],
-            $datos['casoId'],
-            $datos['categoria']
-        );
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bind_param(
+        "dssssssis",
+        $datos['monto'],
+        $datos['comision'],
+        $datos['cedula'],
+        $datos['nombre'],
+        $datos['apellido'],
+        $datos['correo'],
+        $datos['fecha'],
+        $datos['casoId'],
+        $datos['categoria']
+    );
 
-        $stmt->execute();
-    }
+    $stmt->execute();
+}
+
 }
 ?>
 

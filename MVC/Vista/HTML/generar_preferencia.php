@@ -9,9 +9,14 @@ header('Content-Type: application/json');
 
 $monto = isset($_POST['monto']) ? floatval($_POST['monto']) : 0;
 $casoId = $_POST['casoId'] ?? null;
+$nombre = $_POST['nombre'] ?? '';
+$apellido = $_POST['apellido'] ?? '';
+$cedula = $_POST['cedula'] ?? '';
+$correo = $_POST['correo'] ?? '';
+$categoria = $_POST['categoria'] ?? '';
 
-if ($monto < 3000 || !$casoId) {
-  echo json_encode(['error' => 'Monto inválido o datos incompletos.']);
+if ($monto < 3000 || !$casoId || !$nombre || !$apellido || !$cedula || !$correo) {
+  echo json_encode(['error' => 'Datos incompletos o monto inválido.']);
   exit;
 }
 
@@ -19,6 +24,16 @@ MercadoPagoConfig::setAccessToken('APP_USR-4306942363216817-061310-05528330eb0be
 $client = new PreferenceClient();
 
 try {
+  $externalReference = implode('|', [
+    $casoId,
+    $nombre,
+    $apellido,
+    $cedula,
+    $correo,
+    $monto,
+    $categoria
+  ]);
+
   $preference = $client->create([
     "items" => [
       [
@@ -29,7 +44,11 @@ try {
       ],
     ],
     "statement_descriptor" => "Donación Pantry",
-    "external_reference" => "donacion_" . $casoId,
+    "external_reference" => $externalReference,
+    "back_urls" => [
+      "success" => "/Pantry_Amigo/MVC/Vista/HTML/RegDonacion.php"
+    ],
+    "auto_return" => "approved"
   ]);
 
   echo json_encode(['preference_id' => $preference->id]);

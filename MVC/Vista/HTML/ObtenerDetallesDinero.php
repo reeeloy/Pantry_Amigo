@@ -1,6 +1,7 @@
 <?php
 header('Content-Type: application/json');
 require_once '../../Modelo/ConexionBD.php';
+require_once '../../Modelo/FuncionesCaso.php';
 
 if (!isset($_GET['ID'])) {
     echo json_encode(['error' => 'ID no especificado']);

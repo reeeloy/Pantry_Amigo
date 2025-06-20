@@ -1,7 +1,7 @@
 <?php
 require_once '../../../vendor/autoload.php';
 require_once '../../Modelo/ConexionBD.php';
-require_once '../../Modelo/DonacionModelo.php'; // <- este modelo lo usas para guardar
+require_once '../../Modelo/DonacionModelo.php';
 
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Client\Payment\PaymentClient;
@@ -17,40 +17,43 @@ if (!$payment_id) {
 $client = new PaymentClient();
 $payment = $client->get($payment_id);
 
+// ✅ Validar estado del pago
 if ($payment->status !== 'approved') {
-    die("❌ El pago no fue aprobado.");
+    die("❌ El pago no fue aprobado. Estado: " . $payment->status);
 }
 
-// Descompón el external_reference
-list($casoId, $nombre, $apellido, $cedula, $correo, $monto) = explode('|', $payment->external_reference);
+// ✅ Descomponer los datos de external_reference
+list($casoId, $nombre, $apellido, $cedula, $correo, $monto, $categoria) = explode('|', $payment->external_reference);
 
-// Aquí guardas en la base de datos
+// ✅ Conexión a la base de datos
 $conn = new ConexionBD();
 if (!$conn->abrir()) {
     die("❌ Error al conectar con la base de datos.");
 }
 
-$sql = "INSERT INTO Tbl_Donacion_Dinero (Don_Monto, Don_Comision, Don_Cedula_Donante, Don_Nombre_Donante, Don_Apellido_Donante, Don_Correo, Don_Fecha, Don_Caso_Id, Don_Cat_Nombre)
-        VALUES (?, ?, ?, ?, ?, ?, NOW(), ?, ?)";
-
-// Calcular comisión si aplica
+// ✅ Calcular la comisión
 $comision = $payment->transaction_details->total_paid_amount - $payment->transaction_details->net_received_amount;
+$fecha = date('Y-m-d H:i:s');
 
-$categoria = ''; // Si no estás mandando la categoría, ponla manual o consulta por ID
+// ✅ Registrar donación usando el modelo
+$modelo = new DonacionModelo($conn->getConexion());
 
-$conn->consulta($sql, [
-    $monto,
-    $comision,
-    $cedula,
-    $nombre,
-    $apellido,
-    $correo,
-    $casoId,
-    $categoria
+$modelo->registrarDonacion([
+    'monto' => $monto,
+    'comision' => $comision,
+    'cedula' => $cedula,
+    'nombre' => $nombre,
+    'apellido' => $apellido,
+    'correo' => $correo,
+    'fecha' => $fecha,
+    'casoId' => $casoId,
+    'categoria' => $categoria
 ]);
 
 $conn->cerrar();
 
 echo "✅ Donación registrada correctamente. ¡Gracias por tu apoyo!";
-?>
+
+
+
 

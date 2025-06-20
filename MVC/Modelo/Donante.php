@@ -2,34 +2,20 @@
 require_once '../Modelo/ConexionBD.php';
 
 class Donante {
-    private $Dona_Cedula;
-    private $Dona_Nombre;
-    private $Dona_Apellido;
-    private $Dona_Correo;
+    public $cedula;
+    public $nombre;
+    public $apellido;
+    public $correo;
     private $conn;
 
     // Constructor que recibe la conexión
-    public function __construct($conexion) {
+    public function __construct($conexion, $cedula = "", $nombre = "", $apellido = "", $correo = "") {
         $this->conn = $conexion;
-        $this->Dona_Cedula = "";
-        $this->Dona_Nombre = "";
-        $this->Dona_Apellido = "";
-        $this->Dona_Correo = "";
+        $this->cedula = $cedula;
+        $this->nombre = $nombre;
+        $this->apellido = $apellido;
+        $this->correo = $correo;
     }
-
-    // Setters para asignar datos (o un método para cargar todos)
-    public function setDatos($cedula, $nombre, $apellido, $correo) {
-        $this->Dona_Cedula = $cedula;
-        $this->Dona_Nombre = $nombre;
-        $this->Dona_Apellido = $apellido;
-        $this->Dona_Correo = $correo;
-    }
-
-    // Getters
-    public function getDona_Cedula() { return $this->Dona_Cedula; }
-    public function getDona_Nombre() { return $this->Dona_Nombre; }
-    public function getDona_Apellido() { return $this->Dona_Apellido; }
-    public function getDona_Correo() { return $this->Dona_Correo; }
 
     // Método para registrar donante en BD
     public function registrar() {
@@ -40,10 +26,10 @@ class Donante {
         }
         $stmt->bind_param(
             "ssss",
-            $this->Dona_Cedula,
-            $this->Dona_Nombre,
-            $this->Dona_Apellido,
-            $this->Dona_Correo
+            $this->cedula,
+            $this->nombre,
+            $this->apellido,
+            $this->correo
         );
         if (!$stmt->execute()) {
             throw new Exception("Error ejecutando la consulta");

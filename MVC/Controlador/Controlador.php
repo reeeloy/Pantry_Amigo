@@ -3,7 +3,6 @@ require_once '../Modelo/ConexionBD.php';
 require_once '../Modelo/Donante.php';
 require_once '../Modelo/registrarDonante.php';
 require_once '../Modelo/Caso.php';
-require_once '../Modelo/ConsultaRecursos.php';
 require_once '../Modelo/Participacion.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -20,8 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $Dona_Apellido = $_POST['regDonaApellido'];
             $Dona_Correo = $_POST['regDonaCorreo'];
 
-            $personal = new Donante();
-            $personal->Donante($Dona_Cedula, $Dona_Nombre, $Dona_Apellido, $Dona_Correo);
+            $personal = new Donante($Dona_Cedula, $Dona_Nombre, $Dona_Apellido, $Dona_Correo);
 
             $perCliente = new registrarDonante();
             $perCliente->regDonante($personal);

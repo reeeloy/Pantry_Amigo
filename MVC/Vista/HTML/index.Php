@@ -44,9 +44,6 @@
           </ul>
         </li>
         <li class="nav-item">
-          <a href="../HTML/ConsultarFundacion.php" class="nav-link">COLABORATORS</a>
-        </li>
-        <li class="nav-item">
           <a href="#opciones" class="nav-link">OPCIONES</a>
         </li>
         <li class="nav-item">
@@ -119,7 +116,7 @@
         <p>Conoce nuestras fundaciones.</p>
       </div>
 
-    
+
 
       <div class="options-section-card" onclick="window.location.href='ConsultarParticipacion.php'">
         <div class="options-section-card-icon">
@@ -326,6 +323,7 @@
     </script>
 </body>
 </section>
+
 
 
 <!-- Footer -->
