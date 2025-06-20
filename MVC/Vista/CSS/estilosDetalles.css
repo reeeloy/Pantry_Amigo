@@ -299,6 +299,39 @@
   /* Elimina distorsión y rellena el espacio */
 }
 
+/* Modal Voluntariado */
+.modal-voluntariado {
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0; width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-content-voluntariado {
+  background: #fff;
+  border-radius: 12px;
+  max-width: 700px;
+  width: 95vw;
+  padding: 0;
+  position: relative;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+}
+.close-modal-vol {
+  position: absolute;
+  right: 18px;
+  top: 10px;
+  font-size: 2rem;
+  color: #2b577d;
+  cursor: pointer;
+  z-index: 2;
+}
+@media (max-width: 800px) {
+  .modal-content-voluntariado { max-width: 99vw; }
+  #iframe-voluntariado { height: 80vh; }
+}
+
 /* Responsive */
 @media (max-width: 1500px) {
   #detalle-info {

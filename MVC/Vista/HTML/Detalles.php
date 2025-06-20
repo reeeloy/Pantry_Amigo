@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="../CSS/estilosDetalles.css">
   <link rel="stylesheet" href="../CSS/estilosIndex.css">
   <script src="https://cdn.jsdelivr.net/npm/progressbar.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -63,7 +63,24 @@
 
   </main>
 
+  <!-- Modal Voluntariado -->
+<div id="modal-voluntariado" class="modal-voluntariado" style="display:none;">
+  <div class="modal-content-voluntariado">
+    <span class="close-modal-vol" onclick="cerrarModalVoluntariado()">&times;</span>
+    <iframe id="iframe-voluntariado" src="" frameborder="0" style="width:100%;height:600px;border:none;"></iframe>
+  </div>
+</div>
+
   <script>
+    function abrirModalVoluntariado(casoId) {
+  document.getElementById('iframe-voluntariado').src = 'RegistrarVoluntario.php?ID=' + casoId;
+  document.getElementById('modal-voluntariado').style.display = 'flex';
+}
+function cerrarModalVoluntariado() {
+  document.getElementById('modal-voluntariado').style.display = 'none';
+  document.getElementById('iframe-voluntariado').src = '';
+}
+
     document.addEventListener("DOMContentLoaded", function() {
       const urlParams = new URLSearchParams(window.location.search);
       const casoId = urlParams.get('ID');
@@ -85,7 +102,7 @@
     const botones = `
       <div class="botones-detalle">
         <button onclick="window.location.href='Donar.php?ID=${data.Caso_Id}&categoria=${encodeURIComponent(data.Caso_Cat_Nombre)}'">Donar</button>
-        ${data.Caso_Voluntariado == 1 ? `<button onclick="window.location.href='RegistrarVoluntario.php?ID=${data.Caso_Id}'">Voluntariado</button>` : ''}
+        ${data.Caso_Voluntariado == 1 ? `<button onclick="abrirModalVoluntariado(${data.Caso_Id})">Voluntariado</button>` : ''}
       </div>`;
 
     // Contenido HTML del caso
@@ -177,6 +194,30 @@
   }
 });
     });
+
+    // Escuchar mensajes del iframe para mostrar alertas y cerrar el modal
+window.addEventListener('message', function(event) {
+  // Puedes validar event.origin si quieres mayor seguridad
+  if (event.data === 'voluntariado_exito') {
+    Swal.fire({
+      icon: 'success',
+      title: '¡Registro exitoso!',
+      text: 'Te has registrado como voluntario correctamente.',
+      timer: 2500,
+      showConfirmButton: false
+    });
+    cerrarModalVoluntariado();
+  } else if (event.data === 'voluntariado_error') {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'No se pudo registrar tu voluntariado. Intenta de nuevo.',
+      timer: 2500,
+      showConfirmButton: false
+    });
+    cerrarModalVoluntariado();
+  }
+});
   </script>
 </body>
 </html>
