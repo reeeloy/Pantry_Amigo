@@ -43,6 +43,20 @@ class DonacionModelo {
     $stmt->execute();
 }
 
+public function actualizarMontoRecaudado($casoId) {
+    $sql = "UPDATE tbl_casos_dinero 
+            SET Caso_Monto_Recaudado = (
+                SELECT IFNULL(SUM(Don_Monto), 0) 
+                FROM tbl_donacion_dinero 
+                WHERE Don_Caso_Id = ?
+            )
+            WHERE Caso_Id = ?";
+
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bind_param("ii", $casoId, $casoId);
+    return $stmt->execute();
+}
+
 }
 ?>
 

@@ -31,13 +31,16 @@ if (!$conn->abrir()) {
     die("❌ Error al conectar con la base de datos.");
 }
 
+$conexion = $conn->getConexion();
+
 // ✅ Calcular la comisión
 $comision = $payment->transaction_details->total_paid_amount - $payment->transaction_details->net_received_amount;
 $fecha = date('Y-m-d H:i:s');
 
-// ✅ Registrar donación usando el modelo
-$modelo = new DonacionModelo($conn->getConexion());
+// ✅ Crear instancia del modelo
+$modelo = new DonacionModelo($conexion);
 
+// ✅ Registrar la donación
 $modelo->registrarDonacion([
     'monto' => $monto,
     'comision' => $comision,
@@ -50,9 +53,13 @@ $modelo->registrarDonacion([
     'categoria' => $categoria
 ]);
 
+// ✅ Actualizar el monto recaudado del caso
+$modelo->actualizarMontoRecaudado($casoId);
+
 $conn->cerrar();
 
 echo "✅ Donación registrada correctamente. ¡Gracias por tu apoyo!";
+
 
 
 

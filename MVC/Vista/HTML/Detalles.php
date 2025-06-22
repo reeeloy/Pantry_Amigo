@@ -6,7 +6,7 @@
   <title>Detalles del Caso</title>
   <link rel="stylesheet" href="../CSS/estilosDetalles.css">
   <link rel="stylesheet" href="../CSS/estilosIndex.css">
-  <script src="https://cdn.jsdelivr.net/npm/progressbar.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
