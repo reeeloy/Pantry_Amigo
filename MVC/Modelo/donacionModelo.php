@@ -57,6 +57,22 @@ public function actualizarMontoRecaudado($casoId) {
     return $stmt->execute();
 }
 
+public function obtenerMontos($casoId) {
+    $sql = "SELECT Caso_Monto_Meta, Caso_Monto_Recaudado FROM tbl_casos_dinero WHERE Caso_Id = ?";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bind_param("i", $casoId);
+    $stmt->execute();
+    return $stmt->get_result()->fetch_assoc();
+}
+
+public function desactivarCaso($casoId) {
+    $sql = "UPDATE tbl_casos_dinero SET Caso_Estado = 'Inactivo' WHERE Caso_Id = ?";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bind_param("i", $casoId);
+    $stmt->execute();
+}
+
+
 }
 ?>
 

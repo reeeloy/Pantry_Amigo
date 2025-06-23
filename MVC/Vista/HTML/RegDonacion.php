@@ -56,9 +56,38 @@ $modelo->registrarDonacion([
 // ✅ Actualizar el monto recaudado del caso
 $modelo->actualizarMontoRecaudado($casoId);
 
+$montos = $modelo->obtenerMontos($casoId);
+if ($montos['Caso_Monto_Recaudado'] >= $montos['Caso_Monto_Meta']) {
+    $modelo->desactivarCaso($casoId);
+}
+
 $conn->cerrar();
 
-echo "✅ Donación registrada correctamente. ¡Gracias por tu apoyo!";
+// Mostrar mensaje de éxito y redirigir
+echo "
+<!DOCTYPE html>
+<html lang='es'>
+<head>
+  <meta charset='UTF-8'>
+  <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+</head>
+<body>
+  <script>
+    Swal.fire({
+      icon: 'success',
+      title: '¡Gracias por tu donación!',
+      text: 'Tu aporte ha sido registrado exitosamente.',
+      timer: 3500,
+      showConfirmButton: false
+    });
+
+    setTimeout(function() {
+      window.location.href = '/Pantry_Amigo/MVC/Vista/HTML/index.php'; // Ajusta si tu home está en otro lugar
+    }, 3500);
+  </script>
+</body>
+</html>";
+exit;
 
 
 

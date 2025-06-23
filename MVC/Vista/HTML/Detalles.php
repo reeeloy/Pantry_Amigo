@@ -197,21 +197,11 @@ function cerrarModalVoluntariado() {
 
     // Escuchar mensajes del iframe para mostrar alertas y cerrar el modal
 window.addEventListener('message', function(event) {
-  // Puedes validar event.origin si quieres mayor seguridad
   if (event.data === 'voluntariado_exito') {
     Swal.fire({
       icon: 'success',
       title: '¡Registro exitoso!',
       text: 'Te has registrado como voluntario correctamente.',
-      timer: 2500,
-      showConfirmButton: false
-    });
-    cerrarModalVoluntariado();
-  } else if (event.data === 'voluntariado_error') {
-    Swal.fire({
-      icon: 'error',
-      title: 'Error',
-      text: 'No se pudo registrar tu voluntariado. Intenta de nuevo.',
       timer: 2500,
       showConfirmButton: false
     });
