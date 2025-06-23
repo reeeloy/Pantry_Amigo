@@ -34,20 +34,17 @@ $donaciones = $modelo->obtenerDonaciones($cedula);
             <ul class="nav-menu">
                 <button id="menu-close-button" class=""></button>
                 <li class="nav-item">
-                    <a href="../HTML/index.Php" class="nav-link">HOME</a>
+                    <a href="../HTML/index.Php" class="nav-link">INICIO</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#sobre-nosotros" class="nav-link">ABOUT US</a>
+                    <a href="#sobre-nosotros" class="nav-link">SOBRE NOSOTROS</a>
                 </li>
                 <li class="nav-item">
-                    <a href="" class="nav-link">ACOUNT</a>
+                    <a href="" class="nav-link">CUENTA</a>
                     <ul class="submenu">
-                        <li><a href="../HTML/registro.php">SIGN UP</a></li>
-                        <li><a href="../HTML/login.php">LOGIN</a></li>
+                        <li><a href="../HTML/registro.php">REGISTRARSE</a></li>
+                        <li><a href="../HTML/login.php">INICIAR SESION</a></li>
                     </ul>
-                </li>
-                <li class="nav-item">
-                    <a href="../HTML/ConsultarFundacion.php" class="nav-link">COLABORATORS</a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">INFO</a>

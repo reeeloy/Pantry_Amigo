@@ -21,27 +21,27 @@
       <ul class="nav-menu">
         <button id="menu-close-button" class="fas fa-times"></button>
         <li class="nav-item">
-          <a href="#" class="nav-link">HOME</a>
+          <a href="../HTML/index.Php" class="nav-link">INICIO</a>
         </li>
         <li class="nav-item">
-          <a href="#sobre-nosotros" class="nav-link">ABOUT US</a>
+          <a href="#sobre-nosotros" class="nav-link">SOBRE NOSOTROS</a>
         </li>
         <li class="nav-item">
-          <a href="" class="nav-link">ACOUNT</a>
+          <a href="" class="nav-link">CUENTAS</a>
           <ul class="submenu">
-            <li><a href="../HTML/registro.php">SIGN UP</a></li>
-            <li><a href="../HTML/login.php">LOGIN</a></li>
+            <li><a href="../HTML/registro.php">REGISTRARSE</a></li>
+            <li><a href="../HTML/login.php">INICIAR SESION</a></li>
           </ul>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link">PARTICIPATE</a>
+          <a href="#" class="nav-link">PARTICIPA</a>
           <ul class="submenu">
-            <li><a href="#casos">DONATE</a></li>
-            <li><a href="Voluntariados.php">VOLUNTEERING</a></li>
+            <li><a href="#casos">DONAR</a></li>
+            <li><a href="Voluntariados.php">VOLUNTARIODO</a></li>
           </ul>
         </li>
         <li class="nav-item">
-          <a href="#opciones" class="nav-link">OPTIONS</a>
+          <a href="#opciones" class="nav-link">OPCIONES</a>
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link">INFO</a>
