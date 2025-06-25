@@ -1,78 +1,42 @@
 <?php
-class DonacionModelo {
+class DonacionModelo
+{
     private $conn;
 
-    public function __construct($conexion) {
+    public function __construct($conexion)
+    {
         $this->conn = $conexion;
     }
 
-    // Método existente para consultar donaciones
-    public function obtenerDonaciones($cedula = null) {
+    public function obtenerHorariosVoluntarios($cedula = null)
+    {
         if ($cedula) {
-            $stmt = $this->conn->prepare("SELECT Don_Monto, Don_Cat_Nombre, Don_Cedula_Donante, Don_Nombre_Donante, Don_Apellido_Donante, Don_Correo FROM tbl_donacion_dinero WHERE Don_Cedula_Donante = ?");
+            $stmt = $this->conn->prepare("
+            SELECT 
+                Hora_Id,
+                Hora_Citacion,
+                Hora_Localizacion,
+                Hora_Vol_Cedula
+            FROM 
+                tbl_horarios_voluntarios
+            WHERE 
+                Hora_Vol_Cedula = ?
+        ");
             $stmt->bind_param("s", $cedula);
         } else {
-            $stmt = $this->conn->prepare("SELECT Don_Monto, Don_Cat_Nombre, Don_Cedula_Donante, Don_Nombre_Donante, Don_Apellido_Donante, Don_Correo FROM tbl_donacion_dinero");
+            $stmt = $this->conn->prepare("
+            SELECT 
+                Hora_Id,
+                Hora_Citacion,
+                Hora_Localizacion,
+                Hora_Vol_Cedula
+            FROM 
+                tbl_horarios_voluntarios
+        ");
         }
 
         $stmt->execute();
         $resultado = $stmt->get_result();
         return $resultado->fetch_all(MYSQLI_ASSOC);
     }
-
-    // 🔁 Nuevo método para registrar donación
-    public function registrarDonacion($datos) {
-    $sql = "INSERT INTO tbl_donacion_dinero 
-    (Don_Monto, Don_Comision, Don_Cedula_Donante, Don_Nombre_Donante, Don_Apellido_Donante, Don_Correo, Don_Fecha, Don_Caso_Id, Don_Cat_Nombre) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-    $stmt = $this->conn->prepare($sql);
-    $stmt->bind_param(
-        "dssssssis",
-        $datos['monto'],
-        $datos['comision'],
-        $datos['cedula'],
-        $datos['nombre'],
-        $datos['apellido'],
-        $datos['correo'],
-        $datos['fecha'],
-        $datos['casoId'],
-        $datos['categoria']
-    );
-
-    $stmt->execute();
 }
-
-public function actualizarMontoRecaudado($casoId) {
-    $sql = "UPDATE tbl_casos_dinero 
-            SET Caso_Monto_Recaudado = (
-                SELECT IFNULL(SUM(Don_Monto), 0) 
-                FROM tbl_donacion_dinero 
-                WHERE Don_Caso_Id = ?
-            )
-            WHERE Caso_Id = ?";
-
-    $stmt = $this->conn->prepare($sql);
-    $stmt->bind_param("ii", $casoId, $casoId);
-    return $stmt->execute();
-}
-
-public function obtenerMontos($casoId) {
-    $sql = "SELECT Caso_Monto_Meta, Caso_Monto_Recaudado FROM tbl_casos_dinero WHERE Caso_Id = ?";
-    $stmt = $this->conn->prepare($sql);
-    $stmt->bind_param("i", $casoId);
-    $stmt->execute();
-    return $stmt->get_result()->fetch_assoc();
-}
-
-public function desactivarCaso($casoId) {
-    $sql = "UPDATE tbl_casos_dinero SET Caso_Estado = 'Inactivo' WHERE Caso_Id = ?";
-    $stmt = $this->conn->prepare($sql);
-    $stmt->bind_param("i", $casoId);
-    $stmt->execute();
-}
-
-
-}
-?>
-

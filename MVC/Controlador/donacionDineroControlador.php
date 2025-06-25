@@ -20,41 +20,40 @@ if (isset($_GET['generar_pdf'])) {
     $modelo = new DonacionModelo($conn);
 
     $cedula = isset($_GET['cedula']) ? urldecode($_GET['cedula']) : null;
-    $donaciones = $modelo->obtenerDonaciones($cedula);
+    $horarios = $modelo->obtenerHorariosVoluntarios($cedula);
 
-    if (!empty($donaciones)) {
+    if (!empty($horarios)) {
         $pdf = new TCPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('PANTRY');
-        $pdf->SetTitle('Reporte de Donaciones');
-        $pdf->SetTitle('Reporte de Donaciones');
+        $pdf->SetTitle('Reporte de Horarios de Voluntarios');
         $pdf->AddPage();
         $pdf->SetFont('helvetica', '', 12);
 
-        $pdf->Cell(0, 10, 'Reporte de Donaciones', 0, 1, 'C');
+        $pdf->Cell(0, 10, 'Reporte de Horarios de Voluntarios', 0, 1, 'C');
         $pdf->Ln(10);
 
         // Generar tabla en HTML
         $html = '<table border="1" cellpadding="5">';
-        $html .= '<tr style="background-color:#e0e0e0;"><th>Nombre</th><th>Cédula</th><th>Monto</th><th>Categoría</th><th>Correo</th></tr>';
+        $html .= '<tr style="background-color:#e0e0e0;"><th>ID</th><th>Fecha y Hora de Citación</th><th>Lugar</th><th>Cédula del Voluntario</th></tr>';
 
-        foreach ($donaciones as $don) {
-            $nombre = htmlspecialchars($don['Don_Nombre_Donante'] . ' ' . $don['Don_Apellido_Donante']);
-            $monto = '$' . number_format($don['Don_Monto'], 0, ',', '.');
+        foreach ($horarios as $hora) {
             $html .= "<tr>
-                        <td>{$nombre}</td>
-                        <td>{$don['Don_Cedula_Donante']}</td>
-                        <td>{$monto}</td>
-                        <td>{$don['Don_Cat_Nombre']}</td>
-                        <td>{$don['Don_Correo']}</td>
+                        <td>{$hora['Hora_Id']}</td>
+                        <td>{$hora['Hora_Citacion']}</td>
+                        <td>{$hora['Hora_Localizacion']}</td>
+                        <td>{$hora['Hora_Vol_Cedula']}</td>
                       </tr>";
         }
 
         $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
-        
+
+        // Limpiar salida final
         if (ob_get_length()) ob_end_clean();
-        $pdf->Output('donaciones.pdf', 'D');
+
+        // Descargar PDF
+        $pdf->Output('horarios_voluntarios.pdf', 'D');
         exit;
     } else {
         header("Location: ConsultarParticipacion.php");
@@ -68,7 +67,7 @@ $conn = $conexion->getConexion();
 $modelo = new DonacionModelo($conn);
 
 $cedula = isset($_GET['cedula']) ? $_GET['cedula'] : null;
-$donaciones = $modelo->obtenerDonaciones($cedula);
+$horarios = $modelo->obtenerHorariosVoluntarios($cedula);
 
 include '../Vista/HTML/ConsultarParticipacion.php';
 ?>
