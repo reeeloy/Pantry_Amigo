@@ -1,0 +1,195 @@
+/* Estilo base para la página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    width: 80%;
+    margin: 110px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Título principal */
+  h1 {
+    text-align: center;
+    color: #333;
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+  
+  /* Estilo para los detalles de la fundación */
+  .fundacion-detalles {
+    margin-top: 20px;
+  }
+  
+  .fundacion-detalles h2 {
+    color: #2c3e50;
+    font-size: 1.8em;
+    margin-bottom: 10px;
+  }
+  
+  .fundacion-detalles p {
+    font-size: 1.1em;
+    margin: 8px 0;
+    color: #555;
+  }
+  
+  .fundacion-detalles strong {
+    color: #2c3e50;
+  }
+  
+  /* Botón para volver */
+  .volver-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 20px;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    font-size: 1.1em;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+  }
+  
+  .volver-btn:hover {
+    background-color: #2980b9;
+  }
+  
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-size: 10px;
+}
+
+/* Utilidades */
+.section-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section-title {
+  text-align: center;
+  padding: 60px 0 40px;
+  text-transform: uppercase;
+  font-size: 2rem;
+  position: relative;
+}
+
+.section-title::after {
+  content: "";
+  width: 80px;
+  height: 5px;
+  display: block;
+  margin: 10px auto 0;
+  border-radius: 8px;
+  background: #7ec8a1;
+}
+
+/* Header / Navbar */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 5;
+  background: #2b577d;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: px;
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-logo img {
+  width: 60px;
+  height: auto;
+}
+
+.nav-logo .logo-text {
+  font-size: 2rem;
+  color: #fffaf3;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-link {
+  color: #fffaf3;
+  padding: 10px 18px;
+  font-size: 1.1rem;
+  border-radius: 30px;
+  transition: 0.3s ease;
+}
+
+.nav-link:hover {
+  background-color: #7ec8a1;
+  color: #2b577d;
+  font-weight: 600;
+}
+
+.nav-item {
+  position: relative;
+}
+
+/* Submenús */
+.submenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fffaf3;
+  border-radius: 30px;
+  border: 1px solid #d9d9d9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  min-width: 150px;
+  z-index: 999;
+}
+
+.submenu li a {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #2b577d;
+  font-weight: normal;
+  transition: 0.3s ease;
+}
+
+.submenu li a:hover {
+  background-color: #7ec8a1;
+  color: #fffaf3;
+  border-radius: 30px;
+}
+
+.nav-item:hover .submenu {
+  display: block;
+}

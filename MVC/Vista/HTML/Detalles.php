@@ -6,8 +6,8 @@
   <title>Detalles del Caso</title>
   <link rel="stylesheet" href="../CSS/estilosDetalles.css">
   <link rel="stylesheet" href="../CSS/estilosIndex.css">
-  <script src="https://cdn.jsdelivr.net/npm/progressbar.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -21,27 +21,27 @@
       <ul class="nav-menu">
         <button id="menu-close-button" class="fas fa-times"></button>
         <li class="nav-item">
-          <a href="#" class="nav-link">HOME</a>
+          <a href="../HTML/index.Php" class="nav-link">INICIO</a>
         </li>
         <li class="nav-item">
-          <a href="#sobre-nosotros" class="nav-link">ABOUT US</a>
+          <a href="#sobre-nosotros" class="nav-link">SOBRE NOSOTROS</a>
         </li>
         <li class="nav-item">
-          <a href="" class="nav-link">ACOUNT</a>
+          <a href="" class="nav-link">CUENTAS</a>
           <ul class="submenu">
-            <li><a href="../HTML/registro.php">SIGN UP</a></li>
-            <li><a href="../HTML/login.php">LOGIN</a></li>
+            <li><a href="../HTML/registro.php">REGISTRARSE</a></li>
+            <li><a href="../HTML/login.php">INICIAR SESION</a></li>
           </ul>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link">PARTICIPATE</a>
+          <a href="#" class="nav-link">PARTICIPA</a>
           <ul class="submenu">
-            <li><a href="#casos">DONATE</a></li>
-            <li><a href="Voluntariados.php">VOLUNTEERING</a></li>
+            <li><a href="#casos">DONAR</a></li>
+            <li><a href="Voluntariados.php">VOLUNTARIODO</a></li>
           </ul>
         </li>
         <li class="nav-item">
-          <a href="#opciones" class="nav-link">OPTIONS</a>
+          <a href="#opciones" class="nav-link">OPCIONES</a>
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link">INFO</a>
@@ -63,7 +63,24 @@
 
   </main>
 
+  <!-- Modal Voluntariado -->
+<div id="modal-voluntariado" class="modal-voluntariado" style="display:none;">
+  <div class="modal-content-voluntariado">
+    <span class="close-modal-vol" onclick="cerrarModalVoluntariado()">&times;</span>
+    <iframe id="iframe-voluntariado" src="" frameborder="0" style="width:100%;height:600px;border:none;"></iframe>
+  </div>
+</div>
+
   <script>
+    function abrirModalVoluntariado(casoId) {
+  document.getElementById('iframe-voluntariado').src = 'RegistrarVoluntario.php?ID=' + casoId;
+  document.getElementById('modal-voluntariado').style.display = 'flex';
+}
+function cerrarModalVoluntariado() {
+  document.getElementById('modal-voluntariado').style.display = 'none';
+  document.getElementById('iframe-voluntariado').src = '';
+}
+
     document.addEventListener("DOMContentLoaded", function() {
       const urlParams = new URLSearchParams(window.location.search);
       const casoId = urlParams.get('ID');
@@ -85,7 +102,7 @@
     const botones = `
       <div class="botones-detalle">
         <button onclick="window.location.href='Donar.php?ID=${data.Caso_Id}&categoria=${encodeURIComponent(data.Caso_Cat_Nombre)}'">Donar</button>
-        ${data.Caso_Voluntariado == 1 ? `<button onclick="window.location.href='RegistrarVoluntario.php?ID=${data.Caso_Id}'">Voluntariado</button>` : ''}
+        ${data.Caso_Voluntariado == 1 ? `<button onclick="abrirModalVoluntariado(${data.Caso_Id})">Voluntariado</button>` : ''}
       </div>`;
 
     // Contenido HTML del caso
@@ -177,6 +194,20 @@
   }
 });
     });
+
+    // Escuchar mensajes del iframe para mostrar alertas y cerrar el modal
+window.addEventListener('message', function(event) {
+  if (event.data === 'voluntariado_exito') {
+    Swal.fire({
+      icon: 'success',
+      title: '¡Registro exitoso!',
+      text: 'Te has registrado como voluntario correctamente.',
+      timer: 2500,
+      showConfirmButton: false
+    });
+    cerrarModalVoluntariado();
+  }
+});
   </script>
 </body>
 </html>

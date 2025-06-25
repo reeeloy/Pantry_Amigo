@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-06-2025 a las 19:42:54
+-- Tiempo de generación: 23-06-2025 a las 02:28:18
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -157,18 +157,19 @@ CREATE TABLE `tbl_fundaciones` (
   `Fund_Casos_Activos` int(10) NOT NULL,
   `Fund_Telefono` int(10) NOT NULL,
   `Fund_Usu_Id` int(10) NOT NULL,
-  `Fund_Imagen` varchar(255) NOT NULL
+  `Fund_Imagen` varchar(255) NOT NULL,
+  `Fund_descripcion` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `tbl_fundaciones`
 --
 
-INSERT INTO `tbl_fundaciones` (`Fund_Id`, `Fund_Correo`, `Fund_Username`, `Fund_Direccion`, `Fund_Casos_Activos`, `Fund_Telefono`, `Fund_Usu_Id`, `Fund_Imagen`) VALUES
-(13, 'fund13@correo.com', 'Fundacion 13', 'cr. 8 cll. 222', 2, 31384567, 2, 'img_684b104ee5c177.95954465_tipos-de-donaciones.jpg'),
-(14, 'tapitasxpatitas@outlook.com', 'Tapitas por Patitas', 'Cra 12 #34‑56', 1, 314555667, 9, ''),
-(15, 'Borreguito@gmail.com', 'Boreguito', 'CRA 90-10bww', 2, 10231232, 11, 'img_684b0e0301d169.45187413_tipos-de-donaciones.jpg'),
-(16, 'Totolindo@gmail.com', 'Totoooo1', 'calle 90', 2, 123456789, 22, 'img_684b102b9890d8.70525362_WhatsApp Image 2025-02-04 at 12.12.19 PM.jpeg');
+INSERT INTO `tbl_fundaciones` (`Fund_Id`, `Fund_Correo`, `Fund_Username`, `Fund_Direccion`, `Fund_Casos_Activos`, `Fund_Telefono`, `Fund_Usu_Id`, `Fund_Imagen`, `Fund_descripcion`) VALUES
+(13, 'fund13@correo.com', 'Fundacion 13', 'cr. 8 cll. 222', 2, 31384567, 2, 'img_684b104ee5c177.95954465_tipos-de-donaciones.jpg', ''),
+(17, 'Kukiquito@gmail.com', 'Kuki', 'Calle 900 A1', 2, 2147483647, 23, 'img_68589356445dc9.67968965_Kuki.png', 'Soy un perrito'),
+(18, 'Borreguito@gmail.com', 'Borreguito', 'CRA 90-10b', 2, 2147483647, 24, 'img_685898ad1d0eb4.08486316_Borreguito.jpg', 'Vamos'),
+(19, 'Prueba@gmail.com', 'Prueba', 'Cra 100', 4, 1023123, 25, 'img_68589d46cf2a92.54507243_Kuki.png', 'Pruibita');
 
 -- --------------------------------------------------------
 
@@ -214,9 +215,9 @@ CREATE TABLE `tbl_usuario` (
 INSERT INTO `tbl_usuario` (`Usu_Id`, `Usu_Username`, `Usu_Password`, `Usu_Tipo`, `Usu_Correo`) VALUES
 (2, 'Fundacion', '131313', 'Usuario', 'Fundacion13@correo.com'),
 (7, 'admin123', '123123', 'Administrador', 'Admin123@coreeo.com'),
-(9, 'Tapitas por Patitas', 'Perritos1', 'Usuario', 'tapitasxpatitas@outlook.com'),
-(11, 'Borreguito', '202020', 'Usuario', 'Borreguito@gmail.com'),
-(22, 'Prueba', '20100', 'Usuario', 'df028231@gmail.commm');
+(23, 'Kuki', '900400', 'Usuario', 'Kuki@gmail.com'),
+(24, 'Borreguito', '202020', 'Usuario', 'Borreguito@gmail.com'),
+(25, 'Prueba', '75050', 'Usuario', 'Prueba@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -244,7 +245,8 @@ INSERT INTO `tbl_voluntarios` (`Vol_Cedula`, `Vol_Nombre`, `Vol_Apellido`, `Vol_
 (52482557, 'Selena', 'Gomez', 'selG@gmail.com', 30284698, 10, 'Dinero'),
 (1011320651, 'Maria', 'Cardozo', 'maricardozo@gmail.com', 30284698, 8, 'Dinero'),
 (1019988292, 'Marisol', 'Vargas', 'marisol123@gmail.com', 2147483647, 14, 'Dinero'),
-(1234567890, 'YO', 'Yotas', 'yo@gmail.com', 3322596, 14, 'Dinero');
+(1234567890, 'YO', 'Yotas', 'yo@gmail.com', 3322596, 14, 'Dinero'),
+(2147483647, 'Kuki', 'Kuquicito', 'Kuki@gmail.com', 2131231312, 14, 'Dinero');
 
 --
 -- Índices para tablas volcadas
@@ -334,7 +336,7 @@ ALTER TABLE `tbl_donacion_dinero`
 -- AUTO_INCREMENT de la tabla `tbl_fundaciones`
 --
 ALTER TABLE `tbl_fundaciones`
-  MODIFY `Fund_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `Fund_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_horarios_voluntarios`
@@ -346,7 +348,7 @@ ALTER TABLE `tbl_horarios_voluntarios`
 -- AUTO_INCREMENT de la tabla `tbl_usuario`
 --
 ALTER TABLE `tbl_usuario`
-  MODIFY `Usu_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `Usu_Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- Restricciones para tablas volcadas

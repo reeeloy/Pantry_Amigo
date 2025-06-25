@@ -1,6 +1,5 @@
 <?php
 class ConexionBD {
-    
     // Variables para la conexión mysqli
     private $mysqli;
     private $result;
@@ -23,61 +22,62 @@ class ConexionBD {
         $this->mysqli->set_charset("utf8mb4");
         return $this->mysqli;
     }
-    // Metodo para que pueda guardar datos
-       public function prepare($sql) {
+
+    // ✅ Método para obtener el objeto mysqli
+    public function getConexion() {
+        return $this->mysqli;
+    }
+
+    // Método para preparar consultas
+    public function prepare($sql) {
         return $this->mysqli->prepare($sql);
     }
 
-    // Método para cerrar la conexión mysqli
+    // Método para cerrar la conexión
     public function cerrar() {
         if ($this->mysqli) {
             $this->mysqli->close();
         }
     }
 
-    // Método para ejecutar consultas usando mysqli, con soporte para parámetros opcionales
+    // Método para ejecutar consultas (con o sin parámetros)
     public function consulta($sql, $params = []) {
         if (!$this->mysqli) {
             return false;
         }
-        // Si se pasan parámetros, usamos sentencias preparadas
+
         if (!empty($params)) {
             $stmt = $this->mysqli->prepare($sql);
-            if (!$stmt) {
-                return false;
-            }
-            // Suponiendo que todos los parámetros son strings por defecto
+            if (!$stmt) return false;
+
             $tipos = str_repeat("s", count($params));
             $stmt->bind_param($tipos, ...$params);
-            if (!$stmt->execute()) {
-                return false;
-            }
+
+            if (!$stmt->execute()) return false;
+
             $this->result = $stmt->get_result();
             $stmt->close();
             return true;
         } else {
-            // Consulta directa sin parámetros
             $this->result = $this->mysqli->query($sql);
             return $this->result !== false;
         }
     }
 
-    // Método para obtener el resultado de la última consulta (como array asociativo)
+    // Obtener resultados
     public function obtenerResult() {
         return $this->result;
     }
 
-    // Método para obtener la cantidad de filas afectadas
     public function obtenerFilasAfectadas() {
         return $this->mysqli ? $this->mysqli->affected_rows : 0;
     }
 
-    // Método para obtener el último ID insertado
     public function obtenerUltimoID() {
         return $this->mysqli ? $this->mysqli->insert_id : null;
     }
 
-    // Conexión estática (singleton) para mysqli
+    // Conexión estática opcional (no usada actualmente)
     private static $conn;
     public static function getConnection() {
         if (!self::$conn) {
@@ -89,7 +89,7 @@ class ConexionBD {
         return self::$conn;
     }
 
-    // Constructor: se crea la conexión PDO (opcional)
+    // Conexión PDO (opcional, por si la necesitas en algún punto)
     public function __construct() {
         try {
             $this->conexion = new PDO("mysql:host=$this->host;dbname=$this->dbname;charset=utf8", $this->usuario, $this->password);
@@ -100,8 +100,12 @@ class ConexionBD {
     }
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// ⚠️ Conexión directa fuera de la clase (solo para pruebas o consultas sueltas)
+// Puedes usar esto cuando no quieras usar la clase ConexionBD
+// ❌ NO se recomienda usar dentro del MVC normal
+////////////////////////////////////////////////////////////////////////////////
 
-// importante 
 $host = "localhost";
 $user = "root";
 $pass = "";
@@ -111,7 +115,5 @@ $conn = new mysqli($host, $user, $pass, $db);
 if ($conn->connect_error) {
     die("Conexión fallida: " . $conn->connect_error);
 }
-
-
-
 ?>
+

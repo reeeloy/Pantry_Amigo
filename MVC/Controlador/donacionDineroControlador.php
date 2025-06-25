@@ -1,18 +1,19 @@
 <?php
-//  errores durante desarrollo
+// Activar errores durante desarrollo
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 // Limpiar buffer antes de generar PDF
 if (ob_get_length()) ob_clean();
 
-require_once '../Modelo/conexionBDD.php';
-require_once '../Modelo/donacionModelo.php';
+// Incluir conexión y modelo
+require_once '../../MVC/Modelo/conexionBDD.php';
+require_once '../../MVC/Modelo/donacionModelo.php';
 
-// Si se solicita descargar PDF
+// Solo generar PDF si se pasa el parámetro
 if (isset($_GET['generar_pdf'])) {
     // Incluir TCPDF
-    require_once '../../MVC/Vista/Librerias/tcpdf/tcpdf.php';
+    require_once '../../../Pantry_Amigo/MVC/Vista/Librerias/TCPDF/tcpdf.php'; // Revisa que esta ruta sea correcta
 
     $conexion = new ConexionBD();
     $conn = $conexion->getConexion();
@@ -22,7 +23,6 @@ if (isset($_GET['generar_pdf'])) {
     $donaciones = $modelo->obtenerDonaciones($cedula);
 
     if (!empty($donaciones)) {
-        // Crear PDF
         $pdf = new TCPDF();
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('PANTRY');
@@ -30,23 +30,12 @@ if (isset($_GET['generar_pdf'])) {
         $pdf->AddPage();
         $pdf->SetFont('helvetica', '', 12);
 
-        // Título centrado
         $pdf->Cell(0, 10, 'Reporte de Donaciones', 0, 1, 'C');
         $pdf->Ln(10);
 
-        // Tabla de resultados
-        $html = '
-        <table border="1" cellpadding="5">
-            <thead>
-                <tr style="background-color:#e0e0e0;">
-                    <th>Nombre</th>
-                    <th>Cédula</th>
-                    <th>Monto</th>
-                    <th>Categoría</th>
-                    <th>Correo</th>
-                </tr>
-            </thead>
-            <tbody>';
+        // Generar tabla en HTML
+        $html = '<table border="1" cellpadding="5">';
+        $html .= '<tr style="background-color:#e0e0e0;"><th>Nombre</th><th>Cédula</th><th>Monto</th><th>Categoría</th><th>Correo</th></tr>';
 
         foreach ($donaciones as $don) {
             $nombre = htmlspecialchars($don['Don_Nombre_Donante'] . ' ' . $don['Don_Apellido_Donante']);
@@ -60,15 +49,10 @@ if (isset($_GET['generar_pdf'])) {
                       </tr>";
         }
 
-        $html .= '</tbody></table>';
-
-        // Escribir contenido HTML en el PDF
+        $html .= '</table>';
         $pdf->writeHTML($html, true, false, true, false, '');
-
-        // Limpiar buffer final y enviar PDF
+        
         if (ob_get_length()) ob_end_clean();
-
-        // Descargar el PDF
         $pdf->Output('donaciones.pdf', 'D');
         exit;
     } else {
@@ -77,7 +61,7 @@ if (isset($_GET['generar_pdf'])) {
     }
 }
 
-// Si no es generación de PDF, mostrar página normal
+// Si no es PDF, mostrar página normal
 $conexion = new ConexionBD();
 $conn = $conexion->getConexion();
 $modelo = new DonacionModelo($conn);
