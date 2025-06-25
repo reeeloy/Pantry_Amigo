@@ -280,6 +280,14 @@ if (!empty($datos) && isset($datos['Fund_Id']) && !isset($_SESSION['Fund_Id'])) 
                         <option value="6">Medio Ambiente</option>
                       </select>
                     </div>
+                    <div class="col-md-6">
+                      <label class="form-label">Estado</label>
+                      <select name="Caso_Estado" class="form-select" required>
+                        <option value="" disabled selected>Seleccione el estado...</option>
+                        <option value="1">Activo</option>
+                        <option value="2">Inactivo</option>
+                      </select>
+                    </div>
                     <div class="col-12">
                       <label class="form-label">Descripción</label>
                       <textarea class="form-control" name="Caso_Descripcion" rows="4" placeholder="Describe detalladamente el caso y por qué necesita ayuda..." required></textarea>
