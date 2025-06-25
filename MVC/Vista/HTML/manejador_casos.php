@@ -154,7 +154,7 @@ function actualizarCaso($conexion) {
             throw new Exception('ID del caso requerido');
         }
         
-        // Verificar que el caso pertenece a la fundación
+        // Verificar que el caso pertenece a la fundación - CORREGIDO: usar Caso_Fund_Id en lugar de Fund_Id
         $checkSql = "SELECT Caso_Id, Caso_Imagen FROM tbl_casos_dinero WHERE Caso_Id = ? AND Caso_Fund_Id = ?";
         $checkStmt = $conexion->prepare($checkSql);
         $checkStmt->bind_param("ii", $casoId, $_SESSION['Fund_Id']);
@@ -243,7 +243,7 @@ function eliminarCaso($conexion) {
             throw new Exception('ID del caso requerido');
         }
         
-        // Verificar que el caso pertenece a la fundación
+        // Verificar que el caso pertenece a la fundación - CORREGIDO: usar Caso_Fund_Id
         $checkSql = "SELECT Caso_Imagen FROM tbl_casos_dinero WHERE Caso_Id = ? AND Caso_Fund_Id = ?";
         $checkStmt = $conexion->prepare($checkSql);
         $checkStmt->bind_param("ii", $casoId, $_SESSION['Fund_Id']);
