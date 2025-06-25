@@ -1,4 +1,8 @@
 <?php
+// --- BLOQUE DE CÓDIGO PARA ASEGURAR UNA RESPUESTA JSON LIMPIA ---
+ini_set('display_errors', 0); // No mostrar errores/warnings en la respuesta final
+error_reporting(E_ALL); // Seguir reportando todos los errores (se guardarán en el log del servidor, pero no se mostrarán)
+// --- FIN DEL BLOQUE ---
 header('Content-Type: application/json; charset=utf-8');
 include '../../Modelo/ConexionBD.php';
 

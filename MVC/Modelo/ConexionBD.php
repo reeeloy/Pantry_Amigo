@@ -21,7 +21,7 @@ class ConexionBD {
         }
         // Asegurar que se use UTF-8
         $this->mysqli->set_charset("utf8mb4");
-        return true;
+        return $this->mysqli;
     }
     // Metodo para que pueda guardar datos
        public function prepare($sql) {

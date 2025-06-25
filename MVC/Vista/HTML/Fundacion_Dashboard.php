@@ -9,6 +9,11 @@ include_once '../../Modelo/fundacionModelo.php';
 // Establecer conexión y obtener datos
 $conn = new ConexionBD(); $conn->abrir(); $usuarioId = $_SESSION['Usu_Id'];
 $modelo = new FundacionModelo($conn); $datos = $modelo->obtenerPorUsuario($usuarioId) ?? [];
+
+// Solución al problema de sesión
+if (!empty($datos) && isset($datos['Fund_Id']) && !isset($_SESSION['Fund_Id'])) {
+    $_SESSION['Fund_Id'] = $datos['Fund_Id'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -19,7 +24,6 @@ $modelo = new FundacionModelo($conn); $datos = $modelo->obtenerPorUsuario($usuar
   
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  
   <link rel="stylesheet" href="/Pantry_Amigo/MVC/Vista/CSS/dashboard_styles.css"/>
 </head>
 <body>
@@ -36,7 +40,7 @@ $modelo = new FundacionModelo($conn); $datos = $modelo->obtenerPorUsuario($usuar
             <a href="#" id="ayuda-link" class="nav-link"><i class="fas fa-question-circle"></i> <span>Ayuda</span></a>
         </div>
         
-        <div class="w-100">
+        <div class="menu-footer">
             <a href="#" id="sidebar-toggle" class="nav-link sidebar-toggle-link">
                 <i class="fas fa-chevron-left"></i> <span>Ocultar</span>
             </a>
@@ -170,7 +174,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- NAVEGACIÓN ---
     document.querySelectorAll('.nav-link').forEach(link => {
         if (link.id === 'sidebar-toggle') return;
-
         link.addEventListener('click', e => {
             if (e.currentTarget.id === 'cerrar-sesion-link') {
                 e.preventDefault();
@@ -184,24 +187,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 abrirModalCaso('crear');
                 return;
             }
-
             document.getElementById('titulo-seccion').innerText = e.currentTarget.querySelector('span').textContent.trim();
             document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
             e.currentTarget.classList.add('active');
-
             Object.values(secciones).forEach(secId => {
                 const el = document.getElementById(secId.replace('-link', ''));
                 if (el) el.classList.replace('seccion-activa', 'seccion-oculta') || el.classList.add('seccion-oculta');
             });
             const seccionActiva = document.getElementById(secciones[id]);
             if (seccionActiva) seccionActiva.classList.replace('seccion-oculta', 'seccion-activa');
-
             if (id === 'casos-link') cargarCasos();
             if (id === 'voluntarios-link') cargarVoluntarios();
         });
     });
     
-    // --- LÓGICA DE CASOS (UNIFICADA CON MODAL) ---
+    // --- LÓGICA DE CASOS ---
     async function apiCall(url, options = {}) {
         try {
             const response = await fetch(url, options);
@@ -213,7 +213,6 @@ document.addEventListener('DOMContentLoaded', function() {
             return null;
         }
     }
-
     async function cargarCasos() {
         const data = await apiCall('/Pantry_Amigo/MVC/Vista/HTML/obtener_casos_dinero.php');
         casosData = data && !data.error ? data : [];
@@ -223,7 +222,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const container = document.getElementById('lista-casos-container');
         container.innerHTML = '';
         if (lista.length === 0) { container.innerHTML = '<div class="col-12"><div class="alert alert-info">No se encontraron casos. ¡Crea uno nuevo!</div></div>'; return; }
-        
         lista.forEach(caso => {
             const progreso = caso.Caso_Monto_Meta > 0 ? (caso.Caso_Monto_Recaudado / caso.Caso_Monto_Meta * 100).toFixed(1) : 0;
             const casoElement = document.createElement('div');
@@ -231,21 +229,13 @@ document.addEventListener('DOMContentLoaded', function() {
             casoElement.innerHTML = `
                 <div class="caso-card h-100">
                     <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-start">
-                            <h5 class="card-title">${caso.Caso_Nombre}</h5>
-                            <span class="badge bg-success">${caso.Caso_Estado}</span>
-                        </div>
+                        <div class="d-flex justify-content-between align-items-start"><h5 class="card-title">${caso.Caso_Nombre}</h5><span class="badge bg-success">${caso.Caso_Estado}</span></div>
                         <h6 class="card-subtitle mb-2 text-muted">ID: ${caso.Caso_Id} | Categoría: ${caso.Caso_Cat_Nombre}</h6>
                         <p class="card-text mt-3">${caso.Caso_Descripcion}</p>
-                        <div class="progress mb-2" style="height: 10px;">
-                            <div class="progress-bar bg-success" style="width: ${progreso}%"></div>
-                        </div>
+                        <div class="progress mb-2" style="height: 10px;"><div class="progress-bar bg-success" style="width: ${progreso}%"></div></div>
                         <small class="text-muted">Recaudado: $${parseFloat(caso.Caso_Monto_Recaudado).toLocaleString()} de $${parseFloat(caso.Caso_Monto_Meta).toLocaleString()}</small>
                     </div>
-                    <div class="acciones">
-                        <button class="btn btn-sm btn-outline-primary btn-actualizar-caso"><i class="fas fa-edit"></i> Actualizar</button>
-                        <button class="btn btn-sm btn-outline-danger btn-eliminar-caso"><i class="fas fa-trash-alt"></i> Eliminar</button>
-                    </div>
+                    <div class="acciones"><button class="btn btn-sm btn-outline-primary btn-actualizar-caso"><i class="fas fa-edit"></i> Actualizar</button><button class="btn btn-sm btn-outline-danger btn-eliminar-caso"><i class="fas fa-trash-alt"></i> Eliminar</button></div>
                 </div>`;
             casoElement.querySelector('.btn-actualizar-caso').addEventListener('click', () => abrirModalCaso('actualizar', caso.Caso_Id));
             casoElement.querySelector('.btn-eliminar-caso').addEventListener('click', () => eliminarCaso(caso.Caso_Id));
@@ -259,7 +249,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const actionInput = document.getElementById('caso-action');
         const idInput = document.getElementById('caso-id');
         const imagenLabel = document.getElementById('caso-imagen-label');
-
         if (action === 'crear') {
             titulo.innerText = 'Crear Nuevo Caso';
             boton.innerHTML = '<i class="fas fa-plus-circle"></i> Crear Caso';
@@ -276,7 +265,6 @@ document.addEventListener('DOMContentLoaded', function() {
             idInput.value = caso.Caso_Id;
             imagenLabel.innerText = 'Cambiar Imagen (Opcional)';
             casoForm.querySelector('input[name="Caso_Imagen"]').required = false;
-            
             for (const key in caso) {
                 const input = casoForm.querySelector(`[name="${key}"]`);
                 if(input) {
@@ -309,12 +297,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
     
-    // --- LÓGICA DE VOLUNTARIOS (RESTAURADA) ---
+    // --- LÓGICA DE VOLUNTARIOS ---
     async function cargarVoluntarios() {
-        const [vols, horas] = await Promise.all([
-            apiCall('/Pantry_Amigo/MVC/Vista/HTML/obtener_voluntarios.php'),
-            apiCall('/Pantry_Amigo/MVC/Vista/HTML/obtener_horarios_voluntarios.php')
-        ]);
+        const [vols, horas] = await Promise.all([ apiCall('/Pantry_Amigo/MVC/Vista/HTML/obtener_voluntarios.php'), apiCall('/Pantry_Amigo/MVC/Vista/HTML/obtener_horarios_voluntarios.php') ]);
         voluntariosData = vols && !vols.error ? vols : [];
         horariosData = horas && !horas.error ? horas : [];
         renderVoluntarios(voluntariosData);
@@ -362,10 +347,8 @@ document.addEventListener('DOMContentLoaded', function() {
     sidebarToggle.addEventListener('click', (e) => {
         e.preventDefault();
         sidebar.classList.toggle('collapsed');
-        
         const icon = sidebarToggle.querySelector('i');
         const text = sidebarToggle.querySelector('span');
-
         if (sidebar.classList.contains('collapsed')) {
             icon.classList.remove('fa-chevron-left');
             icon.classList.add('fa-chevron-right');
