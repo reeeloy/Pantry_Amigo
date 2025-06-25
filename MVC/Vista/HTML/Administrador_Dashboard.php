@@ -30,6 +30,8 @@ $conexion = $conn->abrir();
           <a href="#" id="solicitudes-link" class="nav-link active"><i class="fas fa-file-signature"></i> <span>Solicitudes</span></a>
           <a href="#" id="gestion-fundaciones-link" class="nav-link"><i class="fas fa-hands-helping"></i> <span>Fundaciones</span></a>
           <a href="#" id="casos-link" class="nav-link"><i class="fas fa-bullseye"></i> <span>Casos de Donación</span></a>
+          <a href="#" id="admin-link" class="nav-link"><i class="fas fa-user-shield"></i> <span>Registro Administradores</span></a>
+
         </div>
         <div class="menu-footer">
           <a href="#" id="sidebar-toggle" class="nav-link sidebar-toggle-link"><i class="fas fa-chevron-left"></i> <span>Ocultar</span></a>
@@ -66,6 +68,20 @@ $conexion = $conn->abrir();
         </div>
         <div id="lista-casos-dinero" class="row"></div>
       </section>
+      <section id="admin" class="seccion-oculta">
+  <h3>Administradores Actuales</h3>
+  <div id="lista-admins" class="mb-4"></div>
+  
+  <h4>Crear Nuevo Administrador</h4>
+  <form id="form-crear-admin">
+    <input type="text" name="username" placeholder="Nombre de Usuario" required class="form-control mb-2">
+    <input type="email" name="correo" placeholder="Correo Electrónico" required class="form-control mb-2">
+    <input type="password" name="password" placeholder="Contraseña" required class="form-control mb-2">
+    <button type="submit" class="btn btn-primary">Crear</button>
+  </form>
+  <div id="admin-feedback" class="mt-2"></div>
+</section>
+
     </main>
   </div>
 
@@ -76,7 +92,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const secciones = { 
         'solicitudes-link':'solicitudes',
         'gestion-fundaciones-link':'gestion-fundaciones',
-        'casos-link':'casos'
+        'casos-link':'casos',
+        'admin-link': 'admin'
     };
 
     // --- NAVEGACIÓN ---
@@ -90,15 +107,18 @@ document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
             e.currentTarget.classList.add('active');
 
+            // OCULTA TODAS LAS SECCIONES
             Object.values(secciones).forEach(secId => {
-                const el = document.getElementById(secId.replace('-link',''));
+                const el = document.getElementById(secId);
                 if(el) el.classList.add('seccion-oculta');
             });
+            // MUESTRA LA SECCIÓN SELECCIONADA
             document.getElementById(secciones[id]).classList.remove('seccion-oculta');
             
             if (id === 'solicitudes-link') cargarSolicitudes();
             if (id === 'gestion-fundaciones-link') cargarFundaciones();
             if (id === 'casos-link') cargarCasosDinero();
+            // Si quieres cargar admins, aquí puedes poner una función cargarAdmins();
         });
     });
 
@@ -227,6 +247,24 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Carga inicial al entrar al dashboard
     cargarSolicitudes();
+
+    // --- REGISTRO DE NUEVO ADMIN ---
+    document.getElementById('form-crear-admin').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form);
+        const feedback = document.getElementById('admin-feedback');
+        feedback.textContent = 'Procesando...';
+
+        const response = await fetch('/Pantry_Amigo/MVC/Modelo/registrarAdmin.php', {
+            method: 'POST',
+            body: formData
+        });
+        const data = await response.json();
+        feedback.textContent = data.message;
+        feedback.className = data.success ? 'alert alert-success mt-2' : 'alert alert-danger mt-2';
+        if (data.success) form.reset();
+    });
 });
 </script>
 </body>

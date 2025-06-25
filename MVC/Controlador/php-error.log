@@ -1,8 +1,0 @@
-[23-Jun-2025 03:41:46 Europe/Berlin] PHP Warning:  Undefined array key "tipo" in C:\xampp\htdocs\Pantry_Amigo\MVC\Controlador\usuarioControlador.php on line 31
-[23-Jun-2025 03:41:46 Europe/Berlin] PHP Warning:  Undefined array key "correo" in C:\xampp\htdocs\Pantry_Amigo\MVC\Controlador\usuarioControlador.php on line 32
-[23-Jun-2025 03:42:47 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'pantry_amigo.tblfundacion' doesn't exist in C:\xampp\htdocs\Pantry_Amigo\MVC\Modelo\usuario.php:44
-Stack trace:
-#0 C:\xampp\htdocs\Pantry_Amigo\MVC\Modelo\usuario.php(44): mysqli->prepare('INSERT INTO tbl...')
-#1 C:\xampp\htdocs\Pantry_Amigo\MVC\Controlador\usuarioControlador.php(57): Usuario->register(Array)
-#2 {main}
-  thrown in C:\xampp\htdocs\Pantry_Amigo\MVC\Modelo\usuario.php on line 44

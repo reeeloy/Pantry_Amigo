@@ -20,7 +20,7 @@
         <select name="tipo" id="tipo-usuario" required>
             <option value="" disabled selected>Selecciona un tipo de cuenta</option>
             <option value="Usuario">Fundación</option>
-            <option value="Administrador">Administrador</option>
+            <!--<option value="Administrador">Administrador</option>-->
         </select>
         <div id="campos-fundacion" class="campos-fundacion">
             <hr><p style="text-align: center; font-weight: bold;">Información de Verificación</p>
