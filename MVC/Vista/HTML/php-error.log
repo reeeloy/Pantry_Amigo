@@ -43,3 +43,18 @@ Stack trace:
 #0 C:\xampp\htdocs\Pantry_Amigo\MVC\Vista\HTML\manejador_casos.php(61): mysqli->prepare('INSERT INTO tbl...')
 #1 {main}
   thrown in C:\xampp\htdocs\Pantry_Amigo\MVC\Vista\HTML\manejador_casos.php on line 61
+[25-Jun-2025 17:11:00 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'Caso_Cat_Id' in 'field list' in C:\xampp\htdocs\Pantry_Amigo\MVC\Vista\HTML\manejador_casos.php:55
+Stack trace:
+#0 C:\xampp\htdocs\Pantry_Amigo\MVC\Vista\HTML\manejador_casos.php(55): mysqli->prepare('INSERT INTO tbl...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Pantry_Amigo\MVC\Vista\HTML\manejador_casos.php on line 55
+[25-Jun-2025 17:12:00 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'Caso_Cat_Id' in 'field list' in C:\xampp\htdocs\Pantry_Amigo\MVC\Vista\HTML\manejador_casos.php:55
+Stack trace:
+#0 C:\xampp\htdocs\Pantry_Amigo\MVC\Vista\HTML\manejador_casos.php(55): mysqli->prepare('INSERT INTO tbl...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Pantry_Amigo\MVC\Vista\HTML\manejador_casos.php on line 55
+[25-Jun-2025 17:41:15 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'Caso_Cat_Id' in 'field list' in C:\xampp\htdocs\Pantry_Amigo\MVC\Vista\HTML\manejador_casos.php:58
+Stack trace:
+#0 C:\xampp\htdocs\Pantry_Amigo\MVC\Vista\HTML\manejador_casos.php(58): mysqli->prepare('INSERT INTO tbl...')
+#1 {main}
+  thrown in C:\xampp\htdocs\Pantry_Amigo\MVC\Vista\HTML\manejador_casos.php on line 58
