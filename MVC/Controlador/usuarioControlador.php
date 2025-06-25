@@ -1,5 +1,5 @@
 <?php
-// /Pantry_Amigo/MVC/Controlador/usuarioControlador.php (Versión Final con Lógica Reparada)
+// /Pantry_Amigo/MVC/Controlador/usuarioControlador.php (Versión Final con Lógica Reparada y Recuperación)
 
 session_start();
 // Se incluyen los modelos al principio.
@@ -15,6 +15,57 @@ if (!$conexion) {
 
 $usuario = new Usuario($conexion);
 
+// --- LÓGICA DE RECUPERACIÓN DE CONTRASEÑA ---
+if (isset($_POST['reset_password'])) {
+    // Verificar que los campos no estén vacíos
+    if (!empty($_POST['correo']) && !empty($_POST['new_password'])) {
+        $correo = $_POST['correo'];
+        $new_password = $_POST['new_password'];
+
+        // Buscar usuario por correo
+        $query = "SELECT * FROM Tbl_Usuario WHERE Usu_Correo = ?";
+        $stmt = $conexion->prepare($query);
+        $stmt->bind_param("s", $correo);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows == 1) {
+            $row = $result->fetch_assoc();
+            
+            // Actualizar contraseña sin encriptar (como tú lo necesitas)
+            $update_query = "UPDATE Tbl_Usuario SET Usu_Password = ? WHERE Usu_Id = ?";
+            $update_stmt = $conexion->prepare($update_query);
+            $update_stmt->bind_param("si", $new_password, $row['Usu_Id']);
+
+            if ($update_stmt->execute()) {
+                // Contraseña actualizada → Mostrar alerta y redirigir
+                echo "<script>
+                    alert('✅ Contraseña cambiada con éxito');
+                    window.location.href = '../Vista/HTML/index.php';
+                </script>";
+                exit();
+            } else {
+                echo "<script>
+                    alert('❌ Error al actualizar la contraseña');
+                    window.location.href = '../Vista/HTML/recuperar.php';
+                </script>";
+                exit();
+            }
+        } else {
+            echo "<script>
+                alert('❌ Correo no registrado');
+                window.location.href = '../Vista/HTML/recuperar.php';
+            </script>";
+            exit();
+        }
+    } else {
+        echo "<script>
+            alert('⚠️ Por favor completa todos los campos');
+            window.location.href = '../Vista/HTML/recuperar.php';
+        </script>";
+        exit();
+    }
+}
 // --- LÓGICA DE INICIO DE SESIÓN ---
 if (isset($_POST['login'])) {
     $username = $_POST['username'];
