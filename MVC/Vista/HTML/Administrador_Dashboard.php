@@ -42,7 +42,7 @@ $conexion = $conn->abrir();
       <header class="header d-flex align-items-center">
         <h2 id="titulo-seccion">Solicitudes de Verificación</h2>
       </header>
-
+      
       <section id="solicitudes" class="seccion-activa">
         <div class="alert alert-info d-flex align-items-center" role="alert">
           <i class="fas fa-info-circle fa-2x me-3"></i>
@@ -72,8 +72,6 @@ $conexion = $conn->abrir();
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    console.log("Punto de Control 1: El script principal se ha cargado.");
-
     let fundacionesData = [], casosDineroData = [];
     const secciones = { 
         'solicitudes-link':'solicitudes',
@@ -96,8 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const el = document.getElementById(secId.replace('-link',''));
                 if(el) el.classList.add('seccion-oculta');
             });
-            const seccionActiva = document.getElementById(secciones[id]);
-            if(seccionActiva) seccionActiva.classList.remove('seccion-oculta');
+            document.getElementById(secciones[id]).classList.remove('seccion-oculta');
             
             if (id === 'solicitudes-link') cargarSolicitudes();
             if (id === 'gestion-fundaciones-link') cargarFundaciones();
@@ -133,17 +130,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- GESTIÓN DE FUNDACIONES Y SOLICITUDES ---
     async function cargarFundaciones() {
-        console.log("Punto de Control 2: Iniciando carga de TODAS las fundaciones...");
         const response = await fetch('/Pantry_Amigo/MVC/Vista/HTML/obtener_fundaciones.php');
         const data = await response.json();
         fundacionesData = data.error ? [] : data;
-        console.log("Punto de Control 3: Fundaciones cargadas.", fundacionesData);
         renderFundaciones(fundacionesData);
     }
 
     async function cargarSolicitudes() {
-        console.log("Punto de Control 2.1: Iniciando carga de SOLICITUDES.");
-        await cargarFundaciones(); // Carga todos los datos primero
+        // Siempre volvemos a cargar los datos para tener la información más reciente
+        const response = await fetch('/Pantry_Amigo/MVC/Vista/HTML/obtener_fundaciones.php');
+        const data = await response.json();
+        fundacionesData = data.error ? [] : data;
+        
         const solicitudes = fundacionesData.filter(f => f.Fund_Estado_Verificacion === 'pendiente');
         renderSolicitudes(solicitudes);
     }
@@ -169,13 +167,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function renderSolicitudes(lista) {
-        console.log(`Punto de Control 4: Renderizando ${lista.length} solicitudes.`);
         const container = document.getElementById('lista-solicitudes');
         container.innerHTML = '';
         if (lista.length === 0) { container.innerHTML = '<div class="alert alert-success">¡Excelente! No hay solicitudes pendientes de verificación.</div>'; return; }
         
         lista.forEach(f => {
-            console.log(`Renderizando solicitud para ID: ${f.Fund_Id}`);
             const card = document.createElement('div');
             card.className = 'col-12 mb-4';
             card.innerHTML = `
@@ -193,34 +189,21 @@ document.addEventListener('DOMContentLoaded', function() {
                         <button class="btn btn-sm btn-success btn-aprobar-fundacion"><i class="fas fa-check"></i> Aprobar</button>
                     </div>
                 </div>`;
-            
-            const btnRechazar = card.querySelector('.btn-rechazar-fundacion');
-            const btnAprobar = card.querySelector('.btn-aprobar-fundacion');
-
-            if (btnRechazar) {
-                console.log(`Añadiendo listener de RECHAZAR para ID: ${f.Fund_Id}`);
-                btnRechazar.addEventListener('click', () => cambiarEstadoFundacion(f.Fund_Id, 'rechazado'));
-            }
-            if (btnAprobar) {
-                console.log(`Añadiendo listener de APROBAR para ID: ${f.Fund_Id}`);
-                btnAprobar.addEventListener('click', () => cambiarEstadoFundacion(f.Fund_Id, 'verificado'));
-            }
+            card.querySelector('.btn-rechazar-fundacion').addEventListener('click', () => cambiarEstadoFundacion(f.Fund_Id, 'rechazado'));
+            card.querySelector('.btn-aprobar-fundacion').addEventListener('click', () => cambiarEstadoFundacion(f.Fund_Id, 'verificado'));
             container.appendChild(card);
         });
     }
 
     async function cambiarEstadoFundacion(id, nuevoEstado) {
-        console.log(`Punto de Control 5: Se hizo clic en un botón. Acción: ${nuevoEstado}, ID: ${id}`);
-        
         let motivo = '';
         if (nuevoEstado === 'rechazado') {
             motivo = prompt("Por favor, introduce el motivo del rechazo para notificar a la fundación:");
-            if (motivo === null) { console.log("Operación cancelada por el usuario."); return; }
+            if (motivo === null) return;
         } else {
-            if (!confirm(`¿Estás seguro de que quieres APROBAR esta fundación?`)) { console.log("Aprobación cancelada por el usuario."); return; }
+            if (!confirm(`¿Estás seguro de que quieres APROBAR esta fundación?`)) return;
         }
 
-        console.log("Punto de Control 6: Enviando datos al backend...");
         const formData = new FormData();
         formData.append('id', id);
         formData.append('estado', nuevoEstado);
@@ -228,20 +211,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const response = await fetch('/Pantry_Amigo/MVC/Vista/HTML/actualizar_estado_fundacion.php', { method: 'POST', body: formData });
         const data = await response.json();
-        
-        console.log("Punto de Control 7: Respuesta recibida del backend:", data);
         alert(data.message);
         if (data.success) {
-            fundacionesData = [];
+            fundacionesData = []; // Forzamos la recarga de datos
             cargarSolicitudes();
         }
     }
     
-    // El resto de tu código para Casos, Eliminar, etc.
-    async function eliminarFundacion(id) { /* Tu código para eliminar */ }
-    async function cargarCasosDinero() { /* Tu código para casos */ }
+    // --- LÓGICA PARA FILTRAR Y ELIMINAR ---
+    async function eliminarFundacion(id) { /* ... Tu código existente ... */ }
+    document.getElementById('btn-filtrar-fundacion').addEventListener('click', () => { /* ... Tu código existente ... */ });
 
-    // Carga inicial
+    // --- LÓGICA PARA CARGAR CASOS ---
+    async function cargarCasosDinero() { /* ... Tu código existente ... */ }
+    
+    // Carga inicial al entrar al dashboard
     cargarSolicitudes();
 });
 </script>

@@ -29,10 +29,11 @@ if (isset($_POST['id']) && isset($_POST['estado'])) {
         if ($fundacion && $usuarioModelo->actualizarEstadoVerificacion($id_fundacion, $nuevo_estado)) {
             $asunto = '';
             $cuerpoHTML = '';
+
             if ($nuevo_estado == 'verificado') {
                 $asunto = '¡Tu solicitud en Pantry Amigo ha sido APROBADA!';
                 $cuerpoHTML = "<h1>¡Felicidades, " . htmlspecialchars($fundacion['Fund_Username']) . "!</h1><p>Tu cuenta ha sido verificada y aprobada por nuestros administradores. Ya puedes iniciar sesión y empezar a crear casos de donación.</p><p>¡Bienvenido a Pantry Amigo!</p>";
-            } else {
+            } else { 
                 $motivo = !empty($_POST['motivo']) ? $_POST['motivo'] : 'No se especificó un motivo.';
                 $asunto = 'Actualización sobre tu solicitud en Pantry Amigo';
                 $cuerpoHTML = "<h1>Actualización sobre tu solicitud</h1><p>Hola, " . htmlspecialchars($fundacion['Fund_Username']) . ".</p><p>Hemos revisado tu solicitud y lamentablemente ha sido rechazada por el siguiente motivo:</p><p><strong>" . htmlspecialchars($motivo) . "</strong></p><p>Si crees que esto es un error, por favor, contacta a soporte.</p>";
@@ -41,10 +42,10 @@ if (isset($_POST['id']) && isset($_POST['estado'])) {
             if (enviarCorreo($fundacion['Fund_Correo'], $fundacion['Fund_Username'], $asunto, $cuerpoHTML)) {
                 $response = ['success' => true, 'message' => "Fundación marcada como '{$nuevo_estado}' y correo de notificación enviado."];
             } else {
-                $response = ['success' => true, 'message' => "ATENCIÓN: La fundación fue marcada como '{$nuevo_estado}', pero falló el envío del correo de notificación."];
+                $response = ['success' => true, 'message' => "ATENCIÓN: El estado de la fundación se actualizó, pero falló el envío del correo de notificación."];
             }
         } else {
-            $response['message'] = "Error al actualizar el estado en la base de datos o encontrar la fundación.";
+            $response['message'] = "Error al actualizar la base de datos o encontrar la fundación.";
         }
     } else {
         $response['message'] = "Error de conexión a la base de datos.";

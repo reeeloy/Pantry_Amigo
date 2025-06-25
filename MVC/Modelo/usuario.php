@@ -1,5 +1,5 @@
 <?php
-// /Pantry_Amigo/MVC/Modelo/usuario.php (Versión Final Estable)
+// /Pantry_Amigo/MVC/Modelo/usuario.php (Versión Final Verificada)
 
 class Usuario {
     private $conn;
@@ -37,6 +37,7 @@ class Usuario {
         if ($result->num_rows > 0) { return false; }
         
         $hashed_password = password_hash($datos['password'], PASSWORD_BCRYPT);
+
         $insertQuery = "INSERT INTO Tbl_Usuario (Usu_Username, Usu_Password, Usu_Tipo, Usu_Correo) VALUES (?, ?, ?, ?)";
         $stmtInsert = $this->conn->prepare($insertQuery);
         $stmtInsert->bind_param("ssss", $datos['username'], $hashed_password, $datos['tipo'], $datos['correo']);
@@ -44,10 +45,17 @@ class Usuario {
         if ($stmtInsert->execute()) {
             if ($datos['tipo'] === 'Usuario') {
                 $ultimo_usu_id = $stmtInsert->insert_id;
+                
+                // Aseguramos que todos los campos necesarios se insertan
                 $sql_fundacion = "INSERT INTO tbl_fundaciones (Fund_Username, Fund_Correo, Fund_NIT, Fund_Ruta_Documento, Fund_Usu_Id, Fund_Estado_Verificacion) VALUES (?, ?, ?, ?, ?, 'pendiente')";
                 $stmt_fundacion = $this->conn->prepare($sql_fundacion);
-                if (!$stmt_fundacion) { return false; }
+                if (!$stmt_fundacion) {
+                    error_log("Error al preparar la consulta de fundación: " . $this->conn->error);
+                    return false;
+                }
+                
                 $stmt_fundacion->bind_param("ssssi", $datos['username'], $datos['correo'], $datos['nit'], $datos['documento'], $ultimo_usu_id);
+                
                 return $stmt_fundacion->execute();
             }
             return true;
