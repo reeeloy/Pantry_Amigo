@@ -78,4 +78,55 @@ button:hover {
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
-}
+} img,
+  video {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  @media (max-width: 480px) {
+
+    .section-content,
+    .section-donation,
+    .form-section,
+    .detail-section {
+      width: 100%;
+      padding: 30px 20px;
+      box-sizing: border-box;
+    }
+
+    .detail-section {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .caso-imagen {
+      max-width: 100%;
+      margin-bottom: 20px;
+    }
+
+    .caso-nombre {
+      font-size: 1.2rem;
+      text-align: center;
+    }
+
+    .caso-descripcion {
+      font-size: 0.95rem;
+    }
+
+    .form-title,
+    .section-title {
+      font-size: 1.3rem;
+    }
+
+    .donation-form input {
+      font-size: 1rem;
+    }
+
+    #btn-donar {
+      font-size: 1.1rem;
+      padding: 12px 0;
+    }
+  }

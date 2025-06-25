@@ -27,6 +27,7 @@ if (isset($_GET['generar_pdf'])) {
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor('PANTRY');
         $pdf->SetTitle('Reporte de Donaciones');
+        $pdf->SetTitle('Reporte de Donaciones');
         $pdf->AddPage();
         $pdf->SetFont('helvetica', '', 12);
 

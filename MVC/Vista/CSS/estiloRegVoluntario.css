@@ -84,17 +84,56 @@ button:hover {
     background-color: #388e3c;
 }
 
-@media (max-width: 500px) {
-    .voluntario-card {
-        padding: 18px 4vw 14px 4vw;
-        border-radius: 10px;
-        max-width: 98vw;
+img,
+  video {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  @media (max-width: 480px) {
+
+    .section-content,
+    .section-donation,
+    .form-section,
+    .detail-section {
+      width: 100%;
+      padding: 30px 20px;
+      box-sizing: border-box;
     }
-    h2 {
-        font-size: 1.3rem;
+
+    .detail-section {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
     }
-    button {
-        font-size: 1rem;
-        padding: 10px;
+
+    .caso-imagen {
+      max-width: 100%;
+      margin-bottom: 20px;
     }
-}
+
+    .caso-nombre {
+      font-size: 1.2rem;
+      text-align: center;
+    }
+
+    .caso-descripcion {
+      font-size: 0.95rem;
+    }
+
+    .form-title,
+    .section-title {
+      font-size: 1.3rem;
+    }
+
+    .donation-form input {
+      font-size: 1rem;
+    }
+
+    #btn-donar {
+      font-size: 1.1rem;
+      padding: 12px 0;
+    }
+  }
+

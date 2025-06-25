@@ -317,20 +317,55 @@ header {
 }
 
 /* Responsive */
-@media (max-width: 900px) {
-  .content-flex {
-    flex-direction: column;
-    gap: 18px;
-    padding: 10px 2vw;
+ img,
+  video {
+    max-width: 100%;
+    height: auto;
+    display: block;
   }
-  .filtros-lateral {
-    flex: unset;
-    max-width: 100vw;
-    width: 100%;
-    margin-bottom: 12px;
-    padding: 18px 10px;
+
+  @media (max-width: 480px) {
+
+    .section-content,
+    .section-donation,
+    .form-section,
+    .detail-section {
+      width: 100%;
+      padding: 30px 20px;
+      box-sizing: border-box;
+    }
+
+    .detail-section {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .caso-imagen {
+      max-width: 100%;
+      margin-bottom: 20px;
+    }
+
+    .caso-nombre {
+      font-size: 1.2rem;
+      text-align: center;
+    }
+
+    .caso-descripcion {
+      font-size: 0.95rem;
+    }
+
+    .form-title,
+    .section-title {
+      font-size: 1.3rem;
+    }
+
+    .donation-form input {
+      font-size: 1rem;
+    }
+
+    #btn-donar {
+      font-size: 1.1rem;
+      padding: 12px 0;
+    }
   }
-  .seccion-activa {
-    width: 100%;
-  }
-}

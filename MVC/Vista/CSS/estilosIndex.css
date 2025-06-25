@@ -1,6 +1,50 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap');
 
+/*Para Moviles y tables */
+@media screen and (max-width: 480px) {
+  .section-title {
+    font-size: 1.5rem;
+    padding: 40px 0 60px;
+  }
+
+  .hero-section .hero-details .title {
+    font-size: 2rem;
+  }
+
+  .hero-section .hero-details .subtitle,
+  .hero-section .hero-details .description {
+    font-size: 1rem;
+    max-width: 100%;
+  }
+
+  .about-section .about-details .text {
+    font-size: 1rem;
+    margin: 30px 0 20px;
+  }
+
+  .options-section-title {
+    font-size: 1.5rem;
+    padding: 10px 0 20px;
+  }
+
+  .options-section-description {
+    font-size: 1rem;
+    padding: 0 20px;
+  }
+
+  .card-title {
+    font-size: 1rem;
+  }
+
+  .footer-section .section-content {
+    text-align: center;
+    gap: 16px;
+    flex-direction: column;
+  }
+}
+
+
 /* Reset básico */
 * {
   margin: 0;
@@ -879,5 +923,12 @@ span {
     flex-direction: column;
     gap: 20px;
   }
+
+  img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
 
 }
