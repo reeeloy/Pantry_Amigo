@@ -1,12 +1,9 @@
 <?php
-// /Pantry_Amigo/MVC/Modelo/usuario.php (Versión Final Verificada)
+// /Pantry_Amigo/MVC/Modelo/usuario.php (Versión Final con Reset Seguro)
 
 class Usuario {
     private $conn;
-    
-    public function __construct($db) {
-        $this->conn = $db;
-    }
+    public function __construct($db) { $this->conn = $db; }
 
     public function login($username, $password) {
         $query = "SELECT * FROM Tbl_Usuario WHERE Usu_Username=?";
@@ -14,7 +11,6 @@ class Usuario {
         $stmt->bind_param("s", $username);
         $stmt->execute();
         $result = $stmt->get_result();
-        
         if ($result->num_rows == 1) {
             $user = $result->fetch_assoc();
             if (password_verify($password, $user['Usu_Password'])) {
@@ -37,7 +33,6 @@ class Usuario {
         if ($result->num_rows > 0) { return false; }
         
         $hashed_password = password_hash($datos['password'], PASSWORD_BCRYPT);
-
         $insertQuery = "INSERT INTO Tbl_Usuario (Usu_Username, Usu_Password, Usu_Tipo, Usu_Correo) VALUES (?, ?, ?, ?)";
         $stmtInsert = $this->conn->prepare($insertQuery);
         $stmtInsert->bind_param("ssss", $datos['username'], $hashed_password, $datos['tipo'], $datos['correo']);
@@ -45,17 +40,10 @@ class Usuario {
         if ($stmtInsert->execute()) {
             if ($datos['tipo'] === 'Usuario') {
                 $ultimo_usu_id = $stmtInsert->insert_id;
-                
-                // Aseguramos que todos los campos necesarios se insertan
                 $sql_fundacion = "INSERT INTO tbl_fundaciones (Fund_Username, Fund_Correo, Fund_NIT, Fund_Ruta_Documento, Fund_Usu_Id, Fund_Estado_Verificacion) VALUES (?, ?, ?, ?, ?, 'pendiente')";
                 $stmt_fundacion = $this->conn->prepare($sql_fundacion);
-                if (!$stmt_fundacion) {
-                    error_log("Error al preparar la consulta de fundación: " . $this->conn->error);
-                    return false;
-                }
-                
+                if (!$stmt_fundacion) { return false; }
                 $stmt_fundacion->bind_param("ssssi", $datos['username'], $datos['correo'], $datos['nit'], $datos['documento'], $ultimo_usu_id);
-                
                 return $stmt_fundacion->execute();
             }
             return true;
@@ -85,6 +73,23 @@ class Usuario {
         $stmt = $this->conn->prepare($sql);
         if (!$stmt) { return false; }
         $stmt->bind_param("si", $nuevoEstado, $fundacionId);
+        return $stmt->execute();
+    }
+
+    // --- FUNCIÓN RESETPASSWORD CORREGIDA Y SEGURA ---
+    public function resetPassword($correo, $new_password) {
+        // 1. Ciframos la nueva contraseña antes de guardarla
+        $hashed_password = password_hash($new_password, PASSWORD_BCRYPT);
+        
+        // 2. Preparamos la consulta para actualizar
+        $query = "UPDATE Tbl_Usuario SET Usu_Password=? WHERE Usu_Correo=?";
+        $stmt = $this->conn->prepare($query);
+        if (!$stmt) { return false; }
+
+        // 3. Enlazamos la nueva contraseña CIFRADA
+        $stmt->bind_param("ss", $hashed_password, $correo);
+        
+        // 4. Ejecutamos y devolvemos el resultado
         return $stmt->execute();
     }
 }
